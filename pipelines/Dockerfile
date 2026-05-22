@@ -22,7 +22,7 @@ COPY pyproject.toml uv.lock* ./
 RUN --mount=type=secret,id=ca_cert \
     UV_INDEX_URL=${UV_INDEX_URL} \
     UV_NATIVE_TLS=true \
-    uv sync --frozen --no-dev --no-install-project
+    uv sync --no-dev --no-install-project
 
 COPY . .
 
