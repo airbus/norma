@@ -4,26 +4,22 @@ Norma is a cloud-agnostic, LLM-agnostic platform that uses [LiteLLM](https://doc
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────┐
-│                 Docker Compose                   │
-│                                                  │
-│  ┌──────────┐  ┌──────────┐  ┌──────────────┐  │
-│  │ Frontend │  │ Backend  │  │  Pipelines   │  │
-│  │ React    │──│ FastAPI  │──│  FastAPI      │  │
-│  │ Vite     │  │ ADK      │  │  ADK          │  │
-│  │ shadcn   │  │ LiteLLM  │  │  LiteLLM      │  │
-│  └──────────┘  └────┬─────┘  └──────┬───────┘  │
-│                     │               │           │
-│                ┌────┴───────────────┴────┐      │
-│                │   PostgreSQL + pgvector │      │
-│                └────────────────────────┘      │
-│                                                  │
-│                ┌────────────────────────┐        │
-│                │   Docker Volume        │        │
-│                │   Documents / Output   │        │
-│                └────────────────────────┘        │
-└─────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    subgraph Docker Compose
+        Frontend["Frontend<br/>React + Vite + shadcn<br/>:3000"]
+        Backend["Backend<br/>FastAPI + ADK + LiteLLM<br/>:8000"]
+        Pipelines["Pipelines<br/>FastAPI + ADK + LiteLLM<br/>:8001"]
+        DB["PostgreSQL 16 + pgvector<br/>:5432"]
+        Volume[("Docker Volume<br/>Documents / Output")]
+
+        Frontend --> Backend
+        Backend --> Pipelines
+        Backend --> DB
+        Pipelines --> DB
+        Backend --> Volume
+        Pipelines --> Volume
+    end
 ```
 
 | Service      | Stack                          | Port |
