@@ -1,0 +1,35 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Norma backend — FastAPI + ADK + LiteLLM"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.136.0",
+    "uvicorn[standard]>=0.47.0",
+    "google-adk>=2.0.0",
+    "litellm>=1.85.0",
+    "sqlalchemy>=2.0.49",
+    "psycopg[binary]>=3.3.0",
+    "alembic>=1.18.0",
+    "pgvector>=0.4.0",
+    "pydantic-settings>=2.14.0",
+    "python-multipart>=0.0.29",
+]
+
+[tool.uv]
+constraint-dependencies = ["graphviz==0.20.3"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.14",
+]

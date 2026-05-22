@@ -1,0 +1,68 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      secrets:
+        - ca_cert
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      args:
+        UV_INDEX_URL: ${UV_INDEX_URL:-https://pypi.org/simple/}
+      secrets:
+        - ca_cert
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - norma-data:/data
+    depends_on:
+      db:
+        condition: service_healthy
+
+  pipelines:
+    build:
+      context: ./pipelines
+      args:
+        UV_INDEX_URL: ${UV_INDEX_URL:-https://pypi.org/simple/}
+      secrets:
+        - ca_cert
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    volumes:
+      - norma-data:/data
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: norma
+      POSTGRES_PASSWORD: norma
+      POSTGRES_DB: norma
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U norma"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+secrets:
+  ca_cert:
+    file: ${CA_CERT_PATH:-/dev/null}
+
+volumes:
+  pgdata:
+  norma-data:
