@@ -79,12 +79,14 @@ project information provided.
 
 ## Instructions
 
-1. Analyze the project's description fields AND questionnaire answers against the decision tree above.
-2. Follow the decision tree strictly and in order (Step 1 → Step 2 → Step 3 → Step 4 → Step 5).
-3. Stop at the first step that produces a definitive result.
-4. If questionnaire answers are incomplete or missing, infer from the free-text description fields.
-5. Respond with EXACTLY ONE WORD: unacceptable, high, limited, or minimal.
-6. Do not include any explanation, punctuation, or other text.
+1. Analyze ALL questionnaire answers and description fields holistically.
+2. Always check for prohibited practices (Step 2) regardless of Q1/Q2 answers — \
+if any prohibited practice is selected, the result is always **unacceptable**.
+3. For non-prohibited cases, follow the decision tree in order (Step 1 → Step 3 → Step 4 → Step 5).
+4. Return the HIGHEST applicable risk level found across all answers.
+5. If questionnaire answers are incomplete or missing, infer from the free-text description fields.
+6. Respond with EXACTLY ONE WORD: unacceptable, high, limited, or minimal.
+7. Do not include any explanation, punctuation, or other text.
 """
 
 
@@ -138,18 +140,35 @@ async def evaluate_risk(
     )
 
     try:
+        safety_settings = [
+            {"category": cat, "threshold": "BLOCK_NONE"}
+            for cat in [
+                "HARM_CATEGORY_HARASSMENT",
+                "HARM_CATEGORY_HATE_SPEECH",
+                "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                "HARM_CATEGORY_DANGEROUS_CONTENT",
+            ]
+        ]
         response = await litellm.acompletion(
             model=settings.litellm_model,
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": user_prompt},
             ],
-            max_tokens=10,
+            max_tokens=256,
             temperature=0,
+            safety_settings=safety_settings,
         )
-        result = response.choices[0].message.content.strip().lower()
+        content = response.choices[0].message.content
+        if not content:
+            logger.warning("LLM returned empty content")
+            return None
+        result = content.strip().lower()
         if result in VALID_CLASSIFICATIONS:
             return result
+        for classification in ("unacceptable", "high", "limited", "minimal"):
+            if classification in result:
+                return classification
         logger.warning("LLM returned unexpected classification: %s", result)
         return None
     except Exception:

@@ -35,6 +35,8 @@ def build_system_prompt(
         parts.append("## Compliance Frameworks\n")
         for fw in framework_contents:
             parts.append(f"### {fw['name']}\n{fw['description']}\n")
+            if fw.get("content"):
+                parts.append(f"\n{fw['content']}\n")
 
     if project_context:
         parts.append("## Current Project Context\n")
@@ -72,4 +74,5 @@ def create_norma_agent(system_prompt: str) -> Agent:
         model=LiteLlm(model=settings.litellm_model),
         name="norma",
         instruction=system_prompt,
+        generate_content_config={"temperature": 0.2},
     )

@@ -1,7 +1,11 @@
+from pathlib import Path
+
 from sqlalchemy.orm import Session
 
 from app.models.document import DocumentDefinition
 from app.models.framework import Framework
+
+KNOWLEDGE_DIR = Path(__file__).resolve().parent.parent / "data" / "knowledge"
 
 SEED_FRAMEWORKS = [
     {
@@ -129,10 +133,22 @@ SEED_FRAMEWORKS = [
 ]
 
 
+def _load_knowledge(framework_name: str) -> str:
+    slug = framework_name.lower().replace(" ", "_")
+    framework_dir = KNOWLEDGE_DIR / slug
+    if not framework_dir.is_dir():
+        return ""
+    parts = [p.read_text() for p in sorted(framework_dir.glob("*.md"))]
+    return "\n\n---\n\n".join(parts)
+
+
 def seed_frameworks(db: Session) -> None:
     for fw_data in SEED_FRAMEWORKS:
         existing = db.query(Framework).filter(Framework.name == fw_data["name"]).first()
         if existing:
+            new_content = _load_knowledge(fw_data["name"])
+            if new_content and existing.content != new_content:
+                existing.content = new_content
             continue
 
         fw = Framework(
@@ -140,6 +156,7 @@ def seed_frameworks(db: Session) -> None:
             description=fw_data["description"],
             category=fw_data["category"],
             status=fw_data["status"],
+            content=_load_knowledge(fw_data["name"]),
         )
         db.add(fw)
         db.flush()

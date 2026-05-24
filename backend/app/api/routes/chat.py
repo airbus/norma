@@ -29,7 +29,7 @@ router = APIRouter(prefix="/api/chat", tags=["chat"])
 
 def _assemble_context(project: Project, db: Session) -> str:
     frameworks = db.query(Framework).all()
-    framework_contents = [{"name": fw.name, "description": fw.description} for fw in frameworks]
+    framework_contents = [{"name": fw.name, "description": fw.description, "content": fw.content} for fw in frameworks]
 
     project_context = {
         "name": project.name,
