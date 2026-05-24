@@ -60,9 +60,23 @@ export function UserManagementCard() {
   }, []);
 
   useEffect(() => {
-    fetchUsers();
-    fetchInvites();
-  }, [fetchUsers, fetchInvites]);
+    let cancelled = false;
+    api
+      .get<User[]>('/users')
+      .then((data) => {
+        if (!cancelled) setUsers(data);
+      })
+      .catch(() => {});
+    api
+      .get<Invite[]>('/invites')
+      .then((data) => {
+        if (!cancelled) setInvites(data);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handleUpdateUser = async (userId: string, body: { role?: string; is_active?: boolean }) => {
     try {

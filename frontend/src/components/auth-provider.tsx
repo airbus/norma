@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { api, type User } from '@/lib/api';
-import { AuthContext } from '@/hooks/use-auth';
+import { AuthContext } from '@/lib/auth-context';
 
 const TOKEN_KEY = 'norma-token';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => !!localStorage.getItem(TOKEN_KEY));
 
   const fetchUser = useCallback(async () => {
     try {
@@ -19,13 +19,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (token) {
-      fetchUser().finally(() => setIsLoading(false));
-    } else {
-      setIsLoading(false);
-    }
-  }, [fetchUser]);
+    if (!localStorage.getItem(TOKEN_KEY)) return;
+    let cancelled = false;
+    api
+      .get<User>('/auth/me')
+      .then((u) => {
+        if (!cancelled) setUser(u);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          localStorage.removeItem(TOKEN_KEY);
+          setUser(null);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const login = async (email: string, password: string) => {
     const res = await api.post<{ access_token: string }>('/auth/login', { email, password });
