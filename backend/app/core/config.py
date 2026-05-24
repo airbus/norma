@@ -11,6 +11,8 @@ class Settings(BaseSettings):
 
     litellm_model: str = "gemini-2.5-flash"
 
+    pipelines_url: str = "http://pipelines:8001"
+
     cors_origins: list[str] = ["http://localhost:5173"]
 
     jwt_secret_key: str = "change-me-in-production"

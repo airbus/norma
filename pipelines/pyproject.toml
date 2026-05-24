@@ -7,12 +7,14 @@ dependencies = [
     "fastapi>=0.136.0",
     "uvicorn[standard]>=0.47.0",
     "google-adk>=2.0.0",
+    "google-cloud-aiplatform>=1.88.0",
     "litellm>=1.85.0",
     "sqlalchemy>=2.0.49",
     "psycopg[binary]>=3.3.0",
     "pgvector>=0.4.0",
     "pydantic-settings>=2.14.0",
     "python-multipart>=0.0.29",
+    "pymupdf>=1.25.0",
 ]
 
 [tool.uv]

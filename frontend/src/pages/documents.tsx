@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { CheckCircle2, Circle, Search, Upload } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -14,13 +14,30 @@ import {
 import { PageHeader } from '@/components/page-header';
 import { RiskBanner } from '@/components/risk-banner';
 import { useProject } from '@/hooks/use-project';
-import { MANDATORY_DOCUMENTS } from '@/data/mock';
+import { api, type DocumentItem } from '@/lib/api';
 
 export function DocumentsPage() {
   const { currentProject } = useProject();
+  const [documents, setDocuments] = useState<DocumentItem[]>([]);
   const [search, setSearch] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploadingId, setUploadingId] = useState<string | null>(null);
 
-  const filtered = MANDATORY_DOCUMENTS.filter(
+  useEffect(() => {
+    if (!currentProject) return;
+    let cancelled = false;
+    api
+      .get<DocumentItem[]>(`/projects/${currentProject.id}/documents`)
+      .then((data) => {
+        if (!cancelled) setDocuments(data);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [currentProject]);
+
+  const filtered = documents.filter(
     (doc) =>
       doc.name.toLowerCase().includes(search.toLowerCase()) ||
       doc.description.toLowerCase().includes(search.toLowerCase()) ||
@@ -28,14 +45,30 @@ export function DocumentsPage() {
   );
 
   const grouped = useMemo(() => {
-    const map = new Map<string, typeof filtered>();
+    const map = new Map<string, DocumentItem[]>();
     for (const doc of filtered) {
-      const list = map.get(doc.framework) ?? [];
+      const list = map.get(doc.framework_name) ?? [];
       list.push(doc);
-      map.set(doc.framework, list);
+      map.set(doc.framework_name, list);
     }
     return map;
   }, [filtered]);
+
+  const handleUpload = async (docId: string, file: File) => {
+    if (!currentProject) return;
+    setUploadingId(docId);
+    try {
+      const updated = await api.uploadFile<DocumentItem>(
+        `/projects/${currentProject.id}/documents/${docId}/upload`,
+        file,
+      );
+      setDocuments((prev) => prev.map((d) => (d.id === docId ? updated : d)));
+    } catch {
+      // ignore
+    } finally {
+      setUploadingId(null);
+    }
+  };
 
   return (
     <div className="flex h-svh flex-col">
@@ -45,7 +78,7 @@ export function DocumentsPage() {
         <div className="mx-auto max-w-4xl space-y-6">
           {currentProject && (
             <RiskBanner
-              riskClassification={currentProject.riskClassification}
+              riskClassification={currentProject.risk_classification}
               description="Documents required for regulatory compliance based on your risk classification."
               chatMessage="What documents are we missing for conformity assessment?"
             />
@@ -104,9 +137,33 @@ export function DocumentsPage() {
                             </p>
                           </TableCell>
                           <TableCell className="text-right pr-4">
-                            <Button variant="outline" size="sm" className="w-24 cursor-pointer">
+                            <input
+                              type="file"
+                              ref={fileInputRef}
+                              className="hidden"
+                              onChange={(e) => {
+                                const file = e.target.files?.[0];
+                                if (file) handleUpload(doc.id, file);
+                                e.target.value = '';
+                              }}
+                            />
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-24 cursor-pointer"
+                              disabled={uploadingId === doc.id}
+                              onClick={() => {
+                                const input = document.createElement('input');
+                                input.type = 'file';
+                                input.onchange = (e) => {
+                                  const file = (e.target as HTMLInputElement).files?.[0];
+                                  if (file) handleUpload(doc.id, file);
+                                };
+                                input.click();
+                              }}
+                            >
                               <Upload className="mr-1 size-3" />
-                              {doc.uploaded ? 'Replace' : 'Upload'}
+                              {uploadingId === doc.id ? '...' : doc.uploaded ? 'Replace' : 'Upload'}
                             </Button>
                           </TableCell>
                         </TableRow>

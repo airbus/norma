@@ -22,8 +22,11 @@ services:
       - "8000:8000"
     env_file:
       - .env
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
     volumes:
       - norma-data:/data
+      - ${GOOGLE_APPLICATION_CREDENTIALS:-/dev/null}:/root/.config/gcloud/application_default_credentials.json:ro
     depends_on:
       db:
         condition: service_healthy
@@ -39,8 +42,11 @@ services:
       - "8001:8001"
     env_file:
       - .env
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
     volumes:
       - norma-data:/data
+      - ${GOOGLE_APPLICATION_CREDENTIALS:-/dev/null}:/root/.config/gcloud/application_default_credentials.json:ro
     depends_on:
       db:
         condition: service_healthy

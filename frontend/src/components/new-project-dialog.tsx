@@ -45,15 +45,16 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
     setAnswers({});
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
-    createProject({
+    await createProject({
       name: name.trim(),
       description: description.trim(),
-      intendedPurpose: intendedPurpose.trim(),
-      intendedUsers: intendedUsers.trim(),
-      deploymentContext: deploymentContext.trim(),
+      intended_purpose: intendedPurpose.trim(),
+      intended_users: intendedUsers.trim(),
+      deployment_context: deploymentContext.trim(),
+      questionnaire_answers: Object.keys(answers).length > 0 ? answers : undefined,
     });
     reset();
     onOpenChange(false);

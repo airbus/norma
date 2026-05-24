@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FileText } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { PageHeader } from '@/components/page-header';
-import { MOCK_FRAMEWORKS, type Framework } from '@/data/mock';
+import { api, type Framework } from '@/lib/api';
 
 const STATUS_VARIANT: Record<string, 'default' | 'secondary' | 'outline'> = {
   active: 'default',
@@ -20,7 +20,15 @@ const STATUS_VARIANT: Record<string, 'default' | 'secondary' | 'outline'> = {
 };
 
 export function FrameworksPage() {
+  const [frameworks, setFrameworks] = useState<Framework[]>([]);
   const [selected, setSelected] = useState<Framework | null>(null);
+
+  useEffect(() => {
+    api
+      .get<Framework[]>('/frameworks')
+      .then(setFrameworks)
+      .catch(() => {});
+  }, []);
 
   return (
     <div className="flex h-svh flex-col">
@@ -28,7 +36,7 @@ export function FrameworksPage() {
 
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {MOCK_FRAMEWORKS.map((fw) => (
+          {frameworks.map((fw) => (
             <Card
               key={fw.id}
               className="cursor-pointer transition-shadow hover:shadow-md"
@@ -44,7 +52,8 @@ export function FrameworksPage() {
               <CardContent>
                 <div className="text-muted-foreground flex items-center gap-1 text-sm">
                   <FileText className="size-4" />
-                  {fw.documentCount} document{fw.documentCount !== 1 && 's'}
+                  {fw.document_count} document
+                  {fw.document_count !== 1 && 's'}
                 </div>
               </CardContent>
             </Card>
@@ -69,8 +78,8 @@ export function FrameworksPage() {
                 <p className="text-sm leading-relaxed">{selected.description}</p>
                 <div className="text-muted-foreground flex items-center gap-1 text-sm">
                   <FileText className="size-4" />
-                  {selected.documentCount} associated document
-                  {selected.documentCount !== 1 && 's'}
+                  {selected.document_count} associated document
+                  {selected.document_count !== 1 && 's'}
                 </div>
                 <div className="flex justify-end">
                   <Button variant="outline" onClick={() => setSelected(null)}>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -11,8 +11,40 @@ import { useProject } from '@/hooks/use-project';
 import { QUESTIONNAIRE_SECTIONS } from '@/data/questionnaire';
 
 export function DescriptionPage() {
-  const { currentProject } = useProject();
-  const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
+  const { currentProject, updateProject, evaluateRisk } = useProject();
+  const [localAnswers, setLocalAnswers] = useState<Record<string, string | string[]> | null>(null);
+  const [evaluating, setEvaluating] = useState(false);
+  const answers = localAnswers ?? currentProject?.questionnaire_answers ?? {};
+  const pendingEvalRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const saveField = useCallback(
+    (field: string, value: string) => {
+      if (!currentProject) return;
+      setEvaluating(true);
+      updateProject(currentProject.id, { [field]: value }).finally(() => setEvaluating(false));
+    },
+    [currentProject, updateProject],
+  );
+
+  function handleAnswerChange(questionId: string, value: string | string[]) {
+    const updated = { ...answers, [questionId]: value };
+    setLocalAnswers(updated);
+    if (!currentProject) return;
+
+    clearTimeout(pendingEvalRef.current);
+    pendingEvalRef.current = setTimeout(() => {
+      setEvaluating(true);
+      updateProject(currentProject.id, { questionnaire_answers: updated }).finally(() =>
+        setEvaluating(false),
+      );
+    }, 1000);
+  }
+
+  function handleReEvaluate() {
+    if (!currentProject) return;
+    setEvaluating(true);
+    evaluateRisk(currentProject.id).finally(() => setEvaluating(false));
+  }
 
   if (!currentProject) {
     return (
@@ -25,10 +57,6 @@ export function DescriptionPage() {
     );
   }
 
-  function handleAnswerChange(questionId: string, value: string | string[]) {
-    setAnswers((prev) => ({ ...prev, [questionId]: value }));
-  }
-
   return (
     <div className="flex h-svh flex-col">
       <PageHeader title="Description" />
@@ -36,9 +64,11 @@ export function DescriptionPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-4xl">
           <RiskBanner
-            riskClassification={currentProject.riskClassification}
+            riskClassification={currentProject.risk_classification}
             description="This system requires full compliance with AI Act obligations before market placement."
             chatMessage="Tell me about my project's risk classification"
+            evaluating={evaluating}
+            onReEvaluate={handleReEvaluate}
           />
           <Tabs defaultValue="overview">
             <TabsList className="mb-6 w-full justify-start">
@@ -60,13 +90,18 @@ export function DescriptionPage() {
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Name</Label>
-                      <Input id="name" defaultValue={currentProject.name} />
+                      <Input
+                        id="name"
+                        defaultValue={currentProject.name}
+                        onBlur={(e) => saveField('name', e.target.value)}
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="description">Description</Label>
                       <Textarea
                         id="description"
                         defaultValue={currentProject.description}
+                        onBlur={(e) => saveField('description', e.target.value)}
                         rows={3}
                       />
                     </div>
@@ -80,7 +115,8 @@ export function DescriptionPage() {
                   </CardHeader>
                   <CardContent>
                     <Textarea
-                      defaultValue={currentProject.intendedPurpose}
+                      defaultValue={currentProject.intended_purpose}
+                      onBlur={(e) => saveField('intended_purpose', e.target.value)}
                       rows={4}
                       placeholder="Describe the intended purpose of the AI system..."
                     />
@@ -96,7 +132,8 @@ export function DescriptionPage() {
                   </CardHeader>
                   <CardContent>
                     <Textarea
-                      defaultValue={currentProject.intendedUsers}
+                      defaultValue={currentProject.intended_users}
+                      onBlur={(e) => saveField('intended_users', e.target.value)}
                       rows={4}
                       placeholder="Describe the intended users and affected persons..."
                     />
@@ -110,7 +147,8 @@ export function DescriptionPage() {
                   </CardHeader>
                   <CardContent>
                     <Textarea
-                      defaultValue={currentProject.deploymentContext}
+                      defaultValue={currentProject.deployment_context}
+                      onBlur={(e) => saveField('deployment_context', e.target.value)}
                       rows={4}
                       placeholder="Describe the deployment context, sector, and geographic scope..."
                     />

@@ -113,8 +113,8 @@ export function AppSidebar() {
                       {currentProject?.name ?? 'No project'}
                     </span>
                     <span className="text-sidebar-foreground truncate text-xs">
-                      {currentProject?.riskClassification
-                        ? RISK_LABELS[currentProject.riskClassification]
+                      {currentProject?.risk_classification
+                        ? RISK_LABELS[currentProject.risk_classification]
                         : 'Select a project'}
                     </span>
                   </div>

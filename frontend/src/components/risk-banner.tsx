@@ -1,5 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { AlertTriangle, Ban, Info, MessageSquare, ShieldAlert } from 'lucide-react';
+import {
+  AlertTriangle,
+  Ban,
+  Info,
+  Loader2,
+  MessageSquare,
+  RefreshCw,
+  ShieldAlert,
+} from 'lucide-react';
 
 const RISK_CONFIG: Record<string, { label: string; icon: typeof Ban; className: string }> = {
   unacceptable: {
@@ -28,26 +36,47 @@ interface RiskBannerProps {
   riskClassification: string;
   description: string;
   chatMessage: string;
+  evaluating?: boolean;
+  onReEvaluate?: () => void;
 }
 
-export function RiskBanner({ riskClassification, description, chatMessage }: RiskBannerProps) {
+export function RiskBanner({
+  riskClassification,
+  description,
+  chatMessage,
+  evaluating,
+  onReEvaluate,
+}: RiskBannerProps) {
   const navigate = useNavigate();
   const config = RISK_CONFIG[riskClassification];
   if (!config) return null;
 
+  const Icon = evaluating ? Loader2 : config.icon;
+
   return (
     <div className={`mb-6 flex items-center gap-3 rounded-lg border px-4 py-3 ${config.className}`}>
-      <config.icon className="size-5 shrink-0" />
+      <Icon className={`size-5 shrink-0 ${evaluating ? 'animate-spin' : ''}`} />
       <div className="flex-1">
-        <p className="text-sm font-semibold">{config.label}</p>
+        <p className="text-sm font-semibold">{evaluating ? 'Evaluating risk...' : config.label}</p>
         <p className="text-xs opacity-80">{description}</p>
       </div>
-      <div
-        className="flex cursor-pointer items-center gap-1.5 rounded-md border border-current/30 px-2.5 py-1.5 hover:bg-current/5"
-        onClick={() => navigate(`/chat?q=${encodeURIComponent(chatMessage)}`)}
-      >
-        <MessageSquare className="size-4" />
-        <span className="text-xs font-medium">Ask Norma</span>
+      <div className="flex items-center gap-2">
+        {onReEvaluate && (
+          <div
+            className="flex cursor-pointer items-center gap-1.5 rounded-md border border-current/30 px-2.5 py-1.5 hover:bg-current/5"
+            onClick={onReEvaluate}
+          >
+            <RefreshCw className={`size-4 ${evaluating ? 'animate-spin' : ''}`} />
+            <span className="text-xs font-medium">Re-evaluate</span>
+          </div>
+        )}
+        <div
+          className="flex cursor-pointer items-center gap-1.5 rounded-md border border-current/30 px-2.5 py-1.5 hover:bg-current/5"
+          onClick={() => navigate(`/chat?q=${encodeURIComponent(chatMessage)}`)}
+        >
+          <MessageSquare className="size-4" />
+          <span className="text-xs font-medium">Ask Norma</span>
+        </div>
       </div>
     </div>
   );

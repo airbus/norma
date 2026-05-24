@@ -11,6 +11,9 @@ RUN --mount=type=secret,id=ca_cert \
         update-ca-certificates; \
     fi
 
+ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+
 RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
@@ -26,4 +29,5 @@ RUN UV_INDEX_URL=${UV_INDEX_URL} \
 COPY . .
 
 EXPOSE 8000
-CMD [".venv/bin/uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+ENV PYTHONPATH=/app
+CMD ["/bin/sh", "-c", ".venv/bin/alembic upgrade head && .venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000"]
