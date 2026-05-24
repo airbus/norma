@@ -20,8 +20,8 @@ ENV PATH="/root/.local/bin:$PATH"
 COPY pyproject.toml ./
 
 RUN UV_INDEX_URL=${UV_INDEX_URL} \
-    uv lock --native-tls && \
-    uv sync --no-dev --no-install-project --native-tls
+    uv lock --system-certs && \
+    uv sync --no-dev --no-install-project --system-certs
 
 COPY . .
 

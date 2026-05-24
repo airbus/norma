@@ -35,6 +35,7 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { NewProjectDialog } from '@/components/new-project-dialog';
+import { useAuth } from '@/hooks/use-auth';
 import { useProject } from '@/hooks/use-project';
 
 const RISK_LABELS: Record<string, string> = {
@@ -60,8 +61,18 @@ const NAV_CONFIG = [
 export function AppSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, logout } = useAuth();
   const { projects, currentProject, setCurrentProject } = useProject();
   const [newProjectOpen, setNewProjectOpen] = useState(false);
+
+  const initials = user
+    ? user.name
+        .split(' ')
+        .map((n) => n[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2)
+    : '';
 
   return (
     <>
@@ -201,14 +212,12 @@ export function AppSidebar() {
                 <DropdownMenuTrigger render={<SidebarMenuButton size="lg" />}>
                   <Avatar className="size-8">
                     <AvatarFallback className="bg-sidebar-primary text-sidebar-primary-foreground text-xs">
-                      JD
+                      {initials}
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">Jane Doe</span>
-                    <span className="text-sidebar-foreground truncate text-xs">
-                      jane.doe@company.com
-                    </span>
+                    <span className="truncate font-semibold">{user?.name}</span>
+                    <span className="text-sidebar-foreground truncate text-xs">{user?.email}</span>
                   </div>
                   <ChevronsUpDown className="ml-auto size-4" />
                 </DropdownMenuTrigger>
@@ -218,7 +227,12 @@ export function AppSidebar() {
                     Settings
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      logout();
+                      navigate('/login');
+                    }}
+                  >
                     <LogOut className="mr-2 size-4" />
                     Logout
                   </DropdownMenuItem>

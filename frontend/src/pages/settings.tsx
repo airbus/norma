@@ -8,21 +8,25 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { PageHeader } from '@/components/page-header';
+import { UserManagementCard } from '@/components/user-management-card';
+import { useAuth } from '@/hooks/use-auth';
 import { useTheme } from '@/hooks/use-theme';
 
 export function SettingsPage() {
   const { theme, setTheme } = useTheme();
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'admin';
 
   return (
     <div className="flex h-svh flex-col">
       <PageHeader title="Settings" />
 
       <div className="flex-1 overflow-auto p-6">
-        <div className="mx-auto max-w-2xl space-y-6">
+        <div className="mx-auto max-w-4xl space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Appearance</CardTitle>
-              <CardDescription>Customize how Norma looks on your device.</CardDescription>
+              <CardTitle>Preferences</CardTitle>
+              <CardDescription>Customize your Norma experience.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
@@ -41,31 +45,24 @@ export function SettingsPage() {
                   </SelectContent>
                 </Select>
               </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Language</CardTitle>
-              <CardDescription>Set your preferred language for the interface.</CardDescription>
-            </CardHeader>
-            <CardContent>
               <div className="flex items-center justify-between">
                 <Label htmlFor="language">Language</Label>
-                <Select defaultValue="en">
+                <Select defaultValue="english">
                   <SelectTrigger id="language" className="w-[160px]">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="en">English</SelectItem>
-                    <SelectItem value="fr">French</SelectItem>
-                    <SelectItem value="de">German</SelectItem>
-                    <SelectItem value="es">Spanish</SelectItem>
+                    <SelectItem value="english">English</SelectItem>
+                    <SelectItem value="french">French</SelectItem>
+                    <SelectItem value="german">German</SelectItem>
+                    <SelectItem value="spanish">Spanish</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </CardContent>
           </Card>
+
+          {isAdmin && <UserManagementCard />}
         </div>
       </div>
     </div>

@@ -9,6 +9,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
+button,
+[role='button'],
+a,
+select,
+[type='checkbox'],
+[type='radio'],
+label[for] {
+  cursor: pointer;
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: 'Inter', sans-serif;
