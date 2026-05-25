@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { api, type Project } from '@/lib/api';
 import { ProjectContext } from '@/hooks/use-project';
+import { useAuth } from '@/hooks/use-auth';
 
 export function ProjectProvider({ children }: { children: ReactNode }) {
+  const { user } = useAuth();
   const [projects, setProjects] = useState<Project[]>([]);
   const [currentProject, setCurrentProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
@@ -27,7 +29,14 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
   }, [currentProject]);
 
   useEffect(() => {
+    if (!user) {
+      setProjects([]);
+      setCurrentProject(null);
+      setLoading(false);
+      return;
+    }
     let cancelled = false;
+    setLoading(true);
     api
       .get<Project[]>('/projects')
       .then((data) => {
@@ -42,7 +51,7 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [user]);
 
   const createProject = useCallback(
     async (data: {

@@ -1,24 +1,20 @@
 import { useState } from 'react';
-import { BookOpen, GitBranch, Ticket } from 'lucide-react';
+import { GitBranch, Plus } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { PageHeader } from '@/components/page-header';
 import { MOCK_INTEGRATIONS, type Integration } from '@/data/mock';
 
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  github: GitBranch,
-  ticket: Ticket,
-  'book-open': BookOpen,
-};
-
 export function IntegrationsPage() {
-  const [integrations, setIntegrations] = useState<Integration[]>(MOCK_INTEGRATIONS);
-
-  const toggle = (id: string) => {
-    setIntegrations((prev) =>
-      prev.map((i) => (i.id === id ? { ...i, connected: !i.connected } : i)),
-    );
-  };
+  const [selected, setSelected] = useState<Integration | null>(null);
 
   return (
     <div className="flex h-svh flex-col">
@@ -26,36 +22,61 @@ export function IntegrationsPage() {
 
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-4xl space-y-4">
-          {integrations.map((integration) => {
-            const Icon = ICON_MAP[integration.icon];
-            return (
-              <Card key={integration.id}>
-                <CardHeader className="flex-row items-start gap-4 space-y-0">
-                  <div className="bg-muted flex size-10 shrink-0 items-center justify-center rounded-lg">
-                    {Icon && <Icon className="size-5" />}
-                  </div>
-                  <div className="flex-1">
-                    <CardTitle className="text-base">{integration.name}</CardTitle>
-                    <CardDescription className="mt-1">{integration.description}</CardDescription>
-                  </div>
-                  <Button
-                    variant={integration.connected ? 'outline' : 'default'}
-                    size="sm"
-                    onClick={() => toggle(integration.id)}
-                  >
-                    {integration.connected ? 'Disconnect' : 'Connect'}
-                  </Button>
-                </CardHeader>
-                {integration.connected && (
-                  <CardContent className="pt-0">
-                    <p className="text-muted-foreground text-sm">Connected and syncing.</p>
-                  </CardContent>
-                )}
-              </Card>
-            );
-          })}
+          <div className="flex justify-end">
+            <Button variant="outline" disabled>
+              <Plus className="mr-1 size-4" />
+              Add Integration
+            </Button>
+          </div>
+
+          {MOCK_INTEGRATIONS.map((integration) => (
+            <Card
+              key={integration.id}
+              className="cursor-pointer transition-shadow hover:shadow-md"
+              onClick={() => setSelected(integration)}
+            >
+              <CardHeader className="!flex !flex-row items-center gap-4">
+                <div className="bg-muted flex size-10 shrink-0 items-center justify-center rounded-lg">
+                  <GitBranch className="size-5" />
+                </div>
+                <div className="flex-1 space-y-0.5">
+                  <CardTitle className="text-base">{integration.name}</CardTitle>
+                  <CardDescription className="text-xs">{integration.description}</CardDescription>
+                </div>
+                <Badge className="shrink-0" variant={integration.connected ? 'default' : 'outline'}>
+                  {integration.connected ? 'Connected' : 'Not connected'}
+                </Badge>
+              </CardHeader>
+            </Card>
+          ))}
         </div>
       </div>
+
+      <Dialog open={!!selected} onOpenChange={() => setSelected(null)}>
+        <DialogContent className="max-w-lg">
+          {selected && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-2">
+                  <DialogTitle>{selected.name}</DialogTitle>
+                  <Badge variant={selected.connected ? 'default' : 'outline'}>
+                    {selected.connected ? 'Connected' : 'Not connected'}
+                  </Badge>
+                </div>
+                <DialogDescription>Integration</DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4">
+                <p className="text-sm leading-relaxed">{selected.description}</p>
+                <div className="flex justify-end">
+                  <Button variant="outline" onClick={() => setSelected(null)}>
+                    Close
+                  </Button>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

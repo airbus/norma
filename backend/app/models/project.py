@@ -24,5 +24,6 @@ class Project(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), onupdate=func.now())
 
     documents = relationship("Document", back_populates="project", cascade="all, delete-orphan")
+    custom_documents = relationship("CustomDocument", back_populates="project", cascade="all, delete-orphan")
     reporting_evidence = relationship("ReportingEvidence", back_populates="project", cascade="all, delete-orphan")
     chat_sessions = relationship("ChatSession", back_populates="project", cascade="all, delete-orphan")

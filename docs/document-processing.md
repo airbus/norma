@@ -6,6 +6,8 @@ The document processing pipeline handles file uploads, text extraction, and LLM-
 
 Each compliance framework defines a set of required documents (e.g., "Technical Documentation" per Annex IV of the EU AI Act). When a user opens a project's documents page, document placeholders are automatically created for every framework definition. Users can then upload files against each placeholder.
 
+Additionally, users can upload free-form custom PDF documents that are not tied to any framework definition. These are stored in a separate `custom_documents` table and processed through the same pipeline.
+
 ## Upload and Processing Flow
 
 ```mermaid
@@ -24,7 +26,7 @@ sequenceDiagram
     BE->>VOL: Save file as {project_id}/{document_id}{ext}
     BE->>DB: UPDATE documents SET file_path, file_name, uploaded_at
 
-    BE->>PL: POST /api/documents/process<br/>{document_id, file_path}
+    BE->>PL: POST /api/documents/process<br/>{document_id, file_path, table_name}
 
     PL->>VOL: Read file from shared volume
     PL->>PL: Extract text based on file type
@@ -33,7 +35,7 @@ sequenceDiagram
     PL->>LLM: acompletion() with extraction prompt
     LLM-->>PL: Markdown summary
 
-    PL->>DB: UPDATE documents SET summary = ...
+    PL->>DB: UPDATE {table_name} SET summary = ...
 
     BE-->>FE: Document response (upload confirmed)
     Note over FE: Summary appears after<br/>Pipelines finishes processing
@@ -46,6 +48,7 @@ erDiagram
     frameworks ||--o{ document_definitions : "defines required docs"
     document_definitions ||--o{ documents : "instantiated per project"
     projects ||--o{ documents : "has"
+    projects ||--o{ custom_documents : "has"
 
     document_definitions {
         uuid id PK
@@ -63,6 +66,16 @@ erDiagram
         string file_name "original filename"
         text summary "LLM-generated, null if not processed"
         datetime uploaded_at
+    }
+
+    custom_documents {
+        uuid id PK
+        uuid project_id FK
+        string file_name "original filename"
+        string file_path
+        text summary "LLM-generated, nullable"
+        datetime uploaded_at
+        datetime created_at
     }
 ```
 
@@ -91,19 +104,22 @@ The extracted text is sent to LiteLLM (`litellm.acompletion()`) with `max_tokens
 - Specific requirements, obligations, or action items
 - Any deadlines, thresholds, or quantitative criteria mentioned
 
-The summary is stored in the `documents.summary` column and serves two purposes:
+The summary is stored in the `documents.summary` or `custom_documents.summary` column and serves three purposes:
 
 1. **Documents page** — displayed directly to the user as a readable summary of the uploaded file
 2. **Chat agent context** — included in the Norma agent's system prompt so the assistant can reference uploaded document content when answering questions
+3. **Reporting suggestions** — included in the context for AI-generated compliance checklist suggestions
 
 ## File Storage
 
 ```
 /data/uploads/                    # Shared Docker volume (norma-data)
   {project_id}/
-    {document_id}.pdf             # Stored with original extension
+    {document_id}.pdf             # Framework documents, stored with original extension
     {document_id}.md
     ...
+    custom/
+      {document_id}.pdf           # Custom documents (PDF only)
 ```
 
 Both the Backend and Pipelines services mount the `norma-data` volume at `/data`. The Backend writes files during upload; the Pipelines service reads them during processing.
@@ -112,8 +128,9 @@ Both the Backend and Pipelines services mount the `norma-data` volume at `/data`
 
 | File | Purpose |
 |------|---------|
-| `backend/app/api/routes/documents.py` | Upload endpoint, document listing, lazy document creation |
+| `backend/app/api/routes/documents.py` | Upload endpoint, document listing, lazy document creation, custom document CRUD |
 | `backend/app/models/document.py` | `Document` and `DocumentDefinition` SQLAlchemy models |
+| `backend/app/models/custom_document.py` | `CustomDocument` SQLAlchemy model for free-form uploads |
 | `backend/app/services/seed.py` | Seeds `document_definitions` from framework config |
 | `pipelines/app/tasks/document_processor.py` | Text extraction and LLM summary generation |
-| `pipelines/app/api/routes/documents.py` | Processing endpoint called by the backend |
+| `pipelines/app/api/routes/documents.py` | Processing endpoint called by the backend (supports `table_name` parameter) |

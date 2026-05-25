@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { FileText } from 'lucide-react';
+import { Plus, Scale } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
@@ -35,27 +35,32 @@ export function FrameworksPage() {
       <PageHeader title="Frameworks" />
 
       <div className="flex-1 overflow-auto p-6">
-        <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto max-w-4xl space-y-4">
+          <div className="flex justify-end">
+            <Button variant="outline" disabled>
+              <Plus className="mr-1 size-4" />
+              Add Framework
+            </Button>
+          </div>
+
           {frameworks.map((fw) => (
             <Card
               key={fw.id}
               className="cursor-pointer transition-shadow hover:shadow-md"
               onClick={() => setSelected(fw)}
             >
-              <CardHeader>
-                <div className="flex items-start justify-between">
+              <CardHeader className="!flex !flex-row items-center gap-4">
+                <div className="bg-muted flex size-10 shrink-0 items-center justify-center rounded-lg">
+                  <Scale className="size-5" />
+                </div>
+                <div className="flex-1 space-y-0.5">
                   <CardTitle className="text-base">{fw.name}</CardTitle>
-                  <Badge variant={STATUS_VARIANT[fw.status] ?? 'outline'}>{fw.status}</Badge>
+                  <CardDescription className="text-xs">{fw.category}</CardDescription>
                 </div>
-                <CardDescription className="text-xs">{fw.category}</CardDescription>
+                <Badge className="shrink-0" variant={STATUS_VARIANT[fw.status] ?? 'outline'}>
+                  {fw.status}
+                </Badge>
               </CardHeader>
-              <CardContent>
-                <div className="text-muted-foreground flex items-center gap-1 text-sm">
-                  <FileText className="size-4" />
-                  {fw.document_count} document
-                  {fw.document_count !== 1 && 's'}
-                </div>
-              </CardContent>
             </Card>
           ))}
         </div>
@@ -76,11 +81,6 @@ export function FrameworksPage() {
               </DialogHeader>
               <div className="space-y-4">
                 <p className="text-sm leading-relaxed">{selected.description}</p>
-                <div className="text-muted-foreground flex items-center gap-1 text-sm">
-                  <FileText className="size-4" />
-                  {selected.document_count} associated document
-                  {selected.document_count !== 1 && 's'}
-                </div>
                 <div className="flex justify-end">
                   <Button variant="outline" onClick={() => setSelected(null)}>
                     Close

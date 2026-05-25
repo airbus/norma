@@ -9,10 +9,11 @@ from sqlalchemy.orm import Session
 from app.api.dependencies import get_current_user
 from app.core.config import settings
 from app.core.database import get_db
+from app.models.custom_document import CustomDocument
 from app.models.document import Document, DocumentDefinition
 from app.models.project import Project
 from app.models.user import User
-from app.schemas.document import DocumentResponse
+from app.schemas.document import CustomDocumentResponse, DocumentResponse
 
 router = APIRouter(prefix="/api/projects/{project_id}/documents", tags=["documents"])
 
@@ -112,3 +113,93 @@ async def upload_document(
         pass
 
     return _to_response(doc)
+
+
+@router.get("/custom", response_model=list[CustomDocumentResponse])
+def list_custom_documents(
+    project_id: uuid.UUID,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    project = _get_project(project_id, current_user, db)
+    return (
+        db.query(CustomDocument)
+        .filter(CustomDocument.project_id == project.id)
+        .order_by(CustomDocument.uploaded_at.desc())
+        .all()
+    )
+
+
+@router.post("/custom/upload", response_model=CustomDocumentResponse)
+async def upload_custom_document(
+    project_id: uuid.UUID,
+    file: UploadFile,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    project = _get_project(project_id, current_user, db)
+
+    if not file.filename or not file.filename.lower().endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are accepted")
+
+    doc_id = uuid.uuid4()
+    upload_dir = UPLOAD_DIR / str(project.id) / "custom"
+    upload_dir.mkdir(parents=True, exist_ok=True)
+
+    stored_name = f"{doc_id}.pdf"
+    file_path = upload_dir / stored_name
+
+    content = await file.read()
+    file_path.write_bytes(content)
+
+    custom_doc = CustomDocument(
+        id=doc_id,
+        project_id=project.id,
+        file_name=file.filename,
+        file_path=str(file_path),
+        uploaded_at=datetime.now(UTC),
+    )
+    db.add(custom_doc)
+    db.commit()
+    db.refresh(custom_doc)
+
+    try:
+        async with httpx.AsyncClient() as client:
+            await client.post(
+                f"{settings.pipelines_url}/api/documents/process",
+                json={
+                    "document_id": str(custom_doc.id),
+                    "file_path": str(file_path),
+                    "table_name": "custom_documents",
+                },
+                timeout=300,
+            )
+    except Exception:
+        pass
+
+    db.refresh(custom_doc)
+    return custom_doc
+
+
+@router.delete("/custom/{document_id}", status_code=204)
+def delete_custom_document(
+    project_id: uuid.UUID,
+    document_id: uuid.UUID,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    project = _get_project(project_id, current_user, db)
+    doc = (
+        db.query(CustomDocument)
+        .filter(CustomDocument.id == document_id, CustomDocument.project_id == project.id)
+        .first()
+    )
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document not found")
+
+    file_path = Path(doc.file_path)
+    if file_path.exists():
+        file_path.unlink()
+
+    db.delete(doc)
+    db.commit()

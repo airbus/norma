@@ -14,6 +14,7 @@ from app.agents.norma import build_system_prompt, create_norma_agent
 from app.api.dependencies import get_current_user
 from app.core.database import SessionLocal, get_db
 from app.models.chat import ChatMessage, ChatSession
+from app.models.custom_document import CustomDocument
 from app.models.document import Document
 from app.models.framework import Framework
 from app.models.project import Project
@@ -87,6 +88,14 @@ def _assemble_context(project: Project, db: Session) -> str:
 
     docs = db.query(Document).filter(Document.project_id == project.id, Document.summary.isnot(None)).all()
     document_summaries = [{"name": doc.definition.name, "summary": doc.summary} for doc in docs]
+
+    custom_docs = (
+        db.query(CustomDocument)
+        .filter(CustomDocument.project_id == project.id, CustomDocument.summary.isnot(None))
+        .all()
+    )
+    for cdoc in custom_docs:
+        document_summaries.append({"name": cdoc.file_name, "summary": cdoc.summary})
 
     return build_system_prompt(
         framework_contents=framework_contents,

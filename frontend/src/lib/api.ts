@@ -55,6 +55,14 @@ export interface DocumentItem {
   uploaded_at: string | null;
 }
 
+export interface CustomDocumentItem {
+  id: string;
+  project_id: string;
+  file_name: string;
+  summary: string | null;
+  uploaded_at: string;
+}
+
 export interface ReportingEvidence {
   id: string;
   project_id: string;

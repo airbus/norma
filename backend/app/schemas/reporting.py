@@ -21,3 +21,12 @@ class EvidenceResponse(BaseModel):
 
 class EvidenceBulkUpsert(BaseModel):
     items: list[EvidenceUpsert]
+
+
+class SuggestRequest(BaseModel):
+    question: str
+    current_comment: str = ""
+
+
+class SuggestResponse(BaseModel):
+    suggestion: str

@@ -126,9 +126,38 @@ List all required documents for a project. Documents are automatically created b
 
 ### `POST /api/projects/{project_id}/documents/{document_id}/upload`
 
-Upload a file for a document. Accepts `multipart/form-data` with a `file` field. After upload, the file is sent to the Pipelines service for text extraction and LLM summary generation.
+Upload a file for a framework document. Accepts `multipart/form-data` with a `file` field. After upload, the file is sent to the Pipelines service for text extraction and LLM summary generation.
 
 Supported file types: PDF, Markdown, TXT, CSV, JSON, XML, HTML.
+
+### Custom Documents
+
+Free-form document uploads not tied to any framework definition. Custom document summaries are included in the chat agent and reporting suggestion context.
+
+### `GET /api/projects/{project_id}/documents/custom`
+
+List all custom documents for a project, ordered by upload date (newest first).
+
+**Response:**
+```json
+[
+  {
+    "id": "uuid",
+    "project_id": "uuid",
+    "file_name": "policy.pdf",
+    "summary": "LLM-generated summary or null",
+    "uploaded_at": "2026-05-25T10:00:00"
+  }
+]
+```
+
+### `POST /api/projects/{project_id}/documents/custom/upload`
+
+Upload a custom PDF document. Accepts `multipart/form-data` with a `file` field. Only `.pdf` files are accepted. After upload, the file is sent to the Pipelines service for processing.
+
+### `DELETE /api/projects/{project_id}/documents/custom/{document_id}`
+
+Delete a custom document (removes the database record and file from disk).
 
 ---
 
@@ -149,6 +178,25 @@ Bulk upsert reporting evidence. Creates or updates entries by `item_key`.
     { "item_key": "data-governance", "comment": "Data governance policy documented in Confluence" },
     { "item_key": "risk-management", "comment": "Risk register maintained in JIRA" }
   ]
+}
+```
+
+### `POST /api/projects/{project_id}/reporting/suggest`
+
+Generate an AI-suggested comment for a reporting checklist item. Uses project context, uploaded document summaries, existing evidence, and framework knowledge to produce a concise suggestion.
+
+**Body:**
+```json
+{
+  "question": "[Data Governance — DG-01 Data Management] How is training data quality assured?",
+  "current_comment": "Optional existing comment to improve"
+}
+```
+
+**Response:**
+```json
+{
+  "suggestion": "Training data quality is assured through automated validation pipelines and manual review."
 }
 ```
 

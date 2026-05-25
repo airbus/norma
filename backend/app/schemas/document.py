@@ -29,3 +29,13 @@ class DocumentResponse(BaseModel):
     file_name: str | None
     summary: str | None
     uploaded_at: datetime | None
+
+
+class CustomDocumentResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: uuid.UUID
+    project_id: uuid.UUID
+    file_name: str
+    summary: str | None
+    uploaded_at: datetime

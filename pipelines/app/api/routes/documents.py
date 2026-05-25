@@ -10,9 +10,13 @@ from app.tasks.document_processor import process_document
 router = APIRouter(prefix="/api/documents", tags=["documents"])
 
 
+ALLOWED_TABLES = {"documents", "custom_documents"}
+
+
 class ProcessRequest(BaseModel):
     document_id: str
     file_path: str
+    table_name: str = "documents"
 
 
 class ProcessResponse(BaseModel):
@@ -27,12 +31,15 @@ async def process_document_endpoint(body: ProcessRequest):
     except ValueError as e:
         raise HTTPException(status_code=400, detail="Invalid document_id") from e
 
+    if body.table_name not in ALLOWED_TABLES:
+        raise HTTPException(status_code=400, detail="Invalid table_name")
+
     summary = await process_document(body.file_path)
 
     db = SessionLocal()
     try:
         db.execute(
-            text("UPDATE documents SET summary = :summary WHERE id = :doc_id"),
+            text(f"UPDATE {body.table_name} SET summary = :summary WHERE id = :doc_id"),
             {"summary": summary, "doc_id": body.document_id},
         )
         db.commit()

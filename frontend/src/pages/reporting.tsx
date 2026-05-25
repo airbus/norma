@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { Download } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PageHeader } from '@/components/page-header';
 import { RiskBanner } from '@/components/risk-banner';
@@ -48,7 +50,12 @@ export function ReportingPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title="Reporting" />
+      <PageHeader title="Reporting">
+        <Button variant="outline" size="sm" disabled>
+          <Download className="mr-1 size-4" />
+          Export Report
+        </Button>
+      </PageHeader>
 
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-4xl">
@@ -75,6 +82,7 @@ export function ReportingPage() {
                   area={area}
                   comments={comments}
                   onCommentChange={handleCommentChange}
+                  projectId={currentProject?.id ?? ''}
                 />
               </TabsContent>
             ))}

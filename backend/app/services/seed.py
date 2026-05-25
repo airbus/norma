@@ -3,7 +3,7 @@ from pathlib import Path
 
 from sqlalchemy.orm import Session
 
-from app.models.document import DocumentDefinition
+from app.models.document import Document, DocumentDefinition
 from app.models.framework import Framework
 from app.models.project import Project
 
@@ -97,41 +97,6 @@ SEED_FRAMEWORKS = [
             },
         ],
     },
-    {
-        "name": "Internal AI Guidelines",
-        "description": (
-            "Company-specific guidelines for responsible AI development and deployment. "
-            "Covers model governance, ethical review processes, bias testing protocols, "
-            "and operational monitoring requirements aligned with corporate values and industry best practices."
-        ),
-        "category": "Internal",
-        "status": "draft",
-        "documents": [
-            {
-                "name": "Internal Governance Policy",
-                "description": (
-                    "Company-specific policy defining AI governance structure, roles, "
-                    "responsibilities, and escalation procedures."
-                ),
-                "article": "",
-            },
-            {
-                "name": "Ethics Review Report",
-                "description": (
-                    "Documented ethical review of the AI system covering fairness, accountability, and societal impact."
-                ),
-                "article": "",
-            },
-            {
-                "name": "Bias Testing Report",
-                "description": (
-                    "Results of bias detection and mitigation testing across "
-                    "protected attributes and demographic groups."
-                ),
-                "article": "",
-            },
-        ],
-    },
 ]
 
 
@@ -145,6 +110,16 @@ def _load_knowledge(framework_name: str) -> str:
 
 
 def seed_frameworks(db: Session) -> None:
+    stale = db.query(Framework).filter(Framework.name == "Internal AI Guidelines").first()
+    if stale:
+        stale_defs = db.query(DocumentDefinition.id).filter(DocumentDefinition.framework_id == stale.id).all()
+        stale_def_ids = [d.id for d in stale_defs]
+        if stale_def_ids:
+            db.query(Document).filter(Document.definition_id.in_(stale_def_ids)).delete()
+            db.query(DocumentDefinition).filter(DocumentDefinition.id.in_(stale_def_ids)).delete()
+        db.delete(stale)
+        db.flush()
+
     for fw_data in SEED_FRAMEWORKS:
         existing = db.query(Framework).filter(Framework.name == fw_data["name"]).first()
         if existing:

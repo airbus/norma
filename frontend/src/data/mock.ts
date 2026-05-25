@@ -182,7 +182,7 @@ export const MOCK_INTEGRATIONS: Integration[] = [
     description:
       'Connect your GitHub repositories to track code changes and manage version control for AI models.',
     icon: 'github',
-    connected: true,
+    connected: false,
   },
 ];
 

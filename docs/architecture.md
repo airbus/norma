@@ -46,8 +46,8 @@ The single-page application provides the full user workflow:
 - **Project management** — create and configure AI system compliance projects
 - **Self-assessment questionnaire** — 17-question EU AI Act decision tree (6 sections covering AI system identification, prohibited practices, regulated products, standalone systems, GPAI, and transparency)
 - **Risk banner** — real-time display of the LLM-evaluated risk classification with re-evaluate controls
-- **Document checklist** — per-framework required documents with file upload and LLM-generated summaries
-- **Reporting checklist** — compliance evidence tracking with free-text comments per item
+- **Document checklist** — per-framework required documents with file upload and LLM-generated summaries, plus free-form custom PDF uploads
+- **Reporting checklist** — compliance evidence tracking with free-text comments per item and AI-powered suggestion generation
 - **Chat interface** — streaming conversation with the Norma AI assistant, with full project context
 - **Settings** — user and admin management (invite links, user listing)
 
@@ -65,10 +65,10 @@ The central API server handling all business logic:
 | **Projects** (`app/api/routes/projects.py`) | Full CRUD for compliance projects. PATCH requests that modify risk-relevant fields (description, intended purpose, intended users, deployment context, questionnaire answers) automatically trigger an LLM-based risk evaluation. |
 | **Risk Evaluation** (`app/services/risk_evaluation.py`) | One-shot LLM call using `litellm.acompletion()` that classifies a project as `unacceptable`, `high`, `limited`, or `minimal` based on the EU AI Act self-assessment decision tree. |
 | **Chat / Norma Agent** (`app/agents/norma.py`, `app/api/routes/chat.py`) | Multi-turn AI assistant built on Google ADK. System prompt assembled from framework knowledge, project context, uploaded document summaries, and reporting evidence. Supports both synchronous and SSE streaming responses. |
-| **Documents** (`app/api/routes/documents.py`) | Manages per-project document instances derived from framework-defined templates. Handles file uploads and delegates processing to the Pipelines service. |
-| **Reporting** (`app/api/routes/reporting.py`) | Bulk upsert of compliance checklist evidence entries keyed by item identifier. |
+| **Documents** (`app/api/routes/documents.py`) | Manages per-project document instances derived from framework-defined templates, plus free-form custom PDF uploads. Handles file uploads and delegates processing to the Pipelines service. |
+| **Reporting** (`app/api/routes/reporting.py`) | Bulk upsert of compliance checklist evidence entries keyed by item identifier. Includes an LLM-powered suggestion endpoint that generates context-aware comments using project data, document summaries, and framework knowledge. |
 | **Frameworks** (`app/api/routes/frameworks.py`) | Read-only endpoints for regulatory frameworks and their metadata. |
-| **Seeding** (`app/services/seed.py`) | On startup, seeds frameworks (EU AI Act, Internal AI Guidelines) with their required document definitions and loads knowledge base content from markdown files. |
+| **Seeding** (`app/services/seed.py`) | On startup, seeds the EU AI Act framework with its required document definitions and loads knowledge base content from markdown files. Also creates a sample project for newly registered users. |
 | **Migrations** (`alembic/`) | Alembic manages schema migrations, run automatically on backend startup. |
 
 ### Pipelines
@@ -79,7 +79,7 @@ A lightweight, independently scalable service dedicated to heavy processing task
 
 1. **Text extraction** — reads uploaded files (PDF via PyMuPDF, or plain text for Markdown/TXT/CSV/JSON/XML/HTML)
 2. **LLM summarisation** — sends extracted text to `litellm.acompletion()` with a structured prompt requesting comprehensive markdown summaries
-3. **Database update** — writes the generated summary back to the `documents.summary` column
+3. **Database update** — writes the generated summary back to the `documents.summary` or `custom_documents.summary` column (determined by the `table_name` parameter)
 
 The Pipelines service shares the `norma-data` volume with the Backend for file access and connects directly to PostgreSQL for writing summaries.
 
@@ -92,6 +92,7 @@ erDiagram
     users ||--o{ projects : owns
     users ||--o{ chat_sessions : participates
     projects ||--o{ documents : has
+    projects ||--o{ custom_documents : has
     projects ||--o{ reporting_evidence : has
     projects ||--o{ chat_sessions : has
     frameworks ||--o{ document_definitions : defines
@@ -147,6 +148,16 @@ erDiagram
         string file_path
         string file_name
         text summary
+        datetime uploaded_at
+        datetime created_at
+    }
+
+    custom_documents {
+        uuid id PK
+        uuid project_id FK
+        string file_name
+        string file_path
+        text summary "LLM-generated, nullable"
         datetime uploaded_at
         datetime created_at
     }

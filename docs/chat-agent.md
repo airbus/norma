@@ -22,6 +22,7 @@ graph TB
         FW[(frameworks.content)]
         PROJ[(projects)]
         DOCS[(documents.summary)]
+        CDOCS[(custom_documents.summary)]
         RPT[(reporting_evidence)]
         HIST[(chat_messages)]
     end
@@ -33,6 +34,7 @@ graph TB
     BUILDER --> FW
     BUILDER --> PROJ
     BUILDER --> DOCS
+    BUILDER --> CDOCS
     BUILDER --> RPT
     BUILDER -->|frozen system prompt| AGENT
     API --> RUNNER
@@ -68,7 +70,7 @@ flowchart LR
         FW_SECTION --> PROJ_SECTION
         PROJ_SECTION[Project Context<br/>Name, description, risk level,<br/>intended purpose/users/deployment,<br/>questionnaire answers]
         PROJ_SECTION --> DOC_SECTION
-        DOC_SECTION[Document Summaries<br/>LLM-generated summaries of<br/>uploaded compliance documents]
+        DOC_SECTION[Document Summaries<br/>LLM-generated summaries of<br/>framework and custom documents]
         DOC_SECTION --> RPT_SECTION
         RPT_SECTION[Reporting Evidence<br/>Comments from compliance<br/>reporting checklist]
     end
@@ -81,7 +83,7 @@ flowchart LR
 | **Base instruction** | Hardcoded in `norma.py` | Its identity, role boundaries, and response format |
 | **Framework knowledge** | `frameworks.content` column | Deep regulatory knowledge (EU AI Act articles, risk classification logic, compliance procedures) |
 | **Project context** | `projects` table | Awareness of the specific AI system being assessed |
-| **Document summaries** | `documents.summary` column | Understanding of compliance documents the user has already prepared |
+| **Document summaries** | `documents.summary` and `custom_documents.summary` columns | Understanding of compliance documents the user has already prepared (both framework-required and custom uploads) |
 | **Reporting evidence** | `reporting_evidence` table | Knowledge of which checklist items the user has addressed |
 
 ## Knowledge Base
