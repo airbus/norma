@@ -9,6 +9,7 @@ from app.core.security import create_access_token, hash_password, verify_passwor
 from app.models.invite_token import InviteToken
 from app.models.user import User
 from app.schemas.auth import LoginRequest, RegisterRequest, TokenResponse, UserResponse
+from app.services.seed import create_sample_project
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -23,7 +24,7 @@ def register(body: RegisterRequest, db: Session = Depends(get_db)):
 
     if body.invite_token:
         invite = db.query(InviteToken).filter(InviteToken.token == body.invite_token).first()
-        if not invite or invite.used_by or invite.expires_at < datetime.now(UTC):
+        if not invite or invite.used_by or invite.expires_at < datetime.now():
             raise HTTPException(status_code=400, detail="Invalid or expired invite")
         if invite.email and invite.email.lower() != body.email.lower():
             raise HTTPException(status_code=400, detail="Email does not match invite")
@@ -46,6 +47,8 @@ def register(body: RegisterRequest, db: Session = Depends(get_db)):
 
     db.commit()
     db.refresh(user)
+
+    create_sample_project(user.id, db)
 
     token = create_access_token(str(user.id), user.role)
     return TokenResponse(access_token=token)

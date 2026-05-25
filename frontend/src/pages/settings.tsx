@@ -46,7 +46,7 @@ export function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Preferences</CardTitle>
-              <CardDescription>Customize your Norma experience.</CardDescription>
+              <CardDescription>Customise your Norma experience.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
@@ -82,7 +82,7 @@ export function SettingsPage() {
             </CardContent>
           </Card>
 
-          {currentProject && (
+          {isAdmin && currentProject && (
             <Card className="border-destructive/50">
               <CardHeader>
                 <CardTitle>Danger Zone</CardTitle>

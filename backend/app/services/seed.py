@@ -1,9 +1,11 @@
+import uuid
 from pathlib import Path
 
 from sqlalchemy.orm import Session
 
 from app.models.document import DocumentDefinition
 from app.models.framework import Framework
+from app.models.project import Project
 
 KNOWLEDGE_DIR = Path(__file__).resolve().parent.parent / "data" / "knowledge"
 
@@ -171,4 +173,57 @@ def seed_frameworks(db: Session) -> None:
                 )
             )
 
+    db.commit()
+
+
+SAMPLE_PROJECT = {
+    "name": "Sample Project — Facial Recognition Access Control",
+    "description": (
+        "An AI-powered facial recognition system used for building access control "
+        "in corporate office environments. The system captures facial images via "
+        "security cameras at entry points, matches them against an enrolled employee "
+        "database, and grants or denies physical access in real time. It operates "
+        "autonomously without human intervention for each access decision."
+    ),
+    "risk_classification": "high",
+    "intended_purpose": (
+        "Automated identity verification and physical access control for corporate "
+        "facilities. The system replaces traditional badge-based access with biometric "
+        "authentication to improve security and reduce tailgating incidents."
+    ),
+    "intended_users": (
+        "Corporate security teams (system administrators), facility managers "
+        "(access policy configuration), and all employees (end users whose biometric "
+        "data is processed for daily building access)."
+    ),
+    "deployment_context": (
+        "Deployed across EU office buildings as the primary access control mechanism. "
+        "Cameras are installed at all entry and exit points. The system processes "
+        "biometric data of approximately 2,000 employees per site and operates 24/7."
+    ),
+    "questionnaire_answers": {
+        "q1": "yes",
+        "q2": "yes",
+        "q3": ["none"],
+        "q4": ["none"],
+        "q5": "no",
+        "q6": ["biometrics"],
+        "q7": "yes",
+        "q8": "no",
+        "q9": ["none"],
+        "q10": "no",
+        "q11": "yes-bias",
+        "q12": "on-the-loop",
+        "q13": "no",
+        "q14": "no",
+        "q15": "no",
+        "q16": "no",
+        "q17": "no",
+    },
+}
+
+
+def create_sample_project(user_id: uuid.UUID, db: Session) -> None:
+    project = Project(owner_id=user_id, **SAMPLE_PROJECT)
+    db.add(project)
     db.commit()

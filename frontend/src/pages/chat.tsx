@@ -41,13 +41,10 @@ export function ChatPage() {
 
   useEffect(() => {
     if (shouldScrollRef.current && lastUserMsgRef.current) {
-      requestAnimationFrame(() => {
-        lastUserMsgRef.current?.scrollIntoView({
-          block: 'start',
-          behavior: 'smooth',
-        });
-      });
       shouldScrollRef.current = false;
+      requestAnimationFrame(() => {
+        lastUserMsgRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      });
     }
   }, [messages]);
 
@@ -86,20 +83,81 @@ export function ChatPage() {
       setIsTyping(true);
       shouldScrollRef.current = true;
 
+      const streamingMsg: ChatMessage = {
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        content: '',
+        created_at: new Date().toISOString(),
+      };
+
       try {
-        const response = await api.post<ChatMessage>(
-          `/chat/sessions/${currentSession.id}/messages`,
-          { content: text.trim() },
-        );
-        setMessages((prev) => [...prev, response]);
+        const token = localStorage.getItem('norma-token');
+        const res = await fetch(`/api/chat/sessions/${currentSession.id}/messages/stream`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({ content: text.trim() }),
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        const reader = res.body!.getReader();
+        const decoder = new TextDecoder();
+        let sseBuffer = '';
+        let started = false;
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          sseBuffer += decoder.decode(value, { stream: true });
+          const events = sseBuffer.split('\n\n');
+          sseBuffer = events.pop() ?? '';
+
+          for (const event of events) {
+            const trimmed = event.trim();
+            if (!trimmed.startsWith('data: ')) continue;
+            const raw = trimmed.slice(6);
+            if (raw === '[DONE]') continue;
+
+            try {
+              streamingMsg.content += JSON.parse(raw);
+            } catch {
+              streamingMsg.content += raw;
+            }
+
+            if (!started) {
+              started = true;
+              setIsTyping(false);
+              setMessages((prev) => [...prev, { ...streamingMsg }]);
+            } else {
+              setMessages((prev) =>
+                prev.map((m) => (m.id === streamingMsg.id ? { ...streamingMsg } : m)),
+              );
+            }
+            await new Promise((r) => requestAnimationFrame(r));
+          }
+        }
       } catch {
-        const errorMsg: ChatMessage = {
-          id: crypto.randomUUID(),
-          role: 'assistant',
-          content: "I'm sorry, I encountered an error processing your request. Please try again.",
-          created_at: new Date().toISOString(),
-        };
-        setMessages((prev) => [...prev, errorMsg]);
+        if (streamingMsg.content) {
+          setMessages((prev) =>
+            prev.map((m) => (m.id === streamingMsg.id ? { ...streamingMsg } : m)),
+          );
+        } else {
+          const errorMsg: ChatMessage = {
+            id: streamingMsg.id,
+            role: 'assistant',
+            content: "I'm sorry, I encountered an error processing your request. Please try again.",
+            created_at: new Date().toISOString(),
+          };
+          setMessages((prev) =>
+            streamingMsg.content === ''
+              ? [...prev, errorMsg]
+              : prev.map((m) => (m.id === streamingMsg.id ? errorMsg : m)),
+          );
+        }
       } finally {
         setIsTyping(false);
       }
@@ -175,7 +233,7 @@ export function ChatPage() {
               </div>
             </div>
           ) : (
-            <div className="mx-auto max-w-3xl space-y-6 px-4 py-8">
+            <div className="mx-auto max-w-3xl space-y-6 px-4 pb-[60vh] pt-8">
               {(() => {
                 const lastUserIdx = messages.findLastIndex((m) => m.role === 'user');
                 return messages.map((msg, idx) =>
@@ -183,7 +241,7 @@ export function ChatPage() {
                     <div
                       key={msg.id}
                       ref={idx === lastUserIdx ? lastUserMsgRef : undefined}
-                      className="flex justify-end"
+                      className="scroll-mt-10 flex justify-end"
                     >
                       <div className="bg-muted max-w-[80%] rounded-2xl rounded-tr-sm px-4 py-3 text-sm">
                         {msg.content}

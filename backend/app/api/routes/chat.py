@@ -1,7 +1,10 @@
+import json
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
+from google.adk.agents.run_config import RunConfig, StreamingMode
+from google.adk.events import Event
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai.types import Content, Part
@@ -9,7 +12,7 @@ from sqlalchemy.orm import Session
 
 from app.agents.norma import build_system_prompt, create_norma_agent
 from app.api.dependencies import get_current_user
-from app.core.database import get_db
+from app.core.database import SessionLocal, get_db
 from app.models.chat import ChatMessage, ChatSession
 from app.models.document import Document
 from app.models.framework import Framework
@@ -25,6 +28,43 @@ from app.schemas.chat import (
 )
 
 router = APIRouter(prefix="/api/chat", tags=["chat"])
+
+_adk_session_service = InMemorySessionService()
+
+
+async def _get_or_create_adk_session(
+    chat_session_id: uuid.UUID,
+    user_id: str,
+    past_messages: list[ChatMessage],
+):
+    """Get existing ADK session or create one, replaying DB history if new."""
+    adk_session_id = str(chat_session_id)
+
+    adk_session = await _adk_session_service.get_session(
+        app_name="norma",
+        user_id=user_id,
+        session_id=adk_session_id,
+    )
+    if adk_session:
+        return adk_session
+
+    adk_session = await _adk_session_service.create_session(
+        app_name="norma",
+        user_id=user_id,
+        session_id=adk_session_id,
+    )
+
+    for msg in past_messages:
+        author = "user" if msg.role == "user" else "norma"
+        role = "user" if msg.role == "user" else "model"
+        event = Event(
+            invocation_id=str(msg.id),
+            author=author,
+            content=Content(role=role, parts=[Part(text=msg.content)]),
+        )
+        await _adk_session_service.append_event(session=adk_session, event=event)
+
+    return adk_session
 
 
 def _assemble_context(project: Project, db: Session) -> str:
@@ -114,23 +154,18 @@ async def send_message(
     db.add(user_msg)
     db.commit()
 
-    agent = create_norma_agent(session.system_prompt)
-    session_service = InMemorySessionService()
+    history = db.query(ChatMessage).filter(ChatMessage.session_id == session.id).order_by(ChatMessage.created_at).all()
+    past_messages = history[:-1]
 
-    adk_session = await session_service.create_session(
-        app_name="norma",
+    adk_session = await _get_or_create_adk_session(
+        chat_session_id=session.id,
         user_id=str(current_user.id),
+        past_messages=past_messages,
     )
 
-    history = db.query(ChatMessage).filter(ChatMessage.session_id == session.id).order_by(ChatMessage.created_at).all()
-    for msg in history[:-1]:
-        author = msg.role if msg.role == "user" else "norma"
-        event = type("Event", (), {"author": author, "content": Content(parts=[Part(text=msg.content)])})()
-        adk_session.events.append(event)
-
-    runner = Runner(agent=agent, app_name="norma", session_service=session_service)
-
-    user_content = Content(parts=[Part(text=body.content)])
+    agent = create_norma_agent(session.system_prompt)
+    runner = Runner(agent=agent, app_name="norma", session_service=_adk_session_service)
+    user_content = Content(role="user", parts=[Part(text=body.content)])
 
     response_text = ""
     async for event in runner.run_async(
@@ -168,33 +203,57 @@ async def send_message_stream(
     db.add(user_msg)
     db.commit()
 
-    agent = create_norma_agent(session.system_prompt)
-    session_service = InMemorySessionService()
+    history = db.query(ChatMessage).filter(ChatMessage.session_id == session.id).order_by(ChatMessage.created_at).all()
+    past_messages = history[:-1]
 
-    adk_session = await session_service.create_session(
-        app_name="norma",
+    adk_session = await _get_or_create_adk_session(
+        chat_session_id=session.id,
         user_id=str(current_user.id),
+        past_messages=past_messages,
     )
 
-    runner = Runner(agent=agent, app_name="norma", session_service=session_service)
-    user_content = Content(parts=[Part(text=body.content)])
+    agent = create_norma_agent(session.system_prompt)
+    runner = Runner(agent=agent, app_name="norma", session_service=_adk_session_service)
+    user_content = Content(role="user", parts=[Part(text=body.content)])
+
+    run_config = RunConfig(streaming_mode=StreamingMode.SSE)
+
+    chat_session_id = session.id
+    user_id = str(current_user.id)
 
     async def event_generator():
         response_text = ""
+        event_count = 0
         async for event in runner.run_async(
-            user_id=str(current_user.id),
+            user_id=user_id,
             session_id=adk_session.id,
             new_message=user_content,
+            run_config=run_config,
         ):
-            if event.content and event.content.parts:
-                for part in event.content.parts:
-                    if part.text:
-                        response_text += part.text
-                        yield f"data: {part.text}\n\n"
+            event_count += 1
+            has_content = bool(event.content and event.content.parts)
+            print(
+                f"[STREAM] event#{event_count} partial={event.partial} author={event.author} has_content={has_content}",
+                flush=True,
+            )
+            if not event.partial or not event.content or not event.content.parts:
+                continue
+            for part in event.content.parts:
+                if part.text and not part.function_call:
+                    response_text += part.text
+                    yield f"data: {json.dumps(part.text)}\n\n"
 
-        assistant_msg = ChatMessage(session_id=session.id, role="assistant", content=response_text)
-        db.add(assistant_msg)
-        db.commit()
+        gen_db = SessionLocal()
+        try:
+            assistant_msg = ChatMessage(session_id=chat_session_id, role="assistant", content=response_text)
+            gen_db.add(assistant_msg)
+            gen_db.commit()
+        finally:
+            gen_db.close()
         yield "data: [DONE]\n\n"
 
-    return StreamingResponse(event_generator(), media_type="text/event-stream")
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={"X-Accel-Buffering": "no", "Cache-Control": "no-cache"},
+    )

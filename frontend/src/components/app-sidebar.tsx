@@ -127,8 +127,12 @@ export function AppSidebar() {
                   sideOffset={4}
                 >
                   {projects.map((project) => (
-                    <DropdownMenuItem key={project.id} onClick={() => setCurrentProject(project)}>
-                      {project.name}
+                    <DropdownMenuItem
+                      key={project.id}
+                      onClick={() => setCurrentProject(project)}
+                      className="truncate"
+                    >
+                      <span className="truncate">{project.name}</span>
                     </DropdownMenuItem>
                   ))}
                   <DropdownMenuSeparator />

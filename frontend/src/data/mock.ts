@@ -211,7 +211,7 @@ export const MOCK_CHAT_MESSAGES: ChatMessage[] = [];
 
 export const SUGGESTED_QUESTIONS = [
   'What risk level is our project under the EU AI Act?',
-  'Summarize our compliance gaps',
+  'Summarise our compliance gaps',
   'What documents are we missing for conformity assessment?',
   'Explain Article 14 human oversight requirements',
 ];
