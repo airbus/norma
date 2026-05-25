@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+import { NormaLogo } from '@/components/icons/norma-logo';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -85,7 +86,15 @@ export function RegisterPage() {
       <div className="flex min-h-svh items-center justify-center bg-background p-4">
         <Card className="w-full max-w-sm">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-semibold">Norma</CardTitle>
+            <div className="flex items-center justify-center gap-2">
+              <NormaLogo className="size-7" />
+              <CardTitle
+                className="text-2xl font-medium"
+                style={{ fontFamily: 'var(--font-logo)' }}
+              >
+                Norma
+              </CardTitle>
+            </div>
             <CardDescription>{pageError}</CardDescription>
           </CardHeader>
           <CardContent>
