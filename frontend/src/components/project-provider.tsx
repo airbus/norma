@@ -29,25 +29,21 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
   }, [currentProject]);
 
   useEffect(() => {
-    if (!user) {
-      setProjects([]);
-      setCurrentProject(null);
-      setLoading(false);
-      return;
-    }
+    if (!user) return;
     let cancelled = false;
-    setLoading(true);
-    api
-      .get<Project[]>('/projects')
-      .then((data) => {
+    const fetchProjects = async () => {
+      try {
+        const data = await api.get<Project[]>('/projects');
         if (cancelled) return;
         setProjects(data);
         if (data.length > 0) setCurrentProject(data[0]);
-        setLoading(false);
-      })
-      .catch(() => {
+      } catch {
+        // auth may not be ready yet
+      } finally {
         if (!cancelled) setLoading(false);
-      });
+      }
+    };
+    fetchProjects();
     return () => {
       cancelled = true;
     };
