@@ -859,9 +859,7 @@
           },
           "MG03": {
             "title": "Determinar las dimensiones de calidad a evaluar",
-            "questions": [
-              "¿Se han definido las dimensiones de calidad de los datos a evaluar?"
-            ]
+            "questions": ["¿Se han definido las dimensiones de calidad de los datos a evaluar?"]
           },
           "MG04": {
             "title": "Definir controles de calidad para cada dimensión",
@@ -905,9 +903,7 @@
           },
           "MG10": {
             "title": "Muestreo de datos",
-            "questions": [
-              "¿Se realiza un muestreo de datos adecuado?"
-            ]
+            "questions": ["¿Se realiza un muestreo de datos adecuado?"]
           },
           "MG11": {
             "title": "Creación y selección de características",
@@ -918,9 +914,7 @@
           },
           "MG12": {
             "title": "Enriquecimiento de datos",
-            "questions": [
-              "¿Se han enriquecido y ampliado los datos?"
-            ]
+            "questions": ["¿Se han enriquecido y ampliado los datos?"]
           },
           "MG13": {
             "title": "Etiquetado de datos",
@@ -1356,9 +1350,7 @@
           },
           "MG06": {
             "title": "Gestión de riesgos",
-            "questions": [
-              "¿Tiene el sistema un plan de gestión de riesgos asociado?"
-            ]
+            "questions": ["¿Tiene el sistema un plan de gestión de riesgos asociado?"]
           },
           "MG07": {
             "title": "Transparencia",
@@ -1463,15 +1455,11 @@
           },
           "MG13": {
             "title": "Artículo 9: Sistema de gestión de riesgos",
-            "questions": [
-              "¿Tiene el sistema un plan de gestión de riesgos asociado?"
-            ]
+            "questions": ["¿Tiene el sistema un plan de gestión de riesgos asociado?"]
           },
           "MG14": {
             "title": "Artículo 14: Supervisión humana",
-            "questions": [
-              "¿El sistema cumple con las medidas de Supervisión Humana?"
-            ]
+            "questions": ["¿El sistema cumple con las medidas de Supervisión Humana?"]
           },
           "MG15": {
             "title": "Artículo 15: Precisión, robustez y ciberseguridad",

@@ -859,9 +859,7 @@
           },
           "MG03": {
             "title": "Determine quality dimensions to evaluate",
-            "questions": [
-              "Have data quality dimensions to evaluate been defined?"
-            ]
+            "questions": ["Have data quality dimensions to evaluate been defined?"]
           },
           "MG04": {
             "title": "Define quality controls for each dimension",
@@ -892,9 +890,7 @@
           },
           "MG08": {
             "title": "Data transformation",
-            "questions": [
-              "Have data been transformed to adapt them to AI system needs?"
-            ]
+            "questions": ["Have data been transformed to adapt them to AI system needs?"]
           },
           "MG09": {
             "title": "Data aggregation",
@@ -905,9 +901,7 @@
           },
           "MG10": {
             "title": "Data sampling",
-            "questions": [
-              "Is adequate data sampling performed?"
-            ]
+            "questions": ["Is adequate data sampling performed?"]
           },
           "MG11": {
             "title": "Feature creation and selection",
@@ -918,9 +912,7 @@
           },
           "MG12": {
             "title": "Data enrichment",
-            "questions": [
-              "Have data been enriched and expanded?"
-            ]
+            "questions": ["Have data been enriched and expanded?"]
           },
           "MG13": {
             "title": "Data labelling",
@@ -1356,9 +1348,7 @@
           },
           "MG06": {
             "title": "Risk management",
-            "questions": [
-              "Does the system have an associated risk management plan?"
-            ]
+            "questions": ["Does the system have an associated risk management plan?"]
           },
           "MG07": {
             "title": "Transparency",
@@ -1463,15 +1453,11 @@
           },
           "MG13": {
             "title": "Article 9: Risk management system",
-            "questions": [
-              "Does the system have an associated risk management plan?"
-            ]
+            "questions": ["Does the system have an associated risk management plan?"]
           },
           "MG14": {
             "title": "Article 14: Human oversight",
-            "questions": [
-              "Does the system comply with Human Oversight measures?"
-            ]
+            "questions": ["Does the system comply with Human Oversight measures?"]
           },
           "MG15": {
             "title": "Article 15: Accuracy, robustness, and cybersecurity",

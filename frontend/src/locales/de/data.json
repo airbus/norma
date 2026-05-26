@@ -859,9 +859,7 @@
           },
           "MG03": {
             "title": "Zu bewertende Qualitätsdimensionen bestimmen",
-            "questions": [
-              "Wurden die zu bewertenden Datenqualitätsdimensionen definiert?"
-            ]
+            "questions": ["Wurden die zu bewertenden Datenqualitätsdimensionen definiert?"]
           },
           "MG04": {
             "title": "Qualitätskontrollen für jede Dimension definieren",
@@ -905,9 +903,7 @@
           },
           "MG10": {
             "title": "Datenstichprobenziehung",
-            "questions": [
-              "Wird eine angemessene Datenstichprobenziehung durchgeführt?"
-            ]
+            "questions": ["Wird eine angemessene Datenstichprobenziehung durchgeführt?"]
           },
           "MG11": {
             "title": "Feature-Erstellung und -Auswahl",
@@ -918,9 +914,7 @@
           },
           "MG12": {
             "title": "Datenanreicherung",
-            "questions": [
-              "Wurden die Daten angereichert und erweitert?"
-            ]
+            "questions": ["Wurden die Daten angereichert und erweitert?"]
           },
           "MG13": {
             "title": "Datenkennzeichnung",
@@ -1356,9 +1350,7 @@
           },
           "MG06": {
             "title": "Risikomanagement",
-            "questions": [
-              "Verfügt das System über einen zugehörigen Risikomanagementplan?"
-            ]
+            "questions": ["Verfügt das System über einen zugehörigen Risikomanagementplan?"]
           },
           "MG07": {
             "title": "Transparenz",
@@ -1463,15 +1455,11 @@
           },
           "MG13": {
             "title": "Article 9: Risikomanagementsystem",
-            "questions": [
-              "Verfügt das System über einen zugehörigen Risikomanagementplan?"
-            ]
+            "questions": ["Verfügt das System über einen zugehörigen Risikomanagementplan?"]
           },
           "MG14": {
             "title": "Article 14: Menschliche Aufsicht",
-            "questions": [
-              "Erfüllt das System die Maßnahmen zur menschlichen Aufsicht?"
-            ]
+            "questions": ["Erfüllt das System die Maßnahmen zur menschlichen Aufsicht?"]
           },
           "MG15": {
             "title": "Article 15: Genauigkeit, Robustheit und Cybersicherheit",

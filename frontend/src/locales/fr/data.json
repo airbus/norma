@@ -905,9 +905,7 @@
           },
           "MG10": {
             "title": "Échantillonnage des données",
-            "questions": [
-              "Un échantillonnage adéquat des données est-il effectué ?"
-            ]
+            "questions": ["Un échantillonnage adéquat des données est-il effectué ?"]
           },
           "MG11": {
             "title": "Création et sélection de caractéristiques",
@@ -918,9 +916,7 @@
           },
           "MG12": {
             "title": "Enrichissement des données",
-            "questions": [
-              "Les données ont-elles été enrichies et augmentées ?"
-            ]
+            "questions": ["Les données ont-elles été enrichies et augmentées ?"]
           },
           "MG13": {
             "title": "Étiquetage des données",
@@ -1356,9 +1352,7 @@
           },
           "MG06": {
             "title": "Gestion des risques",
-            "questions": [
-              "Le système dispose-t-il d'un plan de gestion des risques associé ?"
-            ]
+            "questions": ["Le système dispose-t-il d'un plan de gestion des risques associé ?"]
           },
           "MG07": {
             "title": "Transparence",
@@ -1463,15 +1457,11 @@
           },
           "MG13": {
             "title": "Article 9 : Système de gestion des risques",
-            "questions": [
-              "Le système dispose-t-il d'un plan de gestion des risques associé ?"
-            ]
+            "questions": ["Le système dispose-t-il d'un plan de gestion des risques associé ?"]
           },
           "MG14": {
             "title": "Article 14 : Surveillance humaine",
-            "questions": [
-              "Le système est-il conforme aux mesures de surveillance humaine ?"
-            ]
+            "questions": ["Le système est-il conforme aux mesures de surveillance humaine ?"]
           },
           "MG15": {
             "title": "Article 15 : Précision, robustesse et cybersécurité",
