@@ -13,6 +13,7 @@ router = APIRouter(prefix="/api/github", tags=["github"])
 
 class ProcessRequest(BaseModel):
     integration_id: str
+    language: str = "en"
 
 
 class ProcessResponse(BaseModel):
@@ -64,8 +65,8 @@ async def process_github_data(body: ProcessRequest):
     if not files_text:
         files_text = "No source files available."
 
-    summary = await generate_summary(tasks_text, files_text)
-    architecture = await generate_architecture(tree_text, files_text)
+    summary = await generate_summary(tasks_text, files_text, language=body.language)
+    architecture = await generate_architecture(tree_text, files_text, language=body.language)
 
     db = SessionLocal()
     try:

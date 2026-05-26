@@ -1,0 +1,100 @@
+{
+  "buttons": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "delete": "Eliminar",
+    "create": "Crear",
+    "upload": "Subir",
+    "update": "Actualizar",
+    "connect": "Conectar",
+    "disconnect": "Desconectar",
+    "replace": "Reemplazar",
+    "backToLogin": "Volver al inicio de sesión",
+    "signIn": "Iniciar sesión",
+    "createAccount": "Crear cuenta",
+    "exportReport": "Exportar informe",
+    "addFramework": "Agregar marco normativo",
+    "deleteProject": "Eliminar proyecto",
+    "deletePermanently": "Eliminar permanentemente",
+    "resetPassword": "Restablecer contraseña",
+    "createInvite": "Crear invitación",
+    "syncWithGitHub": "Sincronizar con GitHub",
+    "openOnGitHub": "Abrir en GitHub",
+    "reEvaluate": "Reevaluar",
+    "askNorma": "Consultar a Norma",
+    "newChat": "Nuevo chat",
+    "newProject": "Nuevo proyecto",
+    "makeAdmin": "Convertir en administrador",
+    "makeMember": "Convertir en miembro",
+    "disableAccount": "Desactivar cuenta",
+    "enableAccount": "Activar cuenta",
+    "deleteUser": "Eliminar usuario",
+    "addIntegration": "Agregar integración"
+  },
+  "status": {
+    "active": "Activo",
+    "disabled": "Desactivado",
+    "connected": "Conectado",
+    "notConnected": "No conectado",
+    "pending": "Pendiente",
+    "expired": "Expirado",
+    "used": "Utilizado",
+    "open": "Abierto",
+    "closed": "Cerrado",
+    "draft": "Borrador",
+    "inactive": "Inactivo",
+    "syncError": "Error de sincronización"
+  },
+  "nav": {
+    "general": "General",
+    "project": "Proyecto",
+    "configuration": "Configuración",
+    "github": "GitHub"
+  },
+  "risk": {
+    "unacceptable": "Riesgo inaceptable",
+    "high": "Riesgo alto",
+    "limited": "Riesgo limitado",
+    "minimal": "Riesgo mínimo"
+  },
+  "form": {
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "name": "Nombre",
+    "description": "Descripción",
+    "role": "Rol",
+    "member": "Miembro",
+    "admin": "Administrador",
+    "any": "Cualquiera"
+  },
+  "loading": {
+    "loading": "Cargando...",
+    "signingIn": "Iniciando sesión...",
+    "creatingAccount": "Creando cuenta...",
+    "uploading": "Subiendo...",
+    "syncing": "Sincronizando…",
+    "evaluatingRisk": "Evaluando riesgo..."
+  },
+  "errors": {
+    "loginFailed": "Error de inicio de sesión",
+    "registrationFailed": "Error de registro",
+    "passwordsDoNotMatch": "Las contraseñas no coinciden",
+    "updateFailed": "Error de actualización",
+    "deleteFailed": "Error de eliminación",
+    "passwordResetFailed": "Error al restablecer la contraseña",
+    "failedToCreateInvite": "Error al crear la invitación",
+    "failedToDeleteInvite": "Error al eliminar la invitación",
+    "failedToSave": "Error al guardar",
+    "failedToDisconnect": "Error al desconectar"
+  },
+  "table": {
+    "document": "Documento",
+    "uploaded": "Subido",
+    "title": "Título",
+    "assignees": "Responsables",
+    "labels": "Etiquetas",
+    "expires": "Expira"
+  }
+}

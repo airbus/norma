@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from app.api.dependencies import get_current_user
 from app.core.config import settings
 from app.core.database import get_db
-from app.core.llm import is_gemini_model
+from app.core.llm import get_language_name, is_gemini_model
 from app.models.custom_document import CustomDocument
 from app.models.document import Document, DocumentDefinition
 from app.models.framework import Framework
@@ -82,16 +82,27 @@ def bulk_upsert_evidence(
     return db.query(ReportingEvidence).filter(ReportingEvidence.project_id == project.id).all()
 
 
-SUGGEST_SYSTEM_PROMPT = """\
+def _language_rule(language: str | None) -> str:
+    lang_name = get_language_name(language)
+    if language and language != "en":
+        return f"Respond entirely in {lang_name}."
+    return "Use British English spelling (e.g., organisation, behaviour, summarisation)."
+
+
+_SUGGEST_SYSTEM_TEMPLATE = """\
 You are an AI compliance assistant helping users write evidence comments for regulatory, \
 human rights, and environmental frameworks.
 
 Output exactly ONE short sentence (max 40 words). No preamble, no labels, no bullet points.
 
 - Be specific to the project's actual AI system, grounding in the provided context.
-- Use British English spelling (e.g., organisation, behaviour, summarisation).
+- {language_rule}
 - If an existing comment is provided, improve it while keeping the user's intent.
 """
+
+
+def _suggest_system_prompt(language: str | None) -> str:
+    return _SUGGEST_SYSTEM_TEMPLATE.format(language_rule=_language_rule(language))
 
 
 def _build_project_context(project: Project, db: Session, framework_id: str | None = None) -> list[str]:
@@ -207,7 +218,7 @@ async def suggest_comment(
         response = await litellm.acompletion(
             model=settings.litellm_model,
             messages=[
-                {"role": "system", "content": SUGGEST_SYSTEM_PROMPT},
+                {"role": "system", "content": _suggest_system_prompt(current_user.language_preference)},
                 {"role": "user", "content": user_prompt},
             ],
             max_tokens=2048,
@@ -227,7 +238,7 @@ async def suggest_comment(
         raise HTTPException(status_code=502, detail="Failed to generate suggestion")
 
 
-VALIDATE_SYSTEM_PROMPT = """\
+_VALIDATE_SYSTEM_TEMPLATE = """\
 You are a strict AI compliance auditor. Your job is to determine whether an answer would \
 satisfy a regulatory auditor reviewing this AI system for compliance.
 
@@ -239,7 +250,7 @@ without specifics should be marked as insufficient.
 Evaluate using the provided project context and documents.
 
 Respond in exactly this JSON format (no other text):
-{"covered": true, "feedback": "..."}
+{{"covered": true, "feedback": "..."}}
 
 Rules:
 - "covered": true ONLY if the answer provides concrete, verifiable evidence or specific \
@@ -248,8 +259,12 @@ measures that directly address every aspect of the question.
 of the question, or would not withstand scrutiny from a compliance auditor.
 - "feedback": One sentence (max 60 words). If covered, confirm what makes it sufficient. \
 If not, be direct about exactly what is missing or too vague — name the specific gaps.
-- Use British English spelling (e.g., organisation, behaviour, summarisation).
+- {language_rule}
 """
+
+
+def _validate_system_prompt(language: str | None) -> str:
+    return _VALIDATE_SYSTEM_TEMPLATE.format(language_rule=_language_rule(language))
 
 
 @router.post("/validate", response_model=ValidateResponse)
@@ -277,7 +292,7 @@ async def validate_answer(
         response = await litellm.acompletion(
             model=settings.litellm_model,
             messages=[
-                {"role": "system", "content": VALIDATE_SYSTEM_PROMPT},
+                {"role": "system", "content": _validate_system_prompt(current_user.language_preference)},
                 {"role": "user", "content": user_prompt},
             ],
             max_tokens=2048,

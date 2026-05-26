@@ -69,7 +69,7 @@ async def _get_or_create_adk_session(
     return adk_session
 
 
-def _assemble_context(project: Project, db: Session) -> str:
+def _assemble_context(project: Project, db: Session, language: str = "en") -> str:
     frameworks = db.query(Framework).all()
     framework_contents = [{"name": fw.name, "description": fw.description, "content": fw.content} for fw in frameworks]
 
@@ -106,6 +106,7 @@ def _assemble_context(project: Project, db: Session) -> str:
         project_context=project_context,
         document_summaries=document_summaries if document_summaries else None,
         github_summary=github_summary,
+        language=language,
     )
 
 
@@ -119,7 +120,7 @@ def create_session(
     if not project:
         raise HTTPException(status_code=404, detail="Project not found")
 
-    system_prompt = _assemble_context(project, db)
+    system_prompt = _assemble_context(project, db, language=current_user.language_preference or "en")
     session = ChatSession(project_id=project.id, user_id=current_user.id, system_prompt=system_prompt)
     db.add(session)
     db.commit()

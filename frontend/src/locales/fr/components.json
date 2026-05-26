@@ -1,0 +1,70 @@
+{
+  "sidebar": {
+    "noProject": "Aucun projet",
+    "selectProject": "Sélectionner un projet",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "chat": "Conversation",
+    "description": "Description",
+    "documents": "Documents",
+    "reporting": "Rapports",
+    "integrations": "Intégrations",
+    "frameworks": "Référentiels",
+    "github": "GitHub",
+    "overview": "Vue d'ensemble",
+    "riskClassification": "Classification des risques",
+    "additionalDocuments": "Documents supplémentaires"
+  },
+  "riskBanner": {
+    "evaluatingRisk": "Évaluation du risque…"
+  },
+  "newProjectDialog": {
+    "title": "Créer un nouveau projet",
+    "description": "Configurez un nouveau projet de système d'IA pour commencer le suivi de la conformité.",
+    "overview": "Vue d'ensemble",
+    "projectSummary": "Résumé du projet",
+    "projectSummaryDesc": "Informations générales sur le système d'IA.",
+    "namePlaceholder": "ex. Maintenance prédictive",
+    "descriptionPlaceholder": "Brève description du système d'IA…",
+    "intendedPurpose": "Finalité prévue",
+    "intendedPurposeDesc": "À quoi le système est-il destiné ?",
+    "intendedPurposePlaceholder": "Décrivez la finalité prévue du système d'IA…",
+    "intendedUsers": "Utilisateurs prévus",
+    "intendedUsersDesc": "Qui utilisera ou sera affecté par ce système ?",
+    "intendedUsersPlaceholder": "Décrivez les utilisateurs prévus et les personnes concernées…",
+    "deploymentContext": "Contexte de déploiement",
+    "deploymentContextDesc": "Où et comment le système sera-t-il déployé ?",
+    "deploymentContextPlaceholder": "Décrivez le contexte de déploiement, le secteur et la portée géographique…",
+    "createProject": "Créer le projet"
+  },
+  "userManagement": {
+    "title": "Gestion des utilisateurs",
+    "description": "Gérez les utilisateurs et invitez de nouveaux membres.",
+    "users": "Utilisateurs",
+    "invitations": "Invitations",
+    "createInviteLink": "Créer un lien d'invitation",
+    "emailOptional": "Adresse e-mail (facultatif)",
+    "emailPlaceholder": "utilisateur@exemple.com",
+    "newPassword": "Nouveau mot de passe",
+    "resetPasswordTitle": "Réinitialiser le mot de passe"
+  },
+  "githubConnect": {
+    "connectTitle": "Connecter GitHub",
+    "editTitle": "Modifier l'intégration GitHub",
+    "description": "Associez un dépôt GitHub pour synchroniser les tâches et analyser l'architecture.",
+    "patLabel": "Jeton d'accès personnel",
+    "patLabelKeep": "Jeton d'accès personnel (laisser vide pour conserver l'actuel)",
+    "patTooltip": "Accédez à GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token. Sélectionnez le périmètre « repo » pour les dépôts privés ou « public_repo » pour les dépôts publics.",
+    "repoOwner": "Propriétaire du dépôt",
+    "repoOwnerPlaceholder": "ex. octocat",
+    "repoName": "Nom du dépôt",
+    "repoNamePlaceholder": "ex. hello-world",
+    "projectNumber": "Numéro de projet GitHub (facultatif)",
+    "projectNumberPlaceholder": "ex. 1"
+  },
+  "checklistPanel": {
+    "norma": "Norma",
+    "generateSuggestion": "Générer une suggestion avec Norma",
+    "addComment": "Ajouter un commentaire…"
+  }
+}

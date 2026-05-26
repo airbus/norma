@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,10 +8,11 @@ import { AskNormaButton } from '@/components/ask-norma-button';
 import { PageHeader } from '@/components/page-header';
 import { ChecklistPanel, type ValidationResult } from '@/components/reporting/checklist-panel';
 import { useProject } from '@/hooks/use-project';
-import { FRAMEWORK_CHECKLISTS } from '@/data/reporting-checklists';
+import { getFrameworkChecklists } from '@/data/reporting-checklists';
 import { api, type Framework, type ReportingEvidence } from '@/lib/api';
 
 export function ReportingPage() {
+  const { t } = useTranslation(['pages', 'common']);
   const { currentProject } = useProject();
   const { frameworkId } = useParams<{ frameworkId: string }>();
   const navigate = useNavigate();
@@ -115,15 +117,20 @@ export function ReportingPage() {
   );
 
   const currentFramework = frameworks.find((fw) => fw.id === frameworkId);
-  const checklist = currentFramework ? (FRAMEWORK_CHECKLISTS[currentFramework.name] ?? []) : [];
+  const frameworkChecklists = getFrameworkChecklists(t);
+  const checklist = currentFramework ? (frameworkChecklists[currentFramework.name] ?? []) : [];
 
-  const pageTitle = currentFramework ? `Reporting > ${currentFramework.name}` : 'Reporting';
+  const pageTitle = currentFramework
+    ? `${t('reporting.title')} > ${currentFramework.name}`
+    : t('reporting.title');
 
   return (
     <div className="flex h-svh flex-col">
       <PageHeader title={pageTitle}>
         {currentFramework && (
-          <AskNormaButton question={`Analyse my reporting progress for ${currentFramework.name}`} />
+          <AskNormaButton
+            question={t('reporting.askNormaQuestion', { framework: currentFramework.name })}
+          />
         )}
       </PageHeader>
 
@@ -134,7 +141,7 @@ export function ReportingPage() {
               <div className="mb-4 flex justify-end">
                 <Button variant="outline" size="sm" disabled>
                   <Download className="mr-1 size-4" />
-                  Export Report
+                  {t('common:buttons.exportReport')}
                 </Button>
               </div>
               <Tabs defaultValue={checklist[0].id} key={frameworkId}>

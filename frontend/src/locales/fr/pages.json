@@ -1,0 +1,106 @@
+{
+  "chat": {
+    "title": "Conversation",
+    "greeting": "Bonjour, je suis Norma ! Comment puis-je vous aider ?",
+    "subtitle": "Posez-moi des questions sur la conformité au règlement européen sur l'IA, la classification des risques de votre projet ou toute question réglementaire.",
+    "placeholder": "Demander à Norma",
+    "disclaimer": "Norma peut commettre des erreurs. Vérifiez les informations importantes.",
+    "errorMessage": "Je suis désolée, une erreur est survenue lors du traitement de votre demande. Veuillez réessayer."
+  },
+  "login": {
+    "title": "Connectez-vous à votre compte"
+  },
+  "register": {
+    "createAccount": "Créez votre compte",
+    "setupAdmin": "Configurez votre compte administrateur",
+    "inviteInvalid": "Ce lien d'invitation est invalide ou a expiré.",
+    "verifyFailed": "Impossible de vérifier le statut d'inscription.",
+    "alreadyHaveAccount": "Vous avez déjà un compte ?"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "preferences": "Préférences",
+    "customise": "Personnalisez votre expérience Norma.",
+    "theme": "Thème",
+    "themeLight": "Clair",
+    "themeDark": "Sombre",
+    "themeSystem": "Système",
+    "language": "Langue",
+    "dangerZone": "Zone de danger",
+    "dangerZoneDesc": "Actions irréversibles pour le projet actuel.",
+    "deleteProjectDesc": "Supprimer définitivement « {{name}} » et toutes les données associées.",
+    "deleteProjectConfirm": "Êtes-vous sûr de vouloir supprimer « {{name}} » ? Cette action est irréversible."
+  },
+  "description": {
+    "title": "Description",
+    "noProject": "Sélectionnez ou créez un projet pour commencer.",
+    "riskBannerDesc": "Ce système nécessite une conformité totale aux obligations du règlement sur l'IA avant sa mise sur le marché.",
+    "riskBannerChat": "Parlez-moi de la classification des risques de mon projet",
+    "askNormaQuestion": "Examinez la description de mon projet et proposez des améliorations",
+    "overview": "Vue d'ensemble",
+    "projectSummary": "Résumé du projet",
+    "projectSummaryDesc": "Informations générales sur le système d'IA.",
+    "intendedPurpose": "Finalité prévue",
+    "intendedPurposeDesc": "À quoi le système est-il destiné ?",
+    "intendedPurposePlaceholder": "Décrivez la finalité prévue du système d'IA…",
+    "intendedUsers": "Utilisateurs prévus",
+    "intendedUsersDesc": "Qui utilisera ou sera affecté par ce système ?",
+    "intendedUsersPlaceholder": "Décrivez les utilisateurs prévus et les personnes concernées…",
+    "deploymentContext": "Contexte de déploiement",
+    "deploymentContextDesc": "Où et comment le système sera-t-il déployé ?",
+    "deploymentContextPlaceholder": "Décrivez le contexte de déploiement, le secteur et la portée géographique…"
+  },
+  "documents": {
+    "title": "Documents",
+    "riskBannerDesc": "Documents requis pour la conformité réglementaire en fonction de votre classification des risques.",
+    "riskBannerChat": "Quels documents nous manquent pour l'évaluation de conformité ?",
+    "askNormaQuestion": "Évaluez mes documents {{framework}}",
+    "askNormaQuestionAdditional": "Évaluez mes documents justificatifs supplémentaires",
+    "additional": "Supplémentaires",
+    "uploadedCount": "{{count}} sur {{total}} téléversés",
+    "noAdditionalDocs": "Aucun document supplémentaire n'a encore été téléversé. Téléversez un PDF pour l'inclure dans le contexte de votre projet.",
+    "deleteDocument": "Supprimer le document"
+  },
+  "reporting": {
+    "title": "Rapports",
+    "riskBannerDesc": "Complétez la liste de contrôle de conformité pour chaque domaine d'exigence du règlement européen sur l'IA.",
+    "riskBannerChat": "Quelles sont les principales exigences de reporting pour notre projet ?",
+    "askNormaQuestion": "Analysez ma progression de reporting pour {{framework}}"
+  },
+  "riskClassification": {
+    "askNormaQuestion": "Expliquez la classification des risques de mon projet au titre du règlement européen sur l'IA"
+  },
+  "github": {
+    "title": "GitHub",
+    "askNormaQuestion": "Analysez mon code source et proposez des améliorations",
+    "syncSteps": {
+      "issues": "Récupération des tickets",
+      "tree": "Analyse du dépôt",
+      "files": "Récupération des fichiers sources",
+      "analysis": "Génération de l'analyse"
+    },
+    "lastSynced": "Dernière synchronisation : {{date}}",
+    "tasks": "Tâches",
+    "architecture": "Architecture",
+    "context": "Contexte",
+    "all": "Tous",
+    "assigneePlaceholder": "Responsable",
+    "labelPlaceholder": "Étiquette",
+    "sprintPlaceholder": "Sprint",
+    "statusPlaceholder": "Statut",
+    "noTasks": "Aucune tâche trouvée. Cliquez sur Synchroniser pour récupérer les tâches depuis GitHub.",
+    "noIntegration": "Aucune intégration GitHub configurée.",
+    "noArchitecture": "Aucun diagramme d'architecture disponible. Cliquez sur Synchroniser pour analyser le dépôt.",
+    "contextDescription": "Ce fichier markdown est utilisé comme contexte pour le chatbot Norma. Vous pouvez le modifier avant de démarrer une nouvelle session de conversation.",
+    "savedSuccessfully": "Enregistré avec succès",
+    "noContext": "Aucun fichier de contexte disponible. Cliquez sur Synchroniser avec GitHub pour le générer.",
+    "assignedTo": "Assigné à : {{assignees}}"
+  },
+  "integrations": {
+    "title": "Intégrations",
+    "githubDesc": "Connectez un dépôt GitHub pour synchroniser les tâches et analyser l'architecture."
+  },
+  "frameworks": {
+    "title": "Référentiels"
+  }
+}

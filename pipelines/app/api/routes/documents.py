@@ -17,6 +17,7 @@ class ProcessRequest(BaseModel):
     document_id: str
     file_path: str
     table_name: str = "documents"
+    language: str = "en"
 
 
 class ProcessResponse(BaseModel):
@@ -34,7 +35,7 @@ async def process_document_endpoint(body: ProcessRequest):
     if body.table_name not in ALLOWED_TABLES:
         raise HTTPException(status_code=400, detail="Invalid table_name")
 
-    summary = await process_document(body.file_path)
+    summary = await process_document(body.file_path, language=body.language)
 
     db = SessionLocal()
     try:

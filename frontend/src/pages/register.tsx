@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { NormaLogo } from '@/components/icons/norma-logo';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +10,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { api } from '@/lib/api';
 
 export function RegisterPage() {
+  const { t } = useTranslation(['pages', 'common']);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const inviteToken = searchParams.get('token');
@@ -31,7 +33,7 @@ export function RegisterPage() {
             `/invites/${inviteToken}/validate`,
           );
           if (!res.valid) {
-            setPageError('This invite link is invalid or has expired.');
+            setPageError(t('register.inviteInvalid'));
             return;
           }
           if (res.email) setEmail(res.email);
@@ -43,20 +45,20 @@ export function RegisterPage() {
           }
         }
       } catch {
-        setPageError('Unable to verify registration status.');
+        setPageError(t('register.verifyFailed'));
       } finally {
         setPageLoading(false);
       }
     };
     check();
-  }, [inviteToken, navigate]);
+  }, [inviteToken, navigate, t]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError(t('common:errors.passwordsDoNotMatch'));
       return;
     }
 
@@ -65,7 +67,7 @@ export function RegisterPage() {
       await register(email, password, name, inviteToken ?? undefined);
       navigate('/');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Registration failed');
+      setError(err instanceof Error ? err.message : t('common:errors.registrationFailed'));
     } finally {
       setLoading(false);
     }
@@ -76,7 +78,7 @@ export function RegisterPage() {
   if (pageLoading) {
     return (
       <div className="flex min-h-svh items-center justify-center bg-background">
-        <p className="text-muted-foreground">Loading...</p>
+        <p className="text-muted-foreground">{t('common:loading.loading')}</p>
       </div>
     );
   }
@@ -100,7 +102,7 @@ export function RegisterPage() {
           <CardContent>
             <Link to="/login">
               <Button variant="outline" className="w-full">
-                Back to login
+                {t('common:buttons.backToLogin')}
               </Button>
             </Link>
           </CardContent>
@@ -120,13 +122,13 @@ export function RegisterPage() {
             </CardTitle>
           </div>
           <CardDescription>
-            {inviteToken ? 'Create your account' : 'Set up your admin account'}
+            {inviteToken ? t('register.createAccount') : t('register.setupAdmin')}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">{t('common:form.name')}</Label>
               <Input
                 id="name"
                 value={name}
@@ -136,7 +138,7 @@ export function RegisterPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('common:form.email')}</Label>
               <Input
                 id="email"
                 type="email"
@@ -148,7 +150,7 @@ export function RegisterPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('common:form.password')}</Label>
               <Input
                 id="password"
                 type="password"
@@ -160,7 +162,7 @@ export function RegisterPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="confirm-password">Confirm password</Label>
+              <Label htmlFor="confirm-password">{t('common:form.confirmPassword')}</Label>
               <Input
                 id="confirm-password"
                 type="password"
@@ -173,14 +175,14 @@ export function RegisterPage() {
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Creating account...' : 'Create account'}
+              {loading ? t('common:loading.creatingAccount') : t('common:buttons.createAccount')}
             </Button>
           </form>
           {inviteToken && (
             <p className="mt-4 text-center text-sm text-muted-foreground">
-              Already have an account?{' '}
+              {t('register.alreadyHaveAccount')}{' '}
               <Link to="/login" className="underline">
-                Sign in
+                {t('common:buttons.signIn')}
               </Link>
             </p>
           )}

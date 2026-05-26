@@ -4,6 +4,7 @@ from pathlib import Path
 import litellm
 
 from app.core.config import settings
+from app.core.llm import language_rule
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +19,8 @@ Structure the summary with:
 - Key sections with their main points
 - Specific requirements, obligations, or action items
 - Any deadlines, thresholds, or quantitative criteria mentioned
+
+{language_rule}
 
 Document text:
 ---
@@ -48,7 +51,7 @@ def extract_text(file_path: str) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
-async def generate_summary(text: str) -> str:
+async def generate_summary(text: str, language: str = "en") -> str:
     if not text.strip():
         return "No content could be extracted from this document."
 
@@ -58,16 +61,16 @@ async def generate_summary(text: str) -> str:
 
     response = await litellm.acompletion(
         model=settings.litellm_model,
-        messages=[{"role": "user", "content": SUMMARY_PROMPT.format(text=text)}],
+        messages=[{"role": "user", "content": SUMMARY_PROMPT.format(text=text, language_rule=language_rule(language))}],
         max_tokens=4096,
     )
 
     return response.choices[0].message.content or "Summary generation failed."
 
 
-async def process_document(file_path: str) -> str:
+async def process_document(file_path: str, language: str = "en") -> str:
     logger.info("Processing document: %s", file_path)
     text = extract_text(file_path)
-    summary = await generate_summary(text)
+    summary = await generate_summary(text, language=language)
     logger.info("Generated summary for: %s (%d chars)", file_path, len(summary))
     return summary

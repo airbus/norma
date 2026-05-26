@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CheckCircle2, Circle, FileText, Loader2, Trash2, Upload } from 'lucide-react';
 
@@ -17,7 +18,15 @@ import { PageHeader } from '@/components/page-header';
 import { useProject } from '@/hooks/use-project';
 import { api, type CustomDocumentItem, type DocumentItem, type Framework } from '@/lib/api';
 
+function slugify(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
 export function DocumentsPage() {
+  const { t } = useTranslation(['pages', 'common', 'data']);
   const { currentProject } = useProject();
   const { frameworkId } = useParams<{ frameworkId: string }>();
   const navigate = useNavigate();
@@ -69,10 +78,10 @@ export function DocumentsPage() {
   const uploadedCount = filteredDocs.filter((d) => d.uploaded).length;
 
   const pageTitle = isAdditional
-    ? 'Additional Documents'
+    ? t('documents.additional') + ' ' + t('documents.title')
     : currentFramework
-      ? `Documents > ${currentFramework.name}`
-      : 'Documents';
+      ? `${t('documents.title')} > ${currentFramework.name}`
+      : t('documents.title');
 
   const handleUpload = async (docId: string, file: File) => {
     if (!currentProject) return;
@@ -123,9 +132,11 @@ export function DocumentsPage() {
     <div className="flex h-svh flex-col">
       <PageHeader title={pageTitle}>
         {currentFramework ? (
-          <AskNormaButton question={`Evaluate my ${currentFramework.name} documents`} />
+          <AskNormaButton
+            question={t('documents.askNormaQuestion', { framework: currentFramework.name })}
+          />
         ) : isAdditional ? (
-          <AskNormaButton question="Evaluate my additional supporting documents" />
+          <AskNormaButton question={t('documents.askNormaQuestionAdditional')} />
         ) : null}
       </PageHeader>
 
@@ -155,7 +166,7 @@ export function DocumentsPage() {
                   ) : (
                     <Upload className="mr-1 size-3" />
                   )}
-                  {customUploading ? 'Uploading...' : 'Upload'}
+                  {customUploading ? t('common:loading.uploading') : t('common:buttons.upload')}
                 </Button>
               </div>
 
@@ -164,8 +175,8 @@ export function DocumentsPage() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Document</TableHead>
-                        <TableHead className="w-36">Uploaded</TableHead>
+                        <TableHead>{t('common:table.document')}</TableHead>
+                        <TableHead className="w-36">{t('common:table.uploaded')}</TableHead>
                         <TableHead className="w-10" />
                       </TableRow>
                     </TableHeader>
@@ -194,7 +205,7 @@ export function DocumentsPage() {
                               onClick={() => handleCustomDelete(doc.id)}
                               disabled={deletingId === doc.id}
                               className="text-muted-foreground hover:text-destructive cursor-pointer rounded p-1 transition-colors disabled:opacity-50"
-                              title="Delete document"
+                              title={t('documents.deleteDocument')}
                             >
                               {deletingId === doc.id ? (
                                 <Loader2 className="size-4 animate-spin" />
@@ -210,8 +221,7 @@ export function DocumentsPage() {
                 </div>
               ) : (
                 <div className="text-muted-foreground rounded-lg border border-dashed py-8 text-center text-sm">
-                  No additional documents uploaded yet. Upload any PDF to include it in your project
-                  context.
+                  {t('documents.noAdditionalDocs')}
                 </div>
               )}
             </>
@@ -220,7 +230,10 @@ export function DocumentsPage() {
               {filteredDocs.length > 0 && (
                 <div className="flex items-center justify-between">
                   <Badge variant="outline">
-                    {uploadedCount} of {filteredDocs.length} uploaded
+                    {t('documents.uploadedCount', {
+                      count: uploadedCount,
+                      total: filteredDocs.length,
+                    })}
                   </Badge>
                 </div>
               )}
@@ -231,7 +244,7 @@ export function DocumentsPage() {
                     <TableHeader>
                       <TableRow>
                         <TableHead className="w-8" />
-                        <TableHead>Document</TableHead>
+                        <TableHead>{t('common:table.document')}</TableHead>
                         <TableHead className="w-24 pr-6 text-right" />
                       </TableRow>
                     </TableHeader>
@@ -247,7 +260,12 @@ export function DocumentsPage() {
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
-                              <span className="text-sm font-medium">{doc.name}</span>
+                              <span className="text-sm font-medium">
+                                {t(`documentDefinitions.${slugify(doc.name)}.name`, {
+                                  ns: 'data',
+                                  defaultValue: doc.name,
+                                })}
+                              </span>
                               {doc.article && (
                                 <Badge variant="secondary" className="text-xs">
                                   {doc.article}
@@ -255,7 +273,10 @@ export function DocumentsPage() {
                               )}
                             </div>
                             <p className="text-muted-foreground whitespace-normal text-xs">
-                              {doc.description}
+                              {t(`documentDefinitions.${slugify(doc.name)}.description`, {
+                                ns: 'data',
+                                defaultValue: doc.description,
+                              })}
                             </p>
                           </TableCell>
                           <TableCell className="pr-4 text-right">
@@ -276,7 +297,11 @@ export function DocumentsPage() {
                               }}
                             >
                               <Upload className="mr-1 size-3" />
-                              {uploadingId === doc.id ? '...' : doc.uploaded ? 'Replace' : 'Upload'}
+                              {uploadingId === doc.id
+                                ? '...'
+                                : doc.uploaded
+                                  ? t('common:buttons.replace')
+                                  : t('common:buttons.upload')}
                             </Button>
                           </TableCell>
                         </TableRow>

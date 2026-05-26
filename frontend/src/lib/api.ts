@@ -5,6 +5,7 @@ export interface User {
   role: 'admin' | 'member';
   is_active: boolean;
   created_at: string;
+  language_preference: string | null;
 }
 
 export interface Invite {

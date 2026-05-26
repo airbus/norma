@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
 
 class RegisterRequest(BaseModel):
@@ -30,3 +30,17 @@ class UserResponse(BaseModel):
     role: str
     is_active: bool
     created_at: datetime
+    language_preference: str | None = None
+
+
+class UserSelfUpdateRequest(BaseModel):
+    """Schema for users updating their own preferences."""
+
+    language_preference: str | None = None
+
+    @field_validator("language_preference")
+    @classmethod
+    def validate_language(cls, v: str | None) -> str | None:
+        if v is not None and v not in ("en", "fr", "de", "es"):
+            raise ValueError("Language must be one of: en, fr, de, es")
+        return v

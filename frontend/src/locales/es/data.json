@@ -1,0 +1,1670 @@
+{
+  "suggestedQuestions": {
+    "riskLevel": "¿Qué nivel de riesgo tiene nuestro proyecto según el Reglamento Europeo de IA?",
+    "complianceGaps": "Resuma nuestras brechas de cumplimiento",
+    "missingDocuments": "¿Qué documentos nos faltan para la evaluación de conformidad?",
+    "article14": "Explique los requisitos de supervisión humana del Artículo 14"
+  },
+  "questionnaire": {
+    "sections": {
+      "ai-system": {
+        "title": "Sistema de IA",
+        "description": "Determine si su sistema cumple los requisitos para ser considerado un sistema de IA según el Reglamento Europeo de IA.",
+        "questions": {
+          "q1": {
+            "text": "¿Su sistema infiere a partir de entradas para generar salidas (predicciones, recomendaciones, decisiones o contenido)?",
+            "options": {
+              "yes": "Sí — aprende de los datos o adapta su comportamiento",
+              "no": "No — sigue reglas fijas, tablas de consulta o lógica determinista",
+              "not-sure": "No estoy seguro"
+            }
+          },
+          "q2": {
+            "text": "¿Su sistema opera con cierto nivel de autonomía (es decir, puede funcionar sin instrucciones humanas continuas para cada acción)?",
+            "options": {
+              "yes": "Sí",
+              "no": "No — una persona debe dirigir cada acción manualmente"
+            }
+          }
+        }
+      },
+      "prohibited-practices": {
+        "title": "Prácticas prohibidas",
+        "description": "Compruebe si su sistema implica alguna práctica prohibida de forma absoluta en virtud del Artículo 5 del Reglamento de IA.",
+        "questions": {
+          "q3": {
+            "text": "¿Su sistema realiza alguna de las siguientes acciones? (Seleccione todas las que correspondan)",
+            "options": {
+              "subliminal": "Utiliza técnicas subliminales o engañosas para manipular el comportamiento causando daño",
+              "exploits-vulnerabilities": "Explota vulnerabilidades de grupos específicos (edad, discapacidad, situación socioeconómica)",
+              "social-scoring": "Puntúa o clasifica a personas en función de su comportamiento social, dando lugar a un trato desfavorable en contextos no relacionados",
+              "criminal-profiling": "Predice el riesgo delictivo basándose únicamente en la elaboración de perfiles de rasgos de personalidad, sin hechos objetivos vinculados a un delito",
+              "facial-scraping": "Construye bases de datos de reconocimiento facial mediante la recopilación de imágenes de internet o CCTV",
+              "emotion-inference": "Infiere emociones en entornos laborales o educativos (excepto por razones médicas o de seguridad)",
+              "biometric-categorisation": "Categoriza a personas mediante datos biométricos para deducir raza, opiniones políticas, religión, orientación sexual o afiliación sindical",
+              "realtime-facial": "Utiliza reconocimiento facial en tiempo real en espacios públicos (excepto en las tres excepciones restringidas de aplicación de la ley)",
+              "none": "Ninguna de las anteriores"
+            }
+          }
+        }
+      },
+      "regulated-products": {
+        "title": "Productos regulados",
+        "description": "Determine si su sistema está cubierto por la legislación vigente de la UE en materia de seguridad de productos (Vía A).",
+        "questions": {
+          "q4": {
+            "text": "¿Su sistema es un producto, o un componente de un producto, cubierto por alguna de las siguientes legislaciones de la UE?",
+            "options": {
+              "medical": "Productos sanitarios o diagnósticos in vitro",
+              "machinery": "Maquinaria",
+              "toys": "Juguetes",
+              "lifts": "Ascensores",
+              "radio": "Equipos radioeléctricos",
+              "ppe": "Equipos de protección individual",
+              "aviation": "Aviación civil / aeronaves no tripuladas",
+              "vehicles": "Vehículos de motor / equipos marinos",
+              "pressure": "Equipos a presión, embarcaciones de recreo, instalaciones de teleféricos o aparatos de gas",
+              "none": "Ninguna de las anteriores"
+            }
+          },
+          "q5": {
+            "text": "¿Su producto requiere una evaluación de conformidad por un tercero en virtud de dicha legislación de productos antes de su comercialización?",
+            "options": {
+              "yes": "Sí",
+              "no": "No — solo autoevaluación interna, sin recurrir a normas armonizadas",
+              "not-sure": "No estoy seguro"
+            }
+          }
+        }
+      },
+      "standalone-systems": {
+        "title": "Sistemas autónomos",
+        "description": "Determine si su sistema pertenece a un caso de uso de alto riesgo como sistema autónomo (Vía B).",
+        "questions": {
+          "q6": {
+            "text": "¿Cuál es el dominio principal del uso previsto de su sistema?",
+            "options": {
+              "biometrics": "Biometría (identificación, categorización o reconocimiento de emociones)",
+              "infrastructure": "Infraestructuras críticas (tráfico vial, agua, gas, electricidad, infraestructura digital)",
+              "education": "Educación o formación profesional (admisiones, calificaciones, asignación, supervisión de exámenes)",
+              "employment": "Empleo (contratación, selección de CV, promoción, asignación de tareas, evaluación del rendimiento, despido)",
+              "essential-services": "Servicios esenciales (elegibilidad para prestaciones públicas, calificación crediticia, fijación de precios de seguros, despacho de emergencias)",
+              "law-enforcement": "Aplicación de la ley (riesgo de víctimas, polígrafos, fiabilidad de pruebas, reincidencia, elaboración de perfiles)",
+              "migration": "Migración, asilo o control de fronteras (evaluación de riesgos, examen de documentos, detección de personas)",
+              "justice": "Justicia o procesos democráticos (asistencia a jueces, influencia en elecciones)",
+              "none": "Ninguno de los anteriores"
+            }
+          },
+          "q7": {
+            "text": "¿Su sistema evalúa, valora, puntúa, clasifica o toma decisiones sobre personas físicas individuales (no solo entidades jurídicas como empresas)?",
+            "options": {
+              "yes": "Sí — procesa datos sobre personas identificables para producir evaluaciones o decisiones",
+              "no": "No — solo procesa datos agregados o datos sobre entidades jurídicas",
+              "both": "Ambas cosas"
+            }
+          },
+          "q8": {
+            "text": "¿Su sistema realiza elaboración de perfiles, es decir, tratamiento automatizado de datos personales para evaluar, analizar o predecir características, comportamiento, rendimiento o preferencias de una persona?",
+            "options": {
+              "yes": "Sí",
+              "no": "No — solo realiza clasificación factual simple (p. ej., ordenar por edad) o tareas procedimentales limitadas (p. ej., indexación de archivos, formateo)",
+              "not-sure": "No estoy seguro"
+            }
+          },
+          "q9": {
+            "text": "¿Su sistema realiza exclusivamente una de las siguientes tareas?",
+            "options": {
+              "procedural": "Tareas procedimentales limitadas (conversión de datos, ordenación de archivos, detección de duplicados) sin juicios de valor",
+              "improve-human": "Mejora de trabajo humano previamente completado (correcciones gramaticales, formateo, coherencia de estilo) sin alterar el contenido",
+              "detect-patterns": "Detección de patrones o anomalías en evaluaciones completadas para revisión humana, sin modificar archivos activos",
+              "preparatory": "Trabajo preparatorio para una evaluación (recuperación de disposiciones legales, correspondencia de directrices) sin proporcionar evaluaciones ni recomendaciones",
+              "none": "Ninguna de las anteriores — mi sistema va más allá de estas tareas"
+            }
+          }
+        }
+      },
+      "scope-context": {
+        "title": "Alcance y contexto",
+        "description": "Preguntas de contexto adicional para sistemas clasificados como de alto riesgo.",
+        "questions": {
+          "q10": {
+            "text": "¿Pueden las personas menores de 18 años acceder a su sistema o verse afectadas por sus resultados?",
+            "options": {
+              "yes": "Sí",
+              "no": "No",
+              "possibly": "Posiblemente — no lo hemos evaluado"
+            }
+          },
+          "q11": {
+            "text": "¿Sus datos de entrenamiento incluyen categorías especiales de datos personales (raza, etnia, salud, opiniones políticas, religión, orientación sexual, datos biométricos, genética, afiliación sindical)?",
+            "options": {
+              "yes-bias": "Sí — lo necesitamos para la detección y corrección de sesgos",
+              "yes-other": "Sí — por otros motivos",
+              "no": "No",
+              "not-sure": "No estoy seguro"
+            }
+          },
+          "q12": {
+            "text": "¿Qué nivel de supervisión humana admite actualmente su sistema?",
+            "options": {
+              "in-the-loop": "Humano en el bucle — una persona valida cada acción antes de que el sistema la ejecute",
+              "on-the-loop": "Humano sobre el bucle — el sistema actúa de forma autónoma, pero una persona puede revisar y revertir a posteriori",
+              "autonomous": "Totalmente autónomo — no existe ningún mecanismo de revisión humana",
+              "not-designed": "Aún no diseñado"
+            }
+          },
+          "q13": {
+            "text": "¿Su sistema implica identificación biométrica remota (identificar personas a distancia sin su participación activa)?",
+            "options": {
+              "yes": "Sí",
+              "no": "No"
+            }
+          },
+          "q14": {
+            "text": "¿Su sistema es desplegado por o en nombre de una autoridad pública?",
+            "options": {
+              "yes": "Sí",
+              "no": "No"
+            }
+          }
+        }
+      },
+      "transparency": {
+        "title": "Transparencia",
+        "description": "Las obligaciones de transparencia se aplican a todos los sistemas de IA, independientemente de su clasificación de riesgo.",
+        "questions": {
+          "q15": {
+            "text": "¿Su sistema interactúa directamente con personas (p. ej., chatbot, asistente virtual, interfaz de voz)?",
+            "options": {
+              "yes": "Sí",
+              "no": "No"
+            }
+          },
+          "q16": {
+            "text": "¿Su sistema genera contenido sintético (texto, imágenes, audio o vídeo)?",
+            "options": {
+              "yes": "Sí",
+              "no": "No"
+            }
+          },
+          "q17": {
+            "text": "¿Su sistema puede utilizarse para crear deepfakes (simulaciones realistas de personas, lugares o eventos reales)?",
+            "options": {
+              "yes": "Sí",
+              "no": "No"
+            }
+          }
+        }
+      }
+    }
+  },
+  "reportingChecklist": {
+    "areas": {
+      "cybersecurity": {
+        "title": "Ciber",
+        "article": "Artículo 15",
+        "items": {
+          "CYB-01": {
+            "title": "Prevención de envenenamiento de datos",
+            "questions": [
+              "¿Existen controles para prevenir la manipulación maliciosa del conjunto de datos de entrenamiento o las bases de conocimiento de la IA?",
+              "¿Se verifica la integridad y la procedencia de los datos inyectados durante el ajuste fino o RAG?"
+            ]
+          },
+          "CYB-02": {
+            "title": "Resiliencia frente a ataques de evasión y adversarios",
+            "questions": [
+              "¿Se somete al sistema de IA a pruebas de estrés para evaluar su resistencia a entradas diseñadas para inducir errores (ataques adversarios)?",
+              "¿Existen salvaguardas para mantener el rendimiento frente a variaciones maliciosas?"
+            ]
+          },
+          "CYB-03": {
+            "title": "Mitigación de inyección de prompts",
+            "questions": [
+              "¿Dispone el sistema de mecanismos de protección de entrada y salida para neutralizar inyecciones maliciosas de prompts que alteren la finalidad del modelo?"
+            ]
+          },
+          "CYB-04": {
+            "title": "Prevención de extracción y robo de modelos (inversión de modelos)",
+            "questions": [
+              "¿Existen medidas de seguridad físicas, lógicas y criptográficas para proteger los pesos y parámetros del modelo contra el acceso no autorizado, previniendo la extracción o inversión?"
+            ]
+          },
+          "CYB-05": {
+            "title": "Prevención de fugas de información (ataques de confidencialidad / exfiltración de datos)",
+            "questions": [
+              "¿Se han implementado controles (DLP, filtros de salida) para mitigar el riesgo de que el modelo revele información confidencial, propiedad intelectual o datos personales en sus respuestas?"
+            ]
+          },
+          "CYB-06": {
+            "title": "Seguridad de la cadena de suministro de IA (vulnerabilidades de la cadena de suministro)",
+            "questions": [
+              "¿Se analizan y validan continuamente las bibliotecas de terceros (Python), contenedores y componentes de IA importados en busca de vulnerabilidades para prevenir inyecciones en la cadena de suministro?"
+            ]
+          },
+          "CYB-07": {
+            "title": "IAM, control de acceso y privilegio mínimo (Zero Trust)",
+            "questions": [
+              "¿Se emplean sistemas robustos de gestión de identidades y accesos (IAM), con segregación de roles y control de acceso granular (FGAC) sobre artefactos, bases de datos vectoriales y API de modelos?"
+            ]
+          },
+          "CYB-08": {
+            "title": "Aislamiento de entornos y seguridad perimetral",
+            "questions": [
+              "¿Está el entorno de desarrollo, entrenamiento y ejecución de la IA protegido con cortafuegos estrictos y controles perimetrales (redes aisladas, proxies, WAF) para prevenir intrusiones externas?"
+            ]
+          },
+          "CYB-09": {
+            "title": "Registro, auditoría y trazabilidad de eventos (registro de seguridad)",
+            "questions": [
+              "¿Dispone el sistema de IA de capacidades de registro automático e inmutable de eventos, accesos, comandos y uso de API, y están integrados con un SIEM / Centro de Operaciones de Seguridad (SOC)?"
+            ]
+          },
+          "CYB-10": {
+            "title": "Cifrado de datos y comunicaciones (criptografía)",
+            "questions": [
+              "¿Se cifran los datos de entrenamiento, las bases de conocimiento RAG, los pesos del modelo y los prompts/respuestas en tránsito y en reposo utilizando estándares criptográficos robustos (AES-256, TLS 1.3)?"
+            ]
+          },
+          "CYB-11": {
+            "title": "Gestión de vulnerabilidades y monitorización continua de la postura de seguridad (CSPM)",
+            "questions": [
+              "¿Se realizan análisis continuos de vulnerabilidades, gestión de parches y auditoría de la postura de seguridad (CSPM) en las API en la nube, contenedores y endpoints de modelos de IA?"
+            ]
+          }
+        }
+      },
+      "documentation": {
+        "title": "Docs",
+        "article": "Artículo 11, Anexo IV",
+        "items": {
+          "MG01": {
+            "title": "Planificar la documentación desde el diseño hasta el despliegue",
+            "questions": [
+              "¿Se ha definido una estrategia de documentación desde las fases iniciales de diseño del sistema de IA para proporcionar una cobertura adecuada?",
+              "¿Incluye el plan hitos claros y responsables para garantizar la trazabilidad del proceso de documentación técnica?"
+            ]
+          },
+          "MG02": {
+            "title": "Plan de actualización periódica de la documentación técnica",
+            "questions": [
+              "¿Existe un calendario establecido para la revisión y actualización de la documentación técnica?",
+              "¿El plan de actualización contempla cambios en el contexto normativo, técnico u operativo que generarán actualizaciones adicionales?"
+            ]
+          },
+          "MG03": {
+            "title": "Procedimiento de seguimiento de cambios para actualizaciones coherentes de la documentación",
+            "questions": [
+              "¿Se han definido mecanismos de control de versiones y trazabilidad de cambios para garantizar la coherencia entre el sistema y su documentación técnica?",
+              "¿Garantiza el procedimiento la actualización inmediata de la documentación cuando se modifica el sistema?"
+            ]
+          },
+          "MG04": {
+            "title": "Comunicación multifuncional del contenido y los objetivos de la documentación",
+            "questions": [
+              "¿Se ha diseñado un plan de comunicación interna para compartir el contenido clave de la documentación entre las áreas implicadas?",
+              "¿Se ha verificado que todas las áreas comprenden la finalidad de la documentación técnica en relación con sus funciones?"
+            ]
+          },
+          "MG05": {
+            "title": "Designar un responsable de documentación que coordine y supervise",
+            "questions": [
+              "¿Se ha nombrado formalmente un responsable de la documentación técnica con autoridad multifuncional para coordinar su preparación y supervisión?",
+              "¿Dispone el responsable de los recursos y conocimientos necesarios para llevar a cabo esta tarea de forma eficaz?"
+            ]
+          },
+          "MG06": {
+            "title": "Definir responsables específicos por área o dominio",
+            "questions": [
+              "¿Se han asignado responsables de documentación específicos para cada área clave (datos, seguridad, riesgos, etc.)?",
+              "¿Disponen los responsables designados de las competencias técnicas necesarias para documentar correctamente su dominio?"
+            ]
+          },
+          "MG07": {
+            "title": "Implementar un sistema de gestión documental o repositorio centralizado",
+            "questions": [
+              "¿Existe un repositorio único, seguro y accesible para almacenar la documentación técnica?",
+              "¿Permite el sistema de gestión documental el control de versiones, los permisos de acceso y las auditorías?"
+            ]
+          },
+          "MG08": {
+            "title": "Garantizar que los responsables de documentación tengan acceso al sistema de gestión documental",
+            "questions": [
+              "¿Se ha verificado que todos los responsables tienen acceso adecuado al sistema de gestión documental?",
+              "¿Existen políticas de acceso diferenciadas en función de los roles y responsabilidades?"
+            ]
+          },
+          "MG09": {
+            "title": "Garantizar que el sistema de gestión documental disponga de mecanismos de conservación (copias de seguridad, redundancia)",
+            "questions": [
+              "¿Se han implementado medidas de seguridad y copias de respaldo (backups, redundancia, etc.) para preservar la integridad de la documentación técnica?",
+              "¿Se realizan auditorías periódicas para verificar que estos mecanismos están activos y funcionan correctamente?"
+            ]
+          },
+          "MG10": {
+            "title": "Garantizar que las instrucciones de despliegue sean accesibles para los responsables del despliegue",
+            "questions": [
+              "¿Disponen los responsables del despliegue de acceso claro y directo a las instrucciones y la documentación necesarias?",
+              "¿Se valida periódicamente que dicha documentación está actualizada, es comprensible y completa desde un punto de vista operativo?"
+            ]
+          },
+          "MG11": {
+            "title": "Mantener actualizadas las instrucciones de despliegue",
+            "questions": [
+              "¿Existe un procedimiento para actualizar periódicamente las instrucciones de despliegue del sistema de IA?",
+              "¿Se notifica a los responsables del despliegue cuando las instrucciones han sido modificadas o actualizadas?"
+            ]
+          },
+          "MG12": {
+            "title": "Planificar y ejecutar auditorías periódicas sobre el estado de la documentación",
+            "questions": [
+              "¿Se han definido la frecuencia de evaluación y los criterios para auditar la documentación técnica?",
+              "¿Las auditorías incluyen verificaciones de trazabilidad, vigencia y accesibilidad de la documentación?"
+            ]
+          },
+          "MG13": {
+            "title": "Identificar las normas armonizadas disponibles y pertinentes (CEN/CENELEC, ISO, NIST, etc.)",
+            "questions": [
+              "¿Se ha realizado una identificación de las normas armonizadas pertinentes?",
+              "¿Se realiza un seguimiento periódico de los cambios normativos que podrían afectar al cumplimiento del sistema?"
+            ]
+          },
+          "MG14": {
+            "title": "Aplicar sellos de calidad pertinentes",
+            "questions": [
+              "¿Se ha evaluado la posibilidad de aplicar certificaciones de calidad reconocidas?",
+              "¿Existe evidencia del cumplimiento de los criterios requeridos por estos sellos de calidad?"
+            ]
+          },
+          "MG15": {
+            "title": "Conservar la documentación técnica durante al menos 10 años con acceso para las autoridades",
+            "questions": [
+              "¿Garantiza el repositorio un almacenamiento seguro y duradero durante al menos 10 años?",
+              "¿Permite el sistema el acceso inmediato de las autoridades nacionales competentes cuando sea necesario?"
+            ]
+          },
+          "MG16": {
+            "title": "Conservar la documentación del SGC durante al menos 10 años",
+            "questions": [
+              "¿Se ha incluido la documentación del SGC en el repositorio oficial de conservación?",
+              "¿Se asegura su disponibilidad durante al menos 10 años y su accesibilidad para las autoridades competentes?"
+            ]
+          },
+          "MG17": {
+            "title": "Plan de conservación para los cambios aprobados por el organismo notificado",
+            "questions": [
+              "¿Se conservan las aprobaciones del organismo notificado y las evidencias de cambios en un repositorio centralizado y seguro?",
+              "¿El plan contempla la conservación durante al menos 10 años?"
+            ]
+          },
+          "MG18": {
+            "title": "Plan de conservación para decisiones y documentos del organismo notificado",
+            "questions": [
+              "¿El sistema contempla la conservación de las decisiones y documentos emitidos por los organismos notificados?",
+              "¿Se asegura la conservación y el acceso durante al menos 10 años en un repositorio adecuado?"
+            ]
+          },
+          "MG19": {
+            "title": "Plan de conservación de la declaración de conformidad de la UE durante al menos 10 años",
+            "questions": [
+              "¿Se archiva la declaración de conformidad en un repositorio que garantice su disponibilidad y conservación durante al menos 10 años?"
+            ]
+          },
+          "MG20": {
+            "title": "Auditar periódicamente el mecanismo de conservación",
+            "questions": [
+              "¿Se han establecido auditorías periódicas del mecanismo de conservación de la documentación?",
+              "¿Se verifica el correcto funcionamiento y el cumplimiento de las obligaciones de conservación?"
+            ]
+          },
+          "MG21": {
+            "title": "Garantizar que el mecanismo de conservación sobreviva a la desaparición del proveedor",
+            "questions": [
+              "¿El mecanismo de conservación garantiza el acceso continuado a la documentación técnica incluso si el proveedor cesa su actividad?",
+              "¿Se han adoptado medidas legales y técnicas para asegurar esta disponibilidad futura?"
+            ]
+          },
+          "MG22": {
+            "title": "Incluir la finalidad del sistema, el nombre del proveedor y la versión con relación a versiones anteriores",
+            "questions": [
+              "¿La documentación incluye claramente la finalidad del sistema, el nombre del proveedor y la versión correspondiente?",
+              "¿Se indica la trazabilidad entre las versiones anteriores y la actual?"
+            ]
+          },
+          "MG23": {
+            "title": "Incluir cómo interactúa el sistema con hardware, software o sistemas de IA externos",
+            "questions": [
+              "¿Se ha documentado adecuadamente cómo el sistema se comunica o puede interoperar con otros sistemas externos?",
+              "¿Se han documentado también los requisitos de compatibilidad para garantizar la interoperabilidad?"
+            ]
+          },
+          "MG24": {
+            "title": "Incluir las versiones de software/firmware pertinentes y los requisitos de actualización",
+            "questions": [
+              "¿La documentación registra las versiones utilizadas y los procedimientos necesarios para actualizaciones o parches?",
+              "¿Se indica la política de actualización prevista para mantener la seguridad y la funcionalidad del sistema?"
+            ]
+          },
+          "MG25": {
+            "title": "Incluir cómo se comercializa el sistema (paquetes de software, descargas, API)",
+            "questions": [
+              "¿Se detalla la forma de distribución y despliegue (p. ej., como API, descarga, software integrado)?",
+              "¿Se proporciona documentación clara para cada modalidad de puesta en servicio del sistema?"
+            ]
+          },
+          "MG26": {
+            "title": "Incluir descripción del hardware previsto",
+            "questions": [
+              "¿Se ha documentado el tipo de hardware necesario o recomendado para el correcto funcionamiento del sistema?",
+              "¿Se especifican las posibles limitaciones o incompatibilidades con determinados equipos?"
+            ]
+          },
+          "MG27": {
+            "title": "Incluir fotografías o ilustraciones de las características externas, el marcado y la configuración interna",
+            "questions": [
+              "¿Se incluyen elementos visuales como imágenes del producto, marcado o configuración interna, cuando corresponda?",
+              "¿Las ilustraciones están correctamente asociadas con las descripciones técnicas pertinentes?"
+            ]
+          },
+          "MG28": {
+            "title": "Incluir descripción básica de la interfaz de usuario para el responsable del despliegue",
+            "questions": [
+              "¿La documentación contiene una descripción comprensible y suficiente de la interfaz de usuario dirigida al operador del sistema?",
+              "¿Se han incluido ejemplos visuales o diagramas para familiarizar al responsable del despliegue con la interfaz?"
+            ]
+          },
+          "MG29": {
+            "title": "Incluir descripción de la interfaz de usuario e instrucciones de uso para el responsable del despliegue",
+            "questions": [
+              "¿Se incluyen instrucciones prácticas y actualizadas para facilitar la implementación del sistema por parte del operador?",
+              "¿Las instrucciones contemplan posibles errores durante el despliegue y las correspondientes acciones correctivas?"
+            ]
+          },
+          "MG30": {
+            "title": "Incluir métodos de desarrollo, uso de herramientas o modelos de terceros",
+            "questions": [
+              "¿Se han documentado las herramientas y modelos de terceros utilizados en el desarrollo, junto con su integración o modificación?",
+              "¿Se han evaluado y documentado los riesgos derivados del uso de herramientas o modelos de terceros?"
+            ]
+          },
+          "MG31": {
+            "title": "Incluir especificaciones de diseño, lógica, algoritmos, decisiones clave, supuestos y criterios de optimización",
+            "questions": [
+              "¿Se han documentado de forma clara y accesible todos los elementos técnicos de diseño, incluidos los algoritmos utilizados?",
+              "¿La documentación registra las concesiones técnicas realizadas y cómo afectan al rendimiento o la seguridad del sistema?"
+            ]
+          },
+          "MG32": {
+            "title": "Incluir arquitectura del sistema, integración de componentes y recursos computacionales",
+            "questions": [
+              "¿La documentación incluye un esquema comprensible de la arquitectura del sistema y la interacción de sus componentes?",
+              "¿Se describen los recursos computacionales empleados y las plataformas utilizadas en cada fase de desarrollo?"
+            ]
+          },
+          "MG33": {
+            "title": "Incluir requisitos de datos, metodologías de entrenamiento, conjuntos de datos utilizados, procedencia y etiquetado",
+            "questions": [
+              "¿Se han documentado los datos y las metodologías utilizadas en el entrenamiento, las pruebas y la validación?",
+              "¿Existe evidencia del control de calidad de los datos y de los procesos de etiquetado y limpieza realizados?"
+            ]
+          },
+          "MG34": {
+            "title": "Incluir evaluación de las medidas de supervisión humana y medidas técnicas para la interpretación de resultados",
+            "questions": [
+              "¿Se han evaluado las medidas que permiten la supervisión humana del sistema durante su uso?",
+              "¿La documentación incluye herramientas o mecanismos diseñados para que los usuarios interpreten correctamente los resultados?"
+            ]
+          },
+          "MG35": {
+            "title": "Incluir cambios predeterminados e información técnica asociada para el cumplimiento continuado",
+            "questions": [
+              "¿Se han documentado los cambios previstos que podrían aplicarse al sistema y su impacto técnico?",
+              "¿Se especifican procedimientos de validación para garantizar que estos cambios no comprometan la conformidad del sistema?"
+            ]
+          },
+          "MG36": {
+            "title": "Incluir procedimientos de validación/pruebas, datos utilizados, parámetros de evaluación, resultados y registros firmados",
+            "questions": [
+              "¿La documentación contiene evidencia clara de las pruebas realizadas, los resultados y los registros firmados?",
+              "¿Se han incluido pruebas específicas para verificar los efectos de las actualizaciones o modificaciones planificadas?"
+            ]
+          },
+          "MG37": {
+            "title": "Incluir medidas de ciberseguridad adoptadas",
+            "questions": [
+              "¿Se detallan las medidas de protección aplicadas para garantizar la ciberseguridad del sistema de IA?",
+              "¿La documentación incluye evaluaciones de vulnerabilidades y mecanismos de gestión de incidentes de seguridad?"
+            ]
+          },
+          "MG38": {
+            "title": "Incluir resultados adversos previsibles y fuentes de riesgo para la salud, la seguridad y los derechos fundamentales",
+            "questions": [
+              "¿Se identifican y documentan adecuadamente los posibles resultados adversos y los riesgos asociados al sistema?",
+              "¿La documentación incluye mecanismos para mitigar y supervisar estos riesgos a lo largo del ciclo de vida?"
+            ]
+          },
+          "MG39": {
+            "title": "Incluir medidas de supervisión humana y medidas técnicas para la interpretación por parte del responsable del despliegue",
+            "questions": [
+              "¿Se han especificado claramente las funciones y responsabilidades del responsable del despliegue en relación con la supervisión del sistema?",
+              "¿Se ha descrito la formación o cualificación necesaria para que este perfil interprete correctamente los resultados?"
+            ]
+          },
+          "MG40": {
+            "title": "Incluir descripción de la adecuación de las métricas de rendimiento",
+            "questions": [
+              "¿La documentación justifica los parámetros de rendimiento establecidos y su alineación con la finalidad del sistema?",
+              "¿Se han validado estos parámetros en pruebas documentadas?"
+            ]
+          },
+          "MG41": {
+            "title": "Incluir descripción detallada del sistema de gestión de riesgos conforme al Artículo 9",
+            "questions": [
+              "¿Se ha documentado un sistema de gestión de riesgos conforme al Artículo 9?",
+              "¿Se especifica cómo se actualiza este sistema ante cambios relevantes en el ciclo de vida del sistema de IA?"
+            ]
+          },
+          "MG42": {
+            "title": "Incluir descripción de los cambios relevantes realizados por el proveedor a lo largo del ciclo de vida",
+            "questions": [
+              "¿Se ha registrado el historial de cambios relevantes que ha experimentado el sistema desde su diseño hasta la versión actual?",
+              "¿Se indica el impacto de cada cambio en la seguridad, la precisión o el cumplimiento normativo?"
+            ]
+          },
+          "MG43": {
+            "title": "Incluir lista de normas armonizadas aplicadas (o descripción detallada de las soluciones alternativas)",
+            "questions": [
+              "¿La documentación especifica claramente qué normas armonizadas o estándares técnicos se han seguido?",
+              "¿Se han justificado adecuadamente las soluciones adoptadas en los casos en que no se han aplicado normas armonizadas?"
+            ]
+          },
+          "MG44": {
+            "title": "Incluir una copia de la declaración de conformidad de la UE conforme al Artículo 47",
+            "questions": [
+              "¿Se ha incluido una copia válida de la declaración de conformidad del sistema en la documentación?",
+              "¿Se verifica que dicha declaración está firmada por el proveedor autorizado y hace referencia explícita al Artículo 47?"
+            ]
+          },
+          "MG45": {
+            "title": "Incluir descripción detallada del sistema de vigilancia poscomercialización conforme al Artículo 72(3)",
+            "questions": [
+              "¿Se ha definido un sistema para evaluar el rendimiento del sistema de IA después de su despliegue comercial?",
+              "¿El plan de vigilancia poscomercialización contempla mecanismos de recopilación de información, auditorías y mejoras continuas?"
+            ]
+          }
+        }
+      },
+      "qms": {
+        "title": "SGC",
+        "article": "Artículo 17",
+        "items": {
+          "QMS-01": {
+            "title": "Estrategia de cumplimiento normativo",
+            "questions": [
+              "¿Existe una estrategia de cumplimiento normativo definida para garantizar que el sistema cumpla con el Reglamento de IA?",
+              "¿Establece hitos de cumplimiento?"
+            ]
+          },
+          "QMS-02": {
+            "title": "Control y verificación de diseño",
+            "questions": [
+              "¿Se definen técnicas, procedimientos y acciones sistemáticas para el diseño del sistema, el control del diseño y la verificación del diseño?"
+            ]
+          },
+          "QMS-03": {
+            "title": "Desarrollo y control de calidad",
+            "questions": [
+              "¿Se definen técnicas, procedimientos y acciones sistemáticas para el desarrollo, el control de calidad y el aseguramiento de la calidad?"
+            ]
+          },
+          "QMS-04": {
+            "title": "Pruebas y validación",
+            "questions": [
+              "¿Existen procedimientos de examen, prueba y validación antes, durante y después del desarrollo?",
+              "¿Se documentan las métricas y los umbrales?"
+            ]
+          },
+          "QMS-05": {
+            "title": "Especificaciones técnicas y normas",
+            "questions": [
+              "¿Se han documentado las especificaciones técnicas y las normas que se aplicarán al sistema?"
+            ]
+          },
+          "QMS-06": {
+            "title": "Gestión de datos",
+            "questions": [
+              "¿Existen sistemas y procedimientos documentados para la gestión de datos (adquisición, recopilación, análisis, etiquetado, almacenamiento, filtrado y retención)?"
+            ]
+          },
+          "QMS-07": {
+            "title": "Integración del sistema de gestión de riesgos",
+            "questions": [
+              "¿Se ha integrado el sistema de gestión de riesgos en el sistema de gestión de la calidad?"
+            ]
+          },
+          "QMS-08": {
+            "title": "Vigilancia poscomercialización",
+            "questions": [
+              "¿Se ha establecido la configuración, aplicación y mantenimiento de un sistema de vigilancia poscomercialización?"
+            ]
+          },
+          "QMS-09": {
+            "title": "Notificación de incidentes graves",
+            "questions": [
+              "¿Se han definido procedimientos para la notificación de incidentes graves y funcionamiento defectuoso?"
+            ]
+          },
+          "QMS-10": {
+            "title": "Comunicación con las autoridades",
+            "questions": [
+              "¿Existen procedimientos para gestionar la comunicación con las autoridades nacionales competentes y otros organismos pertinentes?"
+            ]
+          },
+          "QMS-11": {
+            "title": "Mantenimiento de registros (registros y auditoría)",
+            "questions": [
+              "¿Existen sistemas y procedimientos para el mantenimiento de registros (logs y documentación técnica)?"
+            ]
+          },
+          "QMS-12": {
+            "title": "Gestión de recursos y seguridad de suministro",
+            "questions": [
+              "¿Incluye el SGC procedimientos para la gestión de recursos, incluyendo medidas relacionadas con la seguridad de suministro?"
+            ]
+          },
+          "QMS-13": {
+            "title": "Marco de rendición de cuentas",
+            "questions": [
+              "¿Se ha establecido un marco de rendición de cuentas que defina las responsabilidades de los equipos de desarrollo, despliegue y gestión?"
+            ]
+          },
+          "QMS-14": {
+            "title": "Proporcionalidad del SGC",
+            "questions": [
+              "¿Es el sistema de gestión de la calidad proporcionado al tamaño de la organización y a los riesgos del sistema de IA?"
+            ]
+          },
+          "QMS-15": {
+            "title": "Ajuste de pesos y control de sobreajuste",
+            "questions": [
+              "¿Existen validaciones estadísticas y procedimientos de prueba algorítmica para prevenir el sobreajuste y garantizar el correcto ajuste de pesos durante el entrenamiento?"
+            ]
+          },
+          "QMS-16": {
+            "title": "Gestión de modificaciones y actualizaciones",
+            "questions": [
+              "¿Existe un procedimiento formal para gestionar las modificaciones sustanciales del sistema de IA, incluyendo la necesidad de una nueva evaluación de conformidad?"
+            ]
+          }
+        }
+      },
+      "incidents": {
+        "title": "Incidentes",
+        "article": "Artículo 73",
+        "items": {
+          "M-INC-01": {
+            "title": "Enmarcar la gestión de incidentes graves dentro del SGC",
+            "questions": [
+              "Proveedor: Dentro del SGC, procedimientos asociados a la notificación de un incidente grave.",
+              "Responsable del despliegue: Dentro del SGC, procedimientos asociados a la notificación de un incidente grave."
+            ]
+          },
+          "M-INC-02": {
+            "title": "Contacto con la Autoridad de Vigilancia del Mercado",
+            "questions": [
+              "Proveedor: Documento con el contacto del responsable de la Autoridad de Vigilancia del Mercado.",
+              "Responsable del despliegue: Documento con el contacto del responsable de la Autoridad de Vigilancia del Mercado."
+            ]
+          },
+          "M-INC-03": {
+            "title": "Contacto con el proveedor",
+            "questions": [
+              "Proveedor: Preparar un manual de usuario para el canal que permita la gestión de solicitudes e incidentes entre el responsable del despliegue y el proveedor.",
+              "Responsable del despliegue: Acceso al manual de usuario del canal que permite la gestión de solicitudes e incidentes entre el responsable del despliegue y el proveedor."
+            ]
+          },
+          "M-INC-04": {
+            "title": "Conocimiento de la categorización del sistema de IA",
+            "questions": [
+              "Proveedor: Preparar el documento que explique la categoría del sistema de IA según las definidas en el Reglamento.",
+              "Responsable del despliegue: Acceso al documento que explica la categoría del sistema de IA según el Reglamento."
+            ]
+          },
+          "M-INC-05": {
+            "title": "Conocimiento de los derechos fundamentales",
+            "questions": [
+              "Proveedor: Documento que certifique el conocimiento sobre los derechos fundamentales de la Unión Europea.",
+              "Responsable del despliegue: Documento que certifique el conocimiento sobre los derechos fundamentales de la Unión Europea."
+            ]
+          }
+        }
+      },
+      "risk-management": {
+        "title": "Riesgo",
+        "article": "Artículo 9",
+        "items": {
+          "MG01": {
+            "title": "Análisis y definición del contexto interno y externo",
+            "questions": [
+              "¿Se ha definido un sistema de gestión de riesgos para los sistemas de IA de alto riesgo a lo largo de todo el ciclo de vida?",
+              "¿Se han identificado y documentado los elementos del contexto interno y externo de la organización en torno a los sistemas de IA de alto riesgo?",
+              "¿Se ha formalizado el liderazgo y el compromiso con la gestión de riesgos (políticas, procedimientos, recursos, autoridad, rendición de cuentas)?"
+            ]
+          },
+          "MG02": {
+            "title": "Definición y actualización del apetito de riesgo",
+            "questions": [
+              "¿Se ha definido y se actualiza constantemente el apetito de riesgo (en relación con el riesgo que el sistema de IA puede suponer para la salud, la seguridad y los derechos fundamentales)?"
+            ]
+          },
+          "MG03": {
+            "title": "Inventario de componentes del sistema de IA",
+            "questions": [
+              "¿Se han identificado, inventariado y documentado todos los componentes del sistema de IA (actores clave, datos, herramientas, etc.)?"
+            ]
+          },
+          "MG04": {
+            "title": "Identificación de las principales fuentes de riesgo",
+            "questions": [
+              "¿Se han identificado, inventariado y documentado todos los riesgos asociados a los sistemas de IA (especialmente los que podrían afectar a la salud, la seguridad y los derechos fundamentales)?"
+            ]
+          },
+          "MG05": {
+            "title": "Evaluación de las fuentes de riesgo",
+            "questions": [
+              "¿Se han analizado y evaluado todos los riesgos identificados (asignando probabilidad de ocurrencia e impacto)?"
+            ]
+          },
+          "MG06": {
+            "title": "Identificación y análisis del impacto y la probabilidad de los efectos",
+            "questions": [
+              "¿Se han considerado los posibles riesgos relacionados con el uso o impacto del sistema de IA en menores de 18 años (identificación, análisis, evaluación e implementación de medidas de tratamiento)?"
+            ]
+          },
+          "MG07": {
+            "title": "Comunicación de resultados",
+            "questions": [
+              "¿Se han definido e implementado mecanismos de comunicación y consulta en torno al sistema de gestión de riesgos para los sistemas de IA de alto riesgo?"
+            ]
+          },
+          "MG08": {
+            "title": "Análisis de los datos poscomercialización recopilados",
+            "questions": [
+              "¿Se han considerado los posibles riesgos relacionados con el sistema de vigilancia poscomercialización (identificación, análisis, evaluación e implementación de medidas de tratamiento)?"
+            ]
+          },
+          "MG09": {
+            "title": "Identificación de nuevos posibles riesgos",
+            "questions": [
+              "¿Se han definido y priorizado las opciones de tratamiento de riesgos en función de criterios de eficacia y viabilidad?",
+              "¿Se han evaluado medidas de mitigación y salvaguardas adecuadas para cada riesgo identificado?"
+            ]
+          },
+          "MG10": {
+            "title": "Definición y selección de opciones de tratamiento de riesgos",
+            "questions": [
+              "¿Se han determinado todas las opciones de tratamiento de riesgos para gestionar los riesgos identificados, analizados y evaluados?"
+            ]
+          },
+          "MG11": {
+            "title": "Planificar e implementar el tratamiento de riesgos",
+            "questions": [
+              "Si se ha definido, ¿se ha implementado el sistema de gestión de riesgos a lo largo de todo el ciclo de vida?",
+              "Si se ha implementado, ¿se mantiene de forma continua el sistema de gestión de riesgos a lo largo de todo el ciclo de vida?",
+              "¿Se ha planificado la implementación de las medidas de tratamiento definidas?"
+            ]
+          },
+          "MG12": {
+            "title": "Evaluar la eficacia de cada tratamiento",
+            "questions": [
+              "¿Se ha definido e implementado un proceso de monitorización y mejora continua del sistema de gestión de riesgos?",
+              "¿Se han establecido procedimientos de prueba para garantizar que el sistema cumple su finalidad (uso previsto)?",
+              "¿Se han establecido procedimientos de prueba para garantizar que se cumplen los requisitos del sistema de IA de alto riesgo?",
+              "¿Se han definido e implementado pruebas en condiciones reales?"
+            ]
+          },
+          "MG13": {
+            "title": "Determinar si el riesgo residual es aceptable",
+            "questions": [
+              "¿Se han establecido períodos de revisión y monitorización para el sistema de gestión de riesgos?"
+            ]
+          },
+          "MG14": {
+            "title": "Documentar y comunicar los riesgos residuales",
+            "questions": [
+              "Si se ha definido, ¿se ha documentado el sistema de gestión de riesgos a lo largo del ciclo de vida?",
+              "¿Se han documentado los riesgos residuales tras la implementación de medidas de tratamiento para su comunicación a los responsables del despliegue?",
+              "¿Se ha documentado todo el proceso de gestión de riesgos?"
+            ]
+          }
+        }
+      },
+      "data-governance": {
+        "title": "Datos",
+        "article": "Artículo 10",
+        "items": {
+          "MG01": {
+            "title": "Identificación de la información necesaria",
+            "questions": [
+              "¿Se ha identificado toda la información necesaria para el desarrollo y el uso del sistema de IA?",
+              "¿Se ha documentado la información necesaria?"
+            ]
+          },
+          "MG02": {
+            "title": "Establecimiento del proceso de recopilación de datos",
+            "questions": [
+              "¿Se han identificado las fuentes de datos?",
+              "¿Se ha establecido un proceso de recopilación de datos?"
+            ]
+          },
+          "MG03": {
+            "title": "Determinar las dimensiones de calidad a evaluar",
+            "questions": ["¿Se han definido las dimensiones de calidad de los datos a evaluar?"]
+          },
+          "MG04": {
+            "title": "Definir controles de calidad para cada dimensión",
+            "questions": [
+              "¿Se han definido controles de calidad específicos para cada dimensión identificada?"
+            ]
+          },
+          "MG05": {
+            "title": "Implementar los controles de calidad definidos",
+            "questions": [
+              "¿Se han implementado los controles de calidad definidos?",
+              "¿Se han verificado los resultados de los controles de calidad implementados?"
+            ]
+          },
+          "MG06": {
+            "title": "Informar de los resultados de los controles de calidad",
+            "questions": [
+              "¿Se han comunicado los resultados de los controles de calidad?",
+              "¿Se han documentado las desviaciones detectadas en los controles de calidad?"
+            ]
+          },
+          "MG07": {
+            "title": "Desarrollar medidas de mejora de la calidad de los datos",
+            "questions": [
+              "¿Se han desarrollado planes de mejora basados en los resultados de calidad?",
+              "¿Se han documentado las medidas de mejora implementadas?"
+            ]
+          },
+          "MG08": {
+            "title": "Transformación de datos",
+            "questions": [
+              "¿Se han transformado los datos para adaptarlos a las necesidades del sistema de IA?"
+            ]
+          },
+          "MG09": {
+            "title": "Agregación de datos",
+            "questions": [
+              "¿Se han agregado datos de diferentes fuentes?",
+              "¿Se han documentado los procesos de agregación de datos?"
+            ]
+          },
+          "MG10": {
+            "title": "Muestreo de datos",
+            "questions": ["¿Se realiza un muestreo de datos adecuado?"]
+          },
+          "MG11": {
+            "title": "Creación y selección de características",
+            "questions": [
+              "Tras la recopilación y el tratamiento inicial de datos, ¿se han identificado necesidades de datos o características adicionales?",
+              "¿Se ha considerado el aumento o la reducción de la dimensionalidad para crear características o descartar las redundantes?"
+            ]
+          },
+          "MG12": {
+            "title": "Enriquecimiento de datos",
+            "questions": ["¿Se han enriquecido y ampliado los datos?"]
+          },
+          "MG13": {
+            "title": "Etiquetado de datos",
+            "questions": [
+              "¿Se han asignado etiquetas identificativas a los datos recopilados?",
+              "¿Se han utilizado herramientas de etiquetado automático de datos? ¿El proceso ha sido supervisado por control humano?"
+            ]
+          },
+          "MG14": {
+            "title": "Análisis de las principales fuentes de sesgo en los datos",
+            "questions": [
+              "¿Se ha analizado y evaluado el potencial sesgo que pueden presentar los datos recopilados?"
+            ]
+          },
+          "MG15": {
+            "title": "Evaluación del sesgo en los datos",
+            "questions": [
+              "¿Se ha identificado un sesgo en los datos?",
+              "En caso afirmativo, ¿se ha realizado un análisis y una evaluación para determinar la necesidad de medidas de tratamiento?"
+            ]
+          },
+          "MG16": {
+            "title": "Tratamiento del sesgo en los datos",
+            "questions": [
+              "¿Se han implementado medidas de tratamiento para los sesgos identificados y evaluados?"
+            ]
+          },
+          "MG17": {
+            "title": "Transferencia de datos",
+            "questions": [
+              "Si los datos se van a transferir en la última fase del ciclo de vida de los datos, ¿se ha generado un informe con todos los detalles del proceso de transferencia?"
+            ]
+          },
+          "MG18": {
+            "title": "Eliminación total o parcial de datos",
+            "questions": [
+              "¿Se ha verificado que ningún usuario o actor implicado en el desarrollo del sistema de IA sigue necesitando acceso a los datos?",
+              "¿Se ha verificado que el proceso de eliminación de datos no infringirá ninguna obligación legal, contractual o de retención?",
+              "¿Se ha verificado que los datos se eliminarán de todas las ubicaciones de almacenamiento?",
+              "¿Se ha evaluado si existe la posibilidad de restauración parcial o total de los datos a partir del sistema de IA entrenado con dichos datos?",
+              "¿Se ha comprobado si los datos tienen importancia cultural, social o histórica?",
+              "¿Se ha generado un informe con todos los detalles del proceso de eliminación de datos?"
+            ]
+          }
+        }
+      },
+      "accuracy": {
+        "title": "Precisión",
+        "article": "Artículo 15",
+        "items": {
+          "MG01": {
+            "title": "Selección de métricas de precisión según la finalidad prevista",
+            "questions": [
+              "En la selección de las métricas de precisión y sus valores, ¿se ha tenido en cuenta la finalidad prevista del sistema?",
+              "¿Se ha documentado de forma trazable la correspondencia entre cada métrica seleccionada y el uso previsto del sistema?",
+              "¿Se ha validado que las métricas elegidas reflejan correctamente el rendimiento esperado en contextos de aplicación reales?"
+            ]
+          },
+          "MG02": {
+            "title": "Métricas motivadas por el plan de riesgos",
+            "questions": [
+              "¿La selección de métricas de precisión está motivada por la mitigación de los riesgos identificados en el plan de riesgos, y se ha documentado dicha motivación?",
+              "¿Se han realizado pruebas para estudiar la correlación entre los riesgos detectados y las métricas seleccionadas que los abordan específicamente?",
+              "¿Se han priorizado las métricas que ayudan a controlar los riesgos con mayor impacto en la salud, la seguridad y los derechos fundamentales?"
+            ]
+          },
+          "MG03": {
+            "title": "Impacto del preprocesamiento de datos",
+            "questions": [
+              "¿Se ha considerado el impacto del preprocesamiento de datos, registrando las operaciones de preprocesamiento y su relación con los resultados de las métricas de precisión?",
+              "¿Se ha considerado el impacto de la mejora de la calidad de los datos en la precisión del sistema?",
+              "¿Se ha documentado y considerado el impacto de las operaciones de ingeniería de características en la precisión del sistema?"
+            ]
+          },
+          "MG04": {
+            "title": "Impacto del sobreajuste",
+            "questions": [
+              "¿Se ha considerado y registrado el impacto del sobreajuste en la precisión, junto con las medidas adoptadas para evitarlo?",
+              "¿Se han implementado mecanismos de validación cruzada u otros métodos para prevenir el sobreajuste?",
+              "¿Se han registrado indicadores clave para detectar signos de sobreajuste durante el entrenamiento y la evaluación?"
+            ]
+          },
+          "MG05": {
+            "title": "Modelos de referencia para comparación",
+            "questions": [
+              "¿Se han definido criterios para elegir modelos de referencia y su relevancia en cada fase del ciclo de vida?",
+              "¿Se compara sistemáticamente la precisión del modelo a lo largo del ciclo de vida con los modelos de referencia asociados?"
+            ]
+          },
+          "MG06": {
+            "title": "Medición del nivel de certeza/confianza",
+            "questions": [
+              "¿La salida de la IA incluye una medida de certeza o nivel de confianza que acompaña a las salidas del modelo?",
+              "¿Se proporciona información comprensible sobre el nivel de certeza a los usuarios finales en contextos críticos?",
+              "¿Se han definido umbrales de confianza que activen alertas o recomendaciones específicas?"
+            ]
+          },
+          "MG07": {
+            "title": "Pruebas unitarias, de estrés y de integración",
+            "questions": [
+              "¿Se han realizado pruebas acumulativas unitarias, de estrés y de integración durante el proceso de desarrollo del sistema de IA en relación con la medición de la precisión?",
+              "¿Se documentan los resultados de las pruebas y las acciones derivadas?",
+              "¿Se han definido condiciones límite o de fallo?"
+            ]
+          },
+          "MG08": {
+            "title": "Actualizar y centralizar métricas",
+            "questions": [
+              "¿Se actualiza y centraliza la información sobre las métricas de precisión, con acceso para todos los actores implicados?",
+              "¿Se ha implementado un sistema de versionado o trazabilidad?",
+              "¿Existe un procedimiento formal para comunicar las actualizaciones?"
+            ]
+          },
+          "MG09": {
+            "title": "Función objetivo",
+            "questions": [
+              "¿Se ha seleccionado la función objetivo del sistema de acuerdo con su finalidad prevista?",
+              "¿Se han considerado los riesgos encontrados en el análisis de riesgos y cómo la precisión del sistema influye en ellos?"
+            ]
+          },
+          "MG10": {
+            "title": "Interfaz/alarma para la monitorización de la precisión por parte del usuario",
+            "questions": [
+              "¿Dispone el sistema de un mecanismo (interfaz gráfica, alarma, etc.) que permita al usuario monitorizar el estado de la precisión?",
+              "¿Se documenta adecuadamente el funcionamiento de dicho mecanismo?",
+              "¿Se ha formado a los usuarios para interpretar correctamente la información?"
+            ]
+          },
+          "MG11": {
+            "title": "Historial de precisión",
+            "questions": [
+              "¿Dispone el sistema de un mecanismo que almacene todas las precisiones comunicadas al usuario en un historial?",
+              "¿Se puede consultar el historial de precisión por fecha, versión del modelo o contexto de uso?",
+              "¿Se utiliza el historial de precisión para mejorar el modelo o ajustar el umbral de confianza?"
+            ]
+          },
+          "MG12": {
+            "title": "Pruebas de significación estadística",
+            "questions": [
+              "Durante el proceso de selección de la(s) métrica(s) de precisión y la(s) función(es) objetivo, ¿se han realizado pruebas de significación estadística para justificar las elecciones?",
+              "¿Se documentan los resultados de las pruebas?",
+              "¿Se han definido criterios mínimos de significación?"
+            ]
+          },
+          "MG13": {
+            "title": "Benchmarks de modelo/familia",
+            "questions": [
+              "¿Se han realizado benchmarks durante el proceso de diseño considerando la finalidad prevista en relación con el modelo o la familia de modelos utilizada?",
+              "¿Se justifica el uso de benchmarks, priorizando los públicamente reconocidos cuando sea pertinente?",
+              "Para benchmarks frente a medidas manuales o datos históricos, ¿se justifica el benchmark interno y se explica su significación?",
+              "¿Se documenta cómo se realizaron las comparaciones y sus resultados?"
+            ]
+          },
+          "MG14": {
+            "title": "Instrucciones de precisión para el usuario",
+            "questions": [
+              "¿Las instrucciones de uso del sistema incluyen todos los niveles y métricas de precisión pertinentes?",
+              "¿Se presentan las métricas en un formato accesible y comprensible para usuarios no técnicos?"
+            ]
+          }
+        }
+      },
+      "records": {
+        "title": "Registros",
+        "article": "Artículo 12",
+        "items": {
+          "MG01": {
+            "title": "Identificación, análisis y evaluación de las necesidades que motivan la generación de registros",
+            "questions": [
+              "¿Se ha desarrollado un proceso para analizar las necesidades que motivan la generación de registros y establecer la información a recopilar?",
+              "¿Se ha desarrollado un proceso para evaluar las necesidades que motivan la generación de registros?",
+              "¿Se han identificado adecuadamente las necesidades que motivan la generación de registros?"
+            ]
+          },
+          "MG02": {
+            "title": "Identificación de los objetivos específicos del registro",
+            "questions": [
+              "¿Se han identificado los objetivos específicos del registro?",
+              "¿Se ha identificado claramente qué se espera lograr con su recopilación?"
+            ]
+          },
+          "MG03": {
+            "title": "Identificar el alcance del registro, la información a registrar y el tiempo de retención",
+            "questions": [
+              "¿Se ha definido el alcance del registro como la información a registrar y el tiempo durante el cual se mantendrá dicho registro?",
+              "¿Se han determinado los períodos de retención y eliminación teniendo en cuenta las necesidades de disposición de la información y la normativa aplicable, como el RGPD?",
+              "¿Se han considerado las necesidades especiales preexistentes de la normativa específica del sector financiero?"
+            ]
+          },
+          "MG04": {
+            "title": "Identificar los registros necesarios para evidenciar la recopilación de información del Artículo 9 (Gestión de riesgos)",
+            "questions": [
+              "¿Se han generado los registros necesarios para garantizar la recopilación de la información determinada en el proceso de implementación del sistema de gestión de riesgos?",
+              "¿Se han considerado los controles del sistema de gestión de riesgos con evidencias asociadas para la obtención de registros?"
+            ]
+          },
+          "MG05": {
+            "title": "Identificar los registros necesarios para evidenciar la recopilación de información del Artículo 72 (Vigilancia poscomercialización)",
+            "questions": [
+              "¿Se han generado los registros necesarios para garantizar la recopilación de la información determinada en el proceso de implementación del sistema de vigilancia poscomercialización?",
+              "¿Se han documentado e implementado adecuadamente las frecuencias de recopilación de estos registros?"
+            ]
+          },
+          "MG06": {
+            "title": "Identificar los registros necesarios para evidenciar la recopilación de información del Artículo 14 (Supervisión humana)",
+            "questions": [
+              "¿Se han generado los registros necesarios para garantizar la recopilación de la información determinada para implementar los mecanismos de supervisión humana?",
+              "¿Se ha documentado adecuadamente la necesidad de estos registros y cómo interpretar sus resultados para su contribución al proceso de supervisión humana?"
+            ]
+          },
+          "MG07": {
+            "title": "Implementar el proceso de captura de registros",
+            "questions": [
+              "¿Se ha implementado un proceso de captura de registros para garantizar que la información se recopile según los criterios establecidos en la fase de diseño?",
+              "¿Se han realizado pruebas para validar estos procedimientos?",
+              "¿Se han realizado pruebas de estrés en el sistema de captura de registros para garantizar su funcionamiento sin incidentes incluso durante alta demanda?"
+            ]
+          },
+          "MG08": {
+            "title": "Implementar medios de almacenamiento para garantizar la disponibilidad de los registros",
+            "questions": [
+              "¿Se han seleccionado e implementado medios de almacenamiento y materiales de protección adecuados para garantizar la seguridad y la disponibilidad de los registros?",
+              "¿Se han establecido períodos de supervisión y revisión de los medios de almacenamiento?"
+            ]
+          },
+          "MG09": {
+            "title": "Implementar medios de seguridad y ciberseguridad para garantizar la protección de los registros",
+            "questions": [
+              "¿Se han seleccionado e implementado medidas de ciberseguridad adecuadas para garantizar la seguridad y la disponibilidad de los registros?",
+              "¿Se han establecido períodos de supervisión y revisión de la ciberseguridad y el control de acceso?"
+            ]
+          },
+          "MG10": {
+            "title": "Desarrollar formación y capacitación para el personal implicado en la gestión de registros",
+            "questions": [
+              "¿Se desarrollan procesos de formación y capacitación para el personal implicado en la gestión de registros?",
+              "¿Se contemplan estas necesidades de formación en la respuesta del Artículo 4 sobre Alfabetización en IA?"
+            ]
+          },
+          "MG11": {
+            "title": "Análisis del impacto de otras normativas aplicables (RGPD) en la generación de registros",
+            "questions": [
+              "¿Se ha analizado y evaluado el impacto de otras normativas o leyes aplicables que podrían afectar al proceso de generación de registros?",
+              "Específicamente, ¿se ha analizado y evaluado el impacto de la normativa de protección de datos (RGPD) en el proceso de generación de registros?"
+            ]
+          },
+          "MG12": {
+            "title": "Establecer períodos de supervisión y revisión para los medios de almacenamiento y la ciberseguridad",
+            "questions": [
+              "¿Se han establecido períodos de supervisión para los medios de almacenamiento, las medidas de ciberseguridad y los controles de acceso?",
+              "¿Se han establecido períodos de revisión para los medios de almacenamiento, las medidas de ciberseguridad y los controles de acceso?"
+            ]
+          },
+          "MG13": {
+            "title": "Establecer un proceso de monitorización y mejora continua del sistema de gestión de registros",
+            "questions": [
+              "¿Se ha establecido un proceso de monitorización y mejora continua del sistema de gestión de registros?",
+              "En el proceso establecido, ¿se monitorizan e identifican posibles errores, y se evalúan los datos registrados para la implementación y la mejora continua de las soluciones propuestas?"
+            ]
+          },
+          "MG14": {
+            "title": "Implementar un proceso que garantice la documentación técnica adecuada del sistema de gestión de registros",
+            "questions": [
+              "¿Se ha definido e implementado un proceso que garantice la documentación técnica adecuada del sistema de gestión de registros implementado?",
+              "¿Se han contemplado los registros en la documentación no solo específicamente sobre registros, sino también en otros documentos donde aparecen de forma colateral (p. ej., gestión de riesgos, supervisión humana, vigilancia poscomercialización)?"
+            ]
+          },
+          "MG15": {
+            "title": "Artículo 15: Precisión, robustez y ciberseguridad",
+            "questions": [
+              "¿El sistema cumple con las medidas de Precisión, Robustez y Ciberseguridad orientadas a proporcionar Transparencia sobre su funcionamiento?"
+            ]
+          },
+          "MG16": {
+            "title": "Artículo 12: Registros",
+            "questions": [
+              "¿El sistema cumple con las medidas de mantenimiento de registros orientadas a proporcionar Transparencia sobre su funcionamiento?"
+            ]
+          }
+        }
+      },
+      "robustness": {
+        "title": "Robustez",
+        "article": "Artículo 15",
+        "items": {
+          "MG01": {
+            "title": "Adquirir conocimientos básicos sobre robustez",
+            "questions": [
+              "¿Se ha garantizado la formación adecuada del personal implicado en el desarrollo y la implementación sobre los aspectos clave de la robustez del sistema de IA?"
+            ]
+          },
+          "MG02": {
+            "title": "Establecer objetivos claros de robustez, definir métricas asociadas",
+            "questions": [
+              "¿Se han establecido las propiedades y métricas de robustez y los requisitos que deben cumplir según la finalidad prevista y el análisis de riesgos, con evidencias?"
+            ]
+          },
+          "MG03": {
+            "title": "Identificar las características críticas del sistema",
+            "questions": [
+              "Durante el diseño del sistema, ¿se han identificado las características reconocidas para medir la robustez y se ha identificado su separabilidad (posibilidad de ser medidas por separado)?"
+            ]
+          },
+          "MG04": {
+            "title": "Uniformización de los entornos de validación y producción",
+            "questions": [
+              "¿Los diferentes entornos por los que el sistema evoluciona en su ciclo de vida (desarrollo, integración, preproducción, producción) tienen características equivalentes según los objetivos de robustez definidos?"
+            ]
+          },
+          "MG05": {
+            "title": "Validación en entornos de hardware que replican las capacidades finales del sistema",
+            "questions": [
+              "¿Se ha realizado la verificación y validación de las métricas elegidas en entornos de hardware que replican exactamente las capacidades finales a las que tendrá acceso el sistema de IA?"
+            ]
+          },
+          "MG06": {
+            "title": "Medición del rendimiento y complejidad computacional",
+            "questions": [
+              "¿Se han definido diversas métricas de robustez relacionadas con el rendimiento (FLOPS, eficiencia, FLOPY, latencia, etc.) para el sistema en el hardware establecido para su funcionamiento?"
+            ]
+          },
+          "MG07": {
+            "title": "Diseñar experimentos para evaluar la robustez",
+            "questions": [
+              "¿Existe un plan de experimentos para demostrar la robustez del sistema basado en al menos uno de los siguientes métodos: pruebas estadísticas, formales, empíricas o prácticas?"
+            ]
+          },
+          "MG08": {
+            "title": "Realizar experimentos con datos reales, analizar e interpretar resultados",
+            "questions": [
+              "¿Existe evidencia de dichos experimentos realizados, su análisis e interpretación, y su impacto en los parámetros de robustez del sistema de IA?"
+            ]
+          },
+          "MG09": {
+            "title": "Implementar capacidades para observar, supervisar e informar de degradaciones",
+            "questions": [
+              "¿Se han definido procedimientos y medidas técnicas para monitorizar la robustez, como interfaces del sistema que muestren las métricas de robustez seleccionadas en vistas agregadas e históricas y registros de operación?"
+            ]
+          },
+          "MG10": {
+            "title": "Configurar técnicas de alerta y protocolos de fallo seguro",
+            "questions": [
+              "¿Existen mecanismos de alerta cuando la robustez del sistema no se encuentra dentro de los parámetros establecidos?"
+            ]
+          },
+          "MG11": {
+            "title": "Establecer comités de evaluación para prever inconsistencias o fallos",
+            "questions": [
+              "¿Se han establecido comités o equipos específicos para evaluar proactivamente inconsistencias o posibles fallos en la robustez del sistema?"
+            ]
+          },
+          "MG12": {
+            "title": "Implementar mecanismos automáticos para la recuperación ante fallos",
+            "questions": [
+              "¿Existen mecanismos automáticos diseñados e implementados para garantizar la recuperación del sistema en caso de fallo?"
+            ]
+          },
+          "MG13": {
+            "title": "Implementar herramientas para la redundancia geográfica, el versionado y la escalabilidad",
+            "questions": [
+              "¿Se han implementado herramientas o procedimientos específicos para garantizar la redundancia geográfica, la gestión adecuada de versiones y la escalabilidad del sistema?"
+            ]
+          },
+          "MG14": {
+            "title": "Para sistemas de aprendizaje continuo: Garantizar que la robustez, la precisión y el rendimiento no se degraden",
+            "questions": [
+              "Para los sistemas que continúan aprendiendo, ¿se monitorizan todas las métricas establecidas (incluidas la precisión y la ciberseguridad) para determinar si el sistema permanece dentro de los parámetros de diseño?"
+            ]
+          },
+          "MG15": {
+            "title": "Para sistemas de aprendizaje continuo: Adoptar estrategias de mitigación para minimizar la desviación del modelo y prevenir la acumulación de sesgos",
+            "questions": [
+              "¿Se han establecido planes de monitorización y control, con medidas de actuación para la degradación del modelo basadas en la desviación del modelo, el concept drift, el data drift, etc.?"
+            ]
+          },
+          "MG16": {
+            "title": "Para sistemas de aprendizaje continuo: Registrar formalmente los casos de interacción e interoperabilidad con otros sistemas o personas",
+            "questions": [
+              "¿Se registran formalmente las interacciones, la interoperabilidad y la retroalimentación recibida durante el ciclo de vida, especialmente en los sistemas de aprendizaje continuo, para garantizar la trazabilidad y mejorar la robustez?"
+            ]
+          }
+        }
+      },
+      "oversight": {
+        "title": "Supervisión",
+        "article": "Artículo 14",
+        "items": {
+          "MG01": {
+            "title": "Medidas de diseño y desarrollo para una supervisión eficaz",
+            "questions": [
+              "¿Tiene el sistema de IA un sistema de gestión de riesgos asociado conforme al Artículo 9?",
+              "¿Tiene el sistema un modelo de gobernanza de datos asociado conforme al Artículo 10?",
+              "¿Tiene el sistema Documentación Técnica conforme al Artículo 11?",
+              "¿Tiene el sistema gestión de Registros conforme al Artículo 12?",
+              "¿Tiene el sistema mecanismos de Transparencia conforme al Artículo 13?",
+              "¿Tiene el sistema mecanismos de Precisión conforme al Artículo 15?",
+              "¿Tiene el sistema mecanismos de Robustez conforme al Artículo 15?",
+              "¿Tiene el sistema mecanismos de Ciberseguridad conforme al Artículo 15?"
+            ]
+          },
+          "MG02": {
+            "title": "Habilitar una interfaz persona-máquina",
+            "questions": [
+              "¿Dispone el sistema de una interfaz para gestionar su sistema de gestión de riesgos conforme al Artículo 9?",
+              "¿Dispone el sistema de una interfaz para gestionar su modelo de gobernanza de datos conforme al Artículo 10?",
+              "¿Dispone el sistema de una interfaz para gestionar su Documentación Técnica?",
+              "¿Dispone el sistema de una interfaz para gestionar la información de Registros?",
+              "¿Dispone el sistema de una interfaz para gestionar la Transparencia?",
+              "¿Dispone el sistema de una interfaz para gestionar la Precisión?",
+              "¿Dispone el sistema de una interfaz para gestionar la Robustez?",
+              "¿Dispone el sistema de una interfaz para gestionar la Ciberseguridad?"
+            ]
+          },
+          "MG03": {
+            "title": "Modelo de gobernanza",
+            "questions": [
+              "¿Se ha establecido un modelo de gobernanza aplicable durante la construcción y el uso, que incluya como mínimo una estructura organizativa, procedimientos y formación para su uso?",
+              "Para sistemas de identificación biométrica remota: ¿Incluye el modelo de gobernanza la validación de la identificación por separado por al menos dos personas físicas con la competencia, la formación y la autoridad necesarias?"
+            ]
+          },
+          "MG04": {
+            "title": "Concienciación: Error forzado",
+            "questions": [
+              "¿Proporciona el sistema una funcionalidad de «error forzado» o equivalente para evitar el sesgo de automatización?"
+            ]
+          },
+          "MG05": {
+            "title": "Humano en/sobre el bucle",
+            "questions": [
+              "En el modelo de gobernanza del sistema, ¿se ha contemplado el nivel de autonomía del sistema, detallando el momento del proceso en el que la(s) persona(s) responsable(s) intervienen?",
+              "¿Dispone el sistema de mecanismos ágiles para que la persona responsable interrumpa su funcionamiento?"
+            ]
+          },
+          "MG06": {
+            "title": "Gestión de riesgos",
+            "questions": ["¿Tiene el sistema un plan de gestión de riesgos asociado?"]
+          },
+          "MG07": {
+            "title": "Transparencia",
+            "questions": [
+              "¿Dispone el sistema de mecanismos de gestión de la Transparencia que permitan su correcta supervisión?"
+            ]
+          },
+          "MG08": {
+            "title": "Registros",
+            "questions": [
+              "¿El sistema cumple con las medidas de mantenimiento de registros orientadas a proporcionar Transparencia sobre su funcionamiento?"
+            ]
+          }
+        }
+      },
+      "transparency": {
+        "title": "Transparencia",
+        "article": "Artículo 13",
+        "items": {
+          "MG01": {
+            "title": "Facilitar el contacto con el proveedor",
+            "questions": [
+              "¿El sistema está acompañado de un canal que permita la gestión en línea de solicitudes e incidentes?",
+              "¿El modelo de gobernanza dispone de un punto de contacto claro con el proveedor, disponible para los responsables del despliegue?"
+            ]
+          },
+          "MG02": {
+            "title": "Atender al dominio de negocio",
+            "questions": [
+              "¿El sistema cubre los requisitos de transparencia aplicables a sus casos de uso soportados?",
+              "¿El sistema proporciona información detallada sobre su alcance funcional, especificando también los posibles riesgos de usos no previstos?"
+            ]
+          },
+          "MG03": {
+            "title": "Asegurar el objetivo funcional del sistema",
+            "questions": [
+              "¿El sistema proporciona información sobre circunstancias previsibles en las que podría utilizarse para fines distintos de los previstos?",
+              "¿El sistema está acompañado de un plan de riesgos para dichos usos?",
+              "¿El sistema dispone de un procedimiento asociado para supervisar que dichos usos no se produzcan durante la operación?"
+            ]
+          },
+          "MG04": {
+            "title": "Transparencia sobre los datos utilizados",
+            "questions": [
+              "¿El sistema identifica las fuentes de datos utilizadas tanto para su aprendizaje como para su utilización, proporcionando también el significado, la utilidad y la implicación de dichas fuentes y datos?",
+              "¿El sistema está acompañado de herramientas que permitan un análisis exploratorio detallado de datos (EDA) de dichas fuentes?"
+            ]
+          },
+          "MG05": {
+            "title": "Detalle de lo global a lo particular",
+            "questions": [
+              "¿El sistema proporciona mecanismos técnicos que faciliten la comprensión de su mecanismo de razonamiento global?",
+              "¿El sistema proporciona mecanismos técnicos que faciliten la comprensión de sus acciones sobre un subconjunto de información con características similares para garantizar la homogeneidad de funcionamiento?",
+              "¿El sistema proporciona mecanismos técnicos que faciliten la comprensión de cada acción individual?"
+            ]
+          },
+          "MG06": {
+            "title": "Adaptar el lenguaje",
+            "questions": [
+              "¿El sistema proporciona mecanismos que faciliten la comprensión de su razonamiento global en un lenguaje comprensible para todos los actores que interactúan con el sistema a lo largo de su ciclo de vida?",
+              "¿El sistema proporciona mecanismos que faciliten la comprensión de sus acciones sobre subconjuntos de información en un lenguaje comprensible?",
+              "¿El sistema proporciona mecanismos que faciliten la comprensión de las acciones individuales del sistema en un lenguaje comprensible?"
+            ]
+          },
+          "MG07": {
+            "title": "Gestionar la complejidad",
+            "questions": [
+              "¿La complejidad técnica del sistema de IA puede ser un obstáculo para las necesidades de Transparencia en alguna circunstancia?",
+              "Para modelos de caja negra: ¿El proveedor suministra herramientas que permitan la Transparencia sobre el sistema?"
+            ]
+          },
+          "MG08": {
+            "title": "Utilizar métricas integradas en el ciclo de vida del sistema",
+            "questions": [
+              "¿El sistema proporciona métricas sobre datos, el modelo, la calidad de los resultados y el rendimiento del sistema de IA, especificando valores mínimos aceptables por debajo de los cuales es necesario el reentrenamiento o la detención de la ejecución?",
+              "¿El sistema está acompañado de un sistema de integración continua (MLOps) que identifique cómo los cambios en las métricas afectan a diferentes versiones/entregas?"
+            ]
+          },
+          "MG09": {
+            "title": "Aplicar prudencia",
+            "questions": [
+              "¿El sistema dispone de mecanismos técnicos pertinentes para evitar que proporcione información sensible (información confidencial o información que revele detalles relevantes del proceso de negocio que puedan poner en riesgo su funcionamiento)?"
+            ]
+          },
+          "MG10": {
+            "title": "Utilizar causalidad, minimizar correlaciones",
+            "questions": [
+              "¿El sistema proporciona herramientas que identifiquen y analicen correlaciones, así como las explícitamente no deseadas que podrían dificultar la Transparencia del sistema o impactar en su precisión?"
+            ]
+          },
+          "MG11": {
+            "title": "Utilizar contrafactualidad",
+            "questions": [
+              "¿El sistema proporciona mecanismos técnicos que permitan obtener contrafactuales para facilitar la comprensión?"
+            ]
+          },
+          "MG12": {
+            "title": "Habilitar un canal con información sobre el uso del sistema",
+            "questions": [
+              "¿El sistema está acompañado de un medio (página web/wiki/documentación) que recopile información sobre él, orientada a facilitar la Transparencia sobre su funcionamiento, accesible para personas con cualquier nivel de responsabilidad sobre el mismo?"
+            ]
+          },
+          "MG13": {
+            "title": "Artículo 9: Sistema de gestión de riesgos",
+            "questions": ["¿Tiene el sistema un plan de gestión de riesgos asociado?"]
+          },
+          "MG14": {
+            "title": "Artículo 14: Supervisión humana",
+            "questions": ["¿El sistema cumple con las medidas de Supervisión Humana?"]
+          },
+          "MG15": {
+            "title": "Artículo 15: Precisión, robustez y ciberseguridad",
+            "questions": [
+              "¿El sistema cumple con las medidas de Precisión, Robustez y Ciberseguridad orientadas a proporcionar Transparencia?"
+            ]
+          },
+          "MG16": {
+            "title": "Artículo 12: Registros",
+            "questions": [
+              "¿El sistema cumple con las medidas de mantenimiento de registros orientadas a proporcionar Transparencia?"
+            ]
+          }
+        }
+      },
+      "surveillance": {
+        "title": "Vigilancia",
+        "article": "Artículo 72",
+        "items": {
+          "MG01": {
+            "title": "Diseñar el sistema de vigilancia considerando todos los riesgos destacados",
+            "questions": [
+              "¿Se han identificado y documentado de forma exhaustiva todos los riesgos relevantes asociados al entorno de producción y al uso del sistema?",
+              "¿El diseño del sistema de vigilancia integra medidas específicas para abordar cada riesgo identificado?"
+            ]
+          },
+          "MG02": {
+            "title": "Crear indicadores que cubran todos los aspectos del entorno",
+            "questions": [
+              "¿Se han definido indicadores clave que cubran de forma exhaustiva los aspectos críticos del entorno operativo (sistema inteligente, infraestructura, ciberseguridad, usuarios)?",
+              "¿La selección de indicadores se basa en criterios de relevancia y criticidad del entorno, con la debida justificación documentada?",
+              "¿Se ha validado la eficacia y pertinencia de los indicadores en pruebas de escenarios reales o simulados?"
+            ]
+          },
+          "MG03": {
+            "title": "Establecer escalas de normalidad para cada indicador",
+            "questions": [
+              "¿Se han establecido escalas de normalidad o rangos de valores aceptables para cada indicador, basados en análisis históricos y escenarios esperados?",
+              "¿La determinación de estas escalas está adecuadamente justificada y alineada con las condiciones operativas reales?",
+              "¿Existe un mecanismo para actualizar periódicamente las escalas en función de la evolución del entorno o de los nuevos datos recopilados?"
+            ]
+          },
+          "MG04": {
+            "title": "Integrar un sistema de alertas en tiempo real",
+            "questions": [
+              "¿El sistema incorpora un mecanismo de alertas en tiempo real que monitorice continuamente los indicadores clave?",
+              "¿Se han configurado umbrales críticos que, al superarse, activen alertas inmediatas a los responsables?",
+              "¿Se han realizado pruebas tanto en entornos simulados como reales para garantizar la fiabilidad y la velocidad de activación de las alertas?"
+            ]
+          },
+          "MG05": {
+            "title": "Desplegar el sistema de vigilancia poscomercialización en producción",
+            "questions": [
+              "¿Se ha planificado y documentado un proceso de despliegue controlado del sistema de vigilancia en el entorno de producción?",
+              "¿Se ha desplegado el sistema de vigilancia en producción?"
+            ]
+          },
+          "MG06": {
+            "title": "Realizar pruebas del sistema de vigilancia en producción",
+            "questions": [
+              "¿Se han ejecutado pruebas en el entorno de producción para validar la operatividad y la robustez del sistema de vigilancia?"
+            ]
+          },
+          "MG07": {
+            "title": "Establecer la política de vigilancia continua y periódica",
+            "questions": [
+              "¿Existe una política formal que contemple tanto la monitorización continua como las revisiones periódicas del sistema de vigilancia?",
+              "¿Los roles y responsabilidades relacionados con la vigilancia están claramente definidos y respaldados por la dirección?",
+              "¿La política se revisa y actualiza periódicamente para adaptarse a los cambios del entorno o a nuevos riesgos?"
+            ]
+          },
+          "MG08": {
+            "title": "Considerar escenarios anómalos que puedan afectar al rendimiento del propio sistema de vigilancia",
+            "questions": [
+              "¿Se han identificado y documentado los posibles escenarios anómalos que podrían comprometer el rendimiento del sistema de vigilancia?",
+              "¿Existen planes de contingencia y medidas específicas para gestionar cada uno de estos escenarios?"
+            ]
+          },
+          "MG09": {
+            "title": "Formalizar el liderazgo y el compromiso con la gestión del sistema de vigilancia",
+            "questions": [
+              "¿Se ha designado un líder o responsable de la gestión de la vigilancia poscomercialización con la autoridad necesaria?",
+              "¿El compromiso de la alta dirección se refleja en la asignación de recursos y la comunicación interna?",
+              "¿Existe documentación del plan de vigilancia que evidencie el liderazgo y la coordinación de las actividades de vigilancia?"
+            ]
+          },
+          "MG10": {
+            "title": "Asignar un equipo de respuesta",
+            "questions": [
+              "¿Se ha formado un equipo específico, debidamente capacitado, para responder a las alertas e incidentes detectados por el sistema de vigilancia?",
+              "¿Los roles y responsabilidades del equipo de respuesta están claramente definidos y comunicados?"
+            ]
+          },
+          "MG11": {
+            "title": "Definir el protocolo de respuesta",
+            "questions": [
+              "¿Existe un protocolo de respuesta formal y documentado que detalle las acciones a seguir tras la detección de un incidente?",
+              "¿Se ha generado la plantilla del informe de incidentes?"
+            ]
+          },
+          "MG12": {
+            "title": "Realizar las actividades de formación necesarias",
+            "questions": [
+              "¿Se han identificado las necesidades de formación de todo el personal implicado en la vigilancia poscomercialización?",
+              "¿Se realizan ejercicios de formación y simulaciones de respuesta para evaluar la eficacia y mejorar la coordinación del equipo?"
+            ]
+          },
+          "MG13": {
+            "title": "Establecer períodos de revisión y monitorización",
+            "questions": [
+              "¿Se han definido y documentado períodos regulares para revisar el funcionamiento y la eficacia del sistema de vigilancia?"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "documentDefinitions": {
+    "technical-documentation": {
+      "name": "Documentación técnica",
+      "description": "Debe compilarse antes de la comercialización y conservarse durante 10 años. Debe estar inmediatamente disponible para las autoridades de vigilancia del mercado a solicitud."
+    },
+    "eu-declaration-of-conformity": {
+      "name": "Declaración UE de conformidad",
+      "description": "Una declaración escrita y firmada de que el sistema cumple con el Reglamento. Se conserva 10 años, traducida al idioma del Estado miembro."
+    },
+    "ce-marking": {
+      "name": "Marcado CE",
+      "description": "Visible en el producto o la interfaz. Para sistemas digitales, un marcado CE digital accesible desde la interfaz."
+    },
+    "eu-database-registration": {
+      "name": "Registro en la base de datos de la UE",
+      "description": "Los detalles del sistema deben registrarse en la base de datos centralizada de la UE para la trazabilidad pública."
+    },
+    "quality-management-system-documentation": {
+      "name": "Documentación del sistema de gestión de calidad",
+      "description": "El SGC de 13 elementos que cubre diseño, pruebas, gestión de riesgos, respuesta a incidentes, etc. Debe estar completamente documentado y disponible para las autoridades."
+    },
+    "post-market-surveillance-plan": {
+      "name": "Plan de vigilancia poscomercialización",
+      "description": "Forma parte de la documentación técnica. Debe documentar el sistema de vigilancia y los indicadores."
+    },
+    "serious-incident-reports": {
+      "name": "Informes de incidentes graves",
+      "description": "Deben comunicarse a la autoridad de vigilancia del mercado en un plazo de 2 días (sistémico), 10 días (muerte) o 15 días (otros incidentes graves)."
+    },
+    "automated-logs-records": {
+      "name": "Registros / logs automatizados",
+      "description": "Deben conservarse al menos 6 meses y ponerse a disposición para revisión regulatoria."
+    },
+    "fundamental-rights-impact-assessment": {
+      "name": "Evaluación de impacto en derechos fundamentales",
+      "description": "Requerida para organismos públicos o entidades privadas que prestan servicios públicos. Los resultados deben notificarse a la autoridad nacional de vigilancia del mercado antes del despliegue."
+    },
+    "filter-assessment-documentation": {
+      "name": "Documentación de evaluación de filtrado",
+      "description": "Para sistemas que reclaman la exención del artículo 6(3): por qué el sistema normalmente sería de alto riesgo, qué condición de filtrado aplica, y prueba de que no realiza perfilado."
+    },
+    "stakeholder-engagement-record": {
+      "name": "Registro de consulta con partes interesadas",
+      "description": "Documentación de las consultas con comunidades afectadas, organizaciones de la sociedad civil y titulares de derechos, incluyendo metodología y hallazgos."
+    },
+    "human-rights-impact-assessment-report": {
+      "name": "Informe de evaluación de impacto en derechos humanos",
+      "description": "Evaluación integral que documenta los riesgos identificados para los derechos humanos, las poblaciones afectadas, las calificaciones de gravedad y las medidas de mitigación para el sistema de IA."
+    },
+    "algorithmic-impact-assessment": {
+      "name": "Evaluación de impacto algorítmico",
+      "description": "Evaluación técnica de los procesos de toma de decisiones del sistema de IA, el potencial de sesgo y los impactos diferenciales entre grupos demográficos."
+    },
+    "data-protection-impact-assessment": {
+      "name": "Evaluación de impacto en la protección de datos",
+      "description": "Evaluación de las prácticas de recopilación, procesamiento y almacenamiento de datos en relación con los derechos de privacidad y los principios de protección de datos."
+    },
+    "remedy-and-redress-plan": {
+      "name": "Plan de recurso y reparación",
+      "description": "Mecanismos documentados para que las personas impugnen las decisiones tomadas por IA, soliciten reparaciones y accedan a un recurso efectivo cuando se violen sus derechos."
+    },
+    "ongoing-monitoring-plan": {
+      "name": "Plan de supervisión continua",
+      "description": "Marco de supervisión continua de los impactos en derechos humanos tras el despliegue, incluyendo indicadores, ciclos de revisión y procedimientos de escalamiento."
+    },
+    "carbon-footprint-assessment": {
+      "name": "Evaluación de la huella de carbono",
+      "description": "Evaluación cuantitativa de las emisiones de gases de efecto invernadero del entrenamiento de modelos, la inferencia y la infraestructura de soporte, medida en equivalente de CO₂."
+    },
+    "energy-consumption-report": {
+      "name": "Informe de consumo energético",
+      "description": "Informe detallado del consumo de energía en las fases de entrenamiento, inferencia e inactividad, incluyendo el porcentaje de energía renovable y la eficiencia energética (PUE)."
+    },
+    "hardware-lifecycle-assessment": {
+      "name": "Evaluación del ciclo de vida del hardware",
+      "description": "Evaluación del impacto ambiental a lo largo del ciclo de vida del hardware: fabricación, operación y eliminación de GPUs, TPUs y servidores."
+    },
+    "data-centre-sustainability-plan": {
+      "name": "Plan de sostenibilidad del centro de datos",
+      "description": "Documentación de las prácticas ambientales del centro de datos, incluyendo eficiencia de refrigeración, consumo de agua, abastecimiento de energía renovable y gestión de residuos."
+    },
+    "model-efficiency-report": {
+      "name": "Informe de eficiencia del modelo",
+      "description": "Análisis de la eficiencia de la arquitectura del modelo, incluyendo la justificación del número de parámetros, oportunidades de destilación y estrategias de optimización de la inferencia."
+    },
+    "environmental-monitoring-plan": {
+      "name": "Plan de monitoreo ambiental",
+      "description": "Marco de monitoreo continuo para el seguimiento de KPIs ambientales, establecimiento de objetivos de reducción e informes de progreso respecto a los objetivos de sostenibilidad."
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "chat": {
+    "title": "Chat",
+    "greeting": "Hallo, ich bin Norma! Wie kann ich Ihnen helfen?",
+    "subtitle": "Fragen Sie mich zur EU-KI-Verordnung, zur Risikoklassifizierung Ihres Projekts oder zu regulatorischen Fragen.",
+    "placeholder": "Norma fragen",
+    "disclaimer": "Norma kann Fehler machen. Überprüfen Sie wichtige Informationen.",
+    "errorMessage": "Es tut mir leid, bei der Verarbeitung Ihrer Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+  },
+  "login": {
+    "title": "Melden Sie sich bei Ihrem Konto an"
+  },
+  "register": {
+    "createAccount": "Erstellen Sie Ihr Konto",
+    "setupAdmin": "Richten Sie Ihr Admin-Konto ein",
+    "inviteInvalid": "Dieser Einladungslink ist ungültig oder abgelaufen.",
+    "verifyFailed": "Der Registrierungsstatus konnte nicht überprüft werden.",
+    "alreadyHaveAccount": "Sie haben bereits ein Konto?"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "preferences": "Einstellungen",
+    "customise": "Passen Sie Ihre Norma-Erfahrung an.",
+    "theme": "Design",
+    "themeLight": "Hell",
+    "themeDark": "Dunkel",
+    "themeSystem": "System",
+    "language": "Sprache",
+    "dangerZone": "Gefahrenzone",
+    "dangerZoneDesc": "Unwiderrufliche Aktionen für das aktuelle Projekt.",
+    "deleteProjectDesc": "«{{name}}» und alle zugehörigen Daten endgültig löschen.",
+    "deleteProjectConfirm": "Sind Sie sicher, dass Sie «{{name}}» löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+  },
+  "description": {
+    "title": "Beschreibung",
+    "noProject": "Wählen Sie ein Projekt aus oder erstellen Sie eines, um zu beginnen.",
+    "riskBannerDesc": "Dieses System erfordert die vollständige Einhaltung der KI-Verordnung vor der Markteinführung.",
+    "riskBannerChat": "Erzählen Sie mir über die Risikoklassifizierung meines Projekts",
+    "askNormaQuestion": "Überprüfen Sie meine Projektbeschreibung und schlagen Sie Verbesserungen vor",
+    "overview": "Überblick",
+    "projectSummary": "Projektübersicht",
+    "projectSummaryDesc": "Grundlegende Informationen über das KI-System.",
+    "intendedPurpose": "Bestimmungsgemäßer Zweck",
+    "intendedPurposeDesc": "Wofür ist das System konzipiert?",
+    "intendedPurposePlaceholder": "Beschreiben Sie den bestimmungsgemäßen Zweck des KI-Systems...",
+    "intendedUsers": "Vorgesehene Nutzer",
+    "intendedUsersDesc": "Wer wird das System bedienen oder davon betroffen sein?",
+    "intendedUsersPlaceholder": "Beschreiben Sie die vorgesehenen Nutzer und betroffenen Personen...",
+    "deploymentContext": "Einsatzkontext",
+    "deploymentContextDesc": "Wo und wie wird das System eingesetzt?",
+    "deploymentContextPlaceholder": "Beschreiben Sie den Einsatzkontext, den Sektor und den geografischen Anwendungsbereich..."
+  },
+  "documents": {
+    "title": "Dokumente",
+    "riskBannerDesc": "Dokumente, die für die regulatorische Konformität basierend auf Ihrer Risikoklassifizierung erforderlich sind.",
+    "riskBannerChat": "Welche Dokumente fehlen uns für die Konformitätsbewertung?",
+    "askNormaQuestion": "Bewerten Sie meine {{framework}}-Dokumente",
+    "askNormaQuestionAdditional": "Bewerten Sie meine zusätzlichen Belege",
+    "additional": "Zusätzliche",
+    "uploadedCount": "{{count}} von {{total}} hochgeladen",
+    "noAdditionalDocs": "Noch keine zusätzlichen Dokumente hochgeladen. Laden Sie ein beliebiges PDF hoch, um es in Ihren Projektkontext aufzunehmen.",
+    "deleteDocument": "Dokument löschen"
+  },
+  "reporting": {
+    "title": "Berichterstattung",
+    "riskBannerDesc": "Füllen Sie die Compliance-Checkliste für jeden Anforderungsbereich der KI-Verordnung aus.",
+    "riskBannerChat": "Was sind die wichtigsten Berichtspflichten für unser Projekt?",
+    "askNormaQuestion": "Analysieren Sie meinen Berichtsfortschritt für {{framework}}"
+  },
+  "riskClassification": {
+    "askNormaQuestion": "Erklären Sie die Risikoklassifizierung meines Projekts gemäß der EU-KI-Verordnung"
+  },
+  "github": {
+    "title": "GitHub",
+    "askNormaQuestion": "Analysieren Sie meinen Quellcode und schlagen Sie Verbesserungen vor",
+    "syncSteps": {
+      "issues": "Issues werden abgerufen",
+      "tree": "Repository wird analysiert",
+      "files": "Quelldateien werden abgerufen",
+      "analysis": "Analyse wird erstellt"
+    },
+    "lastSynced": "Zuletzt synchronisiert: {{date}}",
+    "tasks": "Aufgaben",
+    "architecture": "Architektur",
+    "context": "Kontext",
+    "all": "Alle",
+    "assigneePlaceholder": "Zugewiesene Person",
+    "labelPlaceholder": "Label",
+    "sprintPlaceholder": "Sprint",
+    "statusPlaceholder": "Status",
+    "noTasks": "Keine Aufgaben gefunden. Klicken Sie auf Synchronisieren, um Aufgaben von GitHub abzurufen.",
+    "noIntegration": "Keine GitHub-Integration konfiguriert.",
+    "noArchitecture": "Noch kein Architekturdiagramm vorhanden. Klicken Sie auf Synchronisieren, um das Repository zu analysieren.",
+    "contextDescription": "Diese Markdown-Datei wird als Kontext für den Norma-Chatbot verwendet. Sie können sie bearbeiten, bevor Sie eine neue Chat-Sitzung starten.",
+    "savedSuccessfully": "Erfolgreich gespeichert",
+    "noContext": "Noch keine Kontextdatei vorhanden. Klicken Sie auf Mit GitHub synchronisieren, um diese zu generieren.",
+    "assignedTo": "Zugewiesen an: {{assignees}}"
+  },
+  "integrations": {
+    "title": "Integrationen",
+    "githubDesc": "Verbinden Sie ein GitHub-Repository, um Aufgaben zu synchronisieren und die Architektur zu analysieren."
+  },
+  "frameworks": {
+    "title": "Frameworks"
+  }
+}

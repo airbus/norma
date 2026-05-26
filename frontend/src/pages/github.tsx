@@ -1,5 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Check, Circle, ExternalLink, Loader2, RefreshCw, Save } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import {
+  Check,
+  Circle,
+  ExternalLink,
+  Loader2,
+  Minus,
+  Move,
+  Plus,
+  RefreshCw,
+  RotateCcw,
+  Save,
+} from 'lucide-react';
 import Markdown from 'react-markdown';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -34,13 +46,14 @@ import { useProject } from '@/hooks/use-project';
 import { type GitHubIntegration, type GitHubTask, api } from '@/lib/api';
 
 const SYNC_STEPS = [
-  { key: 'syncing:issues', label: 'Fetching issues' },
-  { key: 'syncing:tree', label: 'Analysing repository' },
-  { key: 'syncing:files', label: 'Fetching source files' },
-  { key: 'syncing:analysis', label: 'Generating analysis' },
+  { key: 'syncing:issues', labelKey: 'issues' },
+  { key: 'syncing:tree', labelKey: 'tree' },
+  { key: 'syncing:files', labelKey: 'files' },
+  { key: 'syncing:analysis', labelKey: 'analysis' },
 ];
 
 function SyncProgress({ step }: { step: string }) {
+  const { t } = useTranslation(['pages']);
   const currentIdx = SYNC_STEPS.findIndex((s) => s.key === step);
 
   return (
@@ -68,7 +81,7 @@ function SyncProgress({ step }: { step: string }) {
                       : 'text-muted-foreground/60'
                 }`}
               >
-                {s.label}
+                {t(`github.syncSteps.${s.labelKey}`)}
               </span>
             </div>
           );
@@ -79,6 +92,7 @@ function SyncProgress({ step }: { step: string }) {
 }
 
 export function GitHubPage() {
+  const { t } = useTranslation(['pages', 'common']);
   const { currentProject } = useProject();
   const [integration, setIntegration] = useState<GitHubIntegration | null>(null);
   const [tasks, setTasks] = useState<GitHubTask[]>([]);
@@ -94,6 +108,12 @@ export function GitHubPage() {
   const [contextLoaded, setContextLoaded] = useState(false);
   const [contextSaving, setContextSaving] = useState(false);
   const [contextSaved, setContextSaved] = useState(false);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState(false);
+  const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
+  const dragRef = useRef<{ startX: number; startY: number; origX: number; origY: number } | null>(
+    null,
+  );
   const pollRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
 
   const projectId = currentProject?.id;
@@ -175,8 +195,13 @@ export function GitHubPage() {
             .replace(/\s{2,}/g, ' ')
             .trim();
 
+        merged[0] = merged[0].replace(/^graph\s+(LR|RL|BT|TB)/, 'graph TD');
+
         const defined = new Set<string>();
         const cleaned = merged.map((line) => {
+          if (line.trim().startsWith('subgraph ')) {
+            return line.replace(/\s*\([^)]*\)/g, '');
+          }
           const def = line.match(/^(\s*\w+)\[([^\]]*)\]/);
           if (def && !line.includes('-->') && !line.includes('---')) {
             defined.add(def[1].trim());
@@ -199,7 +224,8 @@ export function GitHubPage() {
           const id = `arch-diagram-${Date.now()}`;
           const { svg } = await mermaid.default.render(id, sanitised);
           node.innerHTML = svg;
-        } catch {
+        } catch (err) {
+          console.error('[Mermaid render error]', err);
           node.innerHTML = `<pre class="text-xs overflow-auto p-4 bg-muted rounded-lg"><code>${parsedArchitecture.diagram}</code></pre>`;
         }
       })();
@@ -276,7 +302,7 @@ export function GitHubPage() {
   if (loading && !integration) {
     return (
       <div className="flex h-svh flex-col">
-        <PageHeader title="Codebase" />
+        <PageHeader title={t('github.title')} />
         <div className="flex flex-1 items-center justify-center">
           <Loader2 className="size-6 animate-spin text-muted-foreground" />
         </div>
@@ -286,8 +312,8 @@ export function GitHubPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title="Codebase">
-        <AskNormaButton question="Analyse my codebase and suggest improvements" />
+      <PageHeader title={t('github.title')}>
+        <AskNormaButton question={t('github.askNormaQuestion')} />
       </PageHeader>
 
       {syncing && <SyncProgress step={syncStep} />}
@@ -297,20 +323,22 @@ export function GitHubPage() {
           <Tabs defaultValue="tasks">
             <div className="mb-4 flex items-center justify-between">
               <TabsList>
-                <TabsTrigger value="tasks">Tasks</TabsTrigger>
-                <TabsTrigger value="architecture">Architecture</TabsTrigger>
+                <TabsTrigger value="tasks">{t('github.tasks')}</TabsTrigger>
+                <TabsTrigger value="architecture">{t('github.architecture')}</TabsTrigger>
                 {/* <TabsTrigger value="context" onClick={() => !contextLoaded && fetchContextFile()}>
-                Context
+                {t('github.context')}
               </TabsTrigger> */}
               </TabsList>
               <div className="flex items-center gap-3">
                 {integration?.last_synced_at && !syncing && (
                   <span className="text-xs text-muted-foreground">
-                    Last synced: {new Date(integration.last_synced_at).toLocaleString()}
+                    {t('github.lastSynced', {
+                      date: new Date(integration.last_synced_at).toLocaleString(),
+                    })}
                   </span>
                 )}
                 {integration?.sync_status === 'error' && !syncing && (
-                  <Badge variant="destructive">Sync error</Badge>
+                  <Badge variant="destructive">{t('common:status.syncError')}</Badge>
                 )}
                 <Button
                   size="sm"
@@ -324,7 +352,7 @@ export function GitHubPage() {
                   ) : (
                     <RefreshCw className="mr-1 size-4" />
                   )}
-                  {syncing ? 'Syncing…' : 'Sync with GitHub'}
+                  {syncing ? t('common:loading.syncing') : t('common:buttons.syncWithGitHub')}
                 </Button>
               </div>
             </div>
@@ -333,29 +361,29 @@ export function GitHubPage() {
               <div className="mb-4 flex flex-wrap items-center gap-3">
                 <Select value={statusFilter} onValueChange={(v) => v && setStatusFilter(v)}>
                   <SelectTrigger className="w-32">
-                    <SelectValue placeholder="Status" />
+                    <SelectValue placeholder={t('github.statusPlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All</SelectItem>
-                    <SelectItem value="open">Open</SelectItem>
-                    <SelectItem value="closed">Closed</SelectItem>
+                    <SelectItem value="all">{t('github.all')}</SelectItem>
+                    <SelectItem value="open">{t('common:status.open')}</SelectItem>
+                    <SelectItem value="closed">{t('common:status.closed')}</SelectItem>
                   </SelectContent>
                 </Select>
                 <Input
                   className="w-40"
-                  placeholder="Assignee"
+                  placeholder={t('github.assigneePlaceholder')}
                   value={assigneeFilter}
                   onChange={(e) => setAssigneeFilter(e.target.value)}
                 />
                 <Input
                   className="w-40"
-                  placeholder="Label"
+                  placeholder={t('github.labelPlaceholder')}
                   value={labelFilter}
                   onChange={(e) => setLabelFilter(e.target.value)}
                 />
                 <Input
                   className="w-40"
-                  placeholder="Sprint"
+                  placeholder={t('github.sprintPlaceholder')}
                   value={sprintFilter}
                   onChange={(e) => setSprintFilter(e.target.value)}
                 />
@@ -363,9 +391,7 @@ export function GitHubPage() {
 
               {tasks.length === 0 ? (
                 <div className="rounded-lg border border-dashed p-8 text-center text-sm text-muted-foreground">
-                  {integration
-                    ? 'No tasks found. Click Sync to fetch tasks from GitHub.'
-                    : 'No GitHub integration configured.'}
+                  {integration ? t('github.noTasks') : t('github.noIntegration')}
                 </div>
               ) : (
                 <div className="overflow-hidden rounded-lg border">
@@ -373,10 +399,10 @@ export function GitHubPage() {
                     <TableHeader>
                       <TableRow>
                         <TableHead className="w-16">#</TableHead>
-                        <TableHead>Title</TableHead>
-                        <TableHead className="w-24">Status</TableHead>
-                        <TableHead className="w-40">Assignees</TableHead>
-                        <TableHead className="w-40">Labels</TableHead>
+                        <TableHead>{t('common:table.title')}</TableHead>
+                        <TableHead className="w-24">{t('github.statusPlaceholder')}</TableHead>
+                        <TableHead className="w-40">{t('common:table.assignees')}</TableHead>
+                        <TableHead className="w-40">{t('common:table.labels')}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -418,10 +444,90 @@ export function GitHubPage() {
             <TabsContent value="architecture">
               {integration?.architecture_mermaid ? (
                 <div className="space-y-6">
+                  <div className="flex items-center justify-end gap-1">
+                    <Button
+                      variant={pan ? 'default' : 'outline'}
+                      size="icon"
+                      className="size-8 cursor-pointer"
+                      onClick={() => setPan((p) => !p)}
+                    >
+                      <Move className="size-4" />
+                    </Button>
+                    <div className="bg-border mx-1 h-4 w-px" />
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="size-8 cursor-pointer"
+                      onClick={() => setZoom((z) => Math.max(0.25, z - 0.25))}
+                      disabled={zoom <= 0.25}
+                    >
+                      <Minus className="size-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 min-w-[3.5rem] cursor-pointer text-xs"
+                      onClick={() => {
+                        setZoom(1);
+                        setPanOffset({ x: 0, y: 0 });
+                      }}
+                    >
+                      {zoom === 1 && panOffset.x === 0 && panOffset.y === 0 ? (
+                        <RotateCcw className="size-3" />
+                      ) : (
+                        `${Math.round(zoom * 100)}%`
+                      )}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="size-8 cursor-pointer"
+                      onClick={() => setZoom((z) => Math.min(3, z + 0.25))}
+                      disabled={zoom >= 3}
+                    >
+                      <Plus className="size-4" />
+                    </Button>
+                  </div>
                   <div
-                    ref={mermaidRef}
-                    className="overflow-auto rounded-lg border bg-background p-6"
-                  />
+                    className="overflow-hidden rounded-lg border bg-background p-6"
+                    style={{ cursor: pan ? 'grab' : 'default' }}
+                    onMouseDown={(e) => {
+                      if (!pan) return;
+                      e.preventDefault();
+                      dragRef.current = {
+                        startX: e.clientX,
+                        startY: e.clientY,
+                        origX: panOffset.x,
+                        origY: panOffset.y,
+                      };
+                      (e.currentTarget as HTMLElement).style.cursor = 'grabbing';
+                    }}
+                    onMouseMove={(e) => {
+                      if (!dragRef.current) return;
+                      setPanOffset({
+                        x: dragRef.current.origX + (e.clientX - dragRef.current.startX),
+                        y: dragRef.current.origY + (e.clientY - dragRef.current.startY),
+                      });
+                    }}
+                    onMouseUp={(e) => {
+                      if (!dragRef.current) return;
+                      dragRef.current = null;
+                      (e.currentTarget as HTMLElement).style.cursor = 'grab';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!dragRef.current) return;
+                      dragRef.current = null;
+                      (e.currentTarget as HTMLElement).style.cursor = 'grab';
+                    }}
+                  >
+                    <div
+                      ref={mermaidRef}
+                      style={{
+                        transform: `translate(${panOffset.x}px, ${panOffset.y}px) scale(${zoom})`,
+                        transformOrigin: 'top left',
+                      }}
+                    />
+                  </div>
                   {architectureDescription && (
                     <div className="prose prose-sm dark:prose-invert max-w-none">
                       <Markdown>{architectureDescription}</Markdown>
@@ -430,7 +536,7 @@ export function GitHubPage() {
                 </div>
               ) : (
                 <div className="rounded-lg border border-dashed p-8 text-center text-sm text-muted-foreground">
-                  No architecture diagram yet. Click Sync to analyse the repository.
+                  {t('github.noArchitecture')}
                 </div>
               )}
             </TabsContent>
@@ -440,12 +546,13 @@ export function GitHubPage() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <p className="text-sm text-muted-foreground">
-                      This markdown file is used as context for the Norma chatbot. You can edit it
-                      before starting a new chat session.
+                      {t('github.contextDescription')}
                     </p>
                     <div className="flex items-center gap-3">
                       {contextSaved && (
-                        <span className="text-sm text-primary">Saved successfully</span>
+                        <span className="text-sm text-primary">
+                          {t('github.savedSuccessfully')}
+                        </span>
                       )}
                       <Button onClick={saveContextFile} disabled={contextSaving}>
                         {contextSaving ? (
@@ -453,7 +560,7 @@ export function GitHubPage() {
                         ) : (
                           <Save className="mr-1 size-4" />
                         )}
-                        Save
+                        {t('common:buttons.save')}
                       </Button>
                     </div>
                   </div>
@@ -469,7 +576,7 @@ export function GitHubPage() {
                 </div>
               ) : (
                 <div className="rounded-lg border border-dashed p-8 text-center text-sm text-muted-foreground">
-                  No context file yet. Click Sync with GitHub to generate it.
+                  {t('github.noContext')}
                 </div>
               )}
             </TabsContent>
@@ -493,7 +600,7 @@ export function GitHubPage() {
                   </Badge>
                   {selectedTask.assignees && selectedTask.assignees.length > 0 && (
                     <span className="text-xs">
-                      Assigned to: {selectedTask.assignees.join(', ')}
+                      {t('github.assignedTo', { assignees: selectedTask.assignees.join(', ') })}
                     </span>
                   )}
                   {selectedTask.labels && selectedTask.labels.length > 0 && (
@@ -523,14 +630,14 @@ export function GitHubPage() {
                   rel="noopener noreferrer"
                   className="inline-flex cursor-pointer items-center gap-1 text-sm text-primary hover:underline"
                 >
-                  Open on GitHub <ExternalLink className="size-3" />
+                  {t('common:buttons.openOnGitHub')} <ExternalLink className="size-3" />
                 </a>
                 <Button
                   variant="outline"
                   className="cursor-pointer"
                   onClick={() => setSelectedTask(null)}
                 >
-                  Close
+                  {t('common:buttons.close')}
                 </Button>
               </div>
             </>

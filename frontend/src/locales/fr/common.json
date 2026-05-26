@@ -1,0 +1,100 @@
+{
+  "buttons": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "delete": "Supprimer",
+    "create": "Créer",
+    "upload": "Téléverser",
+    "update": "Mettre à jour",
+    "connect": "Connecter",
+    "disconnect": "Déconnecter",
+    "replace": "Remplacer",
+    "backToLogin": "Retour à la connexion",
+    "signIn": "Se connecter",
+    "createAccount": "Créer un compte",
+    "exportReport": "Exporter le rapport",
+    "addFramework": "Ajouter un référentiel",
+    "deleteProject": "Supprimer le projet",
+    "deletePermanently": "Supprimer définitivement",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "createInvite": "Créer une invitation",
+    "syncWithGitHub": "Synchroniser avec GitHub",
+    "openOnGitHub": "Ouvrir sur GitHub",
+    "reEvaluate": "Réévaluer",
+    "askNorma": "Demander à Norma",
+    "newChat": "Nouvelle conversation",
+    "newProject": "Nouveau projet",
+    "makeAdmin": "Nommer administrateur",
+    "makeMember": "Nommer membre",
+    "disableAccount": "Désactiver le compte",
+    "enableAccount": "Activer le compte",
+    "deleteUser": "Supprimer l’utilisateur",
+    "addIntegration": "Ajouter une intégration"
+  },
+  "status": {
+    "active": "Actif",
+    "disabled": "Désactivé",
+    "connected": "Connecté",
+    "notConnected": "Non connecté",
+    "pending": "En attente",
+    "expired": "Expiré",
+    "used": "Utilisé",
+    "open": "Ouvert",
+    "closed": "Fermé",
+    "draft": "Brouillon",
+    "inactive": "Inactif",
+    "syncError": "Erreur de synchronisation"
+  },
+  "nav": {
+    "general": "Général",
+    "project": "Projet",
+    "configuration": "Configuration",
+    "github": "GitHub"
+  },
+  "risk": {
+    "unacceptable": "Risque inacceptable",
+    "high": "Risque élevé",
+    "limited": "Risque limité",
+    "minimal": "Risque minimal"
+  },
+  "form": {
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "name": "Nom",
+    "description": "Description",
+    "role": "Rôle",
+    "member": "Membre",
+    "admin": "Administrateur",
+    "any": "Tous"
+  },
+  "loading": {
+    "loading": "Chargement…",
+    "signingIn": "Connexion en cours…",
+    "creatingAccount": "Création du compte…",
+    "uploading": "Téléversement…",
+    "syncing": "Synchronisation…",
+    "evaluatingRisk": "Évaluation du risque…"
+  },
+  "errors": {
+    "loginFailed": "Échec de la connexion",
+    "registrationFailed": "Échec de l’inscription",
+    "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
+    "updateFailed": "Échec de la mise à jour",
+    "deleteFailed": "Échec de la suppression",
+    "passwordResetFailed": "Échec de la réinitialisation du mot de passe",
+    "failedToCreateInvite": "Échec de la création de l’invitation",
+    "failedToDeleteInvite": "Échec de la suppression de l’invitation",
+    "failedToSave": "Échec de l’enregistrement",
+    "failedToDisconnect": "Échec de la déconnexion"
+  },
+  "table": {
+    "document": "Document",
+    "uploaded": "Téléversé",
+    "title": "Titre",
+    "assignees": "Responsables",
+    "labels": "Étiquettes",
+    "expires": "Expire"
+  }
+}

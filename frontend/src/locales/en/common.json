@@ -1,0 +1,100 @@
+{
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "delete": "Delete",
+    "create": "Create",
+    "upload": "Upload",
+    "update": "Update",
+    "connect": "Connect",
+    "disconnect": "Disconnect",
+    "replace": "Replace",
+    "backToLogin": "Back to login",
+    "signIn": "Sign in",
+    "createAccount": "Create account",
+    "exportReport": "Export Report",
+    "addFramework": "Add Framework",
+    "deleteProject": "Delete project",
+    "deletePermanently": "Delete permanently",
+    "resetPassword": "Reset password",
+    "createInvite": "Create invite",
+    "syncWithGitHub": "Sync with GitHub",
+    "openOnGitHub": "Open on GitHub",
+    "reEvaluate": "Re-evaluate",
+    "askNorma": "Ask Norma",
+    "newChat": "New chat",
+    "newProject": "New Project",
+    "makeAdmin": "Make admin",
+    "makeMember": "Make member",
+    "disableAccount": "Disable account",
+    "enableAccount": "Enable account",
+    "deleteUser": "Delete user",
+    "addIntegration": "Add Integration"
+  },
+  "status": {
+    "active": "Active",
+    "disabled": "Disabled",
+    "connected": "Connected",
+    "notConnected": "Not connected",
+    "pending": "Pending",
+    "expired": "Expired",
+    "used": "Used",
+    "open": "Open",
+    "closed": "Closed",
+    "draft": "Draft",
+    "inactive": "Inactive",
+    "syncError": "Sync error"
+  },
+  "nav": {
+    "general": "General",
+    "project": "Project",
+    "configuration": "Configuration",
+    "github": "GitHub"
+  },
+  "risk": {
+    "unacceptable": "Unacceptable Risk",
+    "high": "High Risk",
+    "limited": "Limited Risk",
+    "minimal": "Minimal Risk"
+  },
+  "form": {
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "name": "Name",
+    "description": "Description",
+    "role": "Role",
+    "member": "Member",
+    "admin": "Admin",
+    "any": "Any"
+  },
+  "loading": {
+    "loading": "Loading...",
+    "signingIn": "Signing in...",
+    "creatingAccount": "Creating account...",
+    "uploading": "Uploading...",
+    "syncing": "Syncing…",
+    "evaluatingRisk": "Evaluating risk..."
+  },
+  "errors": {
+    "loginFailed": "Login failed",
+    "registrationFailed": "Registration failed",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "updateFailed": "Update failed",
+    "deleteFailed": "Delete failed",
+    "passwordResetFailed": "Password reset failed",
+    "failedToCreateInvite": "Failed to create invite",
+    "failedToDeleteInvite": "Failed to delete invite",
+    "failedToSave": "Failed to save",
+    "failedToDisconnect": "Failed to disconnect"
+  },
+  "table": {
+    "document": "Document",
+    "uploaded": "Uploaded",
+    "title": "Title",
+    "assignees": "Assignees",
+    "labels": "Labels",
+    "expires": "Expires"
+  }
+}

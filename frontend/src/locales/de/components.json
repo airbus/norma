@@ -1,0 +1,70 @@
+{
+  "sidebar": {
+    "noProject": "Kein Projekt",
+    "selectProject": "Projekt auswählen",
+    "settings": "Einstellungen",
+    "logout": "Abmelden",
+    "chat": "Chat",
+    "description": "Beschreibung",
+    "documents": "Dokumente",
+    "reporting": "Berichterstattung",
+    "integrations": "Integrationen",
+    "frameworks": "Frameworks",
+    "github": "GitHub",
+    "overview": "Übersicht",
+    "riskClassification": "Risikoklassifizierung",
+    "additionalDocuments": "Zusätzliche Dokumente"
+  },
+  "riskBanner": {
+    "evaluatingRisk": "Risiko wird bewertet..."
+  },
+  "newProjectDialog": {
+    "title": "Neues Projekt erstellen",
+    "description": "Richten Sie ein neues KI-System-Projekt ein, um die Compliance-Verfolgung zu beginnen.",
+    "overview": "Überblick",
+    "projectSummary": "Projektübersicht",
+    "projectSummaryDesc": "Grundlegende Informationen über das KI-System.",
+    "namePlaceholder": "z. B. Vorausschauende Wartung",
+    "descriptionPlaceholder": "Kurze Beschreibung des KI-Systems...",
+    "intendedPurpose": "Bestimmungsgemäßer Zweck",
+    "intendedPurposeDesc": "Wofür ist das System konzipiert?",
+    "intendedPurposePlaceholder": "Beschreiben Sie den bestimmungsgemäßen Zweck des KI-Systems...",
+    "intendedUsers": "Vorgesehene Nutzer",
+    "intendedUsersDesc": "Wer wird das System bedienen oder davon betroffen sein?",
+    "intendedUsersPlaceholder": "Beschreiben Sie die vorgesehenen Nutzer und betroffenen Personen...",
+    "deploymentContext": "Einsatzkontext",
+    "deploymentContextDesc": "Wo und wie wird das System eingesetzt?",
+    "deploymentContextPlaceholder": "Beschreiben Sie den Einsatzkontext, den Sektor und den geografischen Anwendungsbereich...",
+    "createProject": "Projekt erstellen"
+  },
+  "userManagement": {
+    "title": "Benutzerverwaltung",
+    "description": "Benutzer verwalten und neue Mitglieder einladen.",
+    "users": "Benutzer",
+    "invitations": "Einladungen",
+    "createInviteLink": "Einladungslink erstellen",
+    "emailOptional": "E-Mail (optional)",
+    "emailPlaceholder": "benutzer@beispiel.de",
+    "newPassword": "Neues Passwort",
+    "resetPasswordTitle": "Passwort zurücksetzen"
+  },
+  "githubConnect": {
+    "connectTitle": "GitHub verbinden",
+    "editTitle": "GitHub-Integration bearbeiten",
+    "description": "Verknüpfen Sie ein GitHub-Repository, um Aufgaben zu synchronisieren und die Architektur zu analysieren.",
+    "patLabel": "Personal Access Token",
+    "patLabelKeep": "Personal Access Token (leer lassen, um den aktuellen beizubehalten)",
+    "patTooltip": "Gehen Sie zu GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token. Wählen Sie den Bereich 'repo' für private Repositories oder 'public_repo' für öffentliche Repositories.",
+    "repoOwner": "Repository-Eigentümer",
+    "repoOwnerPlaceholder": "z. B. octocat",
+    "repoName": "Repository-Name",
+    "repoNamePlaceholder": "z. B. hello-world",
+    "projectNumber": "GitHub-Projektnummer (optional)",
+    "projectNumberPlaceholder": "z. B. 1"
+  },
+  "checklistPanel": {
+    "norma": "Norma",
+    "generateSuggestion": "Vorschlag mit Norma generieren",
+    "addComment": "Kommentar hinzufügen..."
+  }
+}

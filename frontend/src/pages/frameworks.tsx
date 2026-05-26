@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Plus, Scale } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -20,6 +21,7 @@ const STATUS_VARIANT: Record<string, 'default' | 'secondary' | 'outline'> = {
 };
 
 export function FrameworksPage() {
+  const { t } = useTranslation(['pages', 'common']);
   const [frameworks, setFrameworks] = useState<Framework[]>([]);
   const [selected, setSelected] = useState<Framework | null>(null);
 
@@ -32,14 +34,14 @@ export function FrameworksPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title="Frameworks" />
+      <PageHeader title={t('frameworks.title')} />
 
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-4xl space-y-4">
           <div className="flex justify-end">
             <Button variant="outline" disabled>
               <Plus className="mr-1 size-4" />
-              Add Framework
+              {t('common:buttons.addFramework')}
             </Button>
           </div>
 
@@ -64,7 +66,7 @@ export function FrameworksPage() {
                         <CardDescription className="text-xs">{fw.description}</CardDescription>
                       </div>
                       <Badge className="shrink-0" variant={STATUS_VARIANT[fw.status] ?? 'outline'}>
-                        {fw.status}
+                        {t(`common:status.${fw.status}`)}
                       </Badge>
                     </CardHeader>
                   </Card>
@@ -83,7 +85,7 @@ export function FrameworksPage() {
                 <div className="flex items-center gap-2">
                   <DialogTitle>{selected.name}</DialogTitle>
                   <Badge variant={STATUS_VARIANT[selected.status] ?? 'outline'}>
-                    {selected.status}
+                    {t(`common:status.${selected.status}`)}
                   </Badge>
                 </div>
                 <DialogDescription>{selected.category}</DialogDescription>
@@ -92,7 +94,7 @@ export function FrameworksPage() {
                 <p className="text-sm leading-relaxed">{selected.description}</p>
                 <div className="flex justify-end">
                   <Button variant="outline" onClick={() => setSelected(null)}>
-                    Close
+                    {t('common:buttons.close')}
                   </Button>
                 </div>
               </div>

@@ -1,0 +1,106 @@
+{
+  "chat": {
+    "title": "Chat",
+    "greeting": "Hi, I'm Norma! How can I help you?",
+    "subtitle": "Ask me about EU AI Act compliance, your project's risk classification, or any regulatory questions.",
+    "placeholder": "Ask Norma",
+    "disclaimer": "Norma can make mistakes. Verify important information.",
+    "errorMessage": "I'm sorry, I encountered an error processing your request. Please try again."
+  },
+  "login": {
+    "title": "Sign in to your account"
+  },
+  "register": {
+    "createAccount": "Create your account",
+    "setupAdmin": "Set up your admin account",
+    "inviteInvalid": "This invite link is invalid or has expired.",
+    "verifyFailed": "Unable to verify registration status.",
+    "alreadyHaveAccount": "Already have an account?"
+  },
+  "settings": {
+    "title": "Settings",
+    "preferences": "Preferences",
+    "customise": "Customise your Norma experience.",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
+    "language": "Language",
+    "dangerZone": "Danger Zone",
+    "dangerZoneDesc": "Irreversible actions for the current project.",
+    "deleteProjectDesc": "Permanently delete “{{name}}” and all associated data.",
+    "deleteProjectConfirm": "Are you sure you want to delete “{{name}}”? This action cannot be undone."
+  },
+  "description": {
+    "title": "Description",
+    "noProject": "Select or create a project to get started.",
+    "riskBannerDesc": "This system requires full compliance with AI Act obligations before market placement.",
+    "riskBannerChat": "Tell me about my project's risk classification",
+    "askNormaQuestion": "Review my project description and suggest improvements",
+    "overview": "Overview",
+    "projectSummary": "Project Summary",
+    "projectSummaryDesc": "Basic information about the AI system.",
+    "intendedPurpose": "Intended Purpose",
+    "intendedPurposeDesc": "What is the system designed to do?",
+    "intendedPurposePlaceholder": "Describe the intended purpose of the AI system...",
+    "intendedUsers": "Intended Users",
+    "intendedUsersDesc": "Who will operate or be affected by this system?",
+    "intendedUsersPlaceholder": "Describe the intended users and affected persons...",
+    "deploymentContext": "Deployment Context",
+    "deploymentContextDesc": "Where and how will the system be deployed?",
+    "deploymentContextPlaceholder": "Describe the deployment context, sector, and geographic scope..."
+  },
+  "documents": {
+    "title": "Documents",
+    "riskBannerDesc": "Documents required for regulatory compliance based on your risk classification.",
+    "riskBannerChat": "What documents are we missing for conformity assessment?",
+    "askNormaQuestion": "Evaluate my {{framework}} documents",
+    "askNormaQuestionAdditional": "Evaluate my additional supporting documents",
+    "additional": "Additional",
+    "uploadedCount": "{{count}} of {{total}} uploaded",
+    "noAdditionalDocs": "No additional documents uploaded yet. Upload any PDF to include it in your project context.",
+    "deleteDocument": "Delete document"
+  },
+  "reporting": {
+    "title": "Reporting",
+    "riskBannerDesc": "Complete the compliance checklist for each requirement area of the EU AI Act.",
+    "riskBannerChat": "What are the key reporting requirements for our project?",
+    "askNormaQuestion": "Analyse my reporting progress for {{framework}}"
+  },
+  "riskClassification": {
+    "askNormaQuestion": "Explain my project's risk classification under the EU AI Act"
+  },
+  "github": {
+    "title": "GitHub",
+    "askNormaQuestion": "Analyse my codebase and suggest improvements",
+    "syncSteps": {
+      "issues": "Fetching issues",
+      "tree": "Analysing repository",
+      "files": "Fetching source files",
+      "analysis": "Generating analysis"
+    },
+    "lastSynced": "Last synced: {{date}}",
+    "tasks": "Tasks",
+    "architecture": "Architecture",
+    "context": "Context",
+    "all": "All",
+    "assigneePlaceholder": "Assignee",
+    "labelPlaceholder": "Label",
+    "sprintPlaceholder": "Sprint",
+    "statusPlaceholder": "Status",
+    "noTasks": "No tasks found. Click Sync to fetch tasks from GitHub.",
+    "noIntegration": "No GitHub integration configured.",
+    "noArchitecture": "No architecture diagram yet. Click Sync to analyse the repository.",
+    "contextDescription": "This markdown file is used as context for the Norma chatbot. You can edit it before starting a new chat session.",
+    "savedSuccessfully": "Saved successfully",
+    "noContext": "No context file yet. Click Sync with GitHub to generate it.",
+    "assignedTo": "Assigned to: {{assignees}}"
+  },
+  "integrations": {
+    "title": "Integrations",
+    "githubDesc": "Connect a GitHub repository to sync tasks and analyse architecture."
+  },
+  "frameworks": {
+    "title": "Frameworks"
+  }
+}
