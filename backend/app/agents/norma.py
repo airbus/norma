@@ -3,6 +3,7 @@ from google.adk.models.lite_llm import LiteLlm
 from google.genai import types
 
 from app.core.config import settings
+from app.core.llm import get_language_name
 
 SYSTEM_INSTRUCTION_TEMPLATE = """\
 You are Norma, an AI compliance assistant. You help users understand and comply with \
@@ -18,8 +19,7 @@ Your role:
 and technical implementation to provide insights, suggest improvements, and answer questions \
 about the project's code and development priorities.
 
-LANGUAGE RULE: Always use British English spelling (e.g. analyse, organisation, behaviour, \
-summarise, recognised, colour). Never use American English spellings.
+LANGUAGE RULE: {language_rule}
 
 RESPONSE STYLE: Keep responses short and visually dynamic. Use a mix of markdown elements \
 to break up content — **bold** for key terms, bullet points for actionable items, \
@@ -34,12 +34,26 @@ cover the top 2–3 priorities and offer to go deeper on any of them.
 """
 
 
+def _language_rule(language: str) -> str:
+    lang_name = get_language_name(language)
+    if language and language != "en":
+        return (
+            f"Always respond entirely in {lang_name}. All text, explanations, and "
+            f"recommendations must be written in {lang_name}."
+        )
+    return (
+        "Always use British English spelling (e.g. analyse, organisation, behaviour, "
+        "summarise, recognised, colour). Never use American English spellings."
+    )
+
+
 def build_system_prompt(
     *,
     framework_contents: list[dict],
     project_context: dict | None = None,
     document_summaries: list[dict] | None = None,
     github_summary: str | None = None,
+    language: str = "en",
 ) -> str:
     parts: list[str] = []
 
@@ -82,7 +96,10 @@ def build_system_prompt(
             parts.append(f"- **{ev['item_key']}:** {ev['comment']}\n")
 
     context = "\n".join(parts) if parts else "No project context available."
-    return SYSTEM_INSTRUCTION_TEMPLATE.format(context=context)
+    return SYSTEM_INSTRUCTION_TEMPLATE.format(
+        context=context,
+        language_rule=_language_rule(language),
+    )
 
 
 def create_norma_agent(system_prompt: str) -> Agent:

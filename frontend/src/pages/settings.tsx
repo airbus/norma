@@ -72,7 +72,7 @@ export function SettingsPage() {
               <div className="flex items-center justify-between">
                 <Label htmlFor="language">{t('settings.language')}</Label>
                 <Select
-                  value={i18n.language}
+                  value={i18n.language?.split('-')[0] ?? 'en'}
                   onValueChange={(v) => {
                     if (!v) return;
                     changeLanguage(v);
