@@ -1574,5 +1574,95 @@
         }
       }
     }
+  },
+  "documentDefinitions": {
+    "technical-documentation": {
+      "name": "Technical Documentation",
+      "description": "Must be compiled before market entry and retained for 10 years. Must be immediately available to market surveillance authorities upon request."
+    },
+    "eu-declaration-of-conformity": {
+      "name": "EU Declaration of Conformity",
+      "description": "A signed written declaration that the system conforms to the Act. Retained 10 years, translated into the language of the Member State."
+    },
+    "ce-marking": {
+      "name": "CE Marking",
+      "description": "Visible on the product or interface. For digital systems, a digital CE marking accessible from the interface."
+    },
+    "eu-database-registration": {
+      "name": "EU Database Registration",
+      "description": "System details must be registered in the centralised EU database for public traceability."
+    },
+    "quality-management-system-documentation": {
+      "name": "Quality Management System Documentation",
+      "description": "The 13-element QMS covering design, testing, risk management, incident response, etc. Must be fully documented and available to authorities."
+    },
+    "post-market-surveillance-plan": {
+      "name": "Post-Market Surveillance Plan",
+      "description": "Forms part of the technical documentation. Must document the monitoring system and indicators."
+    },
+    "serious-incident-reports": {
+      "name": "Serious Incident Reports",
+      "description": "Must be reported to the market surveillance authority within 2 days (systemic), 10 days (death), or 15 days (other serious incidents)."
+    },
+    "automated-logs-records": {
+      "name": "Automated Logs / Records",
+      "description": "Must be retained at least 6 months and made available for regulatory review."
+    },
+    "fundamental-rights-impact-assessment": {
+      "name": "Fundamental Rights Impact Assessment",
+      "description": "Required for public-sector deployers or private entities providing public services. Results must be notified to the national market surveillance authority before deployment."
+    },
+    "filter-assessment-documentation": {
+      "name": "Filter Assessment Documentation",
+      "description": "For systems claiming the Article 6(3) exemption: why the system would normally be high-risk, which filter condition applies, and proof it does not perform profiling."
+    },
+    "stakeholder-engagement-record": {
+      "name": "Stakeholder Engagement Record",
+      "description": "Documentation of consultations with affected communities, civil society organisations, and rights holders, including methodology and findings."
+    },
+    "human-rights-impact-assessment-report": {
+      "name": "Human Rights Impact Assessment Report",
+      "description": "Comprehensive assessment documenting identified human rights risks, affected populations, severity ratings, and mitigation measures for the AI system."
+    },
+    "algorithmic-impact-assessment": {
+      "name": "Algorithmic Impact Assessment",
+      "description": "Technical evaluation of the AI system's decision-making processes, bias potential, and differential impacts across demographic groups."
+    },
+    "data-protection-impact-assessment": {
+      "name": "Data Protection Impact Assessment",
+      "description": "Assessment of data collection, processing, and storage practices against privacy rights and data protection principles."
+    },
+    "remedy-and-redress-plan": {
+      "name": "Remedy and Redress Plan",
+      "description": "Documented mechanisms for individuals to challenge AI-driven decisions, seek remedies, and access effective redress when rights are violated."
+    },
+    "ongoing-monitoring-plan": {
+      "name": "Ongoing Monitoring Plan",
+      "description": "Framework for continuous monitoring of human rights impacts post-deployment, including indicators, review cycles, and escalation procedures."
+    },
+    "carbon-footprint-assessment": {
+      "name": "Carbon Footprint Assessment",
+      "description": "Quantitative assessment of greenhouse gas emissions from model training, inference, and supporting infrastructure, measured in CO₂ equivalent."
+    },
+    "energy-consumption-report": {
+      "name": "Energy Consumption Report",
+      "description": "Detailed report of energy usage across training, inference, and idle phases, including renewable energy percentage and power usage effectiveness (PUE)."
+    },
+    "hardware-lifecycle-assessment": {
+      "name": "Hardware Lifecycle Assessment",
+      "description": "Assessment of environmental impact across the hardware lifecycle: manufacturing, operation, and end-of-life disposal of GPUs, TPUs, and servers."
+    },
+    "data-centre-sustainability-plan": {
+      "name": "Data Centre Sustainability Plan",
+      "description": "Documentation of data centre environmental practices including cooling efficiency, water usage, renewable energy sourcing, and waste management."
+    },
+    "model-efficiency-report": {
+      "name": "Model Efficiency Report",
+      "description": "Analysis of model architecture efficiency, including parameter count justification, distillation opportunities, and inference optimisation strategies."
+    },
+    "environmental-monitoring-plan": {
+      "name": "Environmental Monitoring Plan",
+      "description": "Ongoing monitoring framework for tracking environmental KPIs, setting reduction targets, and reporting progress against sustainability goals."
+    }
   }
 }

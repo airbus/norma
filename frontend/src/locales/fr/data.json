@@ -1578,5 +1578,95 @@
         }
       }
     }
+  },
+  "documentDefinitions": {
+    "technical-documentation": {
+      "name": "Documentation technique",
+      "description": "Doit être établie avant la mise sur le marché et conservée pendant 10 ans. Doit être immédiatement disponible pour les autorités de surveillance du marché sur demande."
+    },
+    "eu-declaration-of-conformity": {
+      "name": "Déclaration UE de conformité",
+      "description": "Une déclaration écrite et signée attestant que le système est conforme au règlement. Conservée 10 ans, traduite dans la langue de l'État membre."
+    },
+    "ce-marking": {
+      "name": "Marquage CE",
+      "description": "Visible sur le produit ou l'interface. Pour les systèmes numériques, un marquage CE numérique accessible depuis l'interface."
+    },
+    "eu-database-registration": {
+      "name": "Enregistrement dans la base de données de l'UE",
+      "description": "Les détails du système doivent être enregistrés dans la base de données centralisée de l'UE pour la traçabilité publique."
+    },
+    "quality-management-system-documentation": {
+      "name": "Documentation du système de gestion de la qualité",
+      "description": "Le SGQ à 13 éléments couvrant la conception, les essais, la gestion des risques, la réponse aux incidents, etc. Doit être entièrement documenté et disponible pour les autorités."
+    },
+    "post-market-surveillance-plan": {
+      "name": "Plan de surveillance après mise sur le marché",
+      "description": "Fait partie de la documentation technique. Doit documenter le système de surveillance et les indicateurs."
+    },
+    "serious-incident-reports": {
+      "name": "Rapports d'incidents graves",
+      "description": "Doivent être signalés à l'autorité de surveillance du marché dans les 2 jours (systémique), 10 jours (décès) ou 15 jours (autres incidents graves)."
+    },
+    "automated-logs-records": {
+      "name": "Journaux / enregistrements automatisés",
+      "description": "Doivent être conservés au moins 6 mois et mis à disposition pour examen réglementaire."
+    },
+    "fundamental-rights-impact-assessment": {
+      "name": "Analyse d'impact sur les droits fondamentaux",
+      "description": "Requise pour les déployeurs du secteur public ou les entités privées fournissant des services publics. Les résultats doivent être notifiés à l'autorité nationale de surveillance du marché avant le déploiement."
+    },
+    "filter-assessment-documentation": {
+      "name": "Documentation d'évaluation de filtrage",
+      "description": "Pour les systèmes revendiquant l'exemption de l'article 6(3) : pourquoi le système serait normalement à haut risque, quelle condition de filtrage s'applique, et preuve qu'il n'effectue pas de profilage."
+    },
+    "stakeholder-engagement-record": {
+      "name": "Registre de consultation des parties prenantes",
+      "description": "Documentation des consultations avec les communautés concernées, les organisations de la société civile et les titulaires de droits, y compris la méthodologie et les conclusions."
+    },
+    "human-rights-impact-assessment-report": {
+      "name": "Rapport d'évaluation de l'impact sur les droits humains",
+      "description": "Évaluation complète documentant les risques identifiés pour les droits humains, les populations affectées, les niveaux de gravité et les mesures d'atténuation pour le système d'IA."
+    },
+    "algorithmic-impact-assessment": {
+      "name": "Évaluation de l'impact algorithmique",
+      "description": "Évaluation technique des processus décisionnels du système d'IA, du potentiel de biais et des impacts différentiels entre groupes démographiques."
+    },
+    "data-protection-impact-assessment": {
+      "name": "Analyse d'impact relative à la protection des données",
+      "description": "Évaluation des pratiques de collecte, de traitement et de stockage des données au regard des droits à la vie privée et des principes de protection des données."
+    },
+    "remedy-and-redress-plan": {
+      "name": "Plan de recours et de réparation",
+      "description": "Mécanismes documentés permettant aux individus de contester les décisions prises par l'IA, de demander des réparations et d'accéder à un recours effectif en cas de violation des droits."
+    },
+    "ongoing-monitoring-plan": {
+      "name": "Plan de surveillance continue",
+      "description": "Cadre de surveillance continue des impacts sur les droits humains après le déploiement, incluant les indicateurs, les cycles de révision et les procédures d'escalade."
+    },
+    "carbon-footprint-assessment": {
+      "name": "Évaluation de l'empreinte carbone",
+      "description": "Évaluation quantitative des émissions de gaz à effet de serre liées à l'entraînement des modèles, l'inférence et l'infrastructure de support, mesurées en équivalent CO₂."
+    },
+    "energy-consumption-report": {
+      "name": "Rapport de consommation énergétique",
+      "description": "Rapport détaillé de la consommation d'énergie lors de l'entraînement, l'inférence et les phases d'inactivité, incluant le pourcentage d'énergie renouvelable et l'efficacité énergétique (PUE)."
+    },
+    "hardware-lifecycle-assessment": {
+      "name": "Évaluation du cycle de vie du matériel",
+      "description": "Évaluation de l'impact environnemental sur l'ensemble du cycle de vie du matériel : fabrication, exploitation et mise au rebut des GPU, TPU et serveurs."
+    },
+    "data-centre-sustainability-plan": {
+      "name": "Plan de durabilité du centre de données",
+      "description": "Documentation des pratiques environnementales du centre de données, incluant l'efficacité du refroidissement, la consommation d'eau, l'approvisionnement en énergie renouvelable et la gestion des déchets."
+    },
+    "model-efficiency-report": {
+      "name": "Rapport d'efficacité du modèle",
+      "description": "Analyse de l'efficacité de l'architecture du modèle, incluant la justification du nombre de paramètres, les opportunités de distillation et les stratégies d'optimisation de l'inférence."
+    },
+    "environmental-monitoring-plan": {
+      "name": "Plan de surveillance environnementale",
+      "description": "Cadre de surveillance continue pour le suivi des indicateurs environnementaux, la définition d'objectifs de réduction et le reporting des progrès par rapport aux objectifs de durabilité."
+    }
   }
 }

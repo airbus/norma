@@ -128,7 +128,9 @@ export function ReportingPage() {
     <div className="flex h-svh flex-col">
       <PageHeader title={pageTitle}>
         {currentFramework && (
-          <AskNormaButton question={`Analyse my reporting progress for ${currentFramework.name}`} />
+          <AskNormaButton
+            question={t('reporting.askNormaQuestion', { framework: currentFramework.name })}
+          />
         )}
       </PageHeader>
 

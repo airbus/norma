@@ -36,6 +36,7 @@
     "noProject": "Seleccione o cree un proyecto para comenzar.",
     "riskBannerDesc": "Este sistema requiere el cumplimiento total de las obligaciones del Reglamento de IA antes de su comercialización.",
     "riskBannerChat": "Hábleme sobre la clasificación de riesgo de mi proyecto",
+    "askNormaQuestion": "Revise la descripción de mi proyecto y sugiera mejoras",
     "overview": "Vista general",
     "projectSummary": "Resumen del proyecto",
     "projectSummaryDesc": "Información básica sobre el sistema de IA.",
@@ -53,6 +54,8 @@
     "title": "Documentos",
     "riskBannerDesc": "Documentos necesarios para el cumplimiento normativo según su clasificación de riesgo.",
     "riskBannerChat": "¿Qué documentos nos faltan para la evaluación de conformidad?",
+    "askNormaQuestion": "Evalúe mis documentos de {{framework}}",
+    "askNormaQuestionAdditional": "Evalúe mis documentos justificativos adicionales",
     "additional": "Adicionales",
     "uploadedCount": "{{count}} de {{total}} subidos",
     "noAdditionalDocs": "Aún no se han subido documentos adicionales. Suba cualquier PDF para incluirlo en el contexto de su proyecto.",
@@ -61,10 +64,15 @@
   "reporting": {
     "title": "Informes",
     "riskBannerDesc": "Complete la lista de verificación de cumplimiento para cada área de requisitos del Reglamento Europeo de IA.",
-    "riskBannerChat": "¿Cuáles son los requisitos clave de informes para nuestro proyecto?"
+    "riskBannerChat": "¿Cuáles son los requisitos clave de informes para nuestro proyecto?",
+    "askNormaQuestion": "Analice mi progreso de informes para {{framework}}"
+  },
+  "riskClassification": {
+    "askNormaQuestion": "Explique la clasificación de riesgo de mi proyecto según el Reglamento Europeo de IA"
   },
   "github": {
     "title": "GitHub",
+    "askNormaQuestion": "Analice mi código fuente y sugiera mejoras",
     "syncSteps": {
       "issues": "Obteniendo incidencias",
       "tree": "Analizando repositorio",

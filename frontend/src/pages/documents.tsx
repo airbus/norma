@@ -18,8 +18,15 @@ import { PageHeader } from '@/components/page-header';
 import { useProject } from '@/hooks/use-project';
 import { api, type CustomDocumentItem, type DocumentItem, type Framework } from '@/lib/api';
 
+function slugify(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
 export function DocumentsPage() {
-  const { t } = useTranslation(['pages', 'common']);
+  const { t } = useTranslation(['pages', 'common', 'data']);
   const { currentProject } = useProject();
   const { frameworkId } = useParams<{ frameworkId: string }>();
   const navigate = useNavigate();
@@ -125,9 +132,11 @@ export function DocumentsPage() {
     <div className="flex h-svh flex-col">
       <PageHeader title={pageTitle}>
         {currentFramework ? (
-          <AskNormaButton question={`Evaluate my ${currentFramework.name} documents`} />
+          <AskNormaButton
+            question={t('documents.askNormaQuestion', { framework: currentFramework.name })}
+          />
         ) : isAdditional ? (
-          <AskNormaButton question="Evaluate my additional supporting documents" />
+          <AskNormaButton question={t('documents.askNormaQuestionAdditional')} />
         ) : null}
       </PageHeader>
 
@@ -251,7 +260,12 @@ export function DocumentsPage() {
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
-                              <span className="text-sm font-medium">{doc.name}</span>
+                              <span className="text-sm font-medium">
+                                {t(`documentDefinitions.${slugify(doc.name)}.name`, {
+                                  ns: 'data',
+                                  defaultValue: doc.name,
+                                })}
+                              </span>
                               {doc.article && (
                                 <Badge variant="secondary" className="text-xs">
                                   {doc.article}
@@ -259,7 +273,10 @@ export function DocumentsPage() {
                               )}
                             </div>
                             <p className="text-muted-foreground whitespace-normal text-xs">
-                              {doc.description}
+                              {t(`documentDefinitions.${slugify(doc.name)}.description`, {
+                                ns: 'data',
+                                defaultValue: doc.description,
+                              })}
                             </p>
                           </TableCell>
                           <TableCell className="pr-4 text-right">

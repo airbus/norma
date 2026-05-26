@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -13,6 +14,7 @@ function NormaIconWhite({ className }: { className?: string }) {
 }
 
 export function AskNormaButton({ question }: { question: string }) {
+  const { t } = useTranslation('common');
   const navigate = useNavigate();
 
   return (
@@ -22,7 +24,7 @@ export function AskNormaButton({ question }: { question: string }) {
       onClick={() => navigate('/chat?q=' + encodeURIComponent(question))}
     >
       <NormaIconWhite className="mr-1 size-4" />
-      Ask Norma
+      {t('buttons.askNorma')}
     </Button>
   );
 }

@@ -1,6 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Check, Circle, ExternalLink, Loader2, RefreshCw, Save } from 'lucide-react';
+import {
+  Check,
+  Circle,
+  ExternalLink,
+  Loader2,
+  Minus,
+  Move,
+  Plus,
+  RefreshCw,
+  RotateCcw,
+  Save,
+} from 'lucide-react';
 import Markdown from 'react-markdown';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -97,6 +108,12 @@ export function GitHubPage() {
   const [contextLoaded, setContextLoaded] = useState(false);
   const [contextSaving, setContextSaving] = useState(false);
   const [contextSaved, setContextSaved] = useState(false);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState(false);
+  const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
+  const dragRef = useRef<{ startX: number; startY: number; origX: number; origY: number } | null>(
+    null,
+  );
   const pollRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
 
   const projectId = currentProject?.id;
@@ -178,8 +195,13 @@ export function GitHubPage() {
             .replace(/\s{2,}/g, ' ')
             .trim();
 
+        merged[0] = merged[0].replace(/^graph\s+(LR|RL|BT|TB)/, 'graph TD');
+
         const defined = new Set<string>();
         const cleaned = merged.map((line) => {
+          if (line.trim().startsWith('subgraph ')) {
+            return line.replace(/\s*\([^)]*\)/g, '');
+          }
           const def = line.match(/^(\s*\w+)\[([^\]]*)\]/);
           if (def && !line.includes('-->') && !line.includes('---')) {
             defined.add(def[1].trim());
@@ -202,7 +224,8 @@ export function GitHubPage() {
           const id = `arch-diagram-${Date.now()}`;
           const { svg } = await mermaid.default.render(id, sanitised);
           node.innerHTML = svg;
-        } catch {
+        } catch (err) {
+          console.error('[Mermaid render error]', err);
           node.innerHTML = `<pre class="text-xs overflow-auto p-4 bg-muted rounded-lg"><code>${parsedArchitecture.diagram}</code></pre>`;
         }
       })();
@@ -290,7 +313,7 @@ export function GitHubPage() {
   return (
     <div className="flex h-svh flex-col">
       <PageHeader title={t('github.title')}>
-        <AskNormaButton question="Analyse my codebase and suggest improvements" />
+        <AskNormaButton question={t('github.askNormaQuestion')} />
       </PageHeader>
 
       {syncing && <SyncProgress step={syncStep} />}
@@ -421,10 +444,90 @@ export function GitHubPage() {
             <TabsContent value="architecture">
               {integration?.architecture_mermaid ? (
                 <div className="space-y-6">
+                  <div className="flex items-center justify-end gap-1">
+                    <Button
+                      variant={pan ? 'default' : 'outline'}
+                      size="icon"
+                      className="size-8 cursor-pointer"
+                      onClick={() => setPan((p) => !p)}
+                    >
+                      <Move className="size-4" />
+                    </Button>
+                    <div className="bg-border mx-1 h-4 w-px" />
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="size-8 cursor-pointer"
+                      onClick={() => setZoom((z) => Math.max(0.25, z - 0.25))}
+                      disabled={zoom <= 0.25}
+                    >
+                      <Minus className="size-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 min-w-[3.5rem] cursor-pointer text-xs"
+                      onClick={() => {
+                        setZoom(1);
+                        setPanOffset({ x: 0, y: 0 });
+                      }}
+                    >
+                      {zoom === 1 && panOffset.x === 0 && panOffset.y === 0 ? (
+                        <RotateCcw className="size-3" />
+                      ) : (
+                        `${Math.round(zoom * 100)}%`
+                      )}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="size-8 cursor-pointer"
+                      onClick={() => setZoom((z) => Math.min(3, z + 0.25))}
+                      disabled={zoom >= 3}
+                    >
+                      <Plus className="size-4" />
+                    </Button>
+                  </div>
                   <div
-                    ref={mermaidRef}
-                    className="overflow-auto rounded-lg border bg-background p-6"
-                  />
+                    className="overflow-hidden rounded-lg border bg-background p-6"
+                    style={{ cursor: pan ? 'grab' : 'default' }}
+                    onMouseDown={(e) => {
+                      if (!pan) return;
+                      e.preventDefault();
+                      dragRef.current = {
+                        startX: e.clientX,
+                        startY: e.clientY,
+                        origX: panOffset.x,
+                        origY: panOffset.y,
+                      };
+                      (e.currentTarget as HTMLElement).style.cursor = 'grabbing';
+                    }}
+                    onMouseMove={(e) => {
+                      if (!dragRef.current) return;
+                      setPanOffset({
+                        x: dragRef.current.origX + (e.clientX - dragRef.current.startX),
+                        y: dragRef.current.origY + (e.clientY - dragRef.current.startY),
+                      });
+                    }}
+                    onMouseUp={(e) => {
+                      if (!dragRef.current) return;
+                      dragRef.current = null;
+                      (e.currentTarget as HTMLElement).style.cursor = 'grab';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!dragRef.current) return;
+                      dragRef.current = null;
+                      (e.currentTarget as HTMLElement).style.cursor = 'grab';
+                    }}
+                  >
+                    <div
+                      ref={mermaidRef}
+                      style={{
+                        transform: `translate(${panOffset.x}px, ${panOffset.y}px) scale(${zoom})`,
+                        transformOrigin: 'top left',
+                      }}
+                    />
+                  </div>
                   {architectureDescription && (
                     <div className="prose prose-sm dark:prose-invert max-w-none">
                       <Markdown>{architectureDescription}</Markdown>

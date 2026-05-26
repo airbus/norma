@@ -36,6 +36,7 @@
     "noProject": "Wählen Sie ein Projekt aus oder erstellen Sie eines, um zu beginnen.",
     "riskBannerDesc": "Dieses System erfordert die vollständige Einhaltung der KI-Verordnung vor der Markteinführung.",
     "riskBannerChat": "Erzählen Sie mir über die Risikoklassifizierung meines Projekts",
+    "askNormaQuestion": "Überprüfen Sie meine Projektbeschreibung und schlagen Sie Verbesserungen vor",
     "overview": "Überblick",
     "projectSummary": "Projektübersicht",
     "projectSummaryDesc": "Grundlegende Informationen über das KI-System.",
@@ -53,6 +54,8 @@
     "title": "Dokumente",
     "riskBannerDesc": "Dokumente, die für die regulatorische Konformität basierend auf Ihrer Risikoklassifizierung erforderlich sind.",
     "riskBannerChat": "Welche Dokumente fehlen uns für die Konformitätsbewertung?",
+    "askNormaQuestion": "Bewerten Sie meine {{framework}}-Dokumente",
+    "askNormaQuestionAdditional": "Bewerten Sie meine zusätzlichen Belege",
     "additional": "Zusätzliche",
     "uploadedCount": "{{count}} von {{total}} hochgeladen",
     "noAdditionalDocs": "Noch keine zusätzlichen Dokumente hochgeladen. Laden Sie ein beliebiges PDF hoch, um es in Ihren Projektkontext aufzunehmen.",
@@ -61,10 +64,15 @@
   "reporting": {
     "title": "Berichterstattung",
     "riskBannerDesc": "Füllen Sie die Compliance-Checkliste für jeden Anforderungsbereich der KI-Verordnung aus.",
-    "riskBannerChat": "Was sind die wichtigsten Berichtspflichten für unser Projekt?"
+    "riskBannerChat": "Was sind die wichtigsten Berichtspflichten für unser Projekt?",
+    "askNormaQuestion": "Analysieren Sie meinen Berichtsfortschritt für {{framework}}"
+  },
+  "riskClassification": {
+    "askNormaQuestion": "Erklären Sie die Risikoklassifizierung meines Projekts gemäß der EU-KI-Verordnung"
   },
   "github": {
     "title": "GitHub",
+    "askNormaQuestion": "Analysieren Sie meinen Quellcode und schlagen Sie Verbesserungen vor",
     "syncSteps": {
       "issues": "Issues werden abgerufen",
       "tree": "Repository wird analysiert",

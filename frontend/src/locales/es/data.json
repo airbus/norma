@@ -1576,5 +1576,95 @@
         }
       }
     }
+  },
+  "documentDefinitions": {
+    "technical-documentation": {
+      "name": "Documentación técnica",
+      "description": "Debe compilarse antes de la comercialización y conservarse durante 10 años. Debe estar inmediatamente disponible para las autoridades de vigilancia del mercado a solicitud."
+    },
+    "eu-declaration-of-conformity": {
+      "name": "Declaración UE de conformidad",
+      "description": "Una declaración escrita y firmada de que el sistema cumple con el Reglamento. Se conserva 10 años, traducida al idioma del Estado miembro."
+    },
+    "ce-marking": {
+      "name": "Marcado CE",
+      "description": "Visible en el producto o la interfaz. Para sistemas digitales, un marcado CE digital accesible desde la interfaz."
+    },
+    "eu-database-registration": {
+      "name": "Registro en la base de datos de la UE",
+      "description": "Los detalles del sistema deben registrarse en la base de datos centralizada de la UE para la trazabilidad pública."
+    },
+    "quality-management-system-documentation": {
+      "name": "Documentación del sistema de gestión de calidad",
+      "description": "El SGC de 13 elementos que cubre diseño, pruebas, gestión de riesgos, respuesta a incidentes, etc. Debe estar completamente documentado y disponible para las autoridades."
+    },
+    "post-market-surveillance-plan": {
+      "name": "Plan de vigilancia poscomercialización",
+      "description": "Forma parte de la documentación técnica. Debe documentar el sistema de vigilancia y los indicadores."
+    },
+    "serious-incident-reports": {
+      "name": "Informes de incidentes graves",
+      "description": "Deben comunicarse a la autoridad de vigilancia del mercado en un plazo de 2 días (sistémico), 10 días (muerte) o 15 días (otros incidentes graves)."
+    },
+    "automated-logs-records": {
+      "name": "Registros / logs automatizados",
+      "description": "Deben conservarse al menos 6 meses y ponerse a disposición para revisión regulatoria."
+    },
+    "fundamental-rights-impact-assessment": {
+      "name": "Evaluación de impacto en derechos fundamentales",
+      "description": "Requerida para organismos públicos o entidades privadas que prestan servicios públicos. Los resultados deben notificarse a la autoridad nacional de vigilancia del mercado antes del despliegue."
+    },
+    "filter-assessment-documentation": {
+      "name": "Documentación de evaluación de filtrado",
+      "description": "Para sistemas que reclaman la exención del artículo 6(3): por qué el sistema normalmente sería de alto riesgo, qué condición de filtrado aplica, y prueba de que no realiza perfilado."
+    },
+    "stakeholder-engagement-record": {
+      "name": "Registro de consulta con partes interesadas",
+      "description": "Documentación de las consultas con comunidades afectadas, organizaciones de la sociedad civil y titulares de derechos, incluyendo metodología y hallazgos."
+    },
+    "human-rights-impact-assessment-report": {
+      "name": "Informe de evaluación de impacto en derechos humanos",
+      "description": "Evaluación integral que documenta los riesgos identificados para los derechos humanos, las poblaciones afectadas, las calificaciones de gravedad y las medidas de mitigación para el sistema de IA."
+    },
+    "algorithmic-impact-assessment": {
+      "name": "Evaluación de impacto algorítmico",
+      "description": "Evaluación técnica de los procesos de toma de decisiones del sistema de IA, el potencial de sesgo y los impactos diferenciales entre grupos demográficos."
+    },
+    "data-protection-impact-assessment": {
+      "name": "Evaluación de impacto en la protección de datos",
+      "description": "Evaluación de las prácticas de recopilación, procesamiento y almacenamiento de datos en relación con los derechos de privacidad y los principios de protección de datos."
+    },
+    "remedy-and-redress-plan": {
+      "name": "Plan de recurso y reparación",
+      "description": "Mecanismos documentados para que las personas impugnen las decisiones tomadas por IA, soliciten reparaciones y accedan a un recurso efectivo cuando se violen sus derechos."
+    },
+    "ongoing-monitoring-plan": {
+      "name": "Plan de supervisión continua",
+      "description": "Marco de supervisión continua de los impactos en derechos humanos tras el despliegue, incluyendo indicadores, ciclos de revisión y procedimientos de escalamiento."
+    },
+    "carbon-footprint-assessment": {
+      "name": "Evaluación de la huella de carbono",
+      "description": "Evaluación cuantitativa de las emisiones de gases de efecto invernadero del entrenamiento de modelos, la inferencia y la infraestructura de soporte, medida en equivalente de CO₂."
+    },
+    "energy-consumption-report": {
+      "name": "Informe de consumo energético",
+      "description": "Informe detallado del consumo de energía en las fases de entrenamiento, inferencia e inactividad, incluyendo el porcentaje de energía renovable y la eficiencia energética (PUE)."
+    },
+    "hardware-lifecycle-assessment": {
+      "name": "Evaluación del ciclo de vida del hardware",
+      "description": "Evaluación del impacto ambiental a lo largo del ciclo de vida del hardware: fabricación, operación y eliminación de GPUs, TPUs y servidores."
+    },
+    "data-centre-sustainability-plan": {
+      "name": "Plan de sostenibilidad del centro de datos",
+      "description": "Documentación de las prácticas ambientales del centro de datos, incluyendo eficiencia de refrigeración, consumo de agua, abastecimiento de energía renovable y gestión de residuos."
+    },
+    "model-efficiency-report": {
+      "name": "Informe de eficiencia del modelo",
+      "description": "Análisis de la eficiencia de la arquitectura del modelo, incluyendo la justificación del número de parámetros, oportunidades de destilación y estrategias de optimización de la inferencia."
+    },
+    "environmental-monitoring-plan": {
+      "name": "Plan de monitoreo ambiental",
+      "description": "Marco de monitoreo continuo para el seguimiento de KPIs ambientales, establecimiento de objetivos de reducción e informes de progreso respecto a los objetivos de sostenibilidad."
+    }
   }
 }

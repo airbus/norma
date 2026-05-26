@@ -1576,5 +1576,95 @@
         }
       }
     }
+  },
+  "documentDefinitions": {
+    "technical-documentation": {
+      "name": "Technische Dokumentation",
+      "description": "Muss vor dem Inverkehrbringen erstellt und 10 Jahre aufbewahrt werden. Muss den Marktüberwachungsbehörden auf Anfrage unverzüglich zur Verfügung gestellt werden."
+    },
+    "eu-declaration-of-conformity": {
+      "name": "EU-Konformitätserklärung",
+      "description": "Eine unterzeichnete schriftliche Erklärung, dass das System den Anforderungen der Verordnung entspricht. 10 Jahre aufzubewahren, in die Sprache des Mitgliedstaats übersetzt."
+    },
+    "ce-marking": {
+      "name": "CE-Kennzeichnung",
+      "description": "Sichtbar auf dem Produkt oder der Benutzeroberfläche. Bei digitalen Systemen eine digitale CE-Kennzeichnung, die über die Benutzeroberfläche zugänglich ist."
+    },
+    "eu-database-registration": {
+      "name": "EU-Datenbankregistrierung",
+      "description": "Systemdetails müssen in der zentralen EU-Datenbank für die öffentliche Rückverfolgbarkeit registriert werden."
+    },
+    "quality-management-system-documentation": {
+      "name": "Dokumentation des Qualitätsmanagementsystems",
+      "description": "Das 13-Elemente-QMS umfasst Design, Tests, Risikomanagement, Vorfallsreaktion usw. Muss vollständig dokumentiert und den Behörden zugänglich sein."
+    },
+    "post-market-surveillance-plan": {
+      "name": "Plan zur Marktüberwachung nach dem Inverkehrbringen",
+      "description": "Teil der technischen Dokumentation. Muss das Überwachungssystem und die Indikatoren dokumentieren."
+    },
+    "serious-incident-reports": {
+      "name": "Meldungen schwerwiegender Vorfälle",
+      "description": "Müssen der Marktüberwachungsbehörde innerhalb von 2 Tagen (systemisch), 10 Tagen (Tod) oder 15 Tagen (andere schwerwiegende Vorfälle) gemeldet werden."
+    },
+    "automated-logs-records": {
+      "name": "Automatisierte Protokolle / Aufzeichnungen",
+      "description": "Müssen mindestens 6 Monate aufbewahrt und für die behördliche Überprüfung bereitgestellt werden."
+    },
+    "fundamental-rights-impact-assessment": {
+      "name": "Grundrechte-Folgenabschätzung",
+      "description": "Erforderlich für öffentliche Betreiber oder private Einrichtungen, die öffentliche Dienstleistungen erbringen. Die Ergebnisse müssen der nationalen Marktüberwachungsbehörde vor der Inbetriebnahme mitgeteilt werden."
+    },
+    "filter-assessment-documentation": {
+      "name": "Dokumentation der Filterbewertung",
+      "description": "Für Systeme, die die Ausnahme nach Artikel 6(3) beanspruchen: warum das System normalerweise als hochriskant eingestuft würde, welche Filterbedingung zutrifft, und Nachweis, dass kein Profiling durchgeführt wird."
+    },
+    "stakeholder-engagement-record": {
+      "name": "Protokoll der Stakeholder-Einbindung",
+      "description": "Dokumentation der Konsultationen mit betroffenen Gemeinschaften, zivilgesellschaftlichen Organisationen und Rechtsinhabern, einschließlich Methodik und Ergebnisse."
+    },
+    "human-rights-impact-assessment-report": {
+      "name": "Bericht zur Menschenrechts-Folgenabschätzung",
+      "description": "Umfassende Bewertung, die identifizierte Menschenrechtsrisiken, betroffene Bevölkerungsgruppen, Schweregrade und Minderungsmaßnahmen für das KI-System dokumentiert."
+    },
+    "algorithmic-impact-assessment": {
+      "name": "Algorithmische Folgenabschätzung",
+      "description": "Technische Bewertung der Entscheidungsprozesse des KI-Systems, des Bias-Potenzials und der unterschiedlichen Auswirkungen auf verschiedene demografische Gruppen."
+    },
+    "data-protection-impact-assessment": {
+      "name": "Datenschutz-Folgenabschätzung",
+      "description": "Bewertung der Datenerhebungs-, Verarbeitungs- und Speicherungspraktiken im Hinblick auf Datenschutzrechte und Datenschutzgrundsätze."
+    },
+    "remedy-and-redress-plan": {
+      "name": "Rechtsbehelfs- und Wiedergutmachungsplan",
+      "description": "Dokumentierte Mechanismen, die es Einzelpersonen ermöglichen, KI-gestützte Entscheidungen anzufechten, Abhilfe zu verlangen und wirksamen Rechtsschutz bei Rechtsverletzungen zu erhalten."
+    },
+    "ongoing-monitoring-plan": {
+      "name": "Plan zur fortlaufenden Überwachung",
+      "description": "Rahmen für die kontinuierliche Überwachung der Menschenrechtsauswirkungen nach der Inbetriebnahme, einschließlich Indikatoren, Überprüfungszyklen und Eskalationsverfahren."
+    },
+    "carbon-footprint-assessment": {
+      "name": "CO₂-Fußabdruck-Bewertung",
+      "description": "Quantitative Bewertung der Treibhausgasemissionen aus Modelltraining, Inferenz und unterstützender Infrastruktur, gemessen in CO₂-Äquivalent."
+    },
+    "energy-consumption-report": {
+      "name": "Energieverbrauchsbericht",
+      "description": "Detaillierter Bericht über den Energieverbrauch in Training, Inferenz und Leerlaufphasen, einschließlich des Anteils erneuerbarer Energien und der Energieeffizienz (PUE)."
+    },
+    "hardware-lifecycle-assessment": {
+      "name": "Hardware-Lebenszyklusbewertung",
+      "description": "Bewertung der Umweltauswirkungen über den gesamten Hardware-Lebenszyklus: Herstellung, Betrieb und Entsorgung von GPUs, TPUs und Servern."
+    },
+    "data-centre-sustainability-plan": {
+      "name": "Nachhaltigkeitsplan für das Rechenzentrum",
+      "description": "Dokumentation der Umweltpraktiken des Rechenzentrums, einschließlich Kühleffizienz, Wasserverbrauch, Beschaffung erneuerbarer Energien und Abfallmanagement."
+    },
+    "model-efficiency-report": {
+      "name": "Modelleffizienzbericht",
+      "description": "Analyse der Effizienz der Modellarchitektur, einschließlich Begründung der Parameteranzahl, Destillationsmöglichkeiten und Strategien zur Inferenzoptimierung."
+    },
+    "environmental-monitoring-plan": {
+      "name": "Umweltüberwachungsplan",
+      "description": "Laufendes Überwachungsrahmenwerk zur Verfolgung von Umwelt-KPIs, Festlegung von Reduktionszielen und Berichterstattung über Fortschritte bei den Nachhaltigkeitszielen."
+    }
   }
 }

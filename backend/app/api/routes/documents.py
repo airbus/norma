@@ -106,7 +106,11 @@ async def upload_document(
         async with httpx.AsyncClient() as client:
             await client.post(
                 f"{settings.pipelines_url}/api/documents/process",
-                json={"document_id": str(doc.id), "file_path": str(file_path)},
+                json={
+                    "document_id": str(doc.id),
+                    "file_path": str(file_path),
+                    "language": current_user.language_preference or "en",
+                },
                 timeout=300,
             )
     except Exception:
@@ -171,6 +175,7 @@ async def upload_custom_document(
                     "document_id": str(custom_doc.id),
                     "file_path": str(file_path),
                     "table_name": "custom_documents",
+                    "language": current_user.language_preference or "en",
                 },
                 timeout=300,
             )

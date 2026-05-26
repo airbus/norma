@@ -48,7 +48,7 @@ export function RiskClassificationPage() {
             t('description.title') + ' > ' + t('sidebar.riskClassification', { ns: 'components' })
           }
         >
-          <AskNormaButton question="Explain my project's risk classification under the EU AI Act" />
+          <AskNormaButton question={t('riskClassification.askNormaQuestion')} />
         </PageHeader>
         <div className="flex flex-1 items-center justify-center">
           <p className="text-muted-foreground">{t('description.noProject')}</p>
@@ -64,7 +64,7 @@ export function RiskClassificationPage() {
           t('description.title') + ' > ' + t('sidebar.riskClassification', { ns: 'components' })
         }
       >
-        <AskNormaButton question="Explain my project's risk classification under the EU AI Act" />
+        <AskNormaButton question={t('riskClassification.askNormaQuestion')} />
       </PageHeader>
 
       <div className="flex-1 overflow-auto p-6">

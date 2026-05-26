@@ -36,6 +36,7 @@
     "noProject": "Select or create a project to get started.",
     "riskBannerDesc": "This system requires full compliance with AI Act obligations before market placement.",
     "riskBannerChat": "Tell me about my project's risk classification",
+    "askNormaQuestion": "Review my project description and suggest improvements",
     "overview": "Overview",
     "projectSummary": "Project Summary",
     "projectSummaryDesc": "Basic information about the AI system.",
@@ -53,6 +54,8 @@
     "title": "Documents",
     "riskBannerDesc": "Documents required for regulatory compliance based on your risk classification.",
     "riskBannerChat": "What documents are we missing for conformity assessment?",
+    "askNormaQuestion": "Evaluate my {{framework}} documents",
+    "askNormaQuestionAdditional": "Evaluate my additional supporting documents",
     "additional": "Additional",
     "uploadedCount": "{{count}} of {{total}} uploaded",
     "noAdditionalDocs": "No additional documents uploaded yet. Upload any PDF to include it in your project context.",
@@ -61,10 +64,15 @@
   "reporting": {
     "title": "Reporting",
     "riskBannerDesc": "Complete the compliance checklist for each requirement area of the EU AI Act.",
-    "riskBannerChat": "What are the key reporting requirements for our project?"
+    "riskBannerChat": "What are the key reporting requirements for our project?",
+    "askNormaQuestion": "Analyse my reporting progress for {{framework}}"
+  },
+  "riskClassification": {
+    "askNormaQuestion": "Explain my project's risk classification under the EU AI Act"
   },
   "github": {
     "title": "GitHub",
+    "askNormaQuestion": "Analyse my codebase and suggest improvements",
     "syncSteps": {
       "issues": "Fetching issues",
       "tree": "Analysing repository",

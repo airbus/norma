@@ -202,7 +202,10 @@ async def sync_integration(
                 try:
                     resp = await client.post(
                         f"{settings.pipelines_url}/api/github/process",
-                        json={"integration_id": str(integration.id)},
+                        json={
+                            "integration_id": str(integration.id),
+                            "language": current_user.language_preference or "en",
+                        },
                         timeout=300,
                     )
                     resp.raise_for_status()

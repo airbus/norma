@@ -24,7 +24,7 @@ export function DescriptionPage() {
     return (
       <div className="flex h-svh flex-col">
         <PageHeader title={t('description.title') + ' > ' + t('description.overview')}>
-          <AskNormaButton question="Review my project description and suggest improvements" />
+          <AskNormaButton question={t('description.askNormaQuestion')} />
         </PageHeader>
         <div className="flex flex-1 items-center justify-center">
           <p className="text-muted-foreground">{t('description.noProject')}</p>
@@ -36,7 +36,7 @@ export function DescriptionPage() {
   return (
     <div className="flex h-svh flex-col">
       <PageHeader title={t('description.title') + ' > ' + t('description.overview')}>
-        <AskNormaButton question="Review my project description and suggest improvements" />
+        <AskNormaButton question={t('description.askNormaQuestion')} />
       </PageHeader>
 
       <div className="flex-1 overflow-auto p-6">

@@ -3,6 +3,7 @@ import logging
 import litellm
 
 from app.core.config import settings
+from app.core.llm import language_rule
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +18,7 @@ Produce a structured summary covering:
 4. **Key observations**: Architecture decisions, patterns, or risks relevant to compliance analysis.
 
 Keep the summary concise (under 1000 words). Use markdown formatting.
+{language_rule}
 
 ---
 
@@ -58,6 +60,7 @@ STRICT Mermaid syntax rules — violating any of these will break the diagram:
 
 After the diagram, provide a punchy description — 3-5 bullet points, each one sentence. \
 Cover the main stack, data flow, and any notable patterns. No long paragraphs.
+{language_rule}
 
 ---
 
@@ -76,8 +79,8 @@ Do not include any other text before the mermaid block.
 """
 
 
-async def generate_summary(tasks_text: str, files_text: str) -> str:
-    prompt = SUMMARY_PROMPT.format(tasks=tasks_text, files=files_text)
+async def generate_summary(tasks_text: str, files_text: str, language: str = "en") -> str:
+    prompt = SUMMARY_PROMPT.format(tasks=tasks_text, files=files_text, language_rule=language_rule(language))
 
     if len(prompt) > 200_000:
         prompt = prompt[:200_000] + "\n\n[... truncated ...]"
@@ -90,8 +93,8 @@ async def generate_summary(tasks_text: str, files_text: str) -> str:
     return response.choices[0].message.content or "Summary generation failed."
 
 
-async def generate_architecture(tree_text: str, files_text: str) -> str:
-    prompt = ARCHITECTURE_PROMPT.format(tree=tree_text, files=files_text)
+async def generate_architecture(tree_text: str, files_text: str, language: str = "en") -> str:
+    prompt = ARCHITECTURE_PROMPT.format(tree=tree_text, files=files_text, language_rule=language_rule(language))
 
     if len(prompt) > 200_000:
         prompt = prompt[:200_000] + "\n\n[... truncated ...]"
@@ -99,6 +102,6 @@ async def generate_architecture(tree_text: str, files_text: str) -> str:
     response = await litellm.acompletion(
         model=settings.litellm_model,
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=4096,
+        max_tokens=8192,
     )
     return response.choices[0].message.content or "Architecture generation failed."
