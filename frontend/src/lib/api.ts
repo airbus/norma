@@ -84,6 +84,36 @@ export interface ChatMessage {
   created_at: string;
 }
 
+export interface GitHubIntegration {
+  id: string;
+  project_id: string;
+  provider: string;
+  repo_owner: string;
+  repo_name: string;
+  github_project_number: number | null;
+  summary: string | null;
+  architecture_mermaid: string | null;
+  sync_status: string;
+  last_synced_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface GitHubTask {
+  id: string;
+  integration_id: string;
+  github_id: number;
+  title: string;
+  body: string | null;
+  status: string;
+  assignees: string[] | null;
+  labels: string[] | null;
+  milestone: string | null;
+  github_url: string;
+  github_created_at: string | null;
+  github_updated_at: string | null;
+}
+
 export interface ChatSessionDetail extends ChatSession {
   messages: ChatMessage[];
 }

@@ -32,6 +32,7 @@ def build_system_prompt(
     framework_contents: list[dict],
     project_context: dict | None = None,
     document_summaries: list[dict] | None = None,
+    github_summary: str | None = None,
 ) -> str:
     parts: list[str] = []
 
@@ -63,6 +64,10 @@ def build_system_prompt(
         parts.append("\n## Uploaded Document Summaries\n")
         for doc in document_summaries:
             parts.append(f"### {doc['name']}\n{doc['summary']}\n")
+
+    if github_summary:
+        parts.append("\n## GitHub Repository & Task Context\n")
+        parts.append(github_summary)
 
     if project_context and project_context.get("reporting_evidence"):
         parts.append("\n## Reporting Evidence\n")

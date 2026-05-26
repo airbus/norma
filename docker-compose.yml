@@ -26,10 +26,12 @@ services:
       - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
     volumes:
       - norma-data:/data
-      - ${GOOGLE_APPLICATION_CREDENTIALS:-/dev/null}:/root/.config/gcloud/application_default_credentials.json:ro
+      - ${GOOGLE_APPLICATION_CREDENTIALS:-.empty}:/root/.config/gcloud/application_default_credentials.json:ro
     depends_on:
       db:
         condition: service_healthy
+      pipelines:
+        condition: service_started
 
   pipelines:
     build:
@@ -46,7 +48,7 @@ services:
       - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
     volumes:
       - norma-data:/data
-      - ${GOOGLE_APPLICATION_CREDENTIALS:-/dev/null}:/root/.config/gcloud/application_default_credentials.json:ro
+      - ${GOOGLE_APPLICATION_CREDENTIALS:-.empty}:/root/.config/gcloud/application_default_credentials.json:ro
     depends_on:
       db:
         condition: service_healthy
@@ -69,7 +71,7 @@ services:
 
 secrets:
   ca_cert:
-    file: ${CA_CERT_PATH:-/dev/null}
+    file: ${CA_CERT_PATH:-.empty}
 
 volumes:
   pgdata:

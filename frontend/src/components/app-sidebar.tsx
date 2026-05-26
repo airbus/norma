@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NormaLogo } from '@/components/icons/norma-logo';
 import {
   BookOpen,
   ChevronsUpDown,
   FileText,
+  GitBranch,
   LayoutGrid,
   LogOut,
   MessageSquare,
@@ -38,6 +39,7 @@ import {
 import { NewProjectDialog } from '@/components/new-project-dialog';
 import { useAuth } from '@/hooks/use-auth';
 import { useProject } from '@/hooks/use-project';
+import { api } from '@/lib/api';
 
 const RISK_LABELS: Record<string, string> = {
   unacceptable: 'Unacceptable Risk',
@@ -65,6 +67,28 @@ export function AppSidebar() {
   const { user, logout } = useAuth();
   const { projects, currentProject, setCurrentProject } = useProject();
   const [newProjectOpen, setNewProjectOpen] = useState(false);
+  const [hasGitHub, setHasGitHub] = useState(false);
+
+  useEffect(() => {
+    if (!currentProject) return;
+    let cancelled = false;
+    const check = () => {
+      api
+        .get(`/projects/${currentProject.id}/integrations`)
+        .then(() => {
+          if (!cancelled) setHasGitHub(true);
+        })
+        .catch(() => {
+          if (!cancelled) setHasGitHub(false);
+        });
+    };
+    check();
+    window.addEventListener('integration-changed', check);
+    return () => {
+      cancelled = true;
+      window.removeEventListener('integration-changed', check);
+    };
+  }, [currentProject]);
 
   const initials = user
     ? user.name
@@ -188,6 +212,26 @@ export function AppSidebar() {
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
+
+          {currentProject && hasGitHub && (
+            <SidebarGroup>
+              <SidebarGroupLabel>GitHub</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton
+                      isActive={location.pathname === '/github'}
+                      onClick={() => navigate('/github')}
+                      tooltip="GitHub"
+                    >
+                      <GitBranch />
+                      <span>GitHub</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          )}
 
           <SidebarGroup>
             <SidebarGroupLabel>Configuration</SidebarGroupLabel>

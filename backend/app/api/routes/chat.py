@@ -17,6 +17,7 @@ from app.models.chat import ChatMessage, ChatSession
 from app.models.custom_document import CustomDocument
 from app.models.document import Document
 from app.models.framework import Framework
+from app.models.integration import Integration
 from app.models.project import Project
 from app.models.reporting import ReportingEvidence
 from app.models.user import User
@@ -97,10 +98,14 @@ def _assemble_context(project: Project, db: Session) -> str:
     for cdoc in custom_docs:
         document_summaries.append({"name": cdoc.file_name, "summary": cdoc.summary})
 
+    integration = db.query(Integration).filter(Integration.project_id == project.id).first()
+    github_summary = integration.summary if integration else None
+
     return build_system_prompt(
         framework_contents=framework_contents,
         project_context=project_context,
         document_summaries=document_summaries if document_summaries else None,
+        github_summary=github_summary,
     )
 
 

@@ -9,6 +9,7 @@ import { ChatPage } from '@/pages/chat';
 import { DescriptionPage } from '@/pages/description';
 import { DocumentsPage } from '@/pages/documents';
 import { FrameworksPage } from '@/pages/frameworks';
+import { GitHubPage } from '@/pages/github';
 import { IntegrationsPage } from '@/pages/integrations';
 import { LoginPage } from '@/pages/login';
 import { RegisterPage } from '@/pages/register';
@@ -33,6 +34,7 @@ function App() {
                     <Route path="description" element={<DescriptionPage />} />
                     <Route path="documents" element={<DocumentsPage />} />
                     <Route path="reporting" element={<ReportingPage />} />
+                    <Route path="github" element={<GitHubPage />} />
                     <Route path="integrations" element={<IntegrationsPage />} />
                     <Route path="frameworks" element={<FrameworksPage />} />
                     <Route path="settings" element={<SettingsPage />} />

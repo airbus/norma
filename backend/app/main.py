@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import auth, chat, documents, frameworks, health, invites, projects, reporting, users
+from app.api.routes import auth, chat, documents, frameworks, health, integrations, invites, projects, reporting, users
 from app.core.config import settings
 from app.core.database import SessionLocal
 from app.services.seed import seed_frameworks
@@ -40,4 +40,5 @@ app.include_router(projects.router)
 app.include_router(frameworks.router)
 app.include_router(documents.router)
 app.include_router(reporting.router)
+app.include_router(integrations.router)
 app.include_router(chat.router)

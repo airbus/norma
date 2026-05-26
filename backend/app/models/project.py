@@ -27,3 +27,4 @@ class Project(Base):
     custom_documents = relationship("CustomDocument", back_populates="project", cascade="all, delete-orphan")
     reporting_evidence = relationship("ReportingEvidence", back_populates="project", cascade="all, delete-orphan")
     chat_sessions = relationship("ChatSession", back_populates="project", cascade="all, delete-orphan")
+    integration = relationship("Integration", back_populates="project", uselist=False, cascade="all, delete-orphan")

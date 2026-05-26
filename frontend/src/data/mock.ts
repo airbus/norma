@@ -17,14 +17,6 @@ export interface MandatoryDocument {
   uploaded: boolean;
 }
 
-export interface Integration {
-  id: string;
-  name: string;
-  description: string;
-  icon: string;
-  connected: boolean;
-}
-
 export interface Framework {
   id: string;
   name: string;
@@ -172,17 +164,6 @@ export const MANDATORY_DOCUMENTS: MandatoryDocument[] = [
     article: '',
     framework: 'Internal AI Guidelines',
     uploaded: false,
-  },
-];
-
-export const MOCK_INTEGRATIONS: Integration[] = [
-  {
-    id: '1',
-    name: 'GitHub',
-    description:
-      'Connect your GitHub repositories to track code changes and manage version control for AI models.',
-    icon: 'github',
-    connected: false,
   },
 ];
 

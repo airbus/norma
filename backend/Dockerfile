@@ -17,7 +17,7 @@ ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+RUN curl -LsSf --cacert /etc/ssl/certs/ca-certificates.crt https://astral.sh/uv/install.sh | sh
 ENV PATH="/root/.local/bin:$PATH"
 
 COPY pyproject.toml ./
