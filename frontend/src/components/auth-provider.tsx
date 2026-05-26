@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { api, type User } from '@/lib/api';
 import { AuthContext } from '@/lib/auth-context';
+import { changeLanguage } from '@/lib/i18n';
 
 const TOKEN_KEY = 'norma-token';
 
@@ -12,6 +13,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const u = await api.get<User>('/auth/me');
       setUser(u);
+      if (u.language_preference) changeLanguage(u.language_preference);
     } catch {
       localStorage.removeItem(TOKEN_KEY);
       setUser(null);
@@ -24,7 +26,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     api
       .get<User>('/auth/me')
       .then((u) => {
-        if (!cancelled) setUser(u);
+        if (!cancelled) {
+          setUser(u);
+          if (u.language_preference) changeLanguage(u.language_preference);
+        }
       })
       .catch(() => {
         if (!cancelled) {

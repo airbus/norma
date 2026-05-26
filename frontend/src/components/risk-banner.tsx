@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import {
   AlertTriangle,
@@ -9,24 +10,20 @@ import {
   ShieldAlert,
 } from 'lucide-react';
 
-const RISK_CONFIG: Record<string, { label: string; icon: typeof Ban; className: string }> = {
+const RISK_CONFIG: Record<string, { icon: typeof Ban; className: string }> = {
   unacceptable: {
-    label: 'Unacceptable Risk',
     icon: Ban,
     className: 'border-destructive/30 bg-destructive/10 text-destructive',
   },
   high: {
-    label: 'High Risk',
     icon: ShieldAlert,
     className: 'border-orange-500/30 bg-orange-500/10 text-orange-700 dark:text-orange-400',
   },
   limited: {
-    label: 'Limited Risk',
     icon: AlertTriangle,
     className: 'border-yellow-500/30 bg-yellow-500/10 text-yellow-700 dark:text-yellow-400',
   },
   minimal: {
-    label: 'Minimal Risk',
     icon: Info,
     className: 'border-primary/30 bg-primary/10 text-primary',
   },
@@ -47,6 +44,7 @@ export function RiskBanner({
   evaluating,
   onReEvaluate,
 }: RiskBannerProps) {
+  const { t } = useTranslation(['components', 'common']);
   const navigate = useNavigate();
   const config = RISK_CONFIG[riskClassification];
   if (!config) return null;
@@ -57,7 +55,9 @@ export function RiskBanner({
     <div className={`mb-6 flex items-center gap-3 rounded-lg border px-4 py-3 ${config.className}`}>
       <Icon className={`size-5 shrink-0 ${evaluating ? 'animate-spin' : ''}`} />
       <div className="flex-1">
-        <p className="text-sm font-semibold">{evaluating ? 'Evaluating risk...' : config.label}</p>
+        <p className="text-sm font-semibold">
+          {evaluating ? t('common:loading.evaluatingRisk') : t(`common:risk.${riskClassification}`)}
+        </p>
         <p className="text-xs opacity-80">{description}</p>
       </div>
       <div className="flex items-center gap-2">
@@ -67,7 +67,7 @@ export function RiskBanner({
             onClick={onReEvaluate}
           >
             <RefreshCw className={`size-4 ${evaluating ? 'animate-spin' : ''}`} />
-            <span className="text-xs font-medium">Re-evaluate</span>
+            <span className="text-xs font-medium">{t('common:buttons.reEvaluate')}</span>
           </div>
         )}
         <div
@@ -75,7 +75,7 @@ export function RiskBanner({
           onClick={() => navigate(`/chat?q=${encodeURIComponent(chatMessage)}`)}
         >
           <MessageSquare className="size-4" />
-          <span className="text-xs font-medium">Ask Norma</span>
+          <span className="text-xs font-medium">{t('common:buttons.askNorma')}</span>
         </div>
       </div>
     </div>

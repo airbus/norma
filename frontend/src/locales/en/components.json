@@ -1,0 +1,67 @@
+{
+  "sidebar": {
+    "noProject": "No project",
+    "selectProject": "Select a project",
+    "settings": "Settings",
+    "logout": "Logout",
+    "chat": "Chat",
+    "description": "Description",
+    "documents": "Documents",
+    "reporting": "Reporting",
+    "integrations": "Integrations",
+    "frameworks": "Frameworks",
+    "github": "GitHub"
+  },
+  "riskBanner": {
+    "evaluatingRisk": "Evaluating risk..."
+  },
+  "newProjectDialog": {
+    "title": "Create a new project",
+    "description": "Set up a new AI system project to begin tracking compliance.",
+    "overview": "Overview",
+    "projectSummary": "Project Summary",
+    "projectSummaryDesc": "Basic information about the AI system.",
+    "namePlaceholder": "e.g. Predictive Maintenance",
+    "descriptionPlaceholder": "Brief description of the AI system...",
+    "intendedPurpose": "Intended Purpose",
+    "intendedPurposeDesc": "What is the system designed to do?",
+    "intendedPurposePlaceholder": "Describe the intended purpose of the AI system...",
+    "intendedUsers": "Intended Users",
+    "intendedUsersDesc": "Who will operate or be affected by this system?",
+    "intendedUsersPlaceholder": "Describe the intended users and affected persons...",
+    "deploymentContext": "Deployment Context",
+    "deploymentContextDesc": "Where and how will the system be deployed?",
+    "deploymentContextPlaceholder": "Describe the deployment context, sector, and geographic scope...",
+    "createProject": "Create project"
+  },
+  "userManagement": {
+    "title": "User Management",
+    "description": "Manage users and invite new members.",
+    "users": "Users",
+    "invitations": "Invitations",
+    "createInviteLink": "Create Invite Link",
+    "emailOptional": "Email (optional)",
+    "emailPlaceholder": "user@example.com",
+    "newPassword": "New password",
+    "resetPasswordTitle": "Reset Password"
+  },
+  "githubConnect": {
+    "connectTitle": "Connect GitHub",
+    "editTitle": "Edit GitHub Integration",
+    "description": "Link a GitHub repository to sync tasks and analyse architecture.",
+    "patLabel": "Personal Access Token",
+    "patLabelKeep": "Personal Access Token (leave blank to keep current)",
+    "patTooltip": "Go to GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token. Select the 'repo' scope for private repos or 'public_repo' for public repos.",
+    "repoOwner": "Repository Owner",
+    "repoOwnerPlaceholder": "e.g. octocat",
+    "repoName": "Repository Name",
+    "repoNamePlaceholder": "e.g. hello-world",
+    "projectNumber": "GitHub Project Number (optional)",
+    "projectNumberPlaceholder": "e.g. 1"
+  },
+  "checklistPanel": {
+    "norma": "Norma",
+    "generateSuggestion": "Generate suggestion with Norma",
+    "addComment": "Add a comment..."
+  }
+}

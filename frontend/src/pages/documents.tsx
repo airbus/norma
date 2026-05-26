@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CheckCircle2, Circle, FileText, Loader2, Trash2, Upload } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
@@ -18,6 +19,7 @@ import { useProject } from '@/hooks/use-project';
 import { api, type CustomDocumentItem, type DocumentItem } from '@/lib/api';
 
 export function DocumentsPage() {
+  const { t } = useTranslation(['pages', 'common']);
   const { currentProject } = useProject();
   const [documents, setDocuments] = useState<DocumentItem[]>([]);
   const [customDocs, setCustomDocs] = useState<CustomDocumentItem[]>([]);
@@ -113,15 +115,15 @@ export function DocumentsPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title="Documents" />
+      <PageHeader title={t('documents.title')} />
 
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-4xl space-y-6">
           {currentProject && (
             <RiskBanner
               riskClassification={currentProject.risk_classification}
-              description="Documents required for regulatory compliance based on your risk classification."
-              chatMessage="What documents are we missing for conformity assessment?"
+              description={t('documents.riskBannerDesc')}
+              chatMessage={t('documents.riskBannerChat')}
             />
           )}
 
@@ -132,7 +134,7 @@ export function DocumentsPage() {
                   {name}
                 </TabsTrigger>
               ))}
-              <TabsTrigger value="additional">Additional</TabsTrigger>
+              <TabsTrigger value="additional">{t('documents.additional')}</TabsTrigger>
             </TabsList>
 
             {[...grouped.entries()].map(([framework, docs]) => {
@@ -141,7 +143,7 @@ export function DocumentsPage() {
                 <TabsContent key={framework} value={framework}>
                   <div className="mb-3 flex items-center justify-between">
                     <Badge variant="outline">
-                      {uploadedCount} of {docs.length} uploaded
+                      {t('documents.uploadedCount', { count: uploadedCount, total: docs.length })}
                     </Badge>
                   </div>
 
@@ -150,7 +152,7 @@ export function DocumentsPage() {
                       <TableHeader>
                         <TableRow>
                           <TableHead className="w-8" />
-                          <TableHead>Document</TableHead>
+                          <TableHead>{t('common:table.document')}</TableHead>
                           <TableHead className="w-24 text-right pr-6" />
                         </TableRow>
                       </TableHeader>
@@ -198,8 +200,8 @@ export function DocumentsPage() {
                                 {uploadingId === doc.id
                                   ? '...'
                                   : doc.uploaded
-                                    ? 'Replace'
-                                    : 'Upload'}
+                                    ? t('common:buttons.replace')
+                                    : t('common:buttons.upload')}
                               </Button>
                             </TableCell>
                           </TableRow>
@@ -234,7 +236,7 @@ export function DocumentsPage() {
                   ) : (
                     <Upload className="mr-1 size-3" />
                   )}
-                  {customUploading ? 'Uploading...' : 'Upload'}
+                  {customUploading ? t('common:loading.uploading') : t('common:buttons.upload')}
                 </Button>
               </div>
 
@@ -243,8 +245,8 @@ export function DocumentsPage() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Document</TableHead>
-                        <TableHead className="w-36">Uploaded</TableHead>
+                        <TableHead>{t('common:table.document')}</TableHead>
+                        <TableHead className="w-36">{t('common:table.uploaded')}</TableHead>
                         <TableHead className="w-10" />
                       </TableRow>
                     </TableHeader>
@@ -273,7 +275,7 @@ export function DocumentsPage() {
                               onClick={() => handleCustomDelete(doc.id)}
                               disabled={deletingId === doc.id}
                               className="text-muted-foreground hover:text-destructive cursor-pointer rounded p-1 transition-colors disabled:opacity-50"
-                              title="Delete document"
+                              title={t('documents.deleteDocument')}
                             >
                               {deletingId === doc.id ? (
                                 <Loader2 className="size-4 animate-spin" />
@@ -289,8 +291,7 @@ export function DocumentsPage() {
                 </div>
               ) : (
                 <div className="text-muted-foreground rounded-lg border border-dashed py-8 text-center text-sm">
-                  No additional documents uploaded yet. Upload any PDF to include it in your project
-                  context.
+                  {t('documents.noAdditionalDocs')}
                 </div>
               )}
             </TabsContent>

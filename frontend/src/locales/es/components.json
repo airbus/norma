@@ -1,0 +1,67 @@
+{
+  "sidebar": {
+    "noProject": "Sin proyecto",
+    "selectProject": "Seleccionar un proyecto",
+    "settings": "Configuración",
+    "logout": "Cerrar sesión",
+    "chat": "Chat",
+    "description": "Descripción",
+    "documents": "Documentos",
+    "reporting": "Informes",
+    "integrations": "Integraciones",
+    "frameworks": "Marcos normativos",
+    "github": "GitHub"
+  },
+  "riskBanner": {
+    "evaluatingRisk": "Evaluando riesgo..."
+  },
+  "newProjectDialog": {
+    "title": "Crear un nuevo proyecto",
+    "description": "Configure un nuevo proyecto de sistema de IA para comenzar a realizar el seguimiento del cumplimiento.",
+    "overview": "Vista general",
+    "projectSummary": "Resumen del proyecto",
+    "projectSummaryDesc": "Información básica sobre el sistema de IA.",
+    "namePlaceholder": "p. ej. Mantenimiento predictivo",
+    "descriptionPlaceholder": "Breve descripción del sistema de IA...",
+    "intendedPurpose": "Finalidad prevista",
+    "intendedPurposeDesc": "¿Cuál es la función prevista del sistema?",
+    "intendedPurposePlaceholder": "Describa la finalidad prevista del sistema de IA...",
+    "intendedUsers": "Usuarios previstos",
+    "intendedUsersDesc": "¿Quién operará o se verá afectado por este sistema?",
+    "intendedUsersPlaceholder": "Describa los usuarios previstos y las personas afectadas...",
+    "deploymentContext": "Contexto de despliegue",
+    "deploymentContextDesc": "¿Dónde y cómo se desplegará el sistema?",
+    "deploymentContextPlaceholder": "Describa el contexto de despliegue, el sector y el ámbito geográfico...",
+    "createProject": "Crear proyecto"
+  },
+  "userManagement": {
+    "title": "Gestión de usuarios",
+    "description": "Gestione usuarios e invite a nuevos miembros.",
+    "users": "Usuarios",
+    "invitations": "Invitaciones",
+    "createInviteLink": "Crear enlace de invitación",
+    "emailOptional": "Correo electrónico (opcional)",
+    "emailPlaceholder": "usuario@ejemplo.com",
+    "newPassword": "Nueva contraseña",
+    "resetPasswordTitle": "Restablecer contraseña"
+  },
+  "githubConnect": {
+    "connectTitle": "Conectar GitHub",
+    "editTitle": "Editar integración con GitHub",
+    "description": "Vincule un repositorio de GitHub para sincronizar tareas y analizar la arquitectura.",
+    "patLabel": "Token de acceso personal",
+    "patLabelKeep": "Token de acceso personal (dejar en blanco para mantener el actual)",
+    "patTooltip": "Vaya a GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token. Seleccione el alcance “repo” para repositorios privados o “public_repo” para repositorios públicos.",
+    "repoOwner": "Propietario del repositorio",
+    "repoOwnerPlaceholder": "p. ej. octocat",
+    "repoName": "Nombre del repositorio",
+    "repoNamePlaceholder": "p. ej. hello-world",
+    "projectNumber": "Número de proyecto de GitHub (opcional)",
+    "projectNumberPlaceholder": "p. ej. 1"
+  },
+  "checklistPanel": {
+    "norma": "Norma",
+    "generateSuggestion": "Generar sugerencia con Norma",
+    "addComment": "Agregar un comentario..."
+  }
+}

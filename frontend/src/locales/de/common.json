@@ -1,0 +1,99 @@
+{
+  "buttons": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "delete": "Löschen",
+    "create": "Erstellen",
+    "upload": "Hochladen",
+    "update": "Aktualisieren",
+    "connect": "Verbinden",
+    "disconnect": "Trennen",
+    "replace": "Ersetzen",
+    "backToLogin": "Zurück zur Anmeldung",
+    "signIn": "Anmelden",
+    "createAccount": "Konto erstellen",
+    "exportReport": "Bericht exportieren",
+    "addFramework": "Framework hinzufügen",
+    "deleteProject": "Projekt löschen",
+    "deletePermanently": "Endgültig löschen",
+    "resetPassword": "Passwort zurücksetzen",
+    "createInvite": "Einladung erstellen",
+    "syncWithGitHub": "Mit GitHub synchronisieren",
+    "openOnGitHub": "Auf GitHub öffnen",
+    "reEvaluate": "Neu bewerten",
+    "askNorma": "Norma fragen",
+    "newChat": "Neuer Chat",
+    "newProject": "Neues Projekt",
+    "makeAdmin": "Zum Admin ernennen",
+    "makeMember": "Zum Mitglied ernennen",
+    "disableAccount": "Konto deaktivieren",
+    "enableAccount": "Konto aktivieren",
+    "deleteUser": "Benutzer löschen"
+  },
+  "status": {
+    "active": "Aktiv",
+    "disabled": "Deaktiviert",
+    "connected": "Verbunden",
+    "notConnected": "Nicht verbunden",
+    "pending": "Ausstehend",
+    "expired": "Abgelaufen",
+    "used": "Verwendet",
+    "open": "Offen",
+    "closed": "Geschlossen",
+    "draft": "Entwurf",
+    "inactive": "Inaktiv",
+    "syncError": "Synchronisierungsfehler"
+  },
+  "nav": {
+    "general": "Allgemein",
+    "project": "Projekt",
+    "configuration": "Konfiguration",
+    "github": "GitHub"
+  },
+  "risk": {
+    "unacceptable": "Unannehmbares Risiko",
+    "high": "Hohes Risiko",
+    "limited": "Begrenztes Risiko",
+    "minimal": "Minimales Risiko"
+  },
+  "form": {
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "name": "Name",
+    "description": "Beschreibung",
+    "role": "Rolle",
+    "member": "Mitglied",
+    "admin": "Admin",
+    "any": "Alle"
+  },
+  "loading": {
+    "loading": "Wird geladen...",
+    "signingIn": "Anmeldung läuft...",
+    "creatingAccount": "Konto wird erstellt...",
+    "uploading": "Wird hochgeladen...",
+    "syncing": "Synchronisierung läuft…",
+    "evaluatingRisk": "Risiko wird bewertet..."
+  },
+  "errors": {
+    "loginFailed": "Anmeldung fehlgeschlagen",
+    "registrationFailed": "Registrierung fehlgeschlagen",
+    "passwordsDoNotMatch": "Passwörter stimmen nicht überein",
+    "updateFailed": "Aktualisierung fehlgeschlagen",
+    "deleteFailed": "Löschen fehlgeschlagen",
+    "passwordResetFailed": "Passwort-Zurücksetzung fehlgeschlagen",
+    "failedToCreateInvite": "Einladung konnte nicht erstellt werden",
+    "failedToDeleteInvite": "Einladung konnte nicht gelöscht werden",
+    "failedToSave": "Speichern fehlgeschlagen",
+    "failedToDisconnect": "Trennen fehlgeschlagen"
+  },
+  "table": {
+    "document": "Dokument",
+    "uploaded": "Hochgeladen",
+    "title": "Titel",
+    "assignees": "Zugewiesene",
+    "labels": "Labels",
+    "expires": "Läuft ab"
+  }
+}

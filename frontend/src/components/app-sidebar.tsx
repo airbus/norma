@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NormaLogo } from '@/components/icons/norma-logo';
 import {
@@ -41,27 +42,21 @@ import { useAuth } from '@/hooks/use-auth';
 import { useProject } from '@/hooks/use-project';
 import { api } from '@/lib/api';
 
-const RISK_LABELS: Record<string, string> = {
-  unacceptable: 'Unacceptable Risk',
-  high: 'High Risk',
-  limited: 'Limited Risk',
-  minimal: 'Minimal Risk',
-};
-
-const NAV_GENERAL = [{ title: 'Chat', icon: MessageSquare, path: '/chat' }];
+const NAV_GENERAL = [{ titleKey: 'chat', icon: MessageSquare, path: '/chat' }];
 
 const NAV_PROJECT = [
-  { title: 'Description', icon: BookOpen, path: '/description' },
-  { title: 'Documents', icon: FileText, path: '/documents' },
-  { title: 'Reporting', icon: ScrollText, path: '/reporting' },
+  { titleKey: 'description', icon: BookOpen, path: '/description' },
+  { titleKey: 'documents', icon: FileText, path: '/documents' },
+  { titleKey: 'reporting', icon: ScrollText, path: '/reporting' },
 ];
 
 const NAV_CONFIG = [
-  { title: 'Integrations', icon: Plug, path: '/integrations' },
-  { title: 'Frameworks', icon: Shield, path: '/frameworks' },
+  { titleKey: 'integrations', icon: Plug, path: '/integrations' },
+  { titleKey: 'frameworks', icon: Shield, path: '/frameworks' },
 ];
 
 export function AppSidebar() {
+  const { t } = useTranslation(['components', 'common']);
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
@@ -136,12 +131,12 @@ export function AppSidebar() {
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold">
-                      {currentProject?.name ?? 'No project'}
+                      {currentProject?.name ?? t('sidebar.noProject')}
                     </span>
                     <span className="text-sidebar-foreground truncate text-xs">
                       {currentProject?.risk_classification
-                        ? RISK_LABELS[currentProject.risk_classification]
-                        : 'Select a project'}
+                        ? t(`common:risk.${currentProject.risk_classification}`)
+                        : t('sidebar.selectProject')}
                     </span>
                   </div>
                   <ChevronsUpDown className="ml-auto size-4" />
@@ -164,7 +159,7 @@ export function AppSidebar() {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => setNewProjectOpen(true)}>
                     <Plus className="mr-2 size-4" />
-                    New Project
+                    {t('common:buttons.newProject')}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -174,7 +169,7 @@ export function AppSidebar() {
 
         <SidebarContent>
           <SidebarGroup>
-            <SidebarGroupLabel>General</SidebarGroupLabel>
+            <SidebarGroupLabel>{t('common:nav.general')}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {NAV_GENERAL.map((item) => (
@@ -182,10 +177,10 @@ export function AppSidebar() {
                     <SidebarMenuButton
                       isActive={location.pathname === item.path}
                       onClick={() => navigate(item.path)}
-                      tooltip={item.title}
+                      tooltip={t(`sidebar.${item.titleKey}`)}
                     >
                       <item.icon />
-                      <span>{item.title}</span>
+                      <span>{t(`sidebar.${item.titleKey}`)}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
@@ -194,7 +189,7 @@ export function AppSidebar() {
           </SidebarGroup>
 
           <SidebarGroup>
-            <SidebarGroupLabel>Project</SidebarGroupLabel>
+            <SidebarGroupLabel>{t('common:nav.project')}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {NAV_PROJECT.map((item) => (
@@ -202,10 +197,10 @@ export function AppSidebar() {
                     <SidebarMenuButton
                       isActive={location.pathname === item.path}
                       onClick={() => navigate(item.path)}
-                      tooltip={item.title}
+                      tooltip={t(`sidebar.${item.titleKey}`)}
                     >
                       <item.icon />
-                      <span>{item.title}</span>
+                      <span>{t(`sidebar.${item.titleKey}`)}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
@@ -215,17 +210,17 @@ export function AppSidebar() {
 
           {currentProject && hasGitHub && (
             <SidebarGroup>
-              <SidebarGroupLabel>GitHub</SidebarGroupLabel>
+              <SidebarGroupLabel>{t('common:nav.github')}</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton
                       isActive={location.pathname === '/github'}
                       onClick={() => navigate('/github')}
-                      tooltip="GitHub"
+                      tooltip={t('sidebar.github')}
                     >
                       <GitBranch />
-                      <span>GitHub</span>
+                      <span>{t('sidebar.github')}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
@@ -234,7 +229,7 @@ export function AppSidebar() {
           )}
 
           <SidebarGroup>
-            <SidebarGroupLabel>Configuration</SidebarGroupLabel>
+            <SidebarGroupLabel>{t('common:nav.configuration')}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {NAV_CONFIG.map((item) => (
@@ -242,10 +237,10 @@ export function AppSidebar() {
                     <SidebarMenuButton
                       isActive={location.pathname === item.path}
                       onClick={() => navigate(item.path)}
-                      tooltip={item.title}
+                      tooltip={t(`sidebar.${item.titleKey}`)}
                     >
                       <item.icon />
-                      <span>{item.title}</span>
+                      <span>{t(`sidebar.${item.titleKey}`)}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
@@ -274,7 +269,7 @@ export function AppSidebar() {
                 <DropdownMenuContent className="min-w-56" align="end" side="top" sideOffset={4}>
                   <DropdownMenuItem onClick={() => navigate('/settings')}>
                     <Settings className="mr-2 size-4" />
-                    Settings
+                    {t('sidebar.settings')}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
@@ -284,7 +279,7 @@ export function AppSidebar() {
                     }}
                   >
                     <LogOut className="mr-2 size-4" />
-                    Logout
+                    {t('sidebar.logout')}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

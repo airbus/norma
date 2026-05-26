@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { NormaLogo } from '@/components/icons/norma-logo';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/use-auth';
 
 export function LoginPage() {
+  const { t } = useTranslation(['pages', 'common']);
   const navigate = useNavigate();
   const { user, login } = useAuth();
   const [email, setEmail] = useState('');
@@ -23,7 +25,7 @@ export function LoginPage() {
       await login(email, password);
       navigate('/');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      setError(err instanceof Error ? err.message : t('common:errors.loginFailed'));
     } finally {
       setLoading(false);
     }
@@ -41,12 +43,12 @@ export function LoginPage() {
               Norma
             </CardTitle>
           </div>
-          <CardDescription>Sign in to your account</CardDescription>
+          <CardDescription>{t('login.title')}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('common:form.email')}</Label>
               <Input
                 id="email"
                 type="email"
@@ -57,7 +59,7 @@ export function LoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('common:form.password')}</Label>
               <Input
                 id="password"
                 type="password"
@@ -69,7 +71,7 @@ export function LoginPage() {
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? t('common:loading.signingIn') : t('common:buttons.signIn')}
             </Button>
           </form>
         </CardContent>

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Markdown from 'react-markdown';
 import { MessageSquare, Send, SquarePen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,7 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useProject } from '@/hooks/use-project';
 import { api, type ChatMessage, type ChatSession } from '@/lib/api';
-import { SUGGESTED_QUESTIONS } from '@/data/mock';
+import { SUGGESTED_QUESTION_KEYS } from '@/data/mock';
 
 function TypingIndicator() {
   return (
@@ -27,6 +28,7 @@ function TypingIndicator() {
 }
 
 export function ChatPage() {
+  const { t } = useTranslation(['pages', 'common', 'data']);
   const [searchParams, setSearchParams] = useSearchParams();
   const { currentProject } = useProject();
   const [session, setSession] = useState<ChatSession | null>(null);
@@ -149,7 +151,7 @@ export function ChatPage() {
           const errorMsg: ChatMessage = {
             id: streamingMsg.id,
             role: 'assistant',
-            content: "I'm sorry, I encountered an error processing your request. Please try again.",
+            content: t('chat.errorMessage'),
             created_at: new Date().toISOString(),
           };
           setMessages((prev) =>
@@ -162,7 +164,7 @@ export function ChatPage() {
         setIsTyping(false);
       }
     },
-    [isTyping, currentProject, session, createSession],
+    [isTyping, currentProject, session, createSession, t],
   );
 
   useEffect(() => {
@@ -194,7 +196,7 @@ export function ChatPage() {
     <div className="flex h-svh flex-col">
       <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
         <SidebarTrigger className="-ml-1" />
-        <h1 className="text-base font-medium">Chat</h1>
+        <h1 className="text-base font-medium">{t('chat.title')}</h1>
         <Button
           variant="ghost"
           size="sm"
@@ -202,7 +204,7 @@ export function ChatPage() {
           onClick={handleNewChat}
         >
           <SquarePen className="mr-1 size-4" />
-          New chat
+          {t('common:buttons.newChat')}
         </Button>
       </header>
 
@@ -215,19 +217,20 @@ export function ChatPage() {
               <div className="bg-primary/10 mb-6 flex size-16 items-center justify-center rounded-2xl">
                 <MessageSquare className="text-primary size-8" />
               </div>
-              <h2 className="mb-2 text-2xl font-semibold">Hi, I'm Norma! How can I help you?</h2>
+              <h2 className="mb-2 text-2xl font-semibold">{t('chat.greeting')}</h2>
               <p className="text-muted-foreground mb-8 max-w-lg text-center text-sm">
-                Ask me about EU AI Act compliance, your project's risk classification, or any
-                regulatory questions.
+                {t('chat.subtitle')}
               </p>
               <div className="flex max-w-lg flex-col items-center gap-2">
-                {SUGGESTED_QUESTIONS.map((q) => (
+                {SUGGESTED_QUESTION_KEYS.map((key) => (
                   <button
-                    key={q}
-                    onClick={() => sendMessage(q)}
+                    key={key}
+                    onClick={() =>
+                      sendMessage(t(`suggestedQuestions.${key}`, { ns: 'data', lng: 'en' }))
+                    }
                     className="hover:bg-accent cursor-pointer rounded-full border px-4 py-2.5 text-sm transition-colors"
                   >
-                    {q}
+                    {t(`suggestedQuestions.${key}`, { ns: 'data' })}
                   </button>
                 ))}
               </div>
@@ -273,7 +276,7 @@ export function ChatPage() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask Norma"
+              placeholder={t('chat.placeholder')}
               rows={1}
               className="placeholder:text-muted-foreground flex-1 resize-none bg-transparent py-1 text-sm outline-none"
             />
@@ -287,9 +290,7 @@ export function ChatPage() {
               <Send className="size-4" />
             </Button>
           </div>
-          <p className="text-muted-foreground mt-2 text-center text-xs">
-            Norma can make mistakes. Verify important information.
-          </p>
+          <p className="text-muted-foreground mt-2 text-center text-xs">{t('chat.disclaimer')}</p>
         </div>
       </div>
     </div>

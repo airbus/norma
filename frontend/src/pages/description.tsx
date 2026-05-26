@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,12 +9,14 @@ import { PageHeader } from '@/components/page-header';
 import { RiskBanner } from '@/components/risk-banner';
 import { SectionPanel } from '@/components/questionnaire/section-panel';
 import { useProject } from '@/hooks/use-project';
-import { QUESTIONNAIRE_SECTIONS } from '@/data/questionnaire';
+import { getQuestionnaireSections } from '@/data/questionnaire';
 
 export function DescriptionPage() {
+  const { t } = useTranslation(['pages', 'common', 'data']);
   const { currentProject, updateProject, evaluateRisk } = useProject();
   const [localAnswers, setLocalAnswers] = useState<Record<string, string | string[]> | null>(null);
   const [evaluating, setEvaluating] = useState(false);
+  const questionnaireSections = getQuestionnaireSections(t);
   const answers = localAnswers ?? currentProject?.questionnaire_answers ?? {};
   const pendingEvalRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
@@ -49,9 +52,9 @@ export function DescriptionPage() {
   if (!currentProject) {
     return (
       <div className="flex h-svh flex-col">
-        <PageHeader title="Description" />
+        <PageHeader title={t('description.title')} />
         <div className="flex flex-1 items-center justify-center">
-          <p className="text-muted-foreground">Select or create a project to get started.</p>
+          <p className="text-muted-foreground">{t('description.noProject')}</p>
         </div>
       </div>
     );
@@ -59,21 +62,21 @@ export function DescriptionPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title="Description" />
+      <PageHeader title={t('description.title')} />
 
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-4xl">
           <RiskBanner
             riskClassification={currentProject.risk_classification}
-            description="This system requires full compliance with AI Act obligations before market placement."
-            chatMessage="Tell me about my project's risk classification"
+            description={t('description.riskBannerDesc')}
+            chatMessage={t('description.riskBannerChat')}
             evaluating={evaluating}
             onReEvaluate={handleReEvaluate}
           />
           <Tabs defaultValue="overview">
             <TabsList className="mb-6 w-full justify-start">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              {QUESTIONNAIRE_SECTIONS.map((section) => (
+              <TabsTrigger value="overview">{t('description.overview')}</TabsTrigger>
+              {questionnaireSections.map((section) => (
                 <TabsTrigger key={section.id} value={section.id}>
                   {section.title}
                 </TabsTrigger>
@@ -84,12 +87,12 @@ export function DescriptionPage() {
               <div className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Project Summary</CardTitle>
-                    <CardDescription>Basic information about the AI system.</CardDescription>
+                    <CardTitle>{t('description.projectSummary')}</CardTitle>
+                    <CardDescription>{t('description.projectSummaryDesc')}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Name</Label>
+                      <Label htmlFor="name">{t('common:form.name')}</Label>
                       <Input
                         id="name"
                         defaultValue={currentProject.name}
@@ -97,7 +100,7 @@ export function DescriptionPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="description">Description</Label>
+                      <Label htmlFor="description">{t('common:form.description')}</Label>
                       <Textarea
                         id="description"
                         defaultValue={currentProject.description}
@@ -110,54 +113,52 @@ export function DescriptionPage() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Intended Purpose</CardTitle>
-                    <CardDescription>What is the system designed to do?</CardDescription>
+                    <CardTitle>{t('description.intendedPurpose')}</CardTitle>
+                    <CardDescription>{t('description.intendedPurposeDesc')}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Textarea
                       defaultValue={currentProject.intended_purpose}
                       onBlur={(e) => saveField('intended_purpose', e.target.value)}
                       rows={4}
-                      placeholder="Describe the intended purpose of the AI system..."
+                      placeholder={t('description.intendedPurposePlaceholder')}
                     />
                   </CardContent>
                 </Card>
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Intended Users</CardTitle>
-                    <CardDescription>
-                      Who will operate or be affected by this system?
-                    </CardDescription>
+                    <CardTitle>{t('description.intendedUsers')}</CardTitle>
+                    <CardDescription>{t('description.intendedUsersDesc')}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Textarea
                       defaultValue={currentProject.intended_users}
                       onBlur={(e) => saveField('intended_users', e.target.value)}
                       rows={4}
-                      placeholder="Describe the intended users and affected persons..."
+                      placeholder={t('description.intendedUsersPlaceholder')}
                     />
                   </CardContent>
                 </Card>
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Deployment Context</CardTitle>
-                    <CardDescription>Where and how will the system be deployed?</CardDescription>
+                    <CardTitle>{t('description.deploymentContext')}</CardTitle>
+                    <CardDescription>{t('description.deploymentContextDesc')}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Textarea
                       defaultValue={currentProject.deployment_context}
                       onBlur={(e) => saveField('deployment_context', e.target.value)}
                       rows={4}
-                      placeholder="Describe the deployment context, sector, and geographic scope..."
+                      placeholder={t('description.deploymentContextPlaceholder')}
                     />
                   </CardContent>
                 </Card>
               </div>
             </TabsContent>
 
-            {QUESTIONNAIRE_SECTIONS.map((section) => (
+            {questionnaireSections.map((section) => (
               <TabsContent key={section.id} value={section.id}>
                 <SectionPanel
                   section={section}

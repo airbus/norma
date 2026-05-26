@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Copy, MoreHorizontal, Plus } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -32,6 +33,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { api, type Invite, type User } from '@/lib/api';
 
 export function UserManagementCard() {
+  const { t } = useTranslation(['components', 'common']);
   const { user: currentUser } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
   const [invites, setInvites] = useState<Invite[]>([]);
@@ -83,7 +85,7 @@ export function UserManagementCard() {
       await api.patch(`/users/${userId}`, body);
       await fetchUsers();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Update failed');
+      setError(err instanceof Error ? err.message : t('common:errors.updateFailed'));
     }
   };
 
@@ -92,7 +94,7 @@ export function UserManagementCard() {
       await api.delete(`/users/${userId}`);
       await fetchUsers();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Delete failed');
+      setError(err instanceof Error ? err.message : t('common:errors.deleteFailed'));
     }
   };
 
@@ -105,7 +107,7 @@ export function UserManagementCard() {
       setResetPasswordUserId(null);
       setNewPassword('');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Password reset failed');
+      setError(err instanceof Error ? err.message : t('common:errors.passwordResetFailed'));
     }
   };
 
@@ -121,7 +123,7 @@ export function UserManagementCard() {
       setInviteDialogOpen(false);
       await fetchInvites();
     } catch (err) {
-      setInviteError(err instanceof Error ? err.message : 'Failed to create invite');
+      setInviteError(err instanceof Error ? err.message : t('common:errors.failedToCreateInvite'));
     }
   };
 
@@ -130,7 +132,7 @@ export function UserManagementCard() {
       await api.delete(`/invites/${inviteId}`);
       await fetchInvites();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete invite');
+      setError(err instanceof Error ? err.message : t('common:errors.failedToDeleteInvite'));
     }
   };
 
@@ -147,24 +149,24 @@ export function UserManagementCard() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>User Management</CardTitle>
-        <CardDescription>Manage users and invite new members.</CardDescription>
+        <CardTitle>{t('userManagement.title')}</CardTitle>
+        <CardDescription>{t('userManagement.description')}</CardDescription>
       </CardHeader>
       <CardContent>
         {error && <p className="mb-4 text-sm text-destructive">{error}</p>}
         <Tabs defaultValue="users">
           <TabsList>
-            <TabsTrigger value="users">Users</TabsTrigger>
-            <TabsTrigger value="invitations">Invitations</TabsTrigger>
+            <TabsTrigger value="users">{t('userManagement.users')}</TabsTrigger>
+            <TabsTrigger value="invitations">{t('userManagement.invitations')}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="users">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Role</TableHead>
+                  <TableHead>{t('common:form.name')}</TableHead>
+                  <TableHead>{t('common:form.email')}</TableHead>
+                  <TableHead>{t('common:form.role')}</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="w-12" />
                 </TableRow>
@@ -179,7 +181,7 @@ export function UserManagementCard() {
                     </TableCell>
                     <TableCell>
                       <Badge variant={u.is_active ? 'default' : 'secondary'}>
-                        {u.is_active ? 'Active' : 'Disabled'}
+                        {u.is_active ? t('common:status.active') : t('common:status.disabled')}
                       </Badge>
                     </TableCell>
                     <TableCell>
@@ -198,7 +200,9 @@ export function UserManagementCard() {
                                 })
                               }
                             >
-                              Make {u.role === 'admin' ? 'member' : 'admin'}
+                              {u.role === 'admin'
+                                ? t('common:buttons.makeMember')
+                                : t('common:buttons.makeAdmin')}
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={() => {
@@ -206,18 +210,20 @@ export function UserManagementCard() {
                                 setNewPassword('');
                               }}
                             >
-                              Reset password
+                              {t('common:buttons.resetPassword')}
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={() => handleUpdateUser(u.id, { is_active: !u.is_active })}
                             >
-                              {u.is_active ? 'Disable' : 'Enable'} account
+                              {u.is_active
+                                ? t('common:buttons.disableAccount')
+                                : t('common:buttons.enableAccount')}
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               className="text-destructive"
                               onClick={() => handleDeleteUser(u.id)}
                             >
-                              Delete user
+                              {t('common:buttons.deleteUser')}
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -241,38 +247,38 @@ export function UserManagementCard() {
                 render={
                   <Button size="sm">
                     <Plus className="mr-2 size-4" />
-                    Create invite
+                    {t('common:buttons.createInvite')}
                   </Button>
                 }
               />
               <DialogContent>
-                <DialogTitle>Create Invite Link</DialogTitle>
+                <DialogTitle>{t('userManagement.createInviteLink')}</DialogTitle>
                 <div className="space-y-4 pt-2">
                   <div className="space-y-2">
-                    <Label htmlFor="invite-email">Email (optional)</Label>
+                    <Label htmlFor="invite-email">{t('userManagement.emailOptional')}</Label>
                     <Input
                       id="invite-email"
                       type="email"
                       value={inviteEmail}
                       onChange={(e) => setInviteEmail(e.target.value)}
-                      placeholder="user@example.com"
+                      placeholder={t('userManagement.emailPlaceholder')}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="invite-role">Role</Label>
+                    <Label htmlFor="invite-role">{t('common:form.role')}</Label>
                     <Select value={inviteRole} onValueChange={(v) => v && setInviteRole(v)}>
                       <SelectTrigger id="invite-role">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="member">Member</SelectItem>
-                        <SelectItem value="admin">Admin</SelectItem>
+                        <SelectItem value="member">{t('common:form.member')}</SelectItem>
+                        <SelectItem value="admin">{t('common:form.admin')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   {inviteError && <p className="text-sm text-destructive">{inviteError}</p>}
                   <Button className="w-full" onClick={handleCreateInvite}>
-                    Create
+                    {t('common:buttons.create')}
                   </Button>
                 </div>
               </DialogContent>
@@ -281,10 +287,10 @@ export function UserManagementCard() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Role</TableHead>
+                  <TableHead>{t('common:form.email')}</TableHead>
+                  <TableHead>{t('common:form.role')}</TableHead>
                   <TableHead>Status</TableHead>
-                  <TableHead>Expires</TableHead>
+                  <TableHead>{t('common:table.expires')}</TableHead>
                   <TableHead className="w-24" />
                 </TableRow>
               </TableHeader>
@@ -293,7 +299,7 @@ export function UserManagementCard() {
                   const status = getInviteStatus(inv);
                   return (
                     <TableRow key={inv.id}>
-                      <TableCell>{inv.email ?? 'Any'}</TableCell>
+                      <TableCell>{inv.email ?? t('common:form.any')}</TableCell>
                       <TableCell>
                         <Badge variant="secondary">{inv.role}</Badge>
                       </TableCell>
@@ -340,10 +346,10 @@ export function UserManagementCard() {
           }}
         >
           <DialogContent>
-            <DialogTitle>Reset Password</DialogTitle>
+            <DialogTitle>{t('userManagement.resetPasswordTitle')}</DialogTitle>
             <div className="space-y-4 pt-2">
               <div className="space-y-2">
-                <Label htmlFor="new-password">New password</Label>
+                <Label htmlFor="new-password">{t('userManagement.newPassword')}</Label>
                 <Input
                   id="new-password"
                   type="password"
@@ -357,7 +363,7 @@ export function UserManagementCard() {
                 onClick={handleResetPassword}
                 disabled={newPassword.length < 8}
               >
-                Reset password
+                {t('common:buttons.resetPassword')}
               </Button>
             </div>
           </DialogContent>

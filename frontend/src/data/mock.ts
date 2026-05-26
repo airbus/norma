@@ -190,9 +190,9 @@ export const MOCK_FRAMEWORKS: Framework[] = [
 
 export const MOCK_CHAT_MESSAGES: ChatMessage[] = [];
 
-export const SUGGESTED_QUESTIONS = [
-  'What risk level is our project under the EU AI Act?',
-  'Summarise our compliance gaps',
-  'What documents are we missing for conformity assessment?',
-  'Explain Article 14 human oversight requirements',
-];
+export const SUGGESTED_QUESTION_KEYS = [
+  'riskLevel',
+  'complianceGaps',
+  'missingDocuments',
+  'article14',
+] as const;

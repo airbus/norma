@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -23,8 +24,11 @@ import { UserManagementCard } from '@/components/user-management-card';
 import { useAuth } from '@/hooks/use-auth';
 import { useProject } from '@/hooks/use-project';
 import { useTheme } from '@/hooks/use-theme';
+import { changeLanguage } from '@/lib/i18n';
+import { api } from '@/lib/api';
 
 export function SettingsPage() {
+  const { t, i18n } = useTranslation(['pages', 'common']);
   const { theme, setTheme } = useTheme();
   const { user } = useAuth();
   const { currentProject, deleteProject } = useProject();
@@ -39,18 +43,18 @@ export function SettingsPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title="Settings" />
+      <PageHeader title={t('settings.title')} />
 
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-4xl space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Preferences</CardTitle>
-              <CardDescription>Customise your Norma experience.</CardDescription>
+              <CardTitle>{t('settings.preferences')}</CardTitle>
+              <CardDescription>{t('settings.customise')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
-                <Label htmlFor="theme">Theme</Label>
+                <Label htmlFor="theme">{t('settings.theme')}</Label>
                 <Select
                   value={theme}
                   onValueChange={(v) => setTheme(v as 'light' | 'dark' | 'system')}
@@ -59,23 +63,30 @@ export function SettingsPage() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    <SelectItem value="light">{t('settings.themeLight')}</SelectItem>
+                    <SelectItem value="dark">{t('settings.themeDark')}</SelectItem>
+                    <SelectItem value="system">{t('settings.themeSystem')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="flex items-center justify-between">
-                <Label htmlFor="language">Language</Label>
-                <Select defaultValue="english">
+                <Label htmlFor="language">{t('settings.language')}</Label>
+                <Select
+                  value={i18n.language}
+                  onValueChange={(v) => {
+                    if (!v) return;
+                    changeLanguage(v);
+                    api.patch('/auth/me', { language_preference: v }).catch(() => {});
+                  }}
+                >
                   <SelectTrigger id="language" className="w-[160px]">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="english">English</SelectItem>
-                    <SelectItem value="french">French</SelectItem>
-                    <SelectItem value="german">German</SelectItem>
-                    <SelectItem value="spanish">Spanish</SelectItem>
+                    <SelectItem value="en">English</SelectItem>
+                    <SelectItem value="fr">Français</SelectItem>
+                    <SelectItem value="de">Deutsch</SelectItem>
+                    <SelectItem value="es">Español</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -85,15 +96,15 @@ export function SettingsPage() {
           {isAdmin && currentProject && (
             <Card className="border-destructive/50">
               <CardHeader>
-                <CardTitle>Danger Zone</CardTitle>
-                <CardDescription>Irreversible actions for the current project.</CardDescription>
+                <CardTitle>{t('settings.dangerZone')}</CardTitle>
+                <CardDescription>{t('settings.dangerZoneDesc')}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium">Delete project</p>
+                    <p className="text-sm font-medium">{t('common:buttons.deleteProject')}</p>
                     <p className="text-muted-foreground text-xs">
-                      Permanently delete &quot;{currentProject.name}&quot; and all associated data.
+                      {t('settings.deleteProjectDesc', { name: currentProject.name })}
                     </p>
                   </div>
                   <Button
@@ -103,7 +114,7 @@ export function SettingsPage() {
                     onClick={() => setDeleteOpen(true)}
                   >
                     <Trash2 className="mr-1 size-3" />
-                    Delete
+                    {t('common:buttons.delete')}
                   </Button>
                 </div>
               </CardContent>
@@ -117,18 +128,17 @@ export function SettingsPage() {
       <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete project</DialogTitle>
+            <DialogTitle>{t('common:buttons.deleteProject')}</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete &quot;{currentProject?.name}
-              &quot;? This action cannot be undone.
+              {t('settings.deleteProjectConfirm', { name: currentProject?.name })}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setDeleteOpen(false)}>
-              Cancel
+              {t('common:buttons.cancel')}
             </Button>
             <Button variant="destructive" className="cursor-pointer" onClick={handleDeleteProject}>
-              Delete permanently
+              {t('common:buttons.deletePermanently')}
             </Button>
           </DialogFooter>
         </DialogContent>

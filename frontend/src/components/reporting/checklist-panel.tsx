@@ -1,5 +1,6 @@
 import { Loader2, Wand2 } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -19,6 +20,7 @@ export function ChecklistPanel({
   onCommentChange,
   projectId,
 }: ChecklistPanelProps) {
+  const { t } = useTranslation('components');
   const [loadingKeys, setLoadingKeys] = useState<Set<string>>(new Set());
 
   async function handleSuggest(key: string, question: string) {
@@ -68,20 +70,20 @@ export function ChecklistPanel({
                       }
                       disabled={isLoading}
                       className="text-muted-foreground hover:text-foreground mt-0.5 flex shrink-0 cursor-pointer items-center gap-1 rounded px-1.5 py-0.5 text-xs transition-colors hover:bg-slate-100 disabled:opacity-50"
-                      title="Generate suggestion with Norma"
+                      title={t('checklistPanel.generateSuggestion')}
                     >
                       {isLoading ? (
                         <Loader2 className="size-3.5 animate-spin" />
                       ) : (
                         <Wand2 className="size-3.5" />
                       )}
-                      Norma
+                      {t('checklistPanel.norma')}
                     </button>
                   </div>
                   <Textarea
                     value={comments[key] ?? ''}
                     onChange={(e) => onCommentChange(key, e.target.value)}
-                    placeholder="Add a comment..."
+                    placeholder={t('checklistPanel.addComment')}
                     rows={2}
                   />
                 </div>

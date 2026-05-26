@@ -1,0 +1,1592 @@
+{
+  "suggestedQuestions": {
+    "riskLevel": "Welche Risikostufe hat unser Projekt gemäß der KI-Verordnung?",
+    "complianceGaps": "Fassen Sie unsere Compliance-Lücken zusammen",
+    "missingDocuments": "Welche Dokumente fehlen uns für die Konformitätsbewertung?",
+    "article14": "Erläutern Sie die Anforderungen an die menschliche Aufsicht gemäß Article 14"
+  },
+  "questionnaire": {
+    "sections": {
+      "ai-system": {
+        "title": "KI-System",
+        "description": "Stellen Sie fest, ob Ihr System als KI-System im Sinne der KI-Verordnung gilt.",
+        "questions": {
+          "q1": {
+            "text": "Leitet Ihr System aus Eingaben Ergebnisse ab (Vorhersagen, Empfehlungen, Entscheidungen oder Inhalte)?",
+            "options": {
+              "yes": "Ja — es lernt aus Daten oder passt sein Verhalten an",
+              "no": "Nein — es folgt festen Regeln, Nachschlagetabellen oder deterministischer Logik",
+              "not-sure": "Nicht sicher"
+            }
+          },
+          "q2": {
+            "text": "Arbeitet Ihr System mit einem gewissen Grad an Autonomie (d. h., es kann ohne kontinuierliche menschliche Anweisung für jede Aktion funktionieren)?",
+            "options": {
+              "yes": "Ja",
+              "no": "Nein — ein Mensch muss jede Aktion manuell steuern"
+            }
+          }
+        }
+      },
+      "prohibited-practices": {
+        "title": "Verbotene Praktiken",
+        "description": "Prüfen Sie, ob Ihr System Praktiken beinhaltet, die gemäß Article 5 der KI-Verordnung vollständig verboten sind.",
+        "questions": {
+          "q3": {
+            "text": "Führt Ihr System eine der folgenden Aktivitäten aus? (Wählen Sie alle zutreffenden aus)",
+            "options": {
+              "subliminal": "Verwendet unterschwellige oder täuschende Techniken zur Verhaltensmanipulation, die Schaden verursachen",
+              "exploits-vulnerabilities": "Nutzt Schwachstellen bestimmter Gruppen aus (Alter, Behinderung, sozioökonomische Lage)",
+              "social-scoring": "Bewertet oder klassifiziert Personen anhand sozialen Verhaltens, was zu nachteiliger Behandlung in nicht verwandten Kontexten führt",
+              "criminal-profiling": "Sagt kriminelles Risiko ausschließlich auf der Grundlage von Persönlichkeitsmerkmalen voraus, ohne objektive Fakten mit Bezug zu einer Straftat",
+              "facial-scraping": "Erstellt Gesichtserkennungsdatenbanken durch das Sammeln von Bildern aus dem Internet oder von Überwachungskameras",
+              "emotion-inference": "Erkennt Emotionen am Arbeitsplatz oder in Bildungseinrichtungen (außer aus medizinischen/sicherheitstechnischen Gründen)",
+              "biometric-categorisation": "Kategorisiert Personen anhand biometrischer Daten, um Rasse, politische Meinungen, Religion, sexuelle Orientierung oder Gewerkschaftszugehörigkeit abzuleiten",
+              "realtime-facial": "Verwendet Echtzeit-Gesichtserkennung in öffentlichen Räumen (außer den drei eng gefassten Ausnahmen für die Strafverfolgung)",
+              "none": "Nichts davon"
+            }
+          }
+        }
+      },
+      "regulated-products": {
+        "title": "Regulierte Produkte",
+        "description": "Stellen Sie fest, ob Ihr System unter bestehende EU-Produktsicherheitsvorschriften fällt (Pathway A).",
+        "questions": {
+          "q4": {
+            "text": "Ist Ihr System ein Produkt oder Bestandteil eines Produkts, das unter eine der folgenden EU-Rechtsvorschriften fällt?",
+            "options": {
+              "medical": "Medizinprodukte oder In-vitro-Diagnostika",
+              "machinery": "Maschinen",
+              "toys": "Spielzeug",
+              "lifts": "Aufzüge",
+              "radio": "Funkanlagen",
+              "ppe": "Persönliche Schutzausrüstung",
+              "aviation": "Zivilluftfahrt / unbemannte Luftfahrzeuge",
+              "vehicles": "Kraftfahrzeuge / Schiffsausrüstung",
+              "pressure": "Druckgeräte, Sportboote, Seilbahnanlagen oder Gasgeräte",
+              "none": "Nichts davon"
+            }
+          },
+          "q5": {
+            "text": "Erfordert Ihr Produkt eine Konformitätsbewertung durch Dritte gemäß dieser Produktgesetzgebung, bevor es auf den Markt gebracht wird?",
+            "options": {
+              "yes": "Ja",
+              "no": "Nein — nur interne Selbstbewertung, ohne Rückgriff auf harmonisierte Normen",
+              "not-sure": "Nicht sicher"
+            }
+          }
+        }
+      },
+      "standalone-systems": {
+        "title": "Eigenständige Systeme",
+        "description": "Stellen Sie fest, ob Ihr System als eigenständiges System unter einen Hochrisiko-Anwendungsfall fällt (Pathway B).",
+        "questions": {
+          "q6": {
+            "text": "Was ist der Hauptanwendungsbereich Ihres Systems?",
+            "options": {
+              "biometrics": "Biometrie (Identifizierung, Kategorisierung oder Emotionserkennung)",
+              "infrastructure": "Kritische Infrastruktur (Straßenverkehr, Wasser, Gas, Strom, digitale Infrastruktur)",
+              "education": "Bildung oder Berufsausbildung (Zulassung, Benotung, Einstufung, Prüfungsüberwachung)",
+              "employment": "Beschäftigung (Personalauswahl, Lebenslauf-Screening, Beförderung, Aufgabenzuweisung, Leistungsüberwachung, Kündigung)",
+              "essential-services": "Grundlegende Dienstleistungen (Anspruchsberechtigung für öffentliche Leistungen, Kreditwürdigkeitsprüfung, Versicherungspreisgestaltung, Notrufsteuerung)",
+              "law-enforcement": "Strafverfolgung (Opferrisikobewertung, Polygraphen, Beweiswürdigung, Rückfallprognose, Profiling)",
+              "migration": "Migration, Asyl oder Grenzkontrolle (Risikobewertung, Dokumentenprüfung, Personenerkennung)",
+              "justice": "Justiz oder demokratische Prozesse (Unterstützung von Richtern, Beeinflussung von Wahlen)",
+              "none": "Nichts davon"
+            }
+          },
+          "q7": {
+            "text": "Bewertet, beurteilt, benotet, stuft oder trifft Ihr System Entscheidungen über einzelne natürliche Personen (nicht nur juristische Personen wie Unternehmen)?",
+            "options": {
+              "yes": "Ja — es verarbeitet Daten über identifizierbare Personen, um Bewertungen oder Entscheidungen zu treffen",
+              "no": "Nein — es verarbeitet nur aggregierte Daten oder Daten über juristische Personen",
+              "both": "Es macht beides"
+            }
+          },
+          "q8": {
+            "text": "Führt Ihr System Profiling durch — d. h. automatisierte Verarbeitung personenbezogener Daten zur Bewertung, Analyse oder Vorhersage von Eigenschaften, Verhalten, Leistung oder Präferenzen einer Person?",
+            "options": {
+              "yes": "Ja",
+              "no": "Nein — es führt nur einfache sachliche Klassifizierung (z. B. Sortierung nach Alter) oder enge verfahrenstechnische Aufgaben (z. B. Dateiindizierung, Formatierung) durch",
+              "not-sure": "Nicht sicher"
+            }
+          },
+          "q9": {
+            "text": "Führt Ihr System ausschließlich eine der folgenden Aufgaben aus?",
+            "options": {
+              "procedural": "Enge verfahrenstechnische Aufgaben (Datenkonvertierung, Dateisortierung, Duplikaterkennung) ohne Werturteile",
+              "improve-human": "Verbesserung zuvor abgeschlossener menschlicher Arbeit (Grammatikprüfung, Formatierung, Stilkonsistenz) ohne inhaltliche Änderung",
+              "detect-patterns": "Erkennung von Mustern oder Anomalien in abgeschlossenen Bewertungen zur menschlichen Überprüfung, ohne aktive Dateien zu verändern",
+              "preparatory": "Vorbereitende Arbeit für eine Bewertung (Abruf von Rechtsvorschriften, Abgleich von Richtlinien) ohne Bereitstellung von Bewertungen oder Empfehlungen",
+              "none": "Nichts davon — mein System geht über diese Aufgaben hinaus"
+            }
+          }
+        }
+      },
+      "scope-context": {
+        "title": "Anwendungsbereich und Kontext",
+        "description": "Zusätzliche Kontextfragen für als hochriskant eingestufte Systeme.",
+        "questions": {
+          "q10": {
+            "text": "Können Personen unter 18 Jahren auf Ihr System zugreifen oder von dessen Ausgaben betroffen sein?",
+            "options": {
+              "yes": "Ja",
+              "no": "Nein",
+              "possibly": "Möglicherweise — wir haben dies noch nicht bewertet"
+            }
+          },
+          "q11": {
+            "text": "Enthält Ihr Trainingsdatensatz besondere Kategorien personenbezogener Daten (Rasse, Ethnizität, Gesundheit, politische Meinungen, Religion, sexuelle Orientierung, Biometrie, Genetik, Gewerkschaftszugehörigkeit)?",
+            "options": {
+              "yes-bias": "Ja — wir benötigen sie zur Erkennung und Korrektur von Verzerrungen",
+              "yes-other": "Ja — aus anderen Gründen",
+              "no": "Nein",
+              "not-sure": "Nicht sicher"
+            }
+          },
+          "q12": {
+            "text": "Welches Maß an menschlicher Aufsicht unterstützt Ihr System derzeit?",
+            "options": {
+              "in-the-loop": "Human-in-the-loop — eine Person überprüft jede Aktion, bevor das System sie ausführt",
+              "on-the-loop": "Human-on-the-loop — das System handelt autonom, aber eine Person kann nachträglich überprüfen und korrigieren",
+              "autonomous": "Vollständig autonom — kein Mechanismus zur menschlichen Überprüfung vorhanden",
+              "not-designed": "Noch nicht konzipiert"
+            }
+          },
+          "q13": {
+            "text": "Beinhaltet Ihr System eine biometrische Fernidentifizierung (Identifizierung von Personen aus der Ferne ohne deren aktive Mitwirkung)?",
+            "options": {
+              "yes": "Ja",
+              "no": "Nein"
+            }
+          },
+          "q14": {
+            "text": "Wird Ihr System von oder im Auftrag einer Behörde eingesetzt?",
+            "options": {
+              "yes": "Ja",
+              "no": "Nein"
+            }
+          }
+        }
+      },
+      "transparency": {
+        "title": "Transparenz",
+        "description": "Transparenzpflichten gelten für alle KI-Systeme, unabhängig von der Risikoklassifizierung.",
+        "questions": {
+          "q15": {
+            "text": "Interagiert Ihr System direkt mit Personen (z. B. Chatbot, virtueller Assistent, Sprachschnittstelle)?",
+            "options": {
+              "yes": "Ja",
+              "no": "Nein"
+            }
+          },
+          "q16": {
+            "text": "Erzeugt Ihr System synthetische Inhalte (Text, Bilder, Audio oder Video)?",
+            "options": {
+              "yes": "Ja",
+              "no": "Nein"
+            }
+          },
+          "q17": {
+            "text": "Kann Ihr System zur Erstellung von Deepfakes verwendet werden (realistische Simulationen realer Personen, Orte oder Ereignisse)?",
+            "options": {
+              "yes": "Ja",
+              "no": "Nein"
+            }
+          }
+        }
+      }
+    }
+  },
+  "reportingChecklist": {
+    "areas": {
+      "cybersecurity": {
+        "title": "Cyber",
+        "article": "Article 15",
+        "items": {
+          "CYB-01": {
+            "title": "Prävention von Datenvergiftung",
+            "questions": [
+              "Gibt es Kontrollen, um böswillige Manipulation des Trainingsdatensatzes oder der KI-Wissensbasen zu verhindern?",
+              "Wird die Integrität und Herkunft der beim Fine-Tuning oder RAG eingespeisten Daten überprüft?"
+            ]
+          },
+          "CYB-02": {
+            "title": "Widerstandsfähigkeit gegen Evasion und adversariale Angriffe",
+            "questions": [
+              "Wird das KI-System Stresstests unterzogen, um seine Widerstandsfähigkeit gegen Eingaben zu bewerten, die Fehler auslösen sollen (adversariale Angriffe)?",
+              "Gibt es Schutzmaßnahmen zur Aufrechterhaltung der Leistung gegenüber böswilligen Variationen?"
+            ]
+          },
+          "CYB-03": {
+            "title": "Abschwächung von Prompt-Injection",
+            "questions": [
+              "Verfügt das System über Ein- und Ausgabeschutzmaßnahmen, um böswillige Prompt-Injections zu neutralisieren, die den Zweck des Modells verändern?"
+            ]
+          },
+          "CYB-04": {
+            "title": "Prävention von Modellextraktion und -diebstahl (Model Inversion)",
+            "questions": [
+              "Gibt es physische, logische und kryptografische Sicherheitsmaßnahmen zum Schutz der Modellgewichte und Parameter vor unbefugtem Zugriff, um Extraktion oder Inversion zu verhindern?"
+            ]
+          },
+          "CYB-05": {
+            "title": "Prävention von Informationslecks (Vertraulichkeitsangriffe / Datenexfiltration)",
+            "questions": [
+              "Wurden Kontrollen (DLP, Ausgabefilter) implementiert, um das Risiko zu mindern, dass das Modell vertrauliche Informationen, geistiges Eigentum oder personenbezogene Daten in seinen Antworten preisgibt?"
+            ]
+          },
+          "CYB-06": {
+            "title": "Sicherheit der KI-Lieferkette (Schwachstellen in der Lieferkette)",
+            "questions": [
+              "Werden Drittanbieter-Bibliotheken (Python), Container und importierte KI-Komponenten kontinuierlich auf Schwachstellen gescannt und validiert, um Lieferketten-Injections zu verhindern?"
+            ]
+          },
+          "CYB-07": {
+            "title": "IAM, Zugangskontrolle und Prinzip der geringsten Privilegien (Zero Trust)",
+            "questions": [
+              "Werden robuste Identitäts- und Zugangsmanagement-Systeme (IAM) mit Rollentrennung und feingranularer Zugangskontrolle (FGAC) für Artefakte, Vektordatenbanken und Modell-APIs eingesetzt?"
+            ]
+          },
+          "CYB-08": {
+            "title": "Umgebungsisolierung und Perimetersicherheit",
+            "questions": [
+              "Ist die KI-Entwicklungs-, Trainings- und Ausführungsumgebung durch strenge Firewalls und Perimeterkontrollen (isolierte Netzwerke, Proxies, WAF) zum Schutz vor externen Eindringlingen geschützt?"
+            ]
+          },
+          "CYB-09": {
+            "title": "Protokollierung, Auditierung und Ereignisnachverfolgung (Security Logging)",
+            "questions": [
+              "Verfügt das KI-System über automatische unveränderliche Protokollierungsfunktionen für Ereignisse, Zugriffe, Befehle und API-Nutzung, und sind diese in ein SIEM / Security Operations Centre (SOC) integriert?"
+            ]
+          },
+          "CYB-10": {
+            "title": "Verschlüsselung von Daten und Kommunikation (Kryptografie)",
+            "questions": [
+              "Werden Trainingsdaten, RAG-Wissensbasen, Modellgewichte und Prompts/Antworten bei der Übertragung und im Ruhezustand mit starken kryptografischen Standards (AES-256, TLS 1.3) verschlüsselt?"
+            ]
+          },
+          "CYB-11": {
+            "title": "Schwachstellenmanagement und kontinuierliche Sicherheitsüberwachung (CSPM)",
+            "questions": [
+              "Werden kontinuierliche Schwachstellenanalyse, Patch-Management und Sicherheitsaudits (CSPM) für Cloud-APIs, Container und KI-Modell-Endpunkte durchgeführt?"
+            ]
+          }
+        }
+      },
+      "documentation": {
+        "title": "Doku",
+        "article": "Article 11, Annex IV",
+        "items": {
+          "MG01": {
+            "title": "Dokumentation von der Konzeption bis zur Bereitstellung planen",
+            "questions": [
+              "Wurde eine Dokumentationsstrategie von den frühen Entwurfsphasen des KI-Systems an definiert, um eine angemessene Abdeckung zu gewährleisten?",
+              "Enthält der Plan klare Meilensteine und verantwortliche Parteien, um die Nachverfolgbarkeit des technischen Dokumentationsprozesses sicherzustellen?"
+            ]
+          },
+          "MG02": {
+            "title": "Periodischer Aktualisierungsplan für die technische Dokumentation",
+            "questions": [
+              "Gibt es einen festgelegten Kalender für die Überprüfung und Aktualisierung der technischen Dokumentation?",
+              "Berücksichtigt der Aktualisierungsplan regulatorische, technische oder betriebliche Kontextänderungen, die zusätzliche Aktualisierungen auslösen?"
+            ]
+          },
+          "MG03": {
+            "title": "Verfahren zur Änderungsverfolgung für konsistente Dokumentationsaktualisierungen",
+            "questions": [
+              "Wurden Versionskontroll- und Änderungsnachverfolgungsmechanismen definiert, um die Kohärenz zwischen dem System und seiner technischen Dokumentation sicherzustellen?",
+              "Garantiert das Verfahren eine sofortige Dokumentationsaktualisierung bei Systemänderungen?"
+            ]
+          },
+          "MG04": {
+            "title": "Funktionsübergreifende Kommunikation von Dokumentationsinhalten und -zielen",
+            "questions": [
+              "Wurde ein interner Kommunikationsplan erstellt, um wichtige Dokumentationsinhalte in den betroffenen Bereichen zu teilen?",
+              "Wurde überprüft, ob alle Bereiche den Zweck der technischen Dokumentation in Bezug auf ihre Funktionen verstehen?"
+            ]
+          },
+          "MG05": {
+            "title": "Einen Dokumentationsverantwortlichen benennen, der koordiniert und überwacht",
+            "questions": [
+              "Wurde ein Verantwortlicher für die technische Dokumentation formell mit funktionsübergreifender Befugnis zur Koordination ihrer Erstellung und Überwachung benannt?",
+              "Verfügt der Verantwortliche über die notwendigen Ressourcen und Kenntnisse, um diese Aufgabe effektiv auszuführen?"
+            ]
+          },
+          "MG06": {
+            "title": "Spezifische Verantwortliche pro Bereich oder Domäne festlegen",
+            "questions": [
+              "Wurden spezifische Dokumentationsverantwortliche für jeden Schlüsselbereich (Daten, Sicherheit, Risiken usw.) zugewiesen?",
+              "Verfügen die benannten Verantwortlichen über die technischen Kompetenzen, um ihren Bereich korrekt zu dokumentieren?"
+            ]
+          },
+          "MG07": {
+            "title": "Ein Dokumentenmanagementsystem oder zentrales Repository implementieren",
+            "questions": [
+              "Gibt es ein einziges, sicheres und zugängliches Repository zur Aufbewahrung der technischen Dokumentation?",
+              "Ermöglicht das Dokumentenmanagementsystem Versionskontrolle, Zugriffsberechtigungen und Audits?"
+            ]
+          },
+          "MG08": {
+            "title": "Sicherstellen, dass Dokumentationsverantwortliche Zugang zum Dokumentenmanagementsystem haben",
+            "questions": [
+              "Wurde überprüft, dass alle Verantwortlichen angemessenen Zugang zum Dokumentenmanagementsystem haben?",
+              "Gibt es differenzierte Zugriffsrichtlinien basierend auf Rollen und Verantwortlichkeiten?"
+            ]
+          },
+          "MG09": {
+            "title": "Sicherstellen, dass das Dokumentenmanagementsystem Aufbewahrungsmechanismen (Backups, Redundanz) besitzt",
+            "questions": [
+              "Wurden Sicherheits- und Backup-Maßnahmen (Backups, Redundanz usw.) implementiert, um die Integrität der technischen Dokumentation zu bewahren?",
+              "Werden periodische Audits durchgeführt, um zu überprüfen, ob diese Mechanismen aktiv sind und korrekt funktionieren?"
+            ]
+          },
+          "MG10": {
+            "title": "Sicherstellen, dass Bereitstellungsanweisungen für Betreiber zugänglich sind",
+            "questions": [
+              "Haben die Bereitstellungsverantwortlichen klaren, direkten Zugang zu den erforderlichen Anweisungen und der Dokumentation?",
+              "Wird regelmäßig überprüft, ob die Dokumentation aktualisiert, verständlich und aus betrieblicher Sicht vollständig ist?"
+            ]
+          },
+          "MG11": {
+            "title": "Bereitstellungsanweisungen aktuell halten",
+            "questions": [
+              "Gibt es ein Verfahren zur regelmäßigen Aktualisierung der Bereitstellungsanweisungen des KI-Systems?",
+              "Werden die Bereitstellungsverantwortlichen benachrichtigt, wenn Anweisungen geändert oder aktualisiert wurden?"
+            ]
+          },
+          "MG12": {
+            "title": "Periodische Audits zum Dokumentationsstatus planen und durchführen",
+            "questions": [
+              "Wurden Bewertungshäufigkeit und Kriterien für die Auditierung der technischen Dokumentation festgelegt?",
+              "Beinhalten die Audits Überprüfungen der Nachverfolgbarkeit, Aktualität und Zugänglichkeit der Dokumentation?"
+            ]
+          },
+          "MG13": {
+            "title": "Verfügbare und relevante harmonisierte Normen identifizieren (CEN/CENELEC, ISO, NIST usw.)",
+            "questions": [
+              "Wurde eine Identifizierung relevanter harmonisierter Normen durchgeführt?",
+              "Wird eine regelmäßige Überwachung normativer Änderungen durchgeführt, die die Systemkonformität beeinflussen könnten?"
+            ]
+          },
+          "MG14": {
+            "title": "Relevante Qualitätssiegel anwenden",
+            "questions": [
+              "Wurde die Möglichkeit der Anwendung anerkannter Qualitätszertifizierungen bewertet?",
+              "Gibt es Nachweise für die Einhaltung der von diesen Qualitätssiegeln geforderten Kriterien?"
+            ]
+          },
+          "MG15": {
+            "title": "Technische Dokumentation mindestens 10 Jahre mit Behördenzugang aufbewahren",
+            "questions": [
+              "Gewährleistet das Repository eine sichere und dauerhafte Aufbewahrung für mindestens 10 Jahre?",
+              "Ermöglicht das System bei Bedarf sofortigen Zugang für zuständige nationale Behörden?"
+            ]
+          },
+          "MG16": {
+            "title": "QMS-Dokumentation mindestens 10 Jahre aufbewahren",
+            "questions": [
+              "Wurde die QMS-Dokumentation in das offizielle Aufbewahrungsrepository aufgenommen?",
+              "Ist ihre Verfügbarkeit für mindestens 10 Jahre und ihre Zugänglichkeit für zuständige Behörden gewährleistet?"
+            ]
+          },
+          "MG17": {
+            "title": "Aufbewahrungsplan für von der benannten Stelle genehmigte Änderungen",
+            "questions": [
+              "Werden Genehmigungen der benannten Stelle und Änderungsnachweise in einem zentralen, sicheren Repository aufbewahrt?",
+              "Sieht der Plan eine Aufbewahrung von mindestens 10 Jahren vor?"
+            ]
+          },
+          "MG18": {
+            "title": "Aufbewahrungsplan für Entscheidungen und Dokumente der benannten Stelle",
+            "questions": [
+              "Sieht das System die Aufbewahrung von Entscheidungen und Dokumenten vor, die von benannten Stellen ausgestellt werden?",
+              "Ist die Aufbewahrung und der Zugang für mindestens 10 Jahre in einem geeigneten Repository gewährleistet?"
+            ]
+          },
+          "MG19": {
+            "title": "Aufbewahrungsplan für die EU-Konformitätserklärung für mindestens 10 Jahre",
+            "questions": [
+              "Ist die Konformitätserklärung in einem Repository archiviert, das die Verfügbarkeit und Aufbewahrung für mindestens 10 Jahre gewährleistet?"
+            ]
+          },
+          "MG20": {
+            "title": "Aufbewahrungsmechanismus regelmäßig auditieren",
+            "questions": [
+              "Wurden regelmäßige Audits des Dokumentationsaufbewahrungsmechanismus eingerichtet?",
+              "Wird das korrekte Funktionieren und die Einhaltung der Aufbewahrungspflichten überprüft?"
+            ]
+          },
+          "MG21": {
+            "title": "Sicherstellen, dass der Aufbewahrungsmechanismus das Verschwinden des Anbieters überlebt",
+            "questions": [
+              "Gewährleistet der Aufbewahrungsmechanismus den fortgesetzten Zugang zur technischen Dokumentation, auch wenn der Anbieter seine Tätigkeit einstellt?",
+              "Wurden rechtliche und technische Maßnahmen ergriffen, um diese zukünftige Verfügbarkeit sicherzustellen?"
+            ]
+          },
+          "MG22": {
+            "title": "Systemzweck, Anbietername und Version mit Bezug zu früheren Versionen angeben",
+            "questions": [
+              "Enthält die Dokumentation klar den Zweck des Systems, den Anbieternamen und die entsprechende Version?",
+              "Ist die Nachverfolgbarkeit zwischen früheren und aktuellen Versionen angegeben?"
+            ]
+          },
+          "MG23": {
+            "title": "Beschreiben, wie das System mit externer Hardware, Software oder KI-Systemen interagiert",
+            "questions": [
+              "Wurde angemessen dokumentiert, wie das System mit anderen externen Systemen kommuniziert oder interoperieren kann?",
+              "Wurden auch Kompatibilitätsanforderungen zur Gewährleistung der Interoperabilität dokumentiert?"
+            ]
+          },
+          "MG24": {
+            "title": "Relevante Software-/Firmware-Versionen und Aktualisierungsanforderungen angeben",
+            "questions": [
+              "Enthält die Dokumentation die verwendeten Versionen und die für Aktualisierungen oder Patches erforderlichen Verfahren?",
+              "Ist die geplante Aktualisierungsrichtlinie zur Aufrechterhaltung der Systemsicherheit und -funktionalität angegeben?"
+            ]
+          },
+          "MG25": {
+            "title": "Beschreiben, wie das System auf den Markt gebracht wird (Softwarepakete, Downloads, API)",
+            "questions": [
+              "Ist die Form der Verteilung und Bereitstellung detailliert beschrieben (z. B. als API, Download, eingebettete Software)?",
+              "Wird für jede Modalität der Inbetriebnahme des Systems eine klare Dokumentation bereitgestellt?"
+            ]
+          },
+          "MG26": {
+            "title": "Beschreibung der vorgesehenen Hardware angeben",
+            "questions": [
+              "Wurde der Typ der für den korrekten Systembetrieb notwendigen oder empfohlenen Hardware dokumentiert?",
+              "Werden mögliche Einschränkungen oder Inkompatibilitäten mit bestimmter Hardware angegeben?"
+            ]
+          },
+          "MG27": {
+            "title": "Fotos oder Abbildungen externer Merkmale, Kennzeichnung und interner Konfiguration beifügen",
+            "questions": [
+              "Sind gegebenenfalls visuelle Elemente wie Produktbilder, Kennzeichnungen oder die interne Konfiguration enthalten?",
+              "Sind die Abbildungen korrekt den relevanten technischen Beschreibungen zugeordnet?"
+            ]
+          },
+          "MG28": {
+            "title": "Grundlegende Beschreibung der Benutzeroberfläche für den Betreiber beifügen",
+            "questions": [
+              "Enthält die Dokumentation eine verständliche und ausreichende Beschreibung der an den Systembetreiber gerichteten Benutzeroberfläche?",
+              "Wurden visuelle Beispiele oder Diagramme beigefügt, um den Betreiber mit der Oberfläche vertraut zu machen?"
+            ]
+          },
+          "MG29": {
+            "title": "Beschreibung der Benutzeroberfläche und Nutzungsanweisungen für den Betreiber beifügen",
+            "questions": [
+              "Sind praktische und aktuelle Anweisungen enthalten, um die Systemimplementierung durch den Betreiber zu erleichtern?",
+              "Berücksichtigen die Anweisungen mögliche Fehler bei der Bereitstellung und entsprechende Korrekturmaßnahmen?"
+            ]
+          },
+          "MG30": {
+            "title": "Entwicklungsmethoden, Nutzung von Drittanbieter-Tools oder -Modellen angeben",
+            "questions": [
+              "Wurden bei der Entwicklung verwendete Drittanbieter-Tools und -Modelle zusammen mit ihrer Integration oder Modifikation dokumentiert?",
+              "Wurden die aus der Nutzung von Drittanbieter-Tools oder -Modellen resultierenden Risiken bewertet und dokumentiert?"
+            ]
+          },
+          "MG31": {
+            "title": "Designspezifikationen, Logik, Algorithmen, Schlüsselentscheidungen, Annahmen und Optimierungskriterien angeben",
+            "questions": [
+              "Wurden alle technischen Designelemente klar und zugänglich dokumentiert, einschließlich der verwendeten Algorithmen?",
+              "Dokumentiert die Dokumentation technische Zugeständnisse und deren Auswirkungen auf Systemleistung oder -sicherheit?"
+            ]
+          },
+          "MG32": {
+            "title": "Systemarchitektur, Komponentenintegration und Rechenressourcen angeben",
+            "questions": [
+              "Enthält die Dokumentation ein verständliches Schema der Systemarchitektur und Komponenteninteraktion?",
+              "Werden die verwendeten Rechenressourcen und Plattformen in jeder Entwicklungsphase beschrieben?"
+            ]
+          },
+          "MG33": {
+            "title": "Datenanforderungen, Trainingsmethoden, verwendete Datensätze, Herkunft und Kennzeichnung angeben",
+            "questions": [
+              "Wurden die beim Training, Testen und Validieren verwendeten Daten und Methoden dokumentiert?",
+              "Gibt es Nachweise für die Datenqualitätskontrolle und die durchgeführten Kennzeichnungs-/Bereinigungsprozesse?"
+            ]
+          },
+          "MG34": {
+            "title": "Bewertung der Maßnahmen zur menschlichen Aufsicht und technische Maßnahmen zur Ergebnisinterpretation angeben",
+            "questions": [
+              "Wurden Maßnahmen bewertet, die eine menschliche Aufsicht des Systems während der Nutzung ermöglichen?",
+              "Enthält die Dokumentation Werkzeuge oder Mechanismen, die für Benutzer zur korrekten Interpretation der Ergebnisse konzipiert sind?"
+            ]
+          },
+          "MG35": {
+            "title": "Vorbestimmte Änderungen und zugehörige technische Informationen zur fortgesetzten Konformität angeben",
+            "questions": [
+              "Wurden geplante Änderungen, die auf das System angewendet werden könnten, und deren technische Auswirkungen dokumentiert?",
+              "Sind Validierungsverfahren spezifiziert, um zu gewährleisten, dass diese Änderungen die Systemkonformität nicht beeinträchtigen?"
+            ]
+          },
+          "MG36": {
+            "title": "Validierungs-/Testverfahren, verwendete Daten, Bewertungsparameter, Ergebnisse und unterzeichnete Aufzeichnungen angeben",
+            "questions": [
+              "Enthält die Dokumentation klare Nachweise über durchgeführte Tests, Ergebnisse und unterzeichnete Aufzeichnungen?",
+              "Wurden spezifische Tests zur Überprüfung der Auswirkungen geplanter Aktualisierungen oder Änderungen beigefügt?"
+            ]
+          },
+          "MG37": {
+            "title": "Ergriffene Cybersicherheitsmaßnahmen angeben",
+            "questions": [
+              "Sind die zum Schutz der KI-System-Cybersicherheit angewendeten Schutzmaßnahmen detailliert beschrieben?",
+              "Enthält die Dokumentation Schwachstellenbewertungen und Mechanismen für das Sicherheitsvorfallmanagement?"
+            ]
+          },
+          "MG38": {
+            "title": "Vorhersehbare unerwünschte Ergebnisse und Risikoquellen für Gesundheit, Sicherheit und Grundrechte angeben",
+            "questions": [
+              "Sind mögliche nachteilige Ergebnisse und mit dem System verbundene Risiken angemessen identifiziert und dokumentiert?",
+              "Enthält die Dokumentation Mechanismen zur Minderung und Überwachung dieser Risiken über den gesamten Lebenszyklus?"
+            ]
+          },
+          "MG39": {
+            "title": "Maßnahmen zur menschlichen Aufsicht und technische Maßnahmen zur Interpretation durch den Betreiber angeben",
+            "questions": [
+              "Wurden die Funktionen und Verantwortlichkeiten des Betreibers bezüglich der Systemüberwachung klar spezifiziert?",
+              "Wurde die notwendige Schulung oder Qualifikation beschrieben, damit dieses Profil die Ergebnisse korrekt interpretieren kann?"
+            ]
+          },
+          "MG40": {
+            "title": "Beschreibung der Angemessenheit der Leistungskennzahlen angeben",
+            "questions": [
+              "Begründet die Dokumentation die festgelegten Leistungsparameter und ihre Ausrichtung auf den Systemzweck?",
+              "Wurden diese Parameter in dokumentierten Tests validiert?"
+            ]
+          },
+          "MG41": {
+            "title": "Detaillierte Beschreibung des Risikomanagementsystems gemäß Article 9 angeben",
+            "questions": [
+              "Wurde ein Risikomanagementsystem dokumentiert, das Article 9 entspricht?",
+              "Ist angegeben, wie dieses System bei relevanten Änderungen im KI-System-Lebenszyklus aktualisiert wird?"
+            ]
+          },
+          "MG42": {
+            "title": "Beschreibung der vom Anbieter im Laufe des Lebenszyklus vorgenommenen relevanten Änderungen angeben",
+            "questions": [
+              "Wurde die Historie der relevanten Änderungen festgehalten, die das System vom Design bis zur aktuellen Version durchlaufen hat?",
+              "Ist die Auswirkung jeder Änderung auf Sicherheit, Genauigkeit oder regulatorische Konformität angegeben?"
+            ]
+          },
+          "MG43": {
+            "title": "Liste der angewendeten harmonisierten Normen angeben (oder detaillierte Beschreibung alternativer Lösungen)",
+            "questions": [
+              "Gibt die Dokumentation klar an, welche harmonisierten Normen oder technischen Standards befolgt wurden?",
+              "Wurden die angenommenen Lösungen dort, wo harmonisierte Normen nicht angewendet wurden, angemessen begründet?"
+            ]
+          },
+          "MG44": {
+            "title": "Eine Kopie der EU-Konformitätserklärung gemäß Article 47 beifügen",
+            "questions": [
+              "Wurde eine gültige Kopie der Konformitätserklärung des Systems in die Dokumentation aufgenommen?",
+              "Ist überprüft, dass diese Erklärung vom autorisierten Anbieter unterzeichnet ist und ausdrücklich auf Article 47 verweist?"
+            ]
+          },
+          "MG45": {
+            "title": "Detaillierte Beschreibung des Post-Market-Überwachungssystems gemäß Article 72(3) angeben",
+            "questions": [
+              "Wurde ein System zur Bewertung der KI-Systemleistung nach der kommerziellen Bereitstellung definiert?",
+              "Umfasst der Post-Market-Überwachungsplan Mechanismen zur Informationssammlung, Audits und kontinuierliche Verbesserungen?"
+            ]
+          }
+        }
+      },
+      "qms": {
+        "title": "QMS",
+        "article": "Article 17",
+        "items": {
+          "QMS-01": {
+            "title": "Regulatorische Compliance-Strategie",
+            "questions": [
+              "Gibt es eine definierte regulatorische Compliance-Strategie, um sicherzustellen, dass das System der KI-Verordnung entspricht?",
+              "Legt sie Compliance-Meilensteine fest?"
+            ]
+          },
+          "QMS-02": {
+            "title": "Designkontrolle und Verifizierung",
+            "questions": [
+              "Sind systematische Techniken, Verfahren und Maßnahmen für das Systemdesign, die Designkontrolle und die Designverifizierung definiert?"
+            ]
+          },
+          "QMS-03": {
+            "title": "Entwicklung und Qualitätskontrolle",
+            "questions": [
+              "Sind systematische Techniken, Verfahren und Maßnahmen für die Entwicklung, Qualitätskontrolle und Qualitätssicherung definiert?"
+            ]
+          },
+          "QMS-04": {
+            "title": "Test und Validierung",
+            "questions": [
+              "Sind Prüf-, Test- und Validierungsverfahren vor, während und nach der Entwicklung vorhanden?",
+              "Sind Metriken und Schwellenwerte dokumentiert?"
+            ]
+          },
+          "QMS-05": {
+            "title": "Technische Spezifikationen und Normen",
+            "questions": [
+              "Wurden die technischen Spezifikationen und Normen dokumentiert, die auf das System angewendet werden?"
+            ]
+          },
+          "QMS-06": {
+            "title": "Datenmanagement",
+            "questions": [
+              "Gibt es dokumentierte Systeme und Verfahren für das Datenmanagement (Erfassung, Sammlung, Analyse, Kennzeichnung, Speicherung, Filterung und Aufbewahrung)?"
+            ]
+          },
+          "QMS-07": {
+            "title": "Integration des Risikomanagementsystems",
+            "questions": [
+              "Wurde das Risikomanagementsystem in das Qualitätsmanagementsystem integriert?"
+            ]
+          },
+          "QMS-08": {
+            "title": "Post-Market-Überwachung",
+            "questions": [
+              "Wurde die Konfiguration, Anwendung und Wartung eines Post-Market-Überwachungssystems festgelegt?"
+            ]
+          },
+          "QMS-09": {
+            "title": "Meldung schwerwiegender Vorfälle",
+            "questions": [
+              "Wurden Verfahren für die Meldung schwerwiegender Vorfälle und Fehlfunktionen definiert?"
+            ]
+          },
+          "QMS-10": {
+            "title": "Kommunikation mit Behörden",
+            "questions": [
+              "Gibt es Verfahren für die Kommunikation mit zuständigen nationalen Behörden und anderen relevanten Stellen?"
+            ]
+          },
+          "QMS-11": {
+            "title": "Aufbewahrung von Aufzeichnungen (Protokolle und Auditierung)",
+            "questions": [
+              "Gibt es Systeme und Verfahren für die Aufbewahrung von Aufzeichnungen (Protokolle und technische Dokumentation)?"
+            ]
+          },
+          "QMS-12": {
+            "title": "Ressourcenmanagement und Versorgungssicherheit",
+            "questions": [
+              "Enthält das QMS Verfahren für das Ressourcenmanagement, einschließlich Maßnahmen zur Versorgungssicherheit?"
+            ]
+          },
+          "QMS-13": {
+            "title": "Verantwortlichkeitsrahmen",
+            "questions": [
+              "Wurde ein Verantwortlichkeitsrahmen eingerichtet, der die Zuständigkeiten der Entwicklungs-, Bereitstellungs- und Managementteams definiert?"
+            ]
+          },
+          "QMS-14": {
+            "title": "QMS-Verhältnismäßigkeit",
+            "questions": [
+              "Ist das Qualitätsmanagementsystem verhältnismäßig zur Größe der Organisation und den Risiken des KI-Systems?"
+            ]
+          },
+          "QMS-15": {
+            "title": "Gewichtsanpassung und Overfitting-Kontrolle",
+            "questions": [
+              "Gibt es statistische Validierungen und algorithmische Testverfahren, um Overfitting zu verhindern und eine korrekte Gewichtsanpassung während des Trainings sicherzustellen?"
+            ]
+          },
+          "QMS-16": {
+            "title": "Management von Änderungen und Aktualisierungen",
+            "questions": [
+              "Gibt es ein formelles Verfahren für das Management wesentlicher Änderungen am KI-System, einschließlich der Notwendigkeit einer neuen Konformitätsbewertung?"
+            ]
+          }
+        }
+      },
+      "incidents": {
+        "title": "Vorfälle",
+        "article": "Article 73",
+        "items": {
+          "M-INC-01": {
+            "title": "Management schwerwiegender Vorfälle im QMS verankern",
+            "questions": [
+              "Anbieter: Innerhalb des QMS, Verfahren im Zusammenhang mit der Meldung eines schwerwiegenden Vorfalls.",
+              "Betreiber: Innerhalb des QMS, Verfahren im Zusammenhang mit der Meldung eines schwerwiegenden Vorfalls."
+            ]
+          },
+          "M-INC-02": {
+            "title": "Kontakt mit der Marktüberwachungsbehörde",
+            "questions": [
+              "Anbieter: Dokument mit dem Kontaktverantwortlichen für die Marktüberwachungsbehörde.",
+              "Betreiber: Dokument mit dem Kontaktverantwortlichen für die Marktüberwachungsbehörde."
+            ]
+          },
+          "M-INC-03": {
+            "title": "Kontakt mit dem Anbieter",
+            "questions": [
+              "Anbieter: Erstellen Sie ein Benutzerhandbuch für den Kanal, der das Management von Anfragen und Vorfällen zwischen Betreiber und Anbieter ermöglicht.",
+              "Betreiber: Zugang zum Benutzerhandbuch für den Kanal, der das Management von Anfragen und Vorfällen zwischen Betreiber und Anbieter ermöglicht."
+            ]
+          },
+          "M-INC-04": {
+            "title": "Kenntnis der KI-System-Kategorisierung",
+            "questions": [
+              "Anbieter: Erstellen Sie das Dokument, das die Kategorie des KI-Systems gemäß den in der Verordnung definierten Kategorien erläutert.",
+              "Betreiber: Zugang zum Dokument, das die Kategorie des KI-Systems gemäß der Verordnung erläutert."
+            ]
+          },
+          "M-INC-05": {
+            "title": "Kenntnis der Grundrechte",
+            "questions": [
+              "Anbieter: Dokument, das die Kenntnis der Grundrechte der Europäischen Union bescheinigt.",
+              "Betreiber: Dokument, das die Kenntnis der Grundrechte der Europäischen Union bescheinigt."
+            ]
+          }
+        }
+      },
+      "risk-management": {
+        "title": "Risiko",
+        "article": "Article 9",
+        "items": {
+          "MG01": {
+            "title": "Analyse und Definition des internen und externen Kontexts",
+            "questions": [
+              "Wurde ein Risikomanagementsystem für KI-Systeme mit hohem Risiko über den gesamten Lebenszyklus definiert?",
+              "Wurden die Elemente des internen und externen Kontexts der Organisation rund um KI-Systeme mit hohem Risiko identifiziert und dokumentiert?",
+              "Wurde die Führung und das Engagement für das Risikomanagement formalisiert (Richtlinien, Verfahren, Ressourcen, Befugnisse, Verantwortlichkeiten)?"
+            ]
+          },
+          "MG02": {
+            "title": "Definition und Aktualisierung der Risikobereitschaft",
+            "questions": [
+              "Wurde die Risikobereitschaft definiert und wird sie ständig aktualisiert (in Bezug auf das Risiko, das das KI-System für Gesundheit, Sicherheit und Grundrechte darstellen kann)?"
+            ]
+          },
+          "MG03": {
+            "title": "Inventar der KI-Systemkomponenten",
+            "questions": [
+              "Wurden alle KI-Systemkomponenten identifiziert, inventarisiert und dokumentiert (Schlüsselakteure, Daten, Werkzeuge usw.)?"
+            ]
+          },
+          "MG04": {
+            "title": "Identifizierung der Hauptrisikoquellen",
+            "questions": [
+              "Wurden alle mit KI-Systemen verbundenen Risiken identifiziert, inventarisiert und dokumentiert (insbesondere solche, die Gesundheit, Sicherheit und Grundrechte betreffen könnten)?"
+            ]
+          },
+          "MG05": {
+            "title": "Bewertung der Risikoquellen",
+            "questions": [
+              "Wurden alle identifizierten Risiken analysiert und bewertet (Zuordnung von Eintrittswahrscheinlichkeit und Auswirkung)?"
+            ]
+          },
+          "MG06": {
+            "title": "Identifizierung und Analyse der Auswirkungen und Wahrscheinlichkeit von Effekten",
+            "questions": [
+              "Wurden mögliche Risiken im Zusammenhang mit der Nutzung oder den Auswirkungen des KI-Systems auf Minderjährige unter 18 Jahren berücksichtigt (Identifizierung, Analyse, Bewertung und Umsetzung von Behandlungsmaßnahmen)?"
+            ]
+          },
+          "MG07": {
+            "title": "Berichterstattung der Ergebnisse",
+            "questions": [
+              "Wurden Mechanismen für Kommunikation und Konsultation rund um das Risikomanagementsystem für KI-Systeme mit hohem Risiko definiert und umgesetzt?"
+            ]
+          },
+          "MG08": {
+            "title": "Analyse der gesammelten Post-Market-Daten",
+            "questions": [
+              "Wurden mögliche Risiken im Zusammenhang mit dem Post-Market-Überwachungssystem berücksichtigt (Identifizierung, Analyse, Bewertung und Umsetzung von Behandlungsmaßnahmen)?"
+            ]
+          },
+          "MG09": {
+            "title": "Identifizierung neuer möglicher Risiken",
+            "questions": [
+              "Wurden Risikobehandlungsoptionen auf der Grundlage von Wirksamkeits- und Machbarkeitskriterien definiert und priorisiert?",
+              "Wurden angemessene Minderungs- und Schutzmaßnahmen für jedes identifizierte Risiko bewertet?"
+            ]
+          },
+          "MG10": {
+            "title": "Definition und Auswahl von Risikobehandlungsoptionen",
+            "questions": [
+              "Wurden alle Risikobehandlungsoptionen für das Management der identifizierten, analysierten und bewerteten Risiken bestimmt?"
+            ]
+          },
+          "MG11": {
+            "title": "Risikobehandlung planen und umsetzen",
+            "questions": [
+              "Wurde das Risikomanagementsystem, sofern definiert, über den gesamten Lebenszyklus umgesetzt?",
+              "Wird das Risikomanagementsystem, sofern umgesetzt, über den gesamten Lebenszyklus kontinuierlich aufrechterhalten?",
+              "Wurde die Umsetzung der definierten Behandlungsmaßnahmen geplant?"
+            ]
+          },
+          "MG12": {
+            "title": "Wirksamkeit jeder Behandlung bewerten",
+            "questions": [
+              "Wurde ein kontinuierlicher Überwachungs- und Verbesserungsprozess rund um das Risikomanagementsystem definiert und umgesetzt?",
+              "Wurden Testverfahren eingerichtet, um sicherzustellen, dass das System seinen Zweck (bestimmungsgemäße Verwendung) erfüllt?",
+              "Wurden Testverfahren eingerichtet, um sicherzustellen, dass die Anforderungen an KI-Systeme mit hohem Risiko erfüllt werden?",
+              "Wurden Tests unter realen Bedingungen definiert und durchgeführt?"
+            ]
+          },
+          "MG13": {
+            "title": "Bestimmen, ob das Restrisiko akzeptabel ist",
+            "questions": [
+              "Wurden Überprüfungs- und Überwachungszeiträume für das Risikomanagementsystem festgelegt?"
+            ]
+          },
+          "MG14": {
+            "title": "Restrisiken dokumentieren und berichten",
+            "questions": [
+              "Wurde das Risikomanagementsystem, sofern definiert, über den gesamten Lebenszyklus dokumentiert?",
+              "Wurden Restrisiken nach der Umsetzung von Behandlungsmaßnahmen für die Kommunikation an Betreiber dokumentiert?",
+              "Wurde der gesamte Risikomanagementprozess dokumentiert?"
+            ]
+          }
+        }
+      },
+      "data-governance": {
+        "title": "Daten",
+        "article": "Article 10",
+        "items": {
+          "MG01": {
+            "title": "Identifizierung der notwendigen Informationen",
+            "questions": [
+              "Wurden alle für die Entwicklung und Nutzung des KI-Systems notwendigen Informationen identifiziert?",
+              "Wurden die notwendigen Informationen dokumentiert?"
+            ]
+          },
+          "MG02": {
+            "title": "Einrichtung des Datenerhebungsprozesses",
+            "questions": [
+              "Wurden die Datenquellen identifiziert?",
+              "Wurde ein Datenerhebungsprozess eingerichtet?"
+            ]
+          },
+          "MG03": {
+            "title": "Zu bewertende Qualitätsdimensionen bestimmen",
+            "questions": [
+              "Wurden die zu bewertenden Datenqualitätsdimensionen definiert?"
+            ]
+          },
+          "MG04": {
+            "title": "Qualitätskontrollen für jede Dimension definieren",
+            "questions": [
+              "Wurden spezifische Qualitätskontrollen für jede identifizierte Dimension definiert?"
+            ]
+          },
+          "MG05": {
+            "title": "Die definierten Qualitätskontrollen umsetzen",
+            "questions": [
+              "Wurden die definierten Qualitätskontrollen umgesetzt?",
+              "Wurden die Ergebnisse der umgesetzten Qualitätskontrollen überprüft?"
+            ]
+          },
+          "MG06": {
+            "title": "Ergebnisse der Qualitätskontrollen berichten",
+            "questions": [
+              "Wurden die Ergebnisse der Qualitätskontrollen berichtet?",
+              "Wurden bei den Qualitätskontrollen festgestellte Abweichungen dokumentiert?"
+            ]
+          },
+          "MG07": {
+            "title": "Maßnahmen zur Verbesserung der Datenqualität entwickeln",
+            "questions": [
+              "Wurden Verbesserungspläne auf Grundlage der Qualitätsergebnisse entwickelt?",
+              "Wurden die umgesetzten Verbesserungsmaßnahmen dokumentiert?"
+            ]
+          },
+          "MG08": {
+            "title": "Datentransformation",
+            "questions": [
+              "Wurden die Daten transformiert, um sie an die Anforderungen des KI-Systems anzupassen?"
+            ]
+          },
+          "MG09": {
+            "title": "Datenaggregation",
+            "questions": [
+              "Wurden Daten aus verschiedenen Quellen aggregiert?",
+              "Wurden die Datenaggregationsprozesse dokumentiert?"
+            ]
+          },
+          "MG10": {
+            "title": "Datenstichprobenziehung",
+            "questions": [
+              "Wird eine angemessene Datenstichprobenziehung durchgeführt?"
+            ]
+          },
+          "MG11": {
+            "title": "Feature-Erstellung und -Auswahl",
+            "questions": [
+              "Wurden nach der anfänglichen Datenerhebung und -verarbeitung zusätzliche Datenbedürfnisse oder Merkmale identifiziert?",
+              "Wurde eine Dimensionalitätserhöhung oder -reduktion in Betracht gezogen, um Features zu erstellen oder redundante zu verwerfen?"
+            ]
+          },
+          "MG12": {
+            "title": "Datenanreicherung",
+            "questions": [
+              "Wurden die Daten angereichert und erweitert?"
+            ]
+          },
+          "MG13": {
+            "title": "Datenkennzeichnung",
+            "questions": [
+              "Wurden den gesammelten Daten identifizierende Labels zugewiesen?",
+              "Wurden automatische Datenkennzeichnungswerkzeuge verwendet? Wurde der Prozess durch menschliche Aufsicht überwacht?"
+            ]
+          },
+          "MG14": {
+            "title": "Analyse der Hauptquellen von Verzerrungen in Daten",
+            "questions": [
+              "Wurde die potenzielle Verzerrung, die die gesammelten Daten aufweisen könnten, analysiert und bewertet?"
+            ]
+          },
+          "MG15": {
+            "title": "Bewertung von Verzerrungen in Daten",
+            "questions": [
+              "Wurde eine Verzerrung in den Daten festgestellt?",
+              "Wenn ja, wurde eine Analyse und Bewertung durchgeführt, um den Bedarf an Behandlungsmaßnahmen zu bestimmen?"
+            ]
+          },
+          "MG16": {
+            "title": "Behandlung von Verzerrungen in Daten",
+            "questions": [
+              "Wurden Behandlungsmaßnahmen für identifizierte und bewertete Verzerrungen umgesetzt?"
+            ]
+          },
+          "MG17": {
+            "title": "Datenübertragung",
+            "questions": [
+              "Wenn Daten in der letzten Phase des Datenlebenszyklus übertragen werden, wurde ein Bericht mit vollständigen Details des Übertragungsprozesses erstellt?"
+            ]
+          },
+          "MG18": {
+            "title": "Vollständige oder teilweise Datenlöschung",
+            "questions": [
+              "Wurde überprüft, dass kein Benutzer oder Beteiligter an der KI-Systementwicklung noch Datenzugang benötigt?",
+              "Wurde überprüft, dass der Datenlöschungsprozess keine gesetzlichen, vertraglichen oder Aufbewahrungspflichten verletzt?",
+              "Wurde überprüft, dass die Daten von allen Speicherorten gelöscht werden?",
+              "Wurde bewertet, ob die Möglichkeit einer teilweisen oder vollständigen Datenwiederherstellung aus dem mit diesen Daten trainierten KI-System besteht?",
+              "Wurde geprüft, ob die Daten kulturelle, soziale oder historische Bedeutung haben?",
+              "Wurde ein Bericht mit vollständigen Details des Datenlöschungsprozesses erstellt?"
+            ]
+          }
+        }
+      },
+      "accuracy": {
+        "title": "Genauigkeit",
+        "article": "Article 15",
+        "items": {
+          "MG01": {
+            "title": "Auswahl von Genauigkeitsmetriken entsprechend dem bestimmungsgemäßen Zweck",
+            "questions": [
+              "Wurde bei der Auswahl der Genauigkeitsmetriken und ihrer Werte der bestimmungsgemäße Zweck des Systems berücksichtigt?",
+              "Wurde die Übereinstimmung zwischen jeder ausgewählten Metrik und dem bestimmungsgemäßen Gebrauch des Systems nachvollziehbar dokumentiert?",
+              "Wurde validiert, dass die gewählten Metriken die erwartete Leistung in realen Anwendungskontexten korrekt widerspiegeln?"
+            ]
+          },
+          "MG02": {
+            "title": "Durch den Risikoplan motivierte Metriken",
+            "questions": [
+              "Wird die Auswahl der Genauigkeitsmetriken durch die Minderung der im Risikoplan identifizierten Risiken motiviert, und wurde diese Motivation dokumentiert?",
+              "Wurden Tests durchgeführt, um die Korrelation zwischen erkannten Risiken und ausgewählten Metriken zu untersuchen, die diese spezifisch adressieren?",
+              "Wurden Metriken priorisiert, die helfen, Risiken mit den größten Auswirkungen auf Gesundheit, Sicherheit und Grundrechte zu kontrollieren?"
+            ]
+          },
+          "MG03": {
+            "title": "Auswirkungen der Datenvorverarbeitung",
+            "questions": [
+              "Wurden die Auswirkungen der Datenvorverarbeitung berücksichtigt, wobei Vorverarbeitungsoperationen und ihr Zusammenhang mit den Ergebnissen der Genauigkeitsmetriken aufgezeichnet wurden?",
+              "Wurden die Auswirkungen der Datenqualitätsverbesserung auf die Systemgenauigkeit berücksichtigt?",
+              "Wurden die Auswirkungen von Feature-Engineering-Operationen auf die Systemgenauigkeit dokumentiert und berücksichtigt?"
+            ]
+          },
+          "MG04": {
+            "title": "Auswirkungen von Overfitting",
+            "questions": [
+              "Wurden die Auswirkungen von Overfitting auf die Genauigkeit berücksichtigt und zusammen mit den ergriffenen Maßnahmen zu dessen Vermeidung aufgezeichnet?",
+              "Wurden Kreuzvalidierungsmechanismen oder andere Methoden zur Verhinderung von Overfitting implementiert?",
+              "Wurden Schlüsselindikatoren aufgezeichnet, um Anzeichen von Overfitting während des Trainings und der Bewertung zu erkennen?"
+            ]
+          },
+          "MG05": {
+            "title": "Baseline-Modelle zum Vergleich",
+            "questions": [
+              "Wurden Kriterien für die Auswahl von Baseline-Modellen und deren Relevanz in jeder Lebenszyklusphase definiert?",
+              "Wird die Modellgenauigkeit systematisch über den gesamten Lebenszyklus mit zugehörigen Baseline-Modellen verglichen?"
+            ]
+          },
+          "MG06": {
+            "title": "Messung des Sicherheits-/Konfidenzniveaus",
+            "questions": [
+              "Enthält die KI-Ausgabe ein Maß für die Sicherheit oder das Konfidenzniveau, das die Modellausgaben begleitet?",
+              "Werden den Endnutzern in kritischen Kontexten verständliche Informationen über das Konfidenzniveau bereitgestellt?",
+              "Wurden Konfidenzschwellenwerte definiert, die spezifische Warnungen oder Empfehlungen auslösen?"
+            ]
+          },
+          "MG07": {
+            "title": "Unit-, Stress- und Integrationstests",
+            "questions": [
+              "Wurden kumulative Unit-, Stress- und Integrationstests während des KI-Systementwicklungsprozesses in Bezug auf die Genauigkeitsmessung durchgeführt?",
+              "Sind Testergebnisse und daraus abgeleitete Maßnahmen dokumentiert?",
+              "Wurden Grenz- oder Fehlerbedingungen definiert?"
+            ]
+          },
+          "MG08": {
+            "title": "Metriken aktualisieren und zentralisieren",
+            "questions": [
+              "Werden die Informationen zu Genauigkeitsmetriken aktualisiert und zentralisiert, mit Zugang für alle beteiligten Akteure?",
+              "Wurde ein Versionierungs- oder Nachverfolgbarkeitssystem implementiert?",
+              "Gibt es ein formelles Verfahren zur Kommunikation von Aktualisierungen?"
+            ]
+          },
+          "MG09": {
+            "title": "Zielfunktion",
+            "questions": [
+              "Wurde die Zielfunktion des Systems entsprechend seinem bestimmungsgemäßen Zweck ausgewählt?",
+              "Wurden die in der Risikoanalyse gefundenen Risiken berücksichtigt und wie die Systemgenauigkeit diese beeinflusst?"
+            ]
+          },
+          "MG10": {
+            "title": "Schnittstelle/Alarm zur Überwachung der Genauigkeit durch den Benutzer",
+            "questions": [
+              "Verfügt das System über einen Mechanismus (grafische Oberfläche, Alarm usw.), der es dem Benutzer ermöglicht, den Genauigkeitsstatus zu überwachen?",
+              "Ist die Funktionsweise des Mechanismus angemessen dokumentiert?",
+              "Wurden die Benutzer geschult, die Informationen korrekt zu interpretieren?"
+            ]
+          },
+          "MG11": {
+            "title": "Genauigkeitsverlauf",
+            "questions": [
+              "Verfügt das System über einen Mechanismus, der alle dem Benutzer gemeldeten Genauigkeiten in einem Verlauf speichert?",
+              "Kann der Genauigkeitsverlauf nach Datum, Modellversion oder Nutzungskontext abgefragt werden?",
+              "Wird der Genauigkeitsverlauf zur Verbesserung des Modells oder zur Anpassung des Konfidenzschwellenwerts verwendet?"
+            ]
+          },
+          "MG12": {
+            "title": "Tests zur statistischen Signifikanz",
+            "questions": [
+              "Wurden bei der Auswahl der Genauigkeitsmetrik(en) und Zielfunktion(en) Tests zur statistischen Signifikanz durchgeführt, um die Entscheidungen zu begründen?",
+              "Sind die Testergebnisse dokumentiert?",
+              "Wurden Mindestsignifikanzkriterien definiert?"
+            ]
+          },
+          "MG13": {
+            "title": "Modell-/Familien-Benchmarks",
+            "questions": [
+              "Wurden während des Designprozesses Benchmarks unter Berücksichtigung des bestimmungsgemäßen Zwecks in Bezug auf das verwendete Modell oder die Modellfamilie durchgeführt?",
+              "Ist die Verwendung von Benchmarks begründet, wobei öffentlich anerkannte Benchmarks bevorzugt werden, wo dies relevant ist?",
+              "Für Benchmarks gegen manuelle Messungen oder historische Daten: Ist der interne Benchmark begründet und seine Bedeutung erläutert?",
+              "Ist dokumentiert, wie die Vergleiche durchgeführt wurden und welche Ergebnisse sie erbrachten?"
+            ]
+          },
+          "MG14": {
+            "title": "Genauigkeitsanweisungen für den Benutzer",
+            "questions": [
+              "Enthalten die Benutzeranweisungen des Systems alle relevanten Genauigkeitsniveaus und Metriken?",
+              "Werden die Metriken in einem für nicht-technische Benutzer zugänglichen und verständlichen Format präsentiert?"
+            ]
+          }
+        }
+      },
+      "records": {
+        "title": "Aufzeichnungen",
+        "article": "Article 12",
+        "items": {
+          "MG01": {
+            "title": "Identifizierung, Analyse und Bewertung der Bedürfnisse, die die Aufzeichnungserstellung motivieren",
+            "questions": [
+              "Wurde ein Prozess entwickelt, um die Bedürfnisse zu analysieren, die die Aufzeichnungserstellung motivieren, und die zu erfassenden Informationen festzulegen?",
+              "Wurde ein Prozess entwickelt, um die Bedürfnisse zu bewerten, die die Aufzeichnungserstellung motivieren?",
+              "Wurden die Bedürfnisse, die die Aufzeichnungserstellung motivieren, angemessen identifiziert?"
+            ]
+          },
+          "MG02": {
+            "title": "Identifizierung spezifischer Protokollierungsziele",
+            "questions": [
+              "Wurden die spezifischen Ziele der Protokollierung identifiziert?",
+              "Wurde klar identifiziert, was mit der Erhebung erreicht werden soll?"
+            ]
+          },
+          "MG03": {
+            "title": "Protokollumfang, zu erfassende Informationen und Aufbewahrungsdauer identifizieren",
+            "questions": [
+              "Wurde der Protokollumfang als die zu erfassenden Informationen und die Dauer, während der das Protokoll aufbewahrt wird, definiert?",
+              "Wurden Aufbewahrungs- und Löschfristen unter Berücksichtigung der Anforderungen an die Informationsaufbewahrung und geltender Vorschriften wie der DSGVO festgelegt?",
+              "Wurden bereits bestehende besondere Anforderungen aus finanzsektor-spezifischen Vorschriften berücksichtigt?"
+            ]
+          },
+          "MG04": {
+            "title": "Protokolle identifizieren, die zum Nachweis der Informationserfassung gemäß Article 9 (Risikomanagement) benötigt werden",
+            "questions": [
+              "Wurden die Protokolle erstellt, die zur Gewährleistung der Erfassung der im Risikomanagementsystem-Umsetzungsprozess festgelegten Informationen notwendig sind?",
+              "Wurden Kontrollen des Risikomanagementsystems mit zugehörigen Nachweisen für die Erstellung von Protokollen berücksichtigt?"
+            ]
+          },
+          "MG05": {
+            "title": "Protokolle identifizieren, die zum Nachweis der Informationserfassung gemäß Article 72 (Post-Market-Überwachung) benötigt werden",
+            "questions": [
+              "Wurden die Protokolle erstellt, die zur Gewährleistung der Erfassung der im Post-Market-Überwachungssystem-Umsetzungsprozess festgelegten Informationen notwendig sind?",
+              "Wurden die Häufigkeiten für die Erfassung dieser Aufzeichnungen angemessen dokumentiert und umgesetzt?"
+            ]
+          },
+          "MG06": {
+            "title": "Protokolle identifizieren, die zum Nachweis der Informationserfassung gemäß Article 14 (Menschliche Aufsicht) benötigt werden",
+            "questions": [
+              "Wurden die Protokolle erstellt, die zur Gewährleistung der Erfassung der für die Umsetzung von Mechanismen zur menschlichen Aufsicht festgelegten Informationen notwendig sind?",
+              "Wurde der Bedarf an diesen Aufzeichnungen und deren Interpretation für den Beitrag zum Prozess der menschlichen Aufsicht angemessen dokumentiert?"
+            ]
+          },
+          "MG07": {
+            "title": "Den Protokollerfassungsprozess implementieren",
+            "questions": [
+              "Wurde ein Protokollerfassungsprozess implementiert, um sicherzustellen, dass Informationen gemäß den in der Entwurfsphase festgelegten Kriterien erfasst werden?",
+              "Wurden Tests zur Validierung dieser Verfahren durchgeführt?",
+              "Wurden Stresstests am Protokollerfassungssystem durchgeführt, um ein Funktionieren ohne Zwischenfälle auch bei hoher Nachfrage zu gewährleisten?"
+            ]
+          },
+          "MG08": {
+            "title": "Speichermedien implementieren, um die Protokollverfügbarkeit zu gewährleisten",
+            "questions": [
+              "Wurden geeignete Speichermedien und Schutzmaterialien ausgewählt und implementiert, um die Sicherheit und Verfügbarkeit der Protokolle zu gewährleisten?",
+              "Wurden Überwachungs- und Überprüfungszeiträume für Speichermedien festgelegt?"
+            ]
+          },
+          "MG09": {
+            "title": "Sicherheits- und Cybersicherheitsmedien implementieren, um den Protokollschutz zu gewährleisten",
+            "questions": [
+              "Wurden geeignete Cybersicherheitsmaßnahmen ausgewählt und implementiert, um die Sicherheit und Verfügbarkeit der Protokolle zu gewährleisten?",
+              "Wurden Überwachungs- und Überprüfungszeiträume für Cybersicherheit und Zugangskontrolle festgelegt?"
+            ]
+          },
+          "MG10": {
+            "title": "Schulung und Kompetenzaufbau für am Protokollmanagement beteiligtes Personal entwickeln",
+            "questions": [
+              "Werden Schulungs- und Kompetenzaufbauprozesse für am Protokollmanagement beteiligtes Personal entwickelt?",
+              "Werden diese Schulungsbedürfnisse in der Antwort zur KI-Kompetenz gemäß Article 4 berücksichtigt?"
+            ]
+          },
+          "MG11": {
+            "title": "Analyse der Auswirkungen anderer geltender Vorschriften (DSGVO) auf die Protokollerstellung",
+            "questions": [
+              "Wurden die Auswirkungen anderer geltender Vorschriften oder Gesetze, die den Protokollerstellungsprozess beeinflussen könnten, analysiert und bewertet?",
+              "Wurden insbesondere die Auswirkungen der Datenschutz-Grundverordnung (DSGVO) auf den Protokollerstellungsprozess analysiert und bewertet?"
+            ]
+          },
+          "MG12": {
+            "title": "Überwachungs- und Überprüfungszeiträume für Speichermedien und Cybersicherheit festlegen",
+            "questions": [
+              "Wurden Überwachungszeiträume für Speichermedien, Cybersicherheitsmaßnahmen und Zugangskontrollen festgelegt?",
+              "Wurden Überprüfungszeiträume für Speichermedien, Cybersicherheitsmaßnahmen und Zugangskontrollen festgelegt?"
+            ]
+          },
+          "MG13": {
+            "title": "Einen kontinuierlichen Überwachungs- und Verbesserungsprozess für das Protokollmanagementsystem einrichten",
+            "questions": [
+              "Wurde ein kontinuierlicher Überwachungs- und Verbesserungsprozess für das Protokollmanagementsystem eingerichtet?",
+              "Werden im eingerichteten Prozess mögliche Fehler überwacht und identifiziert, und werden aufgezeichnete Daten zur Umsetzung und kontinuierlichen Verbesserung der vorgeschlagenen Lösungen bewertet?"
+            ]
+          },
+          "MG14": {
+            "title": "Einen Prozess implementieren, der eine angemessene technische Dokumentation des Protokollmanagementsystems gewährleistet",
+            "questions": [
+              "Wurde ein Prozess definiert und implementiert, der eine angemessene technische Dokumentation des implementierten Protokollmanagementsystems gewährleistet?",
+              "Wurden Protokolle in der Dokumentation nicht nur speziell über Protokolle, sondern auch in anderen Dokumenten berücksichtigt, in denen sie beiläufig erscheinen (z. B. Risikomanagement, menschliche Aufsicht, Post-Market-Überwachung)?"
+            ]
+          },
+          "MG15": {
+            "title": "Article 15: Genauigkeit, Robustheit und Cybersicherheit",
+            "questions": [
+              "Erfüllt das System die Maßnahmen für Genauigkeit, Robustheit und Cybersicherheit, die darauf ausgerichtet sind, Transparenz über seine Funktionsweise zu bieten?"
+            ]
+          },
+          "MG16": {
+            "title": "Article 12: Aufzeichnungen",
+            "questions": [
+              "Erfüllt das System die Aufzeichnungsmaßnahmen, die darauf ausgerichtet sind, Transparenz über seine Funktionsweise zu bieten?"
+            ]
+          }
+        }
+      },
+      "robustness": {
+        "title": "Robustheit",
+        "article": "Article 15",
+        "items": {
+          "MG01": {
+            "title": "Grundlegendes Wissen über Robustheit erwerben",
+            "questions": [
+              "Wurde eine angemessene Schulung des an der Entwicklung und Implementierung beteiligten Personals zu Schlüsselaspekten der KI-System-Robustheit sichergestellt?"
+            ]
+          },
+          "MG02": {
+            "title": "Klare Robustheitsziele festlegen, zugehörige Metriken definieren",
+            "questions": [
+              "Wurden Robustheitseigenschaften und -metriken sowie die Anforderungen, die sie gemäß bestimmungsgemäßem Zweck und Risikoanalyse erfüllen müssen, mit Nachweisen festgelegt?"
+            ]
+          },
+          "MG03": {
+            "title": "Kritische Systemeigenschaften identifizieren",
+            "questions": [
+              "Wurden während des Systemdesigns anerkannte Eigenschaften zur Messung der Robustheit identifiziert und deren Trennbarkeit (Möglichkeit der getrennten Messung) festgestellt?"
+            ]
+          },
+          "MG04": {
+            "title": "Vereinheitlichung von Validierungs- und Produktionsumgebungen",
+            "questions": [
+              "Verfügen die verschiedenen Umgebungen, die das System in seinem Lebenszyklus durchläuft (Entwicklung, Integration, Vorproduktion, Produktion), über gleichwertige Eigenschaften gemäß den definierten Robustheitszielen?"
+            ]
+          },
+          "MG05": {
+            "title": "Validierung in Hardware-Umgebungen, die die endgültigen Systemfähigkeiten replizieren",
+            "questions": [
+              "Wurde die Überprüfung und Validierung der gewählten Metriken in Hardware-Umgebungen durchgeführt, die die endgültigen Fähigkeiten, auf die das KI-System zugreifen kann, exakt replizieren?"
+            ]
+          },
+          "MG06": {
+            "title": "Leistungsmessung und Berechnungskomplexität",
+            "questions": [
+              "Wurden verschiedene Robustheitsmetriken in Bezug auf Leistung (FLOPS, Effizienz, FLOPY, Latenz usw.) für das System auf der für seinen Betrieb vorgesehenen Hardware definiert?"
+            ]
+          },
+          "MG07": {
+            "title": "Experimente zur Bewertung der Robustheit entwerfen",
+            "questions": [
+              "Gibt es einen Experimentplan zum Nachweis der Systemrobustheit, der auf mindestens einer der folgenden Methoden basiert: statistische, formale, empirische oder praktische Tests?"
+            ]
+          },
+          "MG08": {
+            "title": "Experimente mit realen Daten durchführen, Ergebnisse analysieren und interpretieren",
+            "questions": [
+              "Gibt es Nachweise über die durchgeführten Experimente, ihre Analyse und Interpretation sowie ihre Auswirkungen auf die Robustheitsparameter des KI-Systems?"
+            ]
+          },
+          "MG09": {
+            "title": "Fähigkeiten implementieren, um Degradationen zu beobachten, zu überwachen und zu melden",
+            "questions": [
+              "Wurden Verfahren und technische Maßnahmen zur Überwachung der Robustheit definiert, wie z. B. Systemschnittstellen, die ausgewählte Robustheitsmetriken in aggregierten und historischen Ansichten und Betriebsprotokollen anzeigen?"
+            ]
+          },
+          "MG10": {
+            "title": "Warntechniken und sichere Ausfallprotokolle konfigurieren",
+            "questions": [
+              "Gibt es Warnmechanismen, wenn die Systemrobustheit nicht innerhalb der festgelegten Parameter liegt?"
+            ]
+          },
+          "MG11": {
+            "title": "Bewertungsausschüsse einrichten, um Inkonsistenzen oder Ausfälle vorherzusehen",
+            "questions": [
+              "Wurden spezifische Ausschüsse oder Teams eingerichtet, um Inkonsistenzen oder mögliche Ausfälle in der Systemrobustheit proaktiv zu bewerten?"
+            ]
+          },
+          "MG12": {
+            "title": "Automatische Mechanismen zur Fehlerbehebung implementieren",
+            "questions": [
+              "Gibt es automatische Mechanismen, die entworfen und implementiert wurden, um die Systemwiederherstellung im Falle eines Ausfalls zu gewährleisten?"
+            ]
+          },
+          "MG13": {
+            "title": "Werkzeuge für geografische Redundanz, Versionierung und Skalierbarkeit implementieren",
+            "questions": [
+              "Wurden spezifische Werkzeuge oder Verfahren implementiert, um geografische Redundanz, angemessenes Versionsmanagement und Systemskalierbarkeit zu gewährleisten?"
+            ]
+          },
+          "MG14": {
+            "title": "Für kontinuierlich lernende Systeme: Sicherstellen, dass Robustheit, Genauigkeit und Leistung nicht nachlassen",
+            "questions": [
+              "Werden für Systeme, die weiter lernen, alle festgelegten Metriken (einschließlich Genauigkeit und Cybersicherheit) überwacht, um festzustellen, ob das System innerhalb der Designparameter bleibt?"
+            ]
+          },
+          "MG15": {
+            "title": "Für kontinuierlich lernende Systeme: Minderungsstrategien zur Minimierung von Modellabweichung und Verhinderung von Verzerrungsakkumulation anwenden",
+            "questions": [
+              "Wurden Überwachungs- und Kontrollpläne mit Maßnahmen bei Modelldegradation basierend auf Modellabweichung, Concept Drift, Data Drift usw. erstellt?"
+            ]
+          },
+          "MG16": {
+            "title": "Für kontinuierlich lernende Systeme: Interaktions- und Interoperabilitätsfälle mit anderen Systemen oder Menschen formell registrieren",
+            "questions": [
+              "Werden Interaktionen, Interoperabilität und während des Lebenszyklus erhaltenes Feedback formell registriert, insbesondere bei kontinuierlich lernenden Systemen, um die Nachverfolgbarkeit zu gewährleisten und die Robustheit zu verbessern?"
+            ]
+          }
+        }
+      },
+      "oversight": {
+        "title": "Aufsicht",
+        "article": "Article 14",
+        "items": {
+          "MG01": {
+            "title": "Design- und Entwicklungsmaßnahmen für eine wirksame Aufsicht",
+            "questions": [
+              "Verfügt das KI-System über ein zugehöriges Risikomanagementsystem gemäß Article 9?",
+              "Verfügt das System über ein zugehöriges Data-Governance-Modell gemäß Article 10?",
+              "Verfügt das System über eine technische Dokumentation gemäß Article 11?",
+              "Verfügt das System über ein Aufzeichnungsmanagement gemäß Article 12?",
+              "Verfügt das System über Transparenzmechanismen gemäß Article 13?",
+              "Verfügt das System über Genauigkeitsmechanismen gemäß Article 15?",
+              "Verfügt das System über Robustheitsmechanismen gemäß Article 15?",
+              "Verfügt das System über Cybersicherheitsmechanismen gemäß Article 15?"
+            ]
+          },
+          "MG02": {
+            "title": "Eine Mensch-Maschine-Schnittstelle ermöglichen",
+            "questions": [
+              "Verfügt das System über eine Schnittstelle zur Verwaltung seines Risikomanagementsystems gemäß Article 9?",
+              "Verfügt das System über eine Schnittstelle zur Verwaltung seines Data-Governance-Modells gemäß Article 10?",
+              "Verfügt das System über eine Schnittstelle zur Verwaltung seiner technischen Dokumentation?",
+              "Verfügt das System über eine Schnittstelle zur Verwaltung der Aufzeichnungsinformationen?",
+              "Verfügt das System über eine Schnittstelle zur Verwaltung der Transparenz?",
+              "Verfügt das System über eine Schnittstelle zur Verwaltung der Genauigkeit?",
+              "Verfügt das System über eine Schnittstelle zur Verwaltung der Robustheit?",
+              "Verfügt das System über eine Schnittstelle zur Verwaltung der Cybersicherheit?"
+            ]
+          },
+          "MG03": {
+            "title": "Governance-Modell",
+            "questions": [
+              "Wurde ein Governance-Modell eingerichtet, das während der Entwicklung und Nutzung gilt und mindestens eine Organisationsstruktur, Verfahren und Schulungen für seine Nutzung umfasst?",
+              "Für biometrische Fernidentifizierungssysteme: Beinhaltet das Governance-Modell die getrennte Validierung der Identifizierung durch mindestens zwei natürliche Personen mit den erforderlichen Kompetenzen, der Schulung und der Befugnis?"
+            ]
+          },
+          "MG04": {
+            "title": "Sensibilisierung: Erzwungener Fehler",
+            "questions": [
+              "Bietet das System eine Funktion für «erzwungene Fehler» oder eine gleichwertige Funktion, um Automatisierungsverzerrungen zu vermeiden?"
+            ]
+          },
+          "MG05": {
+            "title": "Human in/on the loop",
+            "questions": [
+              "Wurde im Governance-Modell des Systems der Autonomiegrad des Systems berücksichtigt, wobei der Zeitpunkt im Prozess detailliert wird, an dem die verantwortliche(n) Person(en) eingreifen?",
+              "Verfügt das System über agile Mechanismen, damit die verantwortliche Person seinen Betrieb unterbrechen kann?"
+            ]
+          },
+          "MG06": {
+            "title": "Risikomanagement",
+            "questions": [
+              "Verfügt das System über einen zugehörigen Risikomanagementplan?"
+            ]
+          },
+          "MG07": {
+            "title": "Transparenz",
+            "questions": [
+              "Verfügt das System über Transparenzmanagement-Mechanismen, die eine korrekte Überwachung ermöglichen?"
+            ]
+          },
+          "MG08": {
+            "title": "Aufzeichnungen",
+            "questions": [
+              "Erfüllt das System die Aufzeichnungsmaßnahmen, die darauf ausgerichtet sind, Transparenz über seine Funktionsweise zu bieten?"
+            ]
+          }
+        }
+      },
+      "transparency": {
+        "title": "Transparenz",
+        "article": "Article 13",
+        "items": {
+          "MG01": {
+            "title": "Kontakt mit dem Anbieter bereitstellen",
+            "questions": [
+              "Wird das System von einem Kanal begleitet, der die Online-Verwaltung von Anfragen und Vorfällen ermöglicht?",
+              "Verfügt das Governance-Modell über eine klare Kontaktstelle des Anbieters, die den Betreibern zur Verfügung steht?"
+            ]
+          },
+          "MG02": {
+            "title": "Die Geschäftsdomäne beachten",
+            "questions": [
+              "Deckt das System transparenzbezogene Anforderungen ab, die für seine unterstützten Anwendungsfälle gelten?",
+              "Stellt das System detaillierte Informationen über seinen funktionalen Umfang bereit und spezifiziert auch mögliche Risiken aus unbeabsichtigten Verwendungen?"
+            ]
+          },
+          "MG03": {
+            "title": "Das funktionale Ziel des Systems sicherstellen",
+            "questions": [
+              "Stellt das System Informationen über vorhersehbare Umstände bereit, unter denen es für andere als die vorgesehenen Zwecke verwendet werden könnte?",
+              "Wird das System von einem Risikoplan für solche Verwendungen begleitet?",
+              "Verfügt das System über ein zugehöriges Verfahren, um zu überwachen, dass solche Verwendungen während des Betriebs nicht auftreten?"
+            ]
+          },
+          "MG04": {
+            "title": "Transparenz über verwendete Daten",
+            "questions": [
+              "Identifiziert das System die sowohl für sein Lernen als auch für seine Nutzung verwendeten Datenquellen und stellt auch die Bedeutung, den Nutzen und die Auswirkungen der Verwendung dieser Quellen und Daten bereit?",
+              "Wird das System von Werkzeugen begleitet, die eine detaillierte explorative Datenanalyse (EDA) dieser Quellen ermöglichen?"
+            ]
+          },
+          "MG05": {
+            "title": "Detaillierung vom Globalen zum Besonderen",
+            "questions": [
+              "Stellt das System technische Mechanismen bereit, die das Verständnis seines globalen Schlussfolgerungsmechanismus erleichtern?",
+              "Stellt das System technische Mechanismen bereit, die das Verständnis seiner Aktionen auf einer Teilmenge von Informationen mit ähnlichen Merkmalen erleichtern, um die Funktionshomogenität zu gewährleisten?",
+              "Stellt das System technische Mechanismen bereit, die das Verständnis jeder einzelnen Aktion erleichtern?"
+            ]
+          },
+          "MG06": {
+            "title": "Die Sprache anpassen",
+            "questions": [
+              "Stellt das System Mechanismen bereit, die das Verständnis seiner globalen Schlussfolgerung in einer für alle Akteure, die während seines Lebenszyklus mit dem System interagieren, verständlichen Sprache erleichtern?",
+              "Stellt das System Mechanismen bereit, die das Verständnis seiner Aktionen auf Informationsteilmengen in verständlicher Sprache erleichtern?",
+              "Stellt das System Mechanismen bereit, die das Verständnis einzelner Systemaktionen in verständlicher Sprache erleichtern?"
+            ]
+          },
+          "MG07": {
+            "title": "Komplexität verwalten",
+            "questions": [
+              "Kann die technische Komplexität des KI-Systems die Transparenzanforderungen unter bestimmten Umständen blockieren?",
+              "Für Black-Box-Modelle: Stellt der Anbieter Werkzeuge bereit, die Transparenz über das System ermöglichen?"
+            ]
+          },
+          "MG08": {
+            "title": "Im System-Lebenszyklus integrierte Metriken verwenden",
+            "questions": [
+              "Stellt das System Metriken zu Daten, Modell, Ergebnisqualität und KI-Systemleistung bereit und spezifiziert Mindestwerte, bei deren Unterschreitung ein erneutes Training oder ein Betriebsstopp erforderlich ist?",
+              "Wird das System von einem kontinuierlichen Integrationssystem (MLOps) begleitet, das identifiziert, wie sich Metrikänderungen auf verschiedene Versionen/Releases auswirken?"
+            ]
+          },
+          "MG09": {
+            "title": "Vorsicht walten lassen",
+            "questions": [
+              "Verfügt das System über geeignete technische Mechanismen, die verhindern, dass es sensible Informationen bereitstellt (vertrauliche Informationen oder Informationen, die relevante Geschäftsprozessdetails offenbaren, die seinen Betrieb gefährden könnten)?"
+            ]
+          },
+          "MG10": {
+            "title": "Kausalität verwenden, Korrelationen minimieren",
+            "questions": [
+              "Stellt das System Werkzeuge bereit, die Korrelationen identifizieren und analysieren, sowie explizit unerwünschte Korrelationen, die die Systemtransparenz behindern oder seine Genauigkeit beeinträchtigen könnten?"
+            ]
+          },
+          "MG11": {
+            "title": "Kontrafaktizität verwenden",
+            "questions": [
+              "Stellt das System technische Mechanismen bereit, die die Gewinnung von Kontrafaktualen ermöglichen, um das Verständnis zu erleichtern?"
+            ]
+          },
+          "MG12": {
+            "title": "Einen Kanal mit Systemnutzungsinformationen bereitstellen",
+            "questions": [
+              "Wird das System von einem Medium (Web-/Wiki-/Dokumentationsseite) begleitet, das Informationen darüber zusammenstellt und darauf ausgerichtet ist, Transparenz über seine Funktionsweise zu erleichtern, zugänglich für Personen mit jeder Verantwortungsstufe?"
+            ]
+          },
+          "MG13": {
+            "title": "Article 9: Risikomanagementsystem",
+            "questions": [
+              "Verfügt das System über einen zugehörigen Risikomanagementplan?"
+            ]
+          },
+          "MG14": {
+            "title": "Article 14: Menschliche Aufsicht",
+            "questions": [
+              "Erfüllt das System die Maßnahmen zur menschlichen Aufsicht?"
+            ]
+          },
+          "MG15": {
+            "title": "Article 15: Genauigkeit, Robustheit und Cybersicherheit",
+            "questions": [
+              "Erfüllt das System die Maßnahmen für Genauigkeit, Robustheit und Cybersicherheit, die darauf ausgerichtet sind, Transparenz zu bieten?"
+            ]
+          },
+          "MG16": {
+            "title": "Article 12: Aufzeichnungen",
+            "questions": [
+              "Erfüllt das System die Aufzeichnungsmaßnahmen, die darauf ausgerichtet sind, Transparenz zu bieten?"
+            ]
+          }
+        }
+      },
+      "surveillance": {
+        "title": "Überwachung",
+        "article": "Article 72",
+        "items": {
+          "MG01": {
+            "title": "Das Überwachungssystem unter Berücksichtigung aller hervorgehobenen Risiken entwerfen",
+            "questions": [
+              "Wurden alle relevanten Risiken im Zusammenhang mit der Produktionsumgebung und der Systemnutzung umfassend identifiziert und dokumentiert?",
+              "Integriert der Entwurf des Überwachungssystems spezifische Maßnahmen, die auf jedes identifizierte Risiko eingehen?"
+            ]
+          },
+          "MG02": {
+            "title": "Indikatoren erstellen, die alle Aspekte der Umgebung abdecken",
+            "questions": [
+              "Wurden Schlüsselindikatoren definiert, die kritische Aspekte der Betriebsumgebung (intelligentes System, Infrastruktur, Cybersicherheit, Benutzer) umfassend abdecken?",
+              "Basiert die Auswahl der Indikatoren auf Relevanz- und Umgebungskritikalitätskriterien mit entsprechender dokumentierter Begründung?",
+              "Wurde die Wirksamkeit und Relevanz der Indikatoren in realen oder simulierten Szenario-Tests validiert?"
+            ]
+          },
+          "MG03": {
+            "title": "Normalitätsskalen für jeden Indikator festlegen",
+            "questions": [
+              "Wurden Normalitätsskalen oder akzeptable Wertbereiche für jeden Indikator auf der Grundlage historischer Analysen und erwarteter Szenarien festgelegt?",
+              "Ist die Festlegung dieser Skalen angemessen begründet und auf reale Betriebsbedingungen abgestimmt?",
+              "Gibt es einen Mechanismus zur regelmäßigen Aktualisierung der Skalen basierend auf der Umgebungsentwicklung oder neuen gesammelten Daten?"
+            ]
+          },
+          "MG04": {
+            "title": "Ein Echtzeit-Warnsystem integrieren",
+            "questions": [
+              "Enthält das System einen Echtzeit-Warnmechanismus, der Schlüsselindikatoren kontinuierlich überwacht?",
+              "Wurden kritische Schwellenwerte konfiguriert, bei deren Überschreitung sofortige Warnungen an die Verantwortlichen ausgelöst werden?",
+              "Wurden sowohl in simulierten als auch in realen Umgebungen Tests durchgeführt, um die Zuverlässigkeit und Geschwindigkeit der Warnauslösung zu gewährleisten?"
+            ]
+          },
+          "MG05": {
+            "title": "Das Post-Market-Überwachungssystem in der Produktion bereitstellen",
+            "questions": [
+              "Wurde ein kontrollierter Bereitstellungsprozess für das Überwachungssystem in der Produktionsumgebung geplant und dokumentiert?",
+              "Wurde das Überwachungssystem in der Produktion bereitgestellt?"
+            ]
+          },
+          "MG06": {
+            "title": "Produktionstests des Überwachungssystems durchführen",
+            "questions": [
+              "Wurden Tests in der Produktionsumgebung durchgeführt, um die Betriebsfähigkeit und Robustheit des Überwachungssystems zu validieren?"
+            ]
+          },
+          "MG07": {
+            "title": "Die kontinuierliche und periodische Überwachungsrichtlinie festlegen",
+            "questions": [
+              "Gibt es eine formelle Richtlinie, die sowohl kontinuierliches Monitoring als auch periodische Überprüfungen des Überwachungssystems vorsieht?",
+              "Sind die Rollen und Verantwortlichkeiten im Zusammenhang mit der Überwachung klar definiert und vom Management unterstützt?",
+              "Wird die Richtlinie regelmäßig überprüft und aktualisiert, um sich an Umgebungsänderungen oder neue Risiken anzupassen?"
+            ]
+          },
+          "MG08": {
+            "title": "Anomale Szenarien berücksichtigen, die die Leistung des Überwachungssystems beeinflussen könnten",
+            "questions": [
+              "Wurden mögliche anomale Szenarien identifiziert und dokumentiert, die die Leistung des Überwachungssystems beeinträchtigen könnten?",
+              "Gibt es Notfallpläne und spezifische Maßnahmen für die Bewältigung jedes dieser Szenarien?"
+            ]
+          },
+          "MG09": {
+            "title": "Führung und Engagement für das Überwachungssystem-Management formalisieren",
+            "questions": [
+              "Wurde eine Führungskraft oder ein Verantwortlicher für das Post-Market-Überwachungsmanagement mit der notwendigen Befugnis benannt?",
+              "Spiegelt sich das Engagement der Geschäftsleitung in der Ressourcenzuweisung und internen Kommunikation wider?",
+              "Gibt es eine Dokumentation des Überwachungsplans, die die Führung und Koordination der Überwachungsaktivitäten belegt?"
+            ]
+          },
+          "MG10": {
+            "title": "Ein Reaktionsteam zuweisen",
+            "questions": [
+              "Wurde ein spezifisches, ordnungsgemäß geschultes Team gebildet, um auf Warnungen und vom Überwachungssystem erkannte Vorfälle zu reagieren?",
+              "Sind die Rollen und Verantwortlichkeiten des Reaktionsteams klar definiert und kommuniziert?"
+            ]
+          },
+          "MG11": {
+            "title": "Das Reaktionsprotokoll definieren",
+            "questions": [
+              "Gibt es ein formelles und dokumentiertes Reaktionsprotokoll, das die bei Vorfallserkennung zu ergreifenden Maßnahmen detailliert beschreibt?",
+              "Wurde die Vorlage für den Vorfallsbericht erstellt?"
+            ]
+          },
+          "MG12": {
+            "title": "Notwendige Schulungsaktivitäten durchführen",
+            "questions": [
+              "Wurden die Schulungsbedürfnisse für alle an der Post-Market-Überwachung beteiligten Mitarbeiter identifiziert?",
+              "Werden Schulungsübungen und Reaktionssimulationen durchgeführt, um die Wirksamkeit zu bewerten und die Teamkoordination zu verbessern?"
+            ]
+          },
+          "MG13": {
+            "title": "Überprüfungs- und Überwachungszeiträume festlegen",
+            "questions": [
+              "Wurden regelmäßige Zeiträume für die Überprüfung der Funktionsweise und Wirksamkeit des Überwachungssystems definiert und dokumentiert?"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

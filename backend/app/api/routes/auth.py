@@ -8,7 +8,13 @@ from app.core.database import get_db
 from app.core.security import create_access_token, hash_password, verify_password
 from app.models.invite_token import InviteToken
 from app.models.user import User
-from app.schemas.auth import LoginRequest, RegisterRequest, TokenResponse, UserResponse
+from app.schemas.auth import (
+    LoginRequest,
+    RegisterRequest,
+    TokenResponse,
+    UserResponse,
+    UserSelfUpdateRequest,
+)
 from app.services.seed import create_sample_project
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
@@ -68,6 +74,20 @@ def login(body: LoginRequest, db: Session = Depends(get_db)):
 
 @router.get("/me", response_model=UserResponse)
 def me(current_user: User = Depends(get_current_user)):
+    return current_user
+
+
+@router.patch("/me", response_model=UserResponse)
+def update_me(
+    body: UserSelfUpdateRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Update the current user's preferences (e.g. language)."""
+    if body.language_preference is not None:
+        current_user.language_preference = body.language_preference
+    db.commit()
+    db.refresh(current_user)
     return current_user
 
 

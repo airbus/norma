@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -32,6 +33,7 @@ function GitHubConnectForm({
   onSaved: () => void;
   onOpenChange: (open: boolean) => void;
 }) {
+  const { t } = useTranslation(['components', 'common']);
   const [pat, setPat] = useState('');
   const [repoOwner, setRepoOwner] = useState(existing?.repo_owner ?? '');
   const [repoName, setRepoName] = useState(existing?.repo_name ?? '');
@@ -68,7 +70,7 @@ function GitHubConnectForm({
       onSaved();
       onOpenChange(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save');
+      setError(err instanceof Error ? err.message : t('common:errors.failedToSave'));
     } finally {
       setLoading(false);
     }
@@ -83,7 +85,7 @@ function GitHubConnectForm({
       onSaved();
       onOpenChange(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to disconnect');
+      setError(err instanceof Error ? err.message : t('common:errors.failedToDisconnect'));
     } finally {
       setLoading(false);
     }
@@ -92,16 +94,16 @@ function GitHubConnectForm({
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{existing ? 'Edit GitHub Integration' : 'Connect GitHub'}</DialogTitle>
-        <DialogDescription>
-          Link a GitHub repository to sync tasks and analyse architecture.
-        </DialogDescription>
+        <DialogTitle>
+          {existing ? t('githubConnect.editTitle') : t('githubConnect.connectTitle')}
+        </DialogTitle>
+        <DialogDescription>{t('githubConnect.description')}</DialogDescription>
       </DialogHeader>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
           <div className="flex items-center gap-1.5">
             <Label htmlFor="github-pat">
-              Personal Access Token{existing ? ' (leave blank to keep current)' : ''}
+              {existing ? t('githubConnect.patLabelKeep') : t('githubConnect.patLabel')}
             </Label>
             <Tooltip>
               <TooltipTrigger
@@ -112,9 +114,7 @@ function GitHubConnectForm({
                 <HelpCircle className="size-3.5" />
               </TooltipTrigger>
               <TooltipContent side="right" className="max-w-64">
-                Go to GitHub → Settings → Developer settings → Personal access tokens → Tokens
-                (classic) → Generate new token. Select the "repo" scope for private repos or
-                "public_repo" for public repos.
+                {t('githubConnect.patTooltip')}
               </TooltipContent>
             </Tooltip>
           </div>
@@ -127,31 +127,31 @@ function GitHubConnectForm({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="repo-owner">Repository Owner</Label>
+          <Label htmlFor="repo-owner">{t('githubConnect.repoOwner')}</Label>
           <Input
             id="repo-owner"
             value={repoOwner}
             onChange={(e) => setRepoOwner(e.target.value)}
-            placeholder="e.g. octocat"
+            placeholder={t('githubConnect.repoOwnerPlaceholder')}
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="repo-name">Repository Name</Label>
+          <Label htmlFor="repo-name">{t('githubConnect.repoName')}</Label>
           <Input
             id="repo-name"
             value={repoName}
             onChange={(e) => setRepoName(e.target.value)}
-            placeholder="e.g. hello-world"
+            placeholder={t('githubConnect.repoNamePlaceholder')}
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="project-number">GitHub Project Number (optional)</Label>
+          <Label htmlFor="project-number">{t('githubConnect.projectNumber')}</Label>
           <Input
             id="project-number"
             type="number"
             value={projectNumber}
             onChange={(e) => setProjectNumber(e.target.value)}
-            placeholder="e.g. 1"
+            placeholder={t('githubConnect.projectNumberPlaceholder')}
           />
         </div>
         {error && <p className="text-sm text-destructive">{error}</p>}
@@ -163,14 +163,14 @@ function GitHubConnectForm({
               onClick={handleDisconnect}
               disabled={loading}
             >
-              Disconnect
+              {t('common:buttons.disconnect')}
             </Button>
           ) : (
             <div />
           )}
           <div className="flex gap-2">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancel
+              {t('common:buttons.cancel')}
             </Button>
             <Button
               type="submit"
@@ -178,7 +178,7 @@ function GitHubConnectForm({
                 loading || !repoOwner.trim() || !repoName.trim() || (!existing && !pat.trim())
               }
             >
-              {existing ? 'Update' : 'Connect'}
+              {existing ? t('common:buttons.update') : t('common:buttons.connect')}
             </Button>
           </div>
         </div>

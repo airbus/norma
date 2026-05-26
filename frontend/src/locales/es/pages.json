@@ -1,0 +1,98 @@
+{
+  "chat": {
+    "title": "Chat",
+    "greeting": "¡Hola, soy Norma! ¿En qué puedo ayudarle?",
+    "subtitle": "Consúlteme sobre el cumplimiento del Reglamento Europeo de IA, la clasificación de riesgo de su proyecto o cualquier pregunta normativa.",
+    "placeholder": "Consultar a Norma",
+    "disclaimer": "Norma puede cometer errores. Verifique la información importante.",
+    "errorMessage": "Lo siento, se ha producido un error al procesar su solicitud. Por favor, inténtelo de nuevo."
+  },
+  "login": {
+    "title": "Inicie sesión en su cuenta"
+  },
+  "register": {
+    "createAccount": "Cree su cuenta",
+    "setupAdmin": "Configure su cuenta de administrador",
+    "inviteInvalid": "Este enlace de invitación no es válido o ha expirado.",
+    "verifyFailed": "No se ha podido verificar el estado del registro.",
+    "alreadyHaveAccount": "¿Ya tiene una cuenta?"
+  },
+  "settings": {
+    "title": "Configuración",
+    "preferences": "Preferencias",
+    "customise": "Personalice su experiencia con Norma.",
+    "theme": "Tema",
+    "themeLight": "Claro",
+    "themeDark": "Oscuro",
+    "themeSystem": "Sistema",
+    "language": "Idioma",
+    "dangerZone": "Zona de peligro",
+    "dangerZoneDesc": "Acciones irreversibles para el proyecto actual.",
+    "deleteProjectDesc": "Eliminar permanentemente «{{name}}» y todos los datos asociados.",
+    "deleteProjectConfirm": "¿Está seguro de que desea eliminar «{{name}}»? Esta acción no se puede deshacer."
+  },
+  "description": {
+    "title": "Descripción",
+    "noProject": "Seleccione o cree un proyecto para comenzar.",
+    "riskBannerDesc": "Este sistema requiere el cumplimiento total de las obligaciones del Reglamento de IA antes de su comercialización.",
+    "riskBannerChat": "Hábleme sobre la clasificación de riesgo de mi proyecto",
+    "overview": "Vista general",
+    "projectSummary": "Resumen del proyecto",
+    "projectSummaryDesc": "Información básica sobre el sistema de IA.",
+    "intendedPurpose": "Finalidad prevista",
+    "intendedPurposeDesc": "¿Cuál es la función prevista del sistema?",
+    "intendedPurposePlaceholder": "Describa la finalidad prevista del sistema de IA...",
+    "intendedUsers": "Usuarios previstos",
+    "intendedUsersDesc": "¿Quién operará o se verá afectado por este sistema?",
+    "intendedUsersPlaceholder": "Describa los usuarios previstos y las personas afectadas...",
+    "deploymentContext": "Contexto de despliegue",
+    "deploymentContextDesc": "¿Dónde y cómo se desplegará el sistema?",
+    "deploymentContextPlaceholder": "Describa el contexto de despliegue, el sector y el ámbito geográfico..."
+  },
+  "documents": {
+    "title": "Documentos",
+    "riskBannerDesc": "Documentos necesarios para el cumplimiento normativo según su clasificación de riesgo.",
+    "riskBannerChat": "¿Qué documentos nos faltan para la evaluación de conformidad?",
+    "additional": "Adicionales",
+    "uploadedCount": "{{count}} de {{total}} subidos",
+    "noAdditionalDocs": "Aún no se han subido documentos adicionales. Suba cualquier PDF para incluirlo en el contexto de su proyecto.",
+    "deleteDocument": "Eliminar documento"
+  },
+  "reporting": {
+    "title": "Informes",
+    "riskBannerDesc": "Complete la lista de verificación de cumplimiento para cada área de requisitos del Reglamento Europeo de IA.",
+    "riskBannerChat": "¿Cuáles son los requisitos clave de informes para nuestro proyecto?"
+  },
+  "github": {
+    "title": "GitHub",
+    "syncSteps": {
+      "issues": "Obteniendo incidencias",
+      "tree": "Analizando repositorio",
+      "files": "Obteniendo archivos fuente",
+      "analysis": "Generando análisis"
+    },
+    "lastSynced": "Última sincronización: {{date}}",
+    "tasks": "Tareas",
+    "architecture": "Arquitectura",
+    "context": "Contexto",
+    "all": "Todos",
+    "assigneePlaceholder": "Responsable",
+    "labelPlaceholder": "Etiqueta",
+    "sprintPlaceholder": "Sprint",
+    "statusPlaceholder": "Estado",
+    "noTasks": "No se encontraron tareas. Haga clic en Sincronizar para obtener tareas de GitHub.",
+    "noIntegration": "No se ha configurado ninguna integración con GitHub.",
+    "noArchitecture": "Aún no hay diagrama de arquitectura. Haga clic en Sincronizar para analizar el repositorio.",
+    "contextDescription": "Este archivo markdown se utiliza como contexto para el chatbot de Norma. Puede editarlo antes de iniciar una nueva sesión de chat.",
+    "savedSuccessfully": "Guardado correctamente",
+    "noContext": "Aún no hay archivo de contexto. Haga clic en Sincronizar con GitHub para generarlo.",
+    "assignedTo": "Asignado a: {{assignees}}"
+  },
+  "integrations": {
+    "title": "Integraciones",
+    "githubDesc": "Conecte un repositorio de GitHub para sincronizar tareas y analizar la arquitectura."
+  },
+  "frameworks": {
+    "title": "Marcos normativos"
+  }
+}

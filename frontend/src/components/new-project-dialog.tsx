@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,7 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import { SectionPanel } from '@/components/questionnaire/section-panel';
 import { useProject } from '@/hooks/use-project';
-import { QUESTIONNAIRE_SECTIONS } from '@/data/questionnaire';
+import { getQuestionnaireSections } from '@/data/questionnaire';
 
 interface NewProjectDialogProps {
   open: boolean;
@@ -23,8 +24,10 @@ interface NewProjectDialogProps {
 }
 
 export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) {
+  const { t } = useTranslation(['components', 'common', 'data']);
   const navigate = useNavigate();
   const { createProject } = useProject();
+  const questionnaireSections = getQuestionnaireSections(t);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [intendedPurpose, setIntendedPurpose] = useState('');
@@ -71,17 +74,15 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
     >
       <DialogContent className="sm:max-w-4xl h-[85vh] overflow-hidden flex flex-col backdrop-blur-lg">
         <DialogHeader>
-          <DialogTitle>Create a new project</DialogTitle>
-          <DialogDescription>
-            Set up a new AI system project to begin tracking compliance.
-          </DialogDescription>
+          <DialogTitle>{t('newProjectDialog.title')}</DialogTitle>
+          <DialogDescription>{t('newProjectDialog.description')}</DialogDescription>
         </DialogHeader>
 
         <div className="flex-1 overflow-auto -mx-4 px-4">
           <Tabs defaultValue="overview">
             <TabsList className="mb-6 w-full justify-start">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              {QUESTIONNAIRE_SECTIONS.map((section) => (
+              <TabsTrigger value="overview">{t('newProjectDialog.overview')}</TabsTrigger>
+              {questionnaireSections.map((section) => (
                 <TabsTrigger key={section.id} value={section.id}>
                   {section.title}
                 </TabsTrigger>
@@ -92,27 +93,27 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
               <div className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Project Summary</CardTitle>
-                    <CardDescription>Basic information about the AI system.</CardDescription>
+                    <CardTitle>{t('newProjectDialog.projectSummary')}</CardTitle>
+                    <CardDescription>{t('newProjectDialog.projectSummaryDesc')}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <form id="new-project-form" onSubmit={handleSubmit} className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="project-name">Name</Label>
+                        <Label htmlFor="project-name">{t('common:form.name')}</Label>
                         <Input
                           id="project-name"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          placeholder="e.g. Predictive Maintenance"
+                          placeholder={t('newProjectDialog.namePlaceholder')}
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="project-desc">Description</Label>
+                        <Label htmlFor="project-desc">{t('common:form.description')}</Label>
                         <Textarea
                           id="project-desc"
                           value={description}
                           onChange={(e) => setDescription(e.target.value)}
-                          placeholder="Brief description of the AI system..."
+                          placeholder={t('newProjectDialog.descriptionPlaceholder')}
                           rows={3}
                         />
                       </div>
@@ -122,15 +123,15 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Intended Purpose</CardTitle>
-                    <CardDescription>What is the system designed to do?</CardDescription>
+                    <CardTitle>{t('newProjectDialog.intendedPurpose')}</CardTitle>
+                    <CardDescription>{t('newProjectDialog.intendedPurposeDesc')}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Textarea
                       form="new-project-form"
                       value={intendedPurpose}
                       onChange={(e) => setIntendedPurpose(e.target.value)}
-                      placeholder="Describe the intended purpose of the AI system..."
+                      placeholder={t('newProjectDialog.intendedPurposePlaceholder')}
                       rows={4}
                     />
                   </CardContent>
@@ -138,17 +139,15 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Intended Users</CardTitle>
-                    <CardDescription>
-                      Who will operate or be affected by this system?
-                    </CardDescription>
+                    <CardTitle>{t('newProjectDialog.intendedUsers')}</CardTitle>
+                    <CardDescription>{t('newProjectDialog.intendedUsersDesc')}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Textarea
                       form="new-project-form"
                       value={intendedUsers}
                       onChange={(e) => setIntendedUsers(e.target.value)}
-                      placeholder="Describe the intended users and affected persons..."
+                      placeholder={t('newProjectDialog.intendedUsersPlaceholder')}
                       rows={4}
                     />
                   </CardContent>
@@ -156,15 +155,15 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Deployment Context</CardTitle>
-                    <CardDescription>Where and how will the system be deployed?</CardDescription>
+                    <CardTitle>{t('newProjectDialog.deploymentContext')}</CardTitle>
+                    <CardDescription>{t('newProjectDialog.deploymentContextDesc')}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Textarea
                       form="new-project-form"
                       value={deploymentContext}
                       onChange={(e) => setDeploymentContext(e.target.value)}
-                      placeholder="Describe the deployment context, sector, and geographic scope..."
+                      placeholder={t('newProjectDialog.deploymentContextPlaceholder')}
                       rows={4}
                     />
                   </CardContent>
@@ -172,7 +171,7 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
               </div>
             </TabsContent>
 
-            {QUESTIONNAIRE_SECTIONS.map((section) => (
+            {questionnaireSections.map((section) => (
               <TabsContent key={section.id} value={section.id}>
                 <SectionPanel
                   section={section}
@@ -186,10 +185,10 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
 
         <div className="-mx-4 -mb-4 flex justify-end gap-2 rounded-b-xl border-t bg-muted/50 p-4">
           <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            {t('common:buttons.cancel')}
           </Button>
           <Button type="submit" form="new-project-form" disabled={!name.trim()}>
-            Create project
+            {t('newProjectDialog.createProject')}
           </Button>
         </div>
       </DialogContent>
