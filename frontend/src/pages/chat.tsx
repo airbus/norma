@@ -236,7 +236,9 @@ export function ChatPage() {
               </div>
             </div>
           ) : (
-            <div className={`mx-auto max-w-3xl space-y-6 px-4 pt-8 ${awaitingReply ? 'pb-[50vh]' : 'pb-4'}`}>
+            <div
+              className={`mx-auto max-w-3xl space-y-6 px-4 pt-8 ${awaitingReply ? 'pb-[50vh]' : 'pb-4'}`}
+            >
               {(() => {
                 const lastUserIdx = messages.findLastIndex((m) => m.role === 'user');
                 return messages.map((msg, idx) =>

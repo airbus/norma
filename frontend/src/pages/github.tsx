@@ -187,10 +187,7 @@ export function GitHubPage() {
         return cleaned
           .map((line) => {
             if (!line.includes('-->') && !line.includes('---')) return line;
-            return line.replace(
-              /(\w+)\[[^\]]*\]/g,
-              (full, id) => (defined.has(id) ? id : full),
-            );
+            return line.replace(/(\w+)\[[^\]]*\]/g, (full, id) => (defined.has(id) ? id : full));
           })
           .join('\n');
       })();
@@ -300,9 +297,9 @@ export function GitHubPage() {
           <Tabs defaultValue="tasks">
             <div className="mb-4 flex items-center justify-between">
               <TabsList>
-              <TabsTrigger value="tasks">Tasks</TabsTrigger>
-              <TabsTrigger value="architecture">Architecture</TabsTrigger>
-              {/* <TabsTrigger value="context" onClick={() => !contextLoaded && fetchContextFile()}>
+                <TabsTrigger value="tasks">Tasks</TabsTrigger>
+                <TabsTrigger value="architecture">Architecture</TabsTrigger>
+                {/* <TabsTrigger value="context" onClick={() => !contextLoaded && fetchContextFile()}>
                 Context
               </TabsTrigger> */}
               </TabsList>
@@ -315,7 +312,13 @@ export function GitHubPage() {
                 {integration?.sync_status === 'error' && !syncing && (
                   <Badge variant="destructive">Sync error</Badge>
                 )}
-                <Button size="sm" variant="outline" className="cursor-pointer" onClick={handleSync} disabled={syncing}>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="cursor-pointer"
+                  onClick={handleSync}
+                  disabled={syncing}
+                >
                   {syncing ? (
                     <Loader2 className="mr-1 size-4 animate-spin" />
                   ) : (
@@ -522,7 +525,11 @@ export function GitHubPage() {
                 >
                   Open on GitHub <ExternalLink className="size-3" />
                 </a>
-                <Button variant="outline" className="cursor-pointer" onClick={() => setSelectedTask(null)}>
+                <Button
+                  variant="outline"
+                  className="cursor-pointer"
+                  onClick={() => setSelectedTask(null)}
+                >
                   Close
                 </Button>
               </div>
