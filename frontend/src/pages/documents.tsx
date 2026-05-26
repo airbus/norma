@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CheckCircle2, Circle, FileText, Loader2, Trash2, Upload } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
@@ -11,19 +12,36 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { AskNormaButton } from '@/components/ask-norma-button';
 import { PageHeader } from '@/components/page-header';
-import { RiskBanner } from '@/components/risk-banner';
 import { useProject } from '@/hooks/use-project';
-import { api, type CustomDocumentItem, type DocumentItem } from '@/lib/api';
+import { api, type CustomDocumentItem, type DocumentItem, type Framework } from '@/lib/api';
 
 export function DocumentsPage() {
   const { currentProject } = useProject();
+  const { frameworkId } = useParams<{ frameworkId: string }>();
+  const navigate = useNavigate();
   const [documents, setDocuments] = useState<DocumentItem[]>([]);
   const [customDocs, setCustomDocs] = useState<CustomDocumentItem[]>([]);
+  const [frameworks, setFrameworks] = useState<Framework[]>([]);
   const [uploadingId, setUploadingId] = useState<string | null>(null);
   const [customUploading, setCustomUploading] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const redirected = useRef(false);
+
+  useEffect(() => {
+    api
+      .get<Framework[]>('/frameworks')
+      .then(setFrameworks)
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (!frameworkId && frameworks.length > 0 && !redirected.current) {
+      redirected.current = true;
+      navigate(`/documents/${frameworks[0].id}`, { replace: true });
+    }
+  }, [frameworkId, frameworks, navigate]);
 
   useEffect(() => {
     if (!currentProject) return;
@@ -45,26 +63,16 @@ export function DocumentsPage() {
     };
   }, [currentProject]);
 
-  const grouped = useMemo(() => {
-    const map = new Map<string, DocumentItem[]>();
-    for (const doc of documents) {
-      const list = map.get(doc.framework_name) ?? [];
-      list.push(doc);
-      map.set(doc.framework_name, list);
-    }
-    return map;
-  }, [documents]);
+  const isAdditional = frameworkId === 'additional';
+  const currentFramework = frameworks.find((fw) => fw.id === frameworkId);
+  const filteredDocs = documents.filter((d) => d.framework_id === frameworkId);
+  const uploadedCount = filteredDocs.filter((d) => d.uploaded).length;
 
-  const frameworkKeys = useMemo(() => [...grouped.keys()], [grouped]);
-  const defaultSet = useRef(false);
-  const [activeTab, setActiveTab] = useState<string>('additional');
-
-  useEffect(() => {
-    if (frameworkKeys.length > 0 && !defaultSet.current) {
-      defaultSet.current = true;
-      setActiveTab(frameworkKeys.find((k) => k.includes('EU AI Act')) ?? frameworkKeys[0]);
-    }
-  }, [frameworkKeys]);
+  const pageTitle = isAdditional
+    ? 'Additional Documents'
+    : currentFramework
+      ? `Documents > ${currentFramework.name}`
+      : 'Documents';
 
   const handleUpload = async (docId: string, file: File) => {
     if (!currentProject) return;
@@ -113,106 +121,19 @@ export function DocumentsPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title="Documents" />
+      <PageHeader title={pageTitle}>
+        {currentFramework ? (
+          <AskNormaButton question={`Evaluate my ${currentFramework.name} documents`} />
+        ) : isAdditional ? (
+          <AskNormaButton question="Evaluate my additional supporting documents" />
+        ) : null}
+      </PageHeader>
 
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-4xl space-y-6">
-          {currentProject && (
-            <RiskBanner
-              riskClassification={currentProject.risk_classification}
-              description="Documents required for regulatory compliance based on your risk classification."
-              chatMessage="What documents are we missing for conformity assessment?"
-            />
-          )}
-
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="mb-6 w-full justify-start">
-              {frameworkKeys.map((name) => (
-                <TabsTrigger key={name} value={name}>
-                  {name}
-                </TabsTrigger>
-              ))}
-              <TabsTrigger value="additional">Additional</TabsTrigger>
-            </TabsList>
-
-            {[...grouped.entries()].map(([framework, docs]) => {
-              const uploadedCount = docs.filter((d) => d.uploaded).length;
-              return (
-                <TabsContent key={framework} value={framework}>
-                  <div className="mb-3 flex items-center justify-between">
-                    <Badge variant="outline">
-                      {uploadedCount} of {docs.length} uploaded
-                    </Badge>
-                  </div>
-
-                  <div className="overflow-hidden rounded-lg border">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-8" />
-                          <TableHead>Document</TableHead>
-                          <TableHead className="w-24 text-right pr-6" />
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {docs.map((doc) => (
-                          <TableRow key={doc.id}>
-                            <TableCell className="pr-0">
-                              {doc.uploaded ? (
-                                <CheckCircle2 className="size-4 text-primary" />
-                              ) : (
-                                <Circle className="size-4 text-muted-foreground/40" />
-                              )}
-                            </TableCell>
-                            <TableCell>
-                              <div className="flex items-center gap-2">
-                                <span className="text-sm font-medium">{doc.name}</span>
-                                {doc.article && (
-                                  <Badge variant="secondary" className="text-xs">
-                                    {doc.article}
-                                  </Badge>
-                                )}
-                              </div>
-                              <p className="text-muted-foreground text-xs whitespace-normal">
-                                {doc.description}
-                              </p>
-                            </TableCell>
-                            <TableCell className="text-right pr-4">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="w-24 cursor-pointer"
-                                disabled={uploadingId === doc.id}
-                                onClick={() => {
-                                  const input = document.createElement('input');
-                                  input.type = 'file';
-                                  input.accept = '.pdf';
-                                  input.onchange = (e) => {
-                                    const file = (e.target as HTMLInputElement).files?.[0];
-                                    if (file) handleUpload(doc.id, file);
-                                  };
-                                  input.click();
-                                }}
-                              >
-                                <Upload className="mr-1 size-3" />
-                                {uploadingId === doc.id
-                                  ? '...'
-                                  : doc.uploaded
-                                    ? 'Replace'
-                                    : 'Upload'}
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
-                </TabsContent>
-              );
-            })}
-
-            <TabsContent value="additional">
-              <div className="mb-3 flex items-center justify-end">
+          {isAdditional ? (
+            <>
+              <div className="flex items-center justify-end">
                 <Button
                   variant="outline"
                   size="sm"
@@ -293,8 +214,85 @@ export function DocumentsPage() {
                   context.
                 </div>
               )}
-            </TabsContent>
-          </Tabs>
+            </>
+          ) : (
+            <>
+              {filteredDocs.length > 0 && (
+                <div className="flex items-center justify-between">
+                  <Badge variant="outline">
+                    {uploadedCount} of {filteredDocs.length} uploaded
+                  </Badge>
+                </div>
+              )}
+
+              {filteredDocs.length > 0 ? (
+                <div className="overflow-hidden rounded-lg border">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-8" />
+                        <TableHead>Document</TableHead>
+                        <TableHead className="w-24 pr-6 text-right" />
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredDocs.map((doc) => (
+                        <TableRow key={doc.id}>
+                          <TableCell className="pr-0">
+                            {doc.uploaded ? (
+                              <CheckCircle2 className="text-primary size-4" />
+                            ) : (
+                              <Circle className="text-muted-foreground/40 size-4" />
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-medium">{doc.name}</span>
+                              {doc.article && (
+                                <Badge variant="secondary" className="text-xs">
+                                  {doc.article}
+                                </Badge>
+                              )}
+                            </div>
+                            <p className="text-muted-foreground whitespace-normal text-xs">
+                              {doc.description}
+                            </p>
+                          </TableCell>
+                          <TableCell className="pr-4 text-right">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-24 cursor-pointer"
+                              disabled={uploadingId === doc.id}
+                              onClick={() => {
+                                const input = document.createElement('input');
+                                input.type = 'file';
+                                input.accept = '.pdf';
+                                input.onchange = (e) => {
+                                  const file = (e.target as HTMLInputElement).files?.[0];
+                                  if (file) handleUpload(doc.id, file);
+                                };
+                                input.click();
+                              }}
+                            >
+                              <Upload className="mr-1 size-3" />
+                              {uploadingId === doc.id ? '...' : doc.uploaded ? 'Replace' : 'Upload'}
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              ) : (
+                currentFramework && (
+                  <div className="text-muted-foreground rounded-lg border border-dashed py-8 text-center text-sm">
+                    No documents defined for this framework yet.
+                  </div>
+                )
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>

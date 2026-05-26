@@ -68,6 +68,8 @@ export interface ReportingEvidence {
   project_id: string;
   item_key: string;
   comment: string;
+  covered: boolean | null;
+  feedback: string | null;
   updated_at: string;
 }
 

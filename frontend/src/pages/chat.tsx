@@ -33,6 +33,7 @@ export function ChatPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [awaitingReply, setAwaitingReply] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const lastUserMsgRef = useRef<HTMLDivElement>(null);
@@ -81,6 +82,7 @@ export function ChatPage() {
       setMessages((prev) => [...prev, userMsg]);
       setInput('');
       setIsTyping(true);
+      setAwaitingReply(true);
       shouldScrollRef.current = true;
 
       const streamingMsg: ChatMessage = {
@@ -160,6 +162,7 @@ export function ChatPage() {
         }
       } finally {
         setIsTyping(false);
+        setAwaitingReply(false);
       }
     },
     [isTyping, currentProject, session, createSession],
@@ -233,7 +236,9 @@ export function ChatPage() {
               </div>
             </div>
           ) : (
-            <div className="mx-auto max-w-3xl space-y-6 px-4 pb-[60vh] pt-8">
+            <div
+              className={`mx-auto max-w-3xl space-y-6 px-4 pt-8 ${awaitingReply ? 'pb-[50vh]' : 'pb-4'}`}
+            >
               {(() => {
                 const lastUserIdx = messages.findLastIndex((m) => m.role === 'user');
                 return messages.map((msg, idx) =>

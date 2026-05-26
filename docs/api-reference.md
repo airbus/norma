@@ -165,18 +165,28 @@ Delete a custom document (removes the database record and file from disk).
 
 ### `GET /api/projects/{project_id}/reporting`
 
-List all reporting evidence entries for a project.
+List all reporting evidence entries for a project. Each entry includes the comment text and, when available, the LLM validation result (`covered`, `feedback`).
 
 ### `PUT /api/projects/{project_id}/reporting`
 
-Bulk upsert reporting evidence. Creates or updates entries by `item_key`.
+Bulk upsert reporting evidence. Creates or updates entries by `item_key`. Accepts optional `covered` and `feedback` fields to persist validation results alongside comments.
 
 **Body:**
 ```json
 {
   "items": [
-    { "item_key": "data-governance", "comment": "Data governance policy documented in Confluence" },
-    { "item_key": "risk-management", "comment": "Risk register maintained in JIRA" }
+    {
+      "item_key": "data-governance",
+      "comment": "Data governance policy documented in Confluence",
+      "covered": true,
+      "feedback": "Provides a concrete reference to the governance policy location."
+    },
+    {
+      "item_key": "risk-management",
+      "comment": "Risk register maintained in JIRA",
+      "covered": false,
+      "feedback": "Does not describe how risks are identified or mitigated."
+    }
   ]
 }
 ```
@@ -197,6 +207,27 @@ Generate an AI-suggested comment for a reporting checklist item. Uses project co
 ```json
 {
   "suggestion": "Training data quality is assured through automated validation pipelines and manual review."
+}
+```
+
+### `POST /api/projects/{project_id}/reporting/validate`
+
+Validate whether an answer sufficiently addresses a compliance question. Uses project context and documents to evaluate the response against a strict auditor standard.
+
+**Body:**
+```json
+{
+  "question": "[Data Governance — DG-01 Data Management] How is training data quality assured?",
+  "answer": "We use automated validation pipelines.",
+  "framework_id": "optional-framework-uuid"
+}
+```
+
+**Response:**
+```json
+{
+  "covered": false,
+  "feedback": "Does not specify what validation checks are performed or how failures are handled."
 }
 ```
 

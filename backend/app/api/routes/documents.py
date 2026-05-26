@@ -67,7 +67,7 @@ def list_documents(
         db.query(Document)
         .filter(Document.project_id == project.id)
         .join(DocumentDefinition)
-        .order_by(DocumentDefinition.name)
+        .order_by(DocumentDefinition.article)
         .all()
     )
     return [_to_response(d) for d in docs]

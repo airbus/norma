@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Check, Circle, ExternalLink, Loader2, RefreshCw, Save } from 'lucide-react';
+import Markdown from 'react-markdown';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -27,6 +28,7 @@ import {
 } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
+import { AskNormaButton } from '@/components/ask-norma-button';
 import { PageHeader } from '@/components/page-header';
 import { useProject } from '@/hooks/use-project';
 import { type GitHubIntegration, type GitHubTask, api } from '@/lib/api';
@@ -125,27 +127,84 @@ export function GitHubPage() {
     fetchData();
   }, [fetchData]);
 
+  const parsedArchitecture = (() => {
+    const full = integration?.architecture_mermaid ?? '';
+    const graphIdx = full.indexOf('graph ');
+    if (graphIdx === -1) return { diagram: '', description: '' };
+    const afterGraph = full.substring(graphIdx);
+    const closingFence = afterGraph.match(/\n`{3,}\s*\n?/);
+    const diagram = closingFence
+      ? afterGraph.substring(0, closingFence.index!).trim()
+      : afterGraph.trim();
+    const description = closingFence
+      ? afterGraph.substring(closingFence.index! + closingFence[0].length).trim()
+      : '';
+    return { diagram, description };
+  })();
+
   const mermaidRef = useCallback(
     (node: HTMLDivElement | null) => {
-      if (!node || !integration?.architecture_mermaid) return;
+      if (!node || !parsedArchitecture.diagram) return;
 
-      let raw = integration.architecture_mermaid;
-      const fenceMatch = raw.match(/```mermaid\s*\n([\s\S]*?)```/);
-      if (fenceMatch) raw = fenceMatch[1];
+      const sanitised = (() => {
+        const rawLines = parsedArchitecture.diagram.split('\n');
+        const merged: string[] = [];
+        let buf = '';
+        for (const line of rawLines) {
+          if (buf) {
+            buf += ' ' + line.trim();
+            if (buf.includes(']')) {
+              merged.push(buf);
+              buf = '';
+            }
+          } else if (line.includes('[') && !line.includes(']')) {
+            buf = line;
+          } else {
+            merged.push(line);
+          }
+        }
+        if (buf) merged.push(buf);
+
+        const cleanLabel = (label: string) =>
+          label
+            .replace(/\([^)]*\)/g, '')
+            .replace(/\(.*$/, '')
+            .replace(/[{}"'<>]/g, '')
+            .replace(/&/g, 'and')
+            .replace(/,\s*$/, '')
+            .replace(/\s{2,}/g, ' ')
+            .trim();
+
+        const defined = new Set<string>();
+        const cleaned = merged.map((line) => {
+          const def = line.match(/^(\s*\w+)\[([^\]]*)\]/);
+          if (def && !line.includes('-->') && !line.includes('---')) {
+            defined.add(def[1].trim());
+          }
+          return line.replace(/\[([^\]]*)\]/g, (_, l) => `[${cleanLabel(l)}]`);
+        });
+
+        return cleaned
+          .map((line) => {
+            if (!line.includes('-->') && !line.includes('---')) return line;
+            return line.replace(/(\w+)\[[^\]]*\]/g, (full, id) => (defined.has(id) ? id : full));
+          })
+          .join('\n');
+      })();
 
       (async () => {
         try {
           const mermaid = await import('mermaid');
           mermaid.default.initialize({ startOnLoad: false, theme: 'neutral' });
           const id = `arch-diagram-${Date.now()}`;
-          const { svg } = await mermaid.default.render(id, raw.trim());
+          const { svg } = await mermaid.default.render(id, sanitised);
           node.innerHTML = svg;
         } catch {
-          node.innerHTML = `<pre class="text-xs overflow-auto p-4 bg-muted rounded-lg"><code>${raw}</code></pre>`;
+          node.innerHTML = `<pre class="text-xs overflow-auto p-4 bg-muted rounded-lg"><code>${parsedArchitecture.diagram}</code></pre>`;
         }
       })();
     },
-    [integration],
+    [parsedArchitecture.diagram],
   );
 
   const handleSync = async () => {
@@ -212,17 +271,12 @@ export function GitHubPage() {
     }
   };
 
-  const architectureDescription = (() => {
-    if (!integration?.architecture_mermaid) return null;
-    const raw = integration.architecture_mermaid;
-    const afterFence = raw.replace(/```mermaid[\s\S]*?```/, '').trim();
-    return afterFence || null;
-  })();
+  const architectureDescription = parsedArchitecture.description || null;
 
   if (loading && !integration) {
     return (
       <div className="flex h-svh flex-col">
-        <PageHeader title="GitHub" />
+        <PageHeader title="Codebase" />
         <div className="flex flex-1 items-center justify-center">
           <Loader2 className="size-6 animate-spin text-muted-foreground" />
         </div>
@@ -232,25 +286,8 @@ export function GitHubPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title="GitHub">
-        <div className="flex items-center gap-3">
-          {integration?.last_synced_at && !syncing && (
-            <span className="text-xs text-muted-foreground">
-              Last synced: {new Date(integration.last_synced_at).toLocaleString()}
-            </span>
-          )}
-          {integration?.sync_status === 'error' && !syncing && (
-            <Badge variant="destructive">Sync error</Badge>
-          )}
-          <Button onClick={handleSync} disabled={syncing}>
-            {syncing ? (
-              <Loader2 className="mr-1 size-4 animate-spin" />
-            ) : (
-              <RefreshCw className="mr-1 size-4" />
-            )}
-            {syncing ? 'Syncing…' : 'Sync with GitHub'}
-          </Button>
-        </div>
+      <PageHeader title="Codebase">
+        <AskNormaButton question="Analyse my codebase and suggest improvements" />
       </PageHeader>
 
       {syncing && <SyncProgress step={syncStep} />}
@@ -258,13 +295,39 @@ export function GitHubPage() {
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-5xl">
           <Tabs defaultValue="tasks">
-            <TabsList className="mb-4">
-              <TabsTrigger value="tasks">Tasks</TabsTrigger>
-              <TabsTrigger value="architecture">Architecture</TabsTrigger>
-              <TabsTrigger value="context" onClick={() => !contextLoaded && fetchContextFile()}>
+            <div className="mb-4 flex items-center justify-between">
+              <TabsList>
+                <TabsTrigger value="tasks">Tasks</TabsTrigger>
+                <TabsTrigger value="architecture">Architecture</TabsTrigger>
+                {/* <TabsTrigger value="context" onClick={() => !contextLoaded && fetchContextFile()}>
                 Context
-              </TabsTrigger>
-            </TabsList>
+              </TabsTrigger> */}
+              </TabsList>
+              <div className="flex items-center gap-3">
+                {integration?.last_synced_at && !syncing && (
+                  <span className="text-xs text-muted-foreground">
+                    Last synced: {new Date(integration.last_synced_at).toLocaleString()}
+                  </span>
+                )}
+                {integration?.sync_status === 'error' && !syncing && (
+                  <Badge variant="destructive">Sync error</Badge>
+                )}
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="cursor-pointer"
+                  onClick={handleSync}
+                  disabled={syncing}
+                >
+                  {syncing ? (
+                    <Loader2 className="mr-1 size-4 animate-spin" />
+                  ) : (
+                    <RefreshCw className="mr-1 size-4" />
+                  )}
+                  {syncing ? 'Syncing…' : 'Sync with GitHub'}
+                </Button>
+              </div>
+            </div>
 
             <TabsContent value="tasks">
               <div className="mb-4 flex flex-wrap items-center gap-3">
@@ -361,7 +424,7 @@ export function GitHubPage() {
                   />
                   {architectureDescription && (
                     <div className="prose prose-sm dark:prose-invert max-w-none">
-                      <p className="whitespace-pre-wrap">{architectureDescription}</p>
+                      <Markdown>{architectureDescription}</Markdown>
                     </div>
                   )}
                 </div>
@@ -415,7 +478,7 @@ export function GitHubPage() {
       </div>
 
       <Dialog open={!!selectedTask} onOpenChange={() => setSelectedTask(null)}>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="flex h-[70vh] flex-col overflow-hidden sm:max-w-2xl">
           {selectedTask && (
             <>
               <DialogHeader>
@@ -433,34 +496,42 @@ export function GitHubPage() {
                       Assigned to: {selectedTask.assignees.join(', ')}
                     </span>
                   )}
+                  {selectedTask.labels && selectedTask.labels.length > 0 && (
+                    <span className="flex flex-wrap gap-1">
+                      {selectedTask.labels.map((l) => (
+                        <Badge key={l} variant="outline" className="text-xs">
+                          {l}
+                        </Badge>
+                      ))}
+                    </span>
+                  )}
                 </DialogDescription>
               </DialogHeader>
-              <div className="space-y-4">
-                {selectedTask.body && (
-                  <p className="whitespace-pre-wrap text-sm leading-relaxed">{selectedTask.body}</p>
-                )}
-                {selectedTask.labels && selectedTask.labels.length > 0 && (
-                  <div className="flex flex-wrap gap-1">
-                    {selectedTask.labels.map((l) => (
-                      <Badge key={l} variant="outline">
-                        {l}
-                      </Badge>
-                    ))}
+              <div className="-mx-4 flex-1 overflow-auto px-4">
+                {selectedTask.body ? (
+                  <div className="prose prose-sm dark:prose-invert max-w-none">
+                    <Markdown>{selectedTask.body}</Markdown>
                   </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">No description provided.</p>
                 )}
-                <div className="flex justify-between">
-                  <a
-                    href={selectedTask.github_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
-                  >
-                    Open on GitHub <ExternalLink className="size-3" />
-                  </a>
-                  <Button variant="outline" onClick={() => setSelectedTask(null)}>
-                    Close
-                  </Button>
-                </div>
+              </div>
+              <div className="-mx-4 -mb-4 flex items-center justify-between rounded-b-xl border-t bg-muted/50 p-4">
+                <a
+                  href={selectedTask.github_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex cursor-pointer items-center gap-1 text-sm text-primary hover:underline"
+                >
+                  Open on GitHub <ExternalLink className="size-3" />
+                </a>
+                <Button
+                  variant="outline"
+                  className="cursor-pointer"
+                  onClick={() => setSelectedTask(null)}
+                >
+                  Close
+                </Button>
               </div>
             </>
           )}
