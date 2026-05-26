@@ -1,4 +1,6 @@
+import json
 import logging
+import re
 import uuid
 
 import litellm
@@ -10,7 +12,7 @@ from app.core.config import settings
 from app.core.database import get_db
 from app.core.llm import is_gemini_model
 from app.models.custom_document import CustomDocument
-from app.models.document import Document
+from app.models.document import Document, DocumentDefinition
 from app.models.framework import Framework
 from app.models.project import Project
 from app.models.reporting import ReportingEvidence
@@ -20,6 +22,8 @@ from app.schemas.reporting import (
     EvidenceResponse,
     SuggestRequest,
     SuggestResponse,
+    ValidateRequest,
+    ValidateResponse,
 )
 
 logger = logging.getLogger(__name__)
@@ -61,15 +65,26 @@ def bulk_upsert_evidence(
         )
         if existing:
             existing.comment = item.comment
+            existing.covered = item.covered
+            existing.feedback = item.feedback
         else:
-            db.add(ReportingEvidence(project_id=project.id, item_key=item.item_key, comment=item.comment))
+            db.add(
+                ReportingEvidence(
+                    project_id=project.id,
+                    item_key=item.item_key,
+                    comment=item.comment,
+                    covered=item.covered,
+                    feedback=item.feedback,
+                )
+            )
 
     db.commit()
     return db.query(ReportingEvidence).filter(ReportingEvidence.project_id == project.id).all()
 
 
 SUGGEST_SYSTEM_PROMPT = """\
-You are an EU AI Act compliance assistant helping users write evidence comments.
+You are an AI compliance assistant helping users write evidence comments for regulatory, \
+human rights, and environmental frameworks.
 
 Output exactly ONE short sentence (max 40 words). No preamble, no labels, no bullet points.
 
@@ -79,7 +94,7 @@ Output exactly ONE short sentence (max 40 words). No preamble, no labels, no bul
 """
 
 
-def _build_suggest_prompt(question: str, project: Project, current_comment: str, db: Session) -> str:
+def _build_project_context(project: Project, db: Session, framework_id: str | None = None) -> list[str]:
     parts = [
         "## Project Overview\n",
         f"**Name:** {project.name}",
@@ -101,7 +116,11 @@ def _build_suggest_prompt(question: str, project: Project, current_comment: str,
                 val = ", ".join(val)
             parts.append(f"- {key}: {val}")
 
-    docs = db.query(Document).filter(Document.project_id == project.id, Document.summary.isnot(None)).all()
+    doc_query = db.query(Document).filter(Document.project_id == project.id, Document.summary.isnot(None))
+    if framework_id:
+        doc_query = doc_query.join(DocumentDefinition).filter(DocumentDefinition.framework_id == framework_id)
+    docs = doc_query.all()
+
     custom_docs = (
         db.query(CustomDocument)
         .filter(CustomDocument.project_id == project.id, CustomDocument.summary.isnot(None))
@@ -120,17 +139,44 @@ def _build_suggest_prompt(question: str, project: Project, current_comment: str,
         for ev in evidence:
             parts.append(f"- {ev.item_key}: {ev.comment}")
 
-    frameworks = db.query(Framework).all()
-    if frameworks:
-        parts.append("\n## Compliance Frameworks\n")
-        for fw in frameworks:
-            parts.append(f"**{fw.name}:** {fw.description}")
+    if framework_id:
+        fw = db.query(Framework).filter(Framework.id == framework_id).first()
+        if fw:
+            parts.append(f"\n## Current Framework\n**{fw.name}:** {fw.description}")
+    else:
+        frameworks = db.query(Framework).all()
+        if frameworks:
+            parts.append("\n## Compliance Frameworks\n")
+            for fw in frameworks:
+                parts.append(f"**{fw.name}:** {fw.description}")
 
+    return parts
+
+
+def _build_suggest_prompt(
+    question: str,
+    project: Project,
+    current_comment: str,
+    db: Session,
+    framework_id: str | None = None,
+) -> str:
+    parts = _build_project_context(project, db, framework_id)
     parts.append(f"\n## Compliance Question\n{question}")
-
     if current_comment.strip():
         parts.append(f"\n## Existing Comment to Improve\n{current_comment}")
+    return "\n".join(parts)
 
+
+def _build_validate_prompt(
+    question: str,
+    answer: str,
+    project: Project,
+    db: Session,
+    framework_id: str | None = None,
+) -> str:
+    parts = _build_project_context(project, db, framework_id)
+    parts.append(f"\n## Compliance Question\n{question}")
+    parts.append(f"\n## User's Answer to Validate\n{answer}")
     return "\n".join(parts)
 
 
@@ -142,7 +188,9 @@ async def suggest_comment(
     current_user: User = Depends(get_current_user),
 ):
     project = _get_project(project_id, current_user, db)
-    user_prompt = _build_suggest_prompt(body.question, project, body.current_comment, db)
+    user_prompt = _build_suggest_prompt(
+        body.question, project, body.current_comment, db, framework_id=body.framework_id or None
+    )
 
     try:
         kwargs: dict = {}
@@ -177,3 +225,94 @@ async def suggest_comment(
     except Exception:
         logger.exception("Suggestion generation failed")
         raise HTTPException(status_code=502, detail="Failed to generate suggestion")
+
+
+VALIDATE_SYSTEM_PROMPT = """\
+You are a strict AI compliance auditor. Your job is to determine whether an answer would \
+satisfy a regulatory auditor reviewing this AI system for compliance.
+
+Apply a high standard. Vague, generic, or aspirational statements are NOT acceptable. \
+Answers must be concrete, specific to the project, and demonstrate actual implementation \
+— not just intent. Phrases like "robust measures are in place" or "we ensure compliance" \
+without specifics should be marked as insufficient.
+
+Evaluate using the provided project context and documents.
+
+Respond in exactly this JSON format (no other text):
+{"covered": true, "feedback": "..."}
+
+Rules:
+- "covered": true ONLY if the answer provides concrete, verifiable evidence or specific \
+measures that directly address every aspect of the question.
+- "covered": false if the answer is vague, generic, lacks specifics, misses any aspect \
+of the question, or would not withstand scrutiny from a compliance auditor.
+- "feedback": One sentence (max 60 words). If covered, confirm what makes it sufficient. \
+If not, be direct about exactly what is missing or too vague — name the specific gaps.
+- Use British English spelling (e.g., organisation, behaviour, summarisation).
+"""
+
+
+@router.post("/validate", response_model=ValidateResponse)
+async def validate_answer(
+    project_id: uuid.UUID,
+    body: ValidateRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    project = _get_project(project_id, current_user, db)
+    user_prompt = _build_validate_prompt(
+        body.question, body.answer, project, db, framework_id=body.framework_id or None
+    )
+
+    try:
+        safety_settings = [
+            {"category": cat, "threshold": "BLOCK_NONE"}
+            for cat in [
+                "HARM_CATEGORY_HARASSMENT",
+                "HARM_CATEGORY_HATE_SPEECH",
+                "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                "HARM_CATEGORY_DANGEROUS_CONTENT",
+            ]
+        ]
+        response = await litellm.acompletion(
+            model=settings.litellm_model,
+            messages=[
+                {"role": "system", "content": VALIDATE_SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt},
+            ],
+            max_tokens=2048,
+            temperature=0.2,
+            safety_settings=safety_settings,
+        )
+        finish_reason = response.choices[0].finish_reason
+        content = response.choices[0].message.content
+        print(
+            f"[VALIDATE] finish_reason={finish_reason} len={len(content or '')} content={content!r}",
+            flush=True,
+        )
+        if not content:
+            raise HTTPException(status_code=502, detail="LLM returned empty content")
+
+        text = content.strip()
+        if text.startswith("```"):
+            text = "\n".join(text.split("\n")[1:])
+            text = text.rsplit("```", 1)[0].strip()
+
+        try:
+            result = json.loads(text)
+            return ValidateResponse(covered=result["covered"], feedback=result["feedback"])
+        except (json.JSONDecodeError, KeyError):
+            covered_match = re.search(r'"covered"\s*:\s*(true|false)', text, re.IGNORECASE)
+            feedback_match = re.search(r'"feedback"\s*:\s*"((?:[^"\\]|\\.)*)', text)
+            if covered_match and feedback_match:
+                return ValidateResponse(
+                    covered=covered_match.group(1).lower() == "true",
+                    feedback=feedback_match.group(1).rstrip(),
+                )
+            logger.warning("Validation parse failed — raw: %r", content)
+            return ValidateResponse(covered=False, feedback="Unable to validate this answer. Please review manually.")
+    except HTTPException:
+        raise
+    except Exception:
+        logger.exception("Validation failed")
+        raise HTTPException(status_code=502, detail="Failed to validate answer")

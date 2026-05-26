@@ -10,7 +10,10 @@
     "reporting": "Berichterstattung",
     "integrations": "Integrationen",
     "frameworks": "Frameworks",
-    "github": "GitHub"
+    "github": "GitHub",
+    "overview": "Übersicht",
+    "riskClassification": "Risikoklassifizierung",
+    "additionalDocuments": "Zusätzliche Dokumente"
   },
   "riskBanner": {
     "evaluatingRisk": "Risiko wird bewertet..."

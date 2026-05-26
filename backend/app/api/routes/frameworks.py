@@ -29,7 +29,7 @@ def list_frameworks(
     db: Session = Depends(get_db),
     _current_user: User = Depends(get_current_user),
 ):
-    frameworks = db.query(Framework).order_by(Framework.name).all()
+    frameworks = db.query(Framework).order_by(Framework.created_at).all()
     return [_to_response(fw) for fw in frameworks]
 
 

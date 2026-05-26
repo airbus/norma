@@ -115,7 +115,12 @@ export function RegisterPage() {
     <div className="flex min-h-svh items-center justify-center bg-background p-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-semibold">Norma</CardTitle>
+          <div className="flex items-center justify-center gap-2">
+            <NormaLogo className="size-7" />
+            <CardTitle className="text-2xl font-medium" style={{ fontFamily: 'var(--font-logo)' }}>
+              Norma
+            </CardTitle>
+          </div>
           <CardDescription>
             {inviteToken ? t('register.createAccount') : t('register.setupAdmin')}
           </CardDescription>

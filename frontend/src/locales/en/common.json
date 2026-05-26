@@ -29,7 +29,8 @@
     "makeMember": "Make member",
     "disableAccount": "Disable account",
     "enableAccount": "Enable account",
-    "deleteUser": "Delete user"
+    "deleteUser": "Delete user",
+    "addIntegration": "Add Integration"
   },
   "status": {
     "active": "Active",

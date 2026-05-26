@@ -29,7 +29,8 @@
     "makeMember": "Nommer membre",
     "disableAccount": "Désactiver le compte",
     "enableAccount": "Activer le compte",
-    "deleteUser": "Supprimer l’utilisateur"
+    "deleteUser": "Supprimer l’utilisateur",
+    "addIntegration": "Ajouter une intégration"
   },
   "status": {
     "active": "Actif",

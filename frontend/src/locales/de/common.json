@@ -29,7 +29,8 @@
     "makeMember": "Zum Mitglied ernennen",
     "disableAccount": "Konto deaktivieren",
     "enableAccount": "Konto aktivieren",
-    "deleteUser": "Benutzer löschen"
+    "deleteUser": "Benutzer löschen",
+    "addIntegration": "Integration hinzufügen"
   },
   "status": {
     "active": "Aktiv",

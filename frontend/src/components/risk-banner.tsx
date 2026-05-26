@@ -1,14 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import {
-  AlertTriangle,
-  Ban,
-  Info,
-  Loader2,
-  MessageSquare,
-  RefreshCw,
-  ShieldAlert,
-} from 'lucide-react';
+import { AlertTriangle, Ban, Info, Loader2, RefreshCw, ShieldAlert } from 'lucide-react';
 
 const RISK_CONFIG: Record<string, { icon: typeof Ban; className: string }> = {
   unacceptable: {
@@ -32,7 +23,6 @@ const RISK_CONFIG: Record<string, { icon: typeof Ban; className: string }> = {
 interface RiskBannerProps {
   riskClassification: string;
   description: string;
-  chatMessage: string;
   evaluating?: boolean;
   onReEvaluate?: () => void;
 }
@@ -40,12 +30,10 @@ interface RiskBannerProps {
 export function RiskBanner({
   riskClassification,
   description,
-  chatMessage,
   evaluating,
   onReEvaluate,
 }: RiskBannerProps) {
   const { t } = useTranslation(['components', 'common']);
-  const navigate = useNavigate();
   const config = RISK_CONFIG[riskClassification];
   if (!config) return null;
 
@@ -70,13 +58,6 @@ export function RiskBanner({
             <span className="text-xs font-medium">{t('common:buttons.reEvaluate')}</span>
           </div>
         )}
-        <div
-          className="flex cursor-pointer items-center gap-1.5 rounded-md border border-current/30 px-2.5 py-1.5 hover:bg-current/5"
-          onClick={() => navigate(`/chat?q=${encodeURIComponent(chatMessage)}`)}
-        >
-          <MessageSquare className="size-4" />
-          <span className="text-xs font-medium">{t('common:buttons.askNorma')}</span>
-        </div>
       </div>
     </div>
   );
