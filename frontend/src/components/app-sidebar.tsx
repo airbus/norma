@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { NormaLogo } from '@/components/icons/norma-logo';
 import {
   BookOpen,
+  ChevronRight,
   ChevronsUpDown,
   FileText,
   GitBranch,
@@ -35,11 +36,14 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
 import { NewProjectDialog } from '@/components/new-project-dialog';
 import { useAuth } from '@/hooks/use-auth';
 import { useProject } from '@/hooks/use-project';
-import { api } from '@/lib/api';
+import { api, type Framework } from '@/lib/api';
 
 const RISK_LABELS: Record<string, string> = {
   unacceptable: 'Unacceptable Risk',
@@ -49,12 +53,6 @@ const RISK_LABELS: Record<string, string> = {
 };
 
 const NAV_GENERAL = [{ title: 'Chat', icon: MessageSquare, path: '/chat' }];
-
-const NAV_PROJECT = [
-  { title: 'Description', icon: BookOpen, path: '/description' },
-  { title: 'Documents', icon: FileText, path: '/documents' },
-  { title: 'Reporting', icon: ScrollText, path: '/reporting' },
-];
 
 const NAV_CONFIG = [
   { title: 'Integrations', icon: Plug, path: '/integrations' },
@@ -68,6 +66,14 @@ export function AppSidebar() {
   const { projects, currentProject, setCurrentProject } = useProject();
   const [newProjectOpen, setNewProjectOpen] = useState(false);
   const [hasGitHub, setHasGitHub] = useState(false);
+  const [frameworks, setFrameworks] = useState<Framework[]>([]);
+  const [descManual, setDescManual] = useState<boolean | null>(null);
+  const [docsManual, setDocsManual] = useState<boolean | null>(null);
+  const [reportingManual, setReportingManual] = useState<boolean | null>(null);
+
+  const descOpen = descManual ?? location.pathname.startsWith('/description');
+  const docsOpen = docsManual ?? location.pathname.startsWith('/documents');
+  const reportingOpen = reportingManual ?? location.pathname.startsWith('/reporting');
 
   useEffect(() => {
     if (!currentProject) return;
@@ -89,6 +95,13 @@ export function AppSidebar() {
       window.removeEventListener('integration-changed', check);
     };
   }, [currentProject]);
+
+  useEffect(() => {
+    api
+      .get<Framework[]>('/frameworks')
+      .then(setFrameworks)
+      .catch(() => {});
+  }, []);
 
   const initials = user
     ? user.name
@@ -197,18 +210,103 @@ export function AppSidebar() {
             <SidebarGroupLabel>Project</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {NAV_PROJECT.map((item) => (
-                  <SidebarMenuItem key={item.path}>
-                    <SidebarMenuButton
-                      isActive={location.pathname === item.path}
-                      onClick={() => navigate(item.path)}
-                      tooltip={item.title}
-                    >
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    isActive={location.pathname.startsWith('/description')}
+                    onClick={() => setDescManual((m) => !(m ?? descOpen))}
+                    tooltip="Description"
+                  >
+                    <BookOpen />
+                    <span>Description</span>
+                    <ChevronRight
+                      className={`ml-auto size-4 transition-transform ${descOpen ? 'rotate-90' : ''}`}
+                    />
+                  </SidebarMenuButton>
+                  {descOpen && (
+                    <SidebarMenuSub>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton
+                          isActive={location.pathname === '/description'}
+                          onClick={() => navigate('/description')}
+                        >
+                          <span>Overview</span>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton
+                          isActive={location.pathname === '/description/risk-classification'}
+                          onClick={() => navigate('/description/risk-classification')}
+                        >
+                          <span>Risk Classification</span>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    </SidebarMenuSub>
+                  )}
+                </SidebarMenuItem>
+
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    isActive={location.pathname.startsWith('/documents')}
+                    onClick={() => setDocsManual((m) => !(m ?? docsOpen))}
+                    tooltip="Documents"
+                  >
+                    <FileText />
+                    <span>Documents</span>
+                    <ChevronRight
+                      className={`ml-auto size-4 transition-transform ${docsOpen ? 'rotate-90' : ''}`}
+                    />
+                  </SidebarMenuButton>
+                  {docsOpen && (
+                    <SidebarMenuSub>
+                      {frameworks.map((fw) => (
+                        <SidebarMenuSubItem key={fw.id}>
+                          <SidebarMenuSubButton
+                            isActive={location.pathname === `/documents/${fw.id}`}
+                            onClick={() => navigate(`/documents/${fw.id}`)}
+                          >
+                            <span>{fw.name}</span>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton
+                          isActive={location.pathname === '/documents/additional'}
+                          onClick={() => navigate('/documents/additional')}
+                        >
+                          <span>Additional Documents</span>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    </SidebarMenuSub>
+                  )}
+                </SidebarMenuItem>
+
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    isActive={location.pathname.startsWith('/reporting')}
+                    onClick={() => setReportingManual((m) => !(m ?? reportingOpen))}
+                    tooltip="Reporting"
+                  >
+                    <ScrollText />
+                    <span>Reporting</span>
+                    <ChevronRight
+                      className={`ml-auto size-4 transition-transform ${reportingOpen ? 'rotate-90' : ''}`}
+                    />
+                  </SidebarMenuButton>
+                  {reportingOpen && (
+                    <SidebarMenuSub>
+                      {frameworks.map((fw) => (
+                        <SidebarMenuSubItem key={fw.id}>
+                          <SidebarMenuSubButton
+                            isActive={location.pathname === `/reporting/${fw.id}`}
+                            onClick={() => navigate(`/reporting/${fw.id}`)}
+                          >
+                            <span>{fw.name}</span>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  )}
+                </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
@@ -222,10 +320,10 @@ export function AppSidebar() {
                     <SidebarMenuButton
                       isActive={location.pathname === '/github'}
                       onClick={() => navigate('/github')}
-                      tooltip="GitHub"
+                      tooltip="Codebase"
                     >
                       <GitBranch />
-                      <span>GitHub</span>
+                      <span>Codebase</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>

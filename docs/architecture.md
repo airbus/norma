@@ -66,7 +66,7 @@ The central API server handling all business logic:
 | **Risk Evaluation** (`app/services/risk_evaluation.py`) | One-shot LLM call using `litellm.acompletion()` that classifies a project as `unacceptable`, `high`, `limited`, or `minimal` based on the EU AI Act self-assessment decision tree. |
 | **Chat / Norma Agent** (`app/agents/norma.py`, `app/api/routes/chat.py`) | Multi-turn AI assistant built on Google ADK. System prompt assembled from framework knowledge, project context, uploaded document summaries, and reporting evidence. Supports both synchronous and SSE streaming responses. |
 | **Documents** (`app/api/routes/documents.py`) | Manages per-project document instances derived from framework-defined templates, plus free-form custom PDF uploads. Handles file uploads and delegates processing to the Pipelines service. |
-| **Reporting** (`app/api/routes/reporting.py`) | Bulk upsert of compliance checklist evidence entries keyed by item identifier. Includes an LLM-powered suggestion endpoint that generates context-aware comments using project data, document summaries, and framework knowledge. |
+| **Reporting** (`app/api/routes/reporting.py`) | Bulk upsert of compliance checklist evidence entries keyed by item identifier. Each entry stores the user's comment alongside an LLM-generated validation result (`covered` flag and `feedback` text). Includes a suggestion endpoint that generates context-aware comments and a validation endpoint that evaluates whether an answer satisfies the compliance question. |
 | **Frameworks** (`app/api/routes/frameworks.py`) | Read-only endpoints for regulatory frameworks and their metadata. |
 | **Seeding** (`app/services/seed.py`) | On startup, seeds the EU AI Act framework with its required document definitions and loads knowledge base content from markdown files. Also creates a sample project for newly registered users. |
 | **Migrations** (`alembic/`) | Alembic manages schema migrations, run automatically on backend startup. |
@@ -167,6 +167,8 @@ erDiagram
         uuid project_id FK
         string item_key
         text comment
+        boolean covered "nullable — LLM validation result"
+        text feedback "nullable — LLM validation feedback"
         datetime updated_at
     }
 

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { GitBranch } from 'lucide-react';
+import { GitBranch, Plus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { GitHubConnectDialog } from '@/components/github-connect-dialog';
@@ -39,6 +40,13 @@ export function IntegrationsPage() {
 
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-4xl space-y-4">
+          <div className="flex justify-end">
+            <Button variant="outline" disabled>
+              <Plus className="mr-1 size-4" />
+              Add Integration
+            </Button>
+          </div>
+
           {!loading && (
             <Card
               className="cursor-pointer transition-shadow hover:shadow-md"

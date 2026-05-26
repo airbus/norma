@@ -14,6 +14,7 @@ import { IntegrationsPage } from '@/pages/integrations';
 import { LoginPage } from '@/pages/login';
 import { RegisterPage } from '@/pages/register';
 import { ReportingPage } from '@/pages/reporting';
+import { RiskClassificationPage } from '@/pages/risk-classification';
 import { SettingsPage } from '@/pages/settings';
 
 function App() {
@@ -32,7 +33,13 @@ function App() {
                     <Route index element={<Navigate to="/chat" replace />} />
                     <Route path="chat" element={<ChatPage />} />
                     <Route path="description" element={<DescriptionPage />} />
+                    <Route
+                      path="description/risk-classification"
+                      element={<RiskClassificationPage />}
+                    />
+                    <Route path="documents/:frameworkId" element={<DocumentsPage />} />
                     <Route path="documents" element={<DocumentsPage />} />
+                    <Route path="reporting/:frameworkId" element={<ReportingPage />} />
                     <Route path="reporting" element={<ReportingPage />} />
                     <Route path="github" element={<GitHubPage />} />
                     <Route path="integrations" element={<IntegrationsPage />} />

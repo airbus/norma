@@ -36,22 +36,28 @@ Provide the structured summary:
 ARCHITECTURE_PROMPT = """\
 You are a software architect. Below is the file tree and contents of key files from a GitHub repository.
 
-Generate a Mermaid architecture diagram using `graph TD` syntax that shows:
-- Major components, modules, or services
-- Data stores (databases, caches, file systems)
-- External integrations or APIs
-- Key relationships and data flow between components
+Generate a detailed Mermaid architecture diagram using `graph TD` syntax that shows:
+- Individual backend modules: API routes, services, agents, middleware, auth
+- Frontend pages and key components
+- Pipeline tasks and processing steps
+- Data stores: databases, vector stores, file volumes
+- External integrations: LLM providers, GitHub API, cloud services
+- Key relationships and data flow between all components
 
-Keep the diagram readable — no more than 15-20 nodes. Use descriptive labels.
+Use subgraphs to group related components (e.g. `subgraph Backend`, `subgraph Frontend`). \
+Aim for 20-30 nodes to capture meaningful detail. Use descriptive labels.
 
-IMPORTANT rules for valid Mermaid syntax:
+STRICT Mermaid syntax rules — violating any of these will break the diagram:
+- Labels MUST be single-line: A[My Label]. NEVER put line breaks inside brackets.
 - Use only square brackets for labels: A[My Label]
 - Do NOT use curly braces, parentheses, or angle brackets in node definitions
-- Do NOT use HTML tags inside labels
-- Avoid special characters inside labels — use simple text only
-- Use --> for arrows and ---|label| for edge labels
+- Do NOT use HTML tags or special characters inside labels
+- Define each node ONCE in its subgraph. In edges, use only the node ID: A --> B (not A --> B[label])
+- For edge labels use ---|label| syntax: A ---|sends data| B
+- NEVER redefine a node label in an edge connection
 
-After the diagram, provide a brief description (2-3 paragraphs) explaining the architecture.
+After the diagram, provide a punchy description — 3-5 bullet points, each one sentence. \
+Cover the main stack, data flow, and any notable patterns. No long paragraphs.
 
 ---
 

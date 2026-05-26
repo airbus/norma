@@ -43,26 +43,35 @@ export function FrameworksPage() {
             </Button>
           </div>
 
-          {frameworks.map((fw) => (
-            <Card
-              key={fw.id}
-              className="cursor-pointer transition-shadow hover:shadow-md"
-              onClick={() => setSelected(fw)}
-            >
-              <CardHeader className="!flex !flex-row items-center gap-4">
-                <div className="bg-muted flex size-10 shrink-0 items-center justify-center rounded-lg">
-                  <Scale className="size-5" />
-                </div>
-                <div className="flex-1 space-y-0.5">
-                  <CardTitle className="text-base">{fw.name}</CardTitle>
-                  <CardDescription className="text-xs">{fw.category}</CardDescription>
-                </div>
-                <Badge className="shrink-0" variant={STATUS_VARIANT[fw.status] ?? 'outline'}>
-                  {fw.status}
-                </Badge>
-              </CardHeader>
-            </Card>
-          ))}
+          {['External', 'Internal'].map((category) => {
+            const group = frameworks.filter((fw) => fw.category === category);
+            if (group.length === 0) return null;
+            return (
+              <div key={category} className="space-y-3">
+                <h3 className="text-muted-foreground text-sm font-medium">{category}</h3>
+                {group.map((fw) => (
+                  <Card
+                    key={fw.id}
+                    className="cursor-pointer transition-shadow hover:shadow-md"
+                    onClick={() => setSelected(fw)}
+                  >
+                    <CardHeader className="!flex !flex-row items-center gap-4">
+                      <div className="bg-muted flex size-10 shrink-0 items-center justify-center rounded-lg">
+                        <Scale className="size-5" />
+                      </div>
+                      <div className="flex-1 space-y-0.5">
+                        <CardTitle className="text-base">{fw.name}</CardTitle>
+                        <CardDescription className="text-xs">{fw.description}</CardDescription>
+                      </div>
+                      <Badge className="shrink-0" variant={STATUS_VARIANT[fw.status] ?? 'outline'}>
+                        {fw.status}
+                      </Badge>
+                    </CardHeader>
+                  </Card>
+                ))}
+              </div>
+            );
+          })}
         </div>
       </div>
 

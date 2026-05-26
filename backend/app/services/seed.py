@@ -17,7 +17,7 @@ SEED_FRAMEWORKS = [
             "for AI systems based on risk classification. It mandates conformity assessments, transparency "
             "obligations, and human oversight requirements for high-risk AI systems."
         ),
-        "category": "Regulation",
+        "category": "External",
         "status": "active",
         "documents": [
             {
@@ -94,6 +94,128 @@ SEED_FRAMEWORKS = [
                     "which filter condition applies, and proof it does not perform profiling."
                 ),
                 "article": "Art. 6(3)",
+            },
+        ],
+    },
+    {
+        "name": "UNDP Human Rights Assessment",
+        "description": (
+            "The UNDP AI Human Rights Impact Assessment Toolkit provides a structured methodology for "
+            "evaluating AI systems against international human rights standards. It guides organisations "
+            "through stakeholder engagement, rights-based risk analysis, and ongoing monitoring to ensure "
+            "AI deployments respect dignity, equality, and non-discrimination principles."
+        ),
+        "category": "External",
+        "status": "active",
+        "documents": [
+            {
+                "name": "Stakeholder Engagement Record",
+                "description": (
+                    "Documentation of consultations with affected communities, civil society organisations, "
+                    "and rights holders, including methodology and findings."
+                ),
+                "article": "Section 2",
+            },
+            {
+                "name": "Human Rights Impact Assessment Report",
+                "description": (
+                    "Comprehensive assessment documenting identified human rights risks, affected populations, "
+                    "severity ratings, and mitigation measures for the AI system."
+                ),
+                "article": "Section 3",
+            },
+            {
+                "name": "Algorithmic Impact Assessment",
+                "description": (
+                    "Technical evaluation of the AI system's decision-making processes, bias potential, "
+                    "and differential impacts across demographic groups."
+                ),
+                "article": "Section 4",
+            },
+            {
+                "name": "Data Protection Impact Assessment",
+                "description": (
+                    "Assessment of data collection, processing, and storage practices against privacy "
+                    "rights and data protection principles."
+                ),
+                "article": "Section 5",
+            },
+            {
+                "name": "Remedy and Redress Plan",
+                "description": (
+                    "Documented mechanisms for individuals to challenge AI-driven decisions, seek remedies, "
+                    "and access effective redress when rights are violated."
+                ),
+                "article": "Section 6",
+            },
+            {
+                "name": "Ongoing Monitoring Plan",
+                "description": (
+                    "Framework for continuous monitoring of human rights impacts post-deployment, "
+                    "including indicators, review cycles, and escalation procedures."
+                ),
+                "article": "Section 7",
+            },
+        ],
+    },
+    {
+        "name": "Environmental Impact Framework",
+        "description": (
+            "The Environmental Impact Framework for AI Systems provides a structured approach to measuring, "
+            "reporting, and reducing the environmental footprint of AI development and deployment. It covers "
+            "energy consumption, carbon emissions, hardware lifecycle, and data centre sustainability to "
+            "promote responsible and environmentally conscious AI practices."
+        ),
+        "category": "Internal",
+        "status": "active",
+        "documents": [
+            {
+                "name": "Carbon Footprint Assessment",
+                "description": (
+                    "Quantitative assessment of greenhouse gas emissions from model training, inference, "
+                    "and supporting infrastructure, measured in CO₂ equivalent."
+                ),
+                "article": "Principle 1",
+            },
+            {
+                "name": "Energy Consumption Report",
+                "description": (
+                    "Detailed report of energy usage across training, inference, and idle phases, "
+                    "including renewable energy percentage and power usage effectiveness (PUE)."
+                ),
+                "article": "Principle 2",
+            },
+            {
+                "name": "Hardware Lifecycle Assessment",
+                "description": (
+                    "Assessment of environmental impact across the hardware lifecycle: manufacturing, "
+                    "operation, and end-of-life disposal of GPUs, TPUs, and servers."
+                ),
+                "article": "Principle 3",
+            },
+            {
+                "name": "Data Centre Sustainability Plan",
+                "description": (
+                    "Documentation of data centre environmental practices including cooling efficiency, "
+                    "water usage, renewable energy sourcing, and waste management."
+                ),
+                "article": "Principle 4",
+            },
+            {
+                "name": "Model Efficiency Report",
+                "description": (
+                    "Analysis of model architecture efficiency, including parameter count justification, "
+                    "distillation opportunities, and inference optimisation strategies."
+                ),
+                "article": "Principle 5",
+            },
+            {
+                "name": "Environmental Monitoring Plan",
+                "description": (
+                    "Ongoing monitoring framework for tracking environmental KPIs, setting reduction "
+                    "targets, and reporting progress against sustainability goals."
+                ),
+                "article": "Principle 6",
             },
         ],
     },
