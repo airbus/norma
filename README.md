@@ -22,7 +22,7 @@
 
 ## What is Norma?
 
-Norma is a platform that helps teams manage AI compliance across multiple regulatory frameworks, including the **EU AI Act**, **Environmental Impact**, and **UNDP Human Rights** assessments.
+Norma is a platform that helps teams achieve **EU AI Act** compliance.
 
 It combines structured project management with an AI-powered assistant that understands your project context, uploaded documents, codebase, and compliance obligations. Norma guides you through risk classification, evidence gathering, and reporting, all in one place.
 
