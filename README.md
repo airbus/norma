@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="docs/assets/norma-icon.svg" alt="Norma" width="64" height="64" />
+  <img src="docs/assets/norma-logo.png" alt="Norma" height="80" />
 </p>
-
-<h1 align="center">Norma</h1>
 
 <p align="center">
   <em>Open-source AI compliance for project management</em>
