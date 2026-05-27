@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Markdown from 'react-markdown';
 import { Bug, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -26,27 +26,27 @@ export function DebugContextDialog({ section = 'full', refreshKey }: DebugContex
   const [context, setContext] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const fetchContext = useCallback(async () => {
-    if (!currentProject || !section) {
-      setContext(null);
-      return;
-    }
-    setLoading(true);
-    try {
-      const data = await api.get<{ context: string | null }>(
-        `/chat/context?project_id=${currentProject.id}&section=${section}`,
-      );
-      setContext(data.context);
-    } catch {
-      setContext('Failed to load context.');
-    } finally {
-      setLoading(false);
-    }
-  }, [currentProject, section]);
-
   useEffect(() => {
-    if (open) fetchContext();
-  }, [open, fetchContext, refreshKey]);
+    if (!open || !currentProject || !section) return;
+    let cancelled = false;
+    setLoading(true);
+    api
+      .get<{ context: string | null }>(
+        `/chat/context?project_id=${currentProject.id}&section=${section}`,
+      )
+      .then((data) => {
+        if (!cancelled) setContext(data.context);
+      })
+      .catch(() => {
+        if (!cancelled) setContext('Failed to load context.');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [open, currentProject, section, refreshKey]);
 
   const wordCount = context ? context.split(/\s+/).filter(Boolean).length : 0;
   const pageEstimate = Math.ceil(wordCount / 250);

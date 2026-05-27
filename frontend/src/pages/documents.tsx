@@ -220,7 +220,7 @@ export function DocumentsPage() {
                                 <span className="text-sm font-medium">{doc.file_name}</span>
                                 {doc.summary && (
                                   <p className="text-muted-foreground truncate text-xs">
-                                    {doc.summary.replace(/[#*_~`>\-]/g, '').replace(/\s+/g, ' ').trim()}
+                                    {doc.summary.replace(/[#*_~`>-]/g, '').replace(/\s+/g, ' ').trim()}
                                   </p>
                                 )}
                               </div>
@@ -320,7 +320,7 @@ export function DocumentsPage() {
                             </div>
                             <p className="text-muted-foreground truncate text-xs">
                               {doc.summary
-                                ? doc.summary.replace(/[#*_~`>\-]/g, '').replace(/\s+/g, ' ').trim()
+                                ? doc.summary.replace(/[#*_~`>-]/g, '').replace(/\s+/g, ' ').trim()
                                 : t(`documentDefinitions.${slugify(doc.name)}.description`, {
                                     ns: 'data',
                                     defaultValue: doc.description,
