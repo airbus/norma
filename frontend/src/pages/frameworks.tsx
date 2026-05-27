@@ -130,19 +130,18 @@ export function FrameworksPage() {
                       <Badge className="shrink-0" variant={STATUS_VARIANT[fw.status] ?? 'outline'}>
                         {t(`common:status.${fw.status}`)}
                       </Badge>
-                      {!PROTECTED_FRAMEWORKS.has(fw.name) && (
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-muted-foreground hover:text-destructive shrink-0"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setDeleteTarget(fw);
-                          }}
-                        >
-                          <Trash2 className="size-4" />
-                        </Button>
-                      )}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-muted-foreground hover:text-destructive shrink-0"
+                        disabled={PROTECTED_FRAMEWORKS.has(fw.name)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setDeleteTarget(fw);
+                        }}
+                      >
+                        <Trash2 className="size-4" />
+                      </Button>
                     </CardHeader>
                   </Card>
                 ))}

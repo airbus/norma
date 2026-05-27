@@ -48,20 +48,13 @@ This starts four services:
 | Pipelines | [localhost:8001](http://localhost:8001) | Document and codebase processing |
 | Database | localhost:5432 | PostgreSQL 16 + pgvector |
 
-On first startup, the backend automatically runs database migrations and seeds the compliance frameworks (EU AI Act, UNDP Human Rights Assessment, Environmental Impact).
+On first startup, the backend automatically runs database migrations and seeds the compliance frameworks (EU AI Act and UNDP Human Rights Assessment). Additional frameworks such as the Environmental Impact Framework can be added later from the Frameworks page.
 
 ## 3. Create an account
 
-1. Open [localhost:3000](http://localhost:3000) in your browser.
-2. The first user is created via an admin invite. Check the backend logs for the initial invite token, or create one via the API:
-
-```bash
-curl -X POST http://localhost:8000/api/admin/invites \
-  -H "Content-Type: application/json" \
-  -d '{"email": "you@example.com", "role": "admin"}'
-```
-
-3. Register with the invite token at the login page.
+1. Open [localhost:3000/register](http://localhost:3000/register) in your browser.
+2. Since no users exist yet, you will see the admin setup page. Create your admin account.
+3. Once registered, sample projects are created automatically to help you explore the platform. These include pre-filled reporting evidence so you can see how a completed compliance workflow looks.
 
 ## 4. Create a project
 
@@ -85,7 +78,17 @@ Navigate to the **Risk Classification** page and complete the self-assessment qu
 
 The risk classification updates automatically as you modify project details or questionnaire answers.
 
-## 6. Upload documents
+## 6. Manage frameworks
+
+The **Frameworks** page lists the active compliance frameworks. By default, EU AI Act and UNDP Human Rights Assessment are seeded. You can:
+
+- **Add** optional frameworks (e.g., Environmental Impact Framework) from the built-in catalogue
+- **Remove** optional frameworks when they are no longer needed (the EU AI Act is always present)
+- Click any framework card to read its full regulatory text
+
+Adding or removing a framework immediately updates the Documents and Reporting sections across the platform.
+
+## 7. Upload documents
 
 On the **Documents** page, upload compliance documents for each framework. Supported format: PDF.
 
@@ -93,15 +96,16 @@ Norma extracts the text and generates an AI summary for each document. These sum
 
 You can also upload additional documents not tied to any specific framework requirement.
 
-## 7. Complete reporting checklists
+## 8. Complete reporting checklists
 
 The **Reporting** page presents compliance checklists for each framework. For each item:
 
 - Write your evidence or comment
 - Use **Ask Norma** to get AI-generated suggestions based on your project context and uploaded documents
 - Validate your answers against auditor standards
+- **Export to PDF** to generate a professional compliance report for stakeholders
 
-## 8. Connect a GitHub repository (optional)
+## 9. Connect a GitHub repository (optional)
 
 On the **Codebase** page, connect a GitHub repository to give Norma visibility into your codebase:
 
@@ -111,7 +115,7 @@ On the **Codebase** page, connect a GitHub repository to give Norma visibility i
 
 The codebase analysis feeds into the Norma assistant's context, allowing it to reference your actual implementation when answering compliance questions.
 
-## 9. Chat with Norma
+## 10. Chat with Norma
 
 The **Chat** page provides a context-aware AI assistant. Norma has access to:
 
