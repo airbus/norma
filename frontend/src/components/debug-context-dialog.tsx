@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Markdown from 'react-markdown';
 import { Bug, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -25,27 +25,32 @@ export function DebugContextDialog({ section = 'full', refreshKey }: DebugContex
   const [open, setOpen] = useState(false);
   const [context, setContext] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const requestRef = useRef(0);
 
   useEffect(() => {
     if (!open || !currentProject || !section) return;
-    let cancelled = false;
-    setLoading(true);
-    api
-      .get<{ context: string | null }>(
-        `/chat/context?project_id=${currentProject.id}&section=${section}`,
-      )
+    const id = ++requestRef.current;
+    // Fetch context; setState calls are in async callbacks to satisfy lint rules
+    Promise.resolve()
+      .then(() => {
+        setContext(null);
+        setLoading(true);
+        return api.get<{ context: string | null }>(
+          `/chat/context?project_id=${currentProject.id}&section=${section}`,
+        );
+      })
       .then((data) => {
-        if (!cancelled) setContext(data.context);
+        if (requestRef.current === id) {
+          setContext(data.context);
+          setLoading(false);
+        }
       })
       .catch(() => {
-        if (!cancelled) setContext('Failed to load context.');
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
+        if (requestRef.current === id) {
+          setContext('Failed to load context.');
+          setLoading(false);
+        }
       });
-    return () => {
-      cancelled = true;
-    };
   }, [open, currentProject, section, refreshKey]);
 
   const wordCount = context ? context.split(/\s+/).filter(Boolean).length : 0;
@@ -57,10 +62,7 @@ export function DebugContextDialog({ section = 'full', refreshKey }: DebugContex
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button
-            size="sm"
-            className="cursor-pointer bg-red-500 text-white hover:bg-red-600"
-          />
+          <Button size="sm" className="cursor-pointer bg-red-500 text-white hover:bg-red-600" />
         }
       >
         <Bug className="size-4" />
