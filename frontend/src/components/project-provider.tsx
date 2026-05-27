@@ -3,18 +3,31 @@ import { api, type Project } from '@/lib/api';
 import { ProjectContext } from '@/hooks/use-project';
 import { useAuth } from '@/hooks/use-auth';
 
+const STORAGE_KEY = 'norma-current-project-id';
+
 export function ProjectProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [projects, setProjects] = useState<Project[]>([]);
-  const [currentProject, setCurrentProject] = useState<Project | null>(null);
+  const [currentProject, setCurrentProjectState] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const setCurrentProject = useCallback((project: Project | null) => {
+    setCurrentProjectState(project);
+    if (project) {
+      localStorage.setItem(STORAGE_KEY, project.id);
+    } else {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  }, []);
 
   const refreshProjects = useCallback(async () => {
     try {
       const data = await api.get<Project[]>('/projects');
       setProjects(data);
       if (data.length > 0 && !currentProject) {
-        setCurrentProject(data[0]);
+        const savedId = localStorage.getItem(STORAGE_KEY);
+        const saved = savedId ? data.find((p) => p.id === savedId) : null;
+        setCurrentProject(saved ?? data[0]);
       } else if (currentProject) {
         const updated = data.find((p) => p.id === currentProject.id);
         if (updated) setCurrentProject(updated);
@@ -26,7 +39,7 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  }, [currentProject]);
+  }, [currentProject, setCurrentProject]);
 
   useEffect(() => {
     if (!user) return;
@@ -36,7 +49,9 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
         const data = await api.get<Project[]>('/projects');
         if (cancelled) return;
         setProjects(data);
-        if (data.length > 0) setCurrentProject(data[0]);
+        const savedId = localStorage.getItem(STORAGE_KEY);
+        const saved = savedId ? data.find((p) => p.id === savedId) : null;
+        if (data.length > 0) setCurrentProject(saved ?? data[0]);
       } catch {
         // auth may not be ready yet
       } finally {
@@ -47,7 +62,7 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [user]);
+  }, [user, setCurrentProject]);
 
   const createProject = useCallback(
     async (data: {
@@ -63,7 +78,7 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
       setCurrentProject(project);
       return project;
     },
-    [],
+    [setCurrentProject],
   );
 
   const updateProject = useCallback(
@@ -73,7 +88,7 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
       if (currentProject?.id === id) setCurrentProject(project);
       return project;
     },
-    [currentProject],
+    [currentProject, setCurrentProject],
   );
 
   const evaluateRisk = useCallback(
@@ -83,7 +98,7 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
       if (currentProject?.id === id) setCurrentProject(project);
       return project;
     },
-    [currentProject],
+    [currentProject, setCurrentProject],
   );
 
   const deleteProject = useCallback(
@@ -95,7 +110,7 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
         setCurrentProject(remaining[0] ?? null);
       }
     },
-    [currentProject, projects],
+    [currentProject, projects, setCurrentProject],
   );
 
   return (

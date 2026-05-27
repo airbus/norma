@@ -103,6 +103,20 @@
   },
   "frameworks": {
     "title": "Frameworks",
-    "noContent": "The content for this framework has not been loaded yet. The questionnaire and reporting sections are available through the risk classification and reporting pages."
+    "noContent": "The content for this framework has not been loaded yet. The questionnaire and reporting sections are available through the risk classification and reporting pages.",
+    "deleteFramework": "Remove Framework",
+    "deleteFrameworkConfirm": "Are you sure you want to remove \"{{name}}\"? All associated documents and definitions will be deleted. You can re-add it later.",
+    "addFrameworkTitle": "Add Framework",
+    "addFrameworkEmpty": "All available frameworks have already been added.",
+    "names": {
+      "EU AI Act": "EU AI Act",
+      "UNDP Human Rights Assessment": "UNDP Human Rights Assessment",
+      "Environmental Impact Framework": "Environmental Impact Framework"
+    },
+    "descriptions": {
+      "EU AI Act": "The European Union Artificial Intelligence Act establishes a comprehensive regulatory framework for AI systems based on risk classification. It mandates conformity assessments, transparency obligations, and human oversight requirements for high-risk AI systems.",
+      "UNDP Human Rights Assessment": "The UNDP AI Human Rights Impact Assessment Toolkit provides a structured methodology for evaluating AI systems against international human rights standards. It guides organisations through stakeholder engagement, rights-based risk analysis, and ongoing monitoring to ensure AI deployments respect dignity, equality, and non-discrimination principles.",
+      "Environmental Impact Framework": "The Environmental Impact Framework for AI Systems provides a structured approach to measuring, reporting, and reducing the environmental footprint of AI development and deployment. It covers energy consumption, carbon emissions, hardware lifecycle, and data centre sustainability to promote responsible and environmentally conscious AI practices."
+    }
   }
 }

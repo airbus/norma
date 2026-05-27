@@ -225,6 +225,9 @@ SEED_FRAMEWORKS = [
 ]
 
 
+OPTIONAL_FRAMEWORKS = {"Environmental Impact Framework"}
+
+
 def _load_knowledge(framework_name: str) -> str:
     slug = framework_name.lower().replace(" ", "_")
     framework_dir = KNOWLEDGE_DIR / slug
@@ -246,6 +249,9 @@ def seed_frameworks(db: Session) -> None:
         db.flush()
 
     for fw_data in SEED_FRAMEWORKS:
+        if fw_data["name"] in OPTIONAL_FRAMEWORKS:
+            continue
+
         existing = db.query(Framework).filter(Framework.name == fw_data["name"]).first()
         if existing:
             new_content = _load_knowledge(fw_data["name"])

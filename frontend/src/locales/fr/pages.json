@@ -103,6 +103,20 @@
   },
   "frameworks": {
     "title": "Référentiels",
-    "noContent": "Le contenu de ce référentiel n'a pas encore été chargé. Le questionnaire et les sections de rapports sont accessibles via les pages de classification des risques et de rapports."
+    "noContent": "Le contenu de ce référentiel n'a pas encore été chargé. Le questionnaire et les sections de rapports sont accessibles via les pages de classification des risques et de rapports.",
+    "deleteFramework": "Supprimer le référentiel",
+    "deleteFrameworkConfirm": "Êtes-vous sûr de vouloir supprimer « {{name}} » ? Tous les documents et définitions associés seront supprimés. Vous pourrez le réajouter ultérieurement.",
+    "addFrameworkTitle": "Ajouter un référentiel",
+    "addFrameworkEmpty": "Tous les référentiels disponibles ont déjà été ajoutés.",
+    "names": {
+      "EU AI Act": "Loi européenne sur l'IA",
+      "UNDP Human Rights Assessment": "Évaluation des droits de l'homme du PNUD",
+      "Environmental Impact Framework": "Cadre d'impact environnemental"
+    },
+    "descriptions": {
+      "EU AI Act": "La loi européenne sur l'intelligence artificielle établit un cadre réglementaire complet pour les systèmes d'IA basé sur la classification des risques. Elle impose des évaluations de conformité, des obligations de transparence et des exigences de surveillance humaine pour les systèmes d'IA à haut risque.",
+      "UNDP Human Rights Assessment": "La boîte à outils d'évaluation de l'impact de l'IA sur les droits de l'homme du PNUD fournit une méthodologie structurée pour évaluer les systèmes d'IA par rapport aux normes internationales des droits de l'homme. Elle guide les organisations à travers l'engagement des parties prenantes, l'analyse des risques fondée sur les droits et le suivi continu pour garantir que les déploiements d'IA respectent la dignité, l'égalité et les principes de non-discrimination.",
+      "Environmental Impact Framework": "Le cadre d'impact environnemental pour les systèmes d'IA fournit une approche structurée pour mesurer, rendre compte et réduire l'empreinte environnementale du développement et du déploiement de l'IA. Il couvre la consommation d'énergie, les émissions de carbone, le cycle de vie du matériel et la durabilité des centres de données pour promouvoir des pratiques d'IA responsables et respectueuses de l'environnement."
+    }
   }
 }

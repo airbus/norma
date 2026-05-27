@@ -1668,5 +1668,1251 @@
       "name": "Plan de surveillance environnementale",
       "description": "Cadre de surveillance continue pour le suivi des indicateurs environnementaux, la définition d'objectifs de réduction et le reporting des progrès par rapport aux objectifs de durabilité."
     }
+  },
+  "environmentalChecklist": {
+    "areas": {
+      "env-energy-carbon": {
+        "title": "Énergie",
+        "items": {
+          "EC-01": {
+            "title": "Mesure de l'énergie d'entraînement",
+            "questions": [
+              "La consommation totale d'énergie pour l'entraînement du modèle a-t-elle été mesurée et documentée (en kWh) ?",
+              "Le mix de sources d'énergie (renouvelable vs. fossile) de l'infrastructure d'entraînement est-il connu et enregistré ?"
+            ]
+          },
+          "EC-02": {
+            "title": "Mesure de l'énergie d'inférence",
+            "questions": [
+              "La consommation d'énergie en cours d'inférence est-elle surveillée et rapportée ?",
+              "Les métriques d'énergie par requête sont-elles suivies pour les charges de travail en production ?"
+            ]
+          },
+          "EC-03": {
+            "title": "Estimation de l'empreinte carbone",
+            "questions": [
+              "L'empreinte carbone du système d'IA a-t-elle été estimée à l'aide d'une méthodologie reconnue (ex. GHG Protocol, ML CO₂ Impact) ?",
+              "Les émissions de Scope 1, 2 et 3 sont-elles prises en compte dans l'évaluation carbone ?"
+            ]
+          },
+          "EC-04": {
+            "title": "Objectifs de réduction carbone",
+            "questions": [
+              "Existe-t-il des objectifs documentés pour réduire l'empreinte carbone du système d'IA au fil du temps ?",
+              "Les progrès par rapport aux objectifs de réduction carbone sont-ils examinés à des intervalles définis ?"
+            ]
+          },
+          "EC-05": {
+            "title": "Utilisation d'énergie renouvelable",
+            "questions": [
+              "Quel pourcentage de l'énergie consommée par le système d'IA provient de sources renouvelables ?",
+              "Existe-t-il des engagements ou des plans pour augmenter l'utilisation d'énergie renouvelable pour les charges de travail d'IA ?"
+            ]
+          },
+          "EC-06": {
+            "title": "Compensation carbone",
+            "questions": [
+              "Si la compensation carbone est utilisée, les compensations sont-elles vérifiées et issues de programmes crédibles ?"
+            ]
+          }
+        }
+      },
+      "env-hardware": {
+        "title": "Matériel",
+        "items": {
+          "HW-01": {
+            "title": "Sélection du matériel",
+            "questions": [
+              "L'impact environnemental des choix de matériel (type de GPU/TPU, spécifications des serveurs) a-t-il été pris en compte lors de l'approvisionnement ?",
+              "Les options de matériel économes en énergie sont-elles privilégiées lorsque les exigences de performance le permettent ?"
+            ]
+          },
+          "HW-02": {
+            "title": "Utilisation du matériel",
+            "questions": [
+              "Les taux d'utilisation du matériel sont-ils surveillés pour minimiser la consommation de ressources inactives ?",
+              "Des stratégies de planification des charges de travail (ex. traitement par lots, planification hors pointe) sont-elles utilisées pour améliorer l'efficacité ?"
+            ]
+          },
+          "HW-03": {
+            "title": "Durée de vie du matériel",
+            "questions": [
+              "Les cycles de renouvellement du matériel sont-ils planifiés pour équilibrer les besoins de performance et l'impact environnemental ?",
+              "La réutilisation, la remise à neuf ou le don du matériel sont-ils envisagés avant la mise au rebut ?"
+            ]
+          },
+          "HW-04": {
+            "title": "Gestion des déchets électroniques",
+            "questions": [
+              "Le matériel en fin de vie est-il éliminé via des programmes de recyclage de déchets électroniques certifiés ?",
+              "Les matières dangereuses dans les composants matériels sont-elles suivies et gérées conformément aux réglementations ?"
+            ]
+          },
+          "HW-05": {
+            "title": "Durabilité de la chaîne d'approvisionnement",
+            "questions": [
+              "Les fournisseurs de matériel sont-ils évalués pour leurs pratiques environnementales et leurs engagements en matière de durabilité ?"
+            ]
+          }
+        }
+      },
+      "env-data-management": {
+        "title": "Données",
+        "items": {
+          "DM-01": {
+            "title": "Efficacité du stockage de données",
+            "questions": [
+              "Les pratiques de stockage de données sont-elles optimisées pour minimiser la consommation d'énergie (ex. stockage hiérarchisé, compression, déduplication) ?",
+              "Existe-t-il une politique de conservation des données garantissant que les données inutiles sont supprimées pour réduire l'empreinte de stockage ?"
+            ]
+          },
+          "DM-02": {
+            "title": "Efficacité du transfert de données",
+            "questions": [
+              "Les volumes de transfert de données sont-ils minimisés grâce au traitement en périphérie, à la mise en cache ou à des stratégies de localité des données ?",
+              "Le coût environnemental des transferts de données à grande échelle (ex. inter-régions, inter-cloud) est-il pris en compte ?"
+            ]
+          },
+          "DM-03": {
+            "title": "Sélection du centre de données",
+            "questions": [
+              "Les centres de données sont-ils sélectionnés sur la base de critères environnementaux tels que le PUE, l'efficacité de l'utilisation de l'eau et l'approvisionnement en énergie renouvelable ?",
+              "La localisation géographique des centres de données est-elle choisie pour optimiser les climats plus frais ou la disponibilité d'énergie renouvelable ?"
+            ]
+          },
+          "DM-04": {
+            "title": "Utilisation de l'eau",
+            "questions": [
+              "L'utilisation de l'eau des systèmes de refroidissement pour les charges de travail d'IA est-elle mesurée et documentée ?",
+              "Des technologies de refroidissement économes en eau sont-elles employées lorsque cela est possible ?"
+            ]
+          }
+        }
+      },
+      "env-model-efficiency": {
+        "title": "Efficacité",
+        "items": {
+          "ME-01": {
+            "title": "Justification de la taille du modèle",
+            "questions": [
+              "La taille du modèle (nombre de paramètres) est-elle justifiée par rapport aux exigences de la tâche ?",
+              "Des architectures de modèles plus petites ou plus efficaces ont-elles été évaluées avant de sélectionner le modèle final ?"
+            ]
+          },
+          "ME-02": {
+            "title": "Efficacité de l'entraînement",
+            "questions": [
+              "Des techniques d'entraînement efficaces sont-elles utilisées (ex. apprentissage par transfert, entraînement en précision mixte, arrêt précoce) ?",
+              "Le nombre d'exécutions d'entraînement et de recherches d'hyperparamètres est-il documenté et justifié ?"
+            ]
+          },
+          "ME-03": {
+            "title": "Optimisation de l'inférence",
+            "questions": [
+              "Des techniques d'optimisation de l'inférence sont-elles appliquées (ex. quantification, élagage, distillation, mise en cache) ?",
+              "Le compromis entre la précision du modèle et le coût de calcul est-il explicitement évalué ?"
+            ]
+          },
+          "ME-04": {
+            "title": "Fréquence de réentraînement",
+            "questions": [
+              "Le calendrier de réentraînement est-il justifié par des métriques de dégradation des performances plutôt que par des intervalles fixes ?",
+              "Des approches incrémentales ou d'ajustement fin sont-elles utilisées à la place d'un réentraînement complet lorsque cela est possible ?"
+            ]
+          },
+          "ME-05": {
+            "title": "Étalonnage",
+            "questions": [
+              "Les métriques d'efficacité environnementale (ex. précision par watt, débit par kWh) sont-elles suivies en parallèle des métriques de performance ?"
+            ]
+          }
+        }
+      },
+      "env-lifecycle": {
+        "title": "Cycle de vie",
+        "items": {
+          "LC-01": {
+            "title": "Analyse du cycle de vie",
+            "questions": [
+              "Une analyse du cycle de vie a-t-elle été réalisée, couvrant l'impact environnemental du développement au déploiement jusqu'au démantèlement ?",
+              "Les émissions intrinsèques liées à la fabrication du matériel sont-elles incluses dans l'analyse du cycle de vie ?"
+            ]
+          },
+          "LC-02": {
+            "title": "Plan de démantèlement",
+            "questions": [
+              "Existe-t-il un plan documenté pour le démantèlement écoresponsable du système d'IA et de son infrastructure ?",
+              "Le plan de démantèlement aborde-t-il la suppression des données, la mise au rebut du matériel et l'arrêt progressif des services ?"
+            ]
+          },
+          "LC-03": {
+            "title": "Durabilité des fournisseurs et du cloud",
+            "questions": [
+              "Les fournisseurs cloud et les prestataires tiers sont-ils évalués pour leurs engagements environnementaux et leurs rapports ?",
+              "Les accords de niveau de service incluent-ils des critères de performance environnementale ?"
+            ]
+          },
+          "LC-04": {
+            "title": "Pratiques d'économie circulaire",
+            "questions": [
+              "Les principes de l'économie circulaire (réutilisation, réparation, recyclage) sont-ils appliqués à l'infrastructure et au matériel d'IA ?"
+            ]
+          }
+        }
+      },
+      "env-monitoring": {
+        "title": "Suivi",
+        "items": {
+          "EM-01": {
+            "title": "KPI environnementaux",
+            "questions": [
+              "Des indicateurs clés de performance (KPI) environnementaux sont-ils définis pour le système d'IA (ex. énergie par inférence, carbone total, utilisation de l'eau) ?",
+              "Les KPI sont-ils révisés et mis à jour à intervalles réguliers ?"
+            ]
+          },
+          "EM-02": {
+            "title": "Rapports et divulgation",
+            "questions": [
+              "Les données d'impact environnemental sont-elles communiquées aux parties prenantes internes et, le cas échéant, aux organismes externes ?",
+              "Les rapports environnementaux suivent-ils une norme ou un cadre reconnu (ex. GRI, CDP, TCFD) ?"
+            ]
+          },
+          "EM-03": {
+            "title": "Amélioration continue",
+            "questions": [
+              "Existe-t-il un processus documenté pour identifier et mettre en œuvre des améliorations environnementales sur la base des données de suivi ?",
+              "Les enseignements tirés des incidents environnementaux ou des insuffisances de performance sont-ils systématiquement capitalisés ?"
+            ]
+          },
+          "EM-04": {
+            "title": "Conformité réglementaire",
+            "questions": [
+              "L'organisation suit-elle et respecte-t-elle les réglementations environnementales applicables liées à l'IA et aux opérations des centres de données ?"
+            ]
+          },
+          "EM-05": {
+            "title": "Intégration des objectifs de durabilité",
+            "questions": [
+              "Les objectifs environnementaux spécifiques à l'IA sont-ils alignés sur les objectifs et engagements de durabilité plus larges de l'organisation (ex. engagements de neutralité carbone) ?"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "undpChecklist": {
+    "areas": {
+      "undp-zero-question": {
+        "title": "Question 0",
+        "items": {
+          "ZQ-01": {
+            "title": "Évaluation de la nécessité de l'IA",
+            "questions": [
+              "A-t-il été évalué si une solution basée sur l'IA est réellement nécessaire, ou si des alternatives non algorithmiques pourraient atteindre le même objectif ? (CRITIQUE)"
+            ]
+          },
+          "ZQ-02": {
+            "title": "Justification de l'IA",
+            "questions": [
+              "La justification du choix d'une approche basée sur l'IA par rapport aux alternatives a-t-elle été documentée ?"
+            ]
+          },
+          "ZQ-03": {
+            "title": "Analyse SWOT",
+            "questions": [
+              "Une analyse SWOT (Forces, Faiblesses, Opportunités, Menaces) de l'approche IA par rapport aux alternatives a-t-elle été réalisée ?"
+            ]
+          },
+          "ZQ-04": {
+            "title": "Compatibilité avec les droits fondamentaux",
+            "questions": [
+              "A-t-il été confirmé que la solution d'IA ne poursuit pas un objectif intrinsèquement incompatible avec les droits fondamentaux ?"
+            ]
+          }
+        }
+      },
+      "undp-org-readiness": {
+        "title": "Préparation",
+        "items": {
+          "OR-01": {
+            "title": "Politique des droits de l'homme",
+            "questions": [
+              "L'organisation dispose-t-elle d'une politique documentée en matière de droits de l'homme couvrant la conception, le développement et le déploiement de l'IA ?"
+            ]
+          },
+          "OR-02": {
+            "title": "Soutien de la direction",
+            "questions": [
+              "La direction soutient-elle activement et alloue-t-elle des ressources pour la diligence raisonnable en matière de droits de l'homme pour les initiatives d'IA ?"
+            ]
+          },
+          "OR-03": {
+            "title": "Canaux de signalement",
+            "questions": [
+              "Des canaux dédiés existent-ils pour que les employés signalent les problèmes potentiels de droits de l'homme liés aux systèmes d'IA ?"
+            ]
+          },
+          "OR-04": {
+            "title": "Révision des politiques",
+            "questions": [
+              "L'organisation révise-t-elle et met-elle à jour régulièrement ses politiques pour traiter les questions émergentes de droits de l'homme liées à l'IA ?"
+            ]
+          },
+          "OR-05": {
+            "title": "Collaboration interdépartementale",
+            "questions": [
+              "La collaboration interdépartementale sur les droits de l'homme dans l'IA est-elle facilitée ?"
+            ]
+          },
+          "OR-06": {
+            "title": "Engagement des parties prenantes",
+            "questions": [
+              "L'organisation implique-t-elle les parties prenantes (y compris les communautés affectées) pour obtenir des contributions et des retours tout au long du cycle de vie de l'IA ?"
+            ]
+          },
+          "OR-07": {
+            "title": "Allocation de ressources",
+            "questions": [
+              "L'organisation alloue-t-elle des ressources suffisantes pour la formation, les évaluations des risques et l'engagement des parties prenantes ?"
+            ]
+          },
+          "OR-08": {
+            "title": "Transparence publique",
+            "questions": [
+              "L'organisation accorde-t-elle la priorité à la transparence et à la communication avec le public concernant l'utilisation de l'IA ?"
+            ]
+          },
+          "OR-09": {
+            "title": "Compréhension de la direction",
+            "questions": [
+              "L'équipe de direction a-t-elle une compréhension approfondie des implications de l'IA en matière de droits de l'homme ?"
+            ]
+          },
+          "OR-10": {
+            "title": "Formation des employés",
+            "questions": [
+              "Les employés reçoivent-ils une formation régulière sur les droits de l'homme et les considérations éthiques dans l'IA ?"
+            ]
+          },
+          "OR-11": {
+            "title": "Personnel désigné",
+            "questions": [
+              "Du personnel ou des équipes désignées sont-ils responsables du suivi et du traitement des questions de droits de l'homme dans les projets d'IA ?"
+            ]
+          },
+          "OR-12": {
+            "title": "Expertise externe",
+            "questions": [
+              "L'organisation collabore-t-elle avec des experts externes en droits de l'homme et en IA ?"
+            ]
+          },
+          "OR-13": {
+            "title": "Protection des lanceurs d'alerte",
+            "questions": [
+              "Les employés sont-ils protégés contre les représailles lorsqu'ils soulèvent des préoccupations en matière de droits de l'homme concernant l'IA ?"
+            ]
+          },
+          "OR-14": {
+            "title": "Intégration des retours",
+            "questions": [
+              "Existe-t-il un processus pour intégrer les retours des parties prenantes dans les pratiques d'IA ?"
+            ]
+          },
+          "OR-15": {
+            "title": "Expertise juridique",
+            "questions": [
+              "L'organisation a-t-elle accès à une expertise juridique en droits de l'homme et en IA ?"
+            ]
+          },
+          "OR-16": {
+            "title": "Ressources de bonnes pratiques",
+            "questions": [
+              "Des ressources sont-elles fournies aux employés pour se tenir informés des bonnes pratiques ?"
+            ]
+          },
+          "OR-17": {
+            "title": "Participation sectorielle",
+            "questions": [
+              "L'organisation participe-t-elle à des groupes ou forums sectoriels sur les droits de l'homme et l'IA ?"
+            ]
+          },
+          "OR-18": {
+            "title": "Évaluation des lacunes en compétences",
+            "questions": [
+              "L'organisation évalue-t-elle et comble-t-elle régulièrement les lacunes en compétences liées aux droits de l'homme et à l'IA ?"
+            ]
+          },
+          "OR-19": {
+            "title": "Processus d'évaluation d'impact",
+            "questions": [
+              "Existe-t-il un processus systématique d'évaluation de l'impact sur les droits de l'homme pour tous les projets d'IA ? (CRITIQUE)"
+            ]
+          },
+          "OR-20": {
+            "title": "Évaluation de l'IA tierce",
+            "questions": [
+              "Des procédures existent-elles pour évaluer les impacts sur les droits de l'homme des systèmes d'IA tiers intégrés ou utilisés ? (CRITIQUE)"
+            ]
+          },
+          "OR-21": {
+            "title": "Identification des risques",
+            "questions": [
+              "Un processus systématique d'identification des risques est-il en place, incluant des tests de fiabilité, de précision et de résilience ?"
+            ]
+          },
+          "OR-22": {
+            "title": "Engagement communautaire",
+            "questions": [
+              "Les parties prenantes (y compris les communautés affectées) sont-elles impliquées dans le processus de déploiement de l'IA ?"
+            ]
+          },
+          "OR-23": {
+            "title": "Évaluation pré-déploiement",
+            "questions": [
+              "Tous les projets d'IA font-ils l'objet d'une évaluation de l'impact sur les droits de l'homme et la protection des données avant le déploiement ? (CRITIQUE)"
+            ]
+          },
+          "OR-24": {
+            "title": "Protocoles de sécurité des données",
+            "questions": [
+              "Des protocoles de sécurité et de confidentialité des données sont-ils établis pour tous les processus liés à l'IA ?"
+            ]
+          },
+          "OR-25": {
+            "title": "Mises à jour réglementaires",
+            "questions": [
+              "Les processus sont-ils régulièrement mis à jour pour intégrer les nouvelles réglementations et normes ?"
+            ]
+          },
+          "OR-26": {
+            "title": "Processus de surveillance",
+            "questions": [
+              "Un processus de surveillance est-il établi pour suivre les performances du système d'IA et sa conformité aux normes en matière de droits de l'homme ? (CRITIQUE)"
+            ]
+          },
+          "OR-27": {
+            "title": "Atténuation des défaillances",
+            "questions": [
+              "L'organisation a-t-elle la capacité d'atténuer et de minimiser les effets négatifs des défaillances du système d'IA ?"
+            ]
+          },
+          "OR-28": {
+            "title": "Mécanisme de recours",
+            "questions": [
+              "Un mécanisme de recours est-il en place pour les personnes affectées négativement par les systèmes d'IA ? (CRITIQUE)"
+            ]
+          }
+        }
+      },
+      "undp-planning": {
+        "title": "Planification",
+        "items": {
+          "PS-01": {
+            "title": "Finalité du système",
+            "questions": [
+              "La finalité principale du système d'IA a-t-elle été documentée ? (CRITIQUE)"
+            ]
+          },
+          "PS-02": {
+            "title": "Caractéristiques techniques",
+            "questions": [
+              "Les principales caractéristiques techniques du système ont-elles été documentées (type de modèle d'IA, architecture) ?"
+            ]
+          },
+          "PS-03": {
+            "title": "Juridictions de déploiement",
+            "questions": [
+              "Tous les pays/juridictions où le système sera déployé ont-ils été identifiés ?"
+            ]
+          },
+          "PS-04": {
+            "title": "Types de données",
+            "questions": [
+              "Tous les types de données traitées (personnelles, non personnelles, catégories spéciales) pour l'entraînement et le fonctionnement ont-ils été identifiés ? (CRITIQUE)"
+            ]
+          },
+          "PS-05": {
+            "title": "Cartographie des flux de données",
+            "questions": [
+              "Tous les flux de données ont-ils été cartographiés — de la collecte au traitement, puis au stockage et à la suppression ?"
+            ]
+          },
+          "PS-06": {
+            "title": "Personnes affectées",
+            "questions": [
+              "Toutes les personnes ou groupes potentiellement affectés par le système d'IA ont-ils été identifiés ? (CRITIQUE)"
+            ]
+          },
+          "PS-07": {
+            "title": "Groupes vulnérables",
+            "questions": [
+              "A-t-il été évalué si les groupes affectés comprennent des personnes ou groupes vulnérables (enfants, minorités, personnes en situation de handicap, etc.) ?"
+            ]
+          },
+          "PS-08": {
+            "title": "Titulaires d'obligations",
+            "questions": [
+              "Tous les titulaires d'obligations ont-ils été identifiés — qui est impliqué dans la conception, la fourniture et le déploiement, et quel est leur rôle ? (CRITIQUE)"
+            ]
+          },
+          "PS-09": {
+            "title": "Chaîne de responsabilité",
+            "questions": [
+              "La chaîne de responsabilité du développeur au déployeur a-t-elle été documentée ?"
+            ]
+          },
+          "PS-10": {
+            "title": "Politiques existantes",
+            "questions": [
+              "Les politiques et procédures existantes pour l'évaluation des impacts sur les droits de l'homme (y compris l'engagement des parties prenantes) ont-elles été documentées ?"
+            ]
+          },
+          "PS-11": {
+            "title": "Évaluations d'impact antérieures",
+            "questions": [
+              "Les évaluations d'impact antérieures ont-elles été documentées (ex. analyse d'impact relative à la protection des données, évaluations sectorielles) ?"
+            ]
+          },
+          "PS-12": {
+            "title": "Identification des groupes affectés",
+            "questions": [
+              "Tous les groupes ou communautés potentiellement affectés par le système d'IA (y compris pendant le développement) ont-ils été identifiés ? (CRITIQUE)"
+            ]
+          },
+          "PS-13": {
+            "title": "Parties prenantes pertinentes",
+            "questions": [
+              "Toutes les parties prenantes pertinentes à impliquer ont-elles été identifiées (société civile, organisations internationales, experts, associations professionnelles, journalistes) ?"
+            ]
+          },
+          "PS-14": {
+            "title": "Titulaires d'obligations supplémentaires",
+            "questions": [
+              "Des titulaires d'obligations supplémentaires au-delà du fournisseur et du déployeur d'IA ont-ils été identifiés (autorités nationales, agences gouvernementales) ?"
+            ]
+          },
+          "PS-15": {
+            "title": "Évaluation de la chaîne d'approvisionnement",
+            "questions": [
+              "A-t-il été évalué si les partenaires commerciaux et fournisseurs (sous-traitants de systèmes d'IA et de jeux de données) ont été impliqués dans l'évaluation ? (CRITIQUE)"
+            ]
+          },
+          "PS-16": {
+            "title": "Impact des fournisseurs sur les droits de l'homme",
+            "questions": [
+              "Le fournisseur d'IA a-t-il réalisé une évaluation de la chaîne d'approvisionnement pour les impacts potentiels sur les droits de l'homme de la part des fournisseurs/sous-traitants ? (CRITIQUE)"
+            ]
+          },
+          "PS-17": {
+            "title": "Normes des fournisseurs",
+            "questions": [
+              "Le fournisseur d'IA a-t-il promu des normes ou des audits en matière de droits de l'homme auprès de ses fournisseurs ?"
+            ]
+          },
+          "PS-18": {
+            "title": "Communication publique",
+            "questions": [
+              "Le fournisseur d'IA et les développeurs communiquent-ils publiquement les impacts potentiels du système d'IA sur les droits de l'homme ?"
+            ]
+          },
+          "PS-19": {
+            "title": "Formation du personnel",
+            "questions": [
+              "Le fournisseur d'IA et les développeurs dispensent-ils une formation sur les normes en matière de droits de l'homme au personnel de direction et d'approvisionnement ?"
+            ]
+          }
+        }
+      },
+      "undp-rights-mapping": {
+        "title": "Droits",
+        "items": {
+          "HRM-01": {
+            "title": "Identification des droits",
+            "questions": [
+              "Tous les droits de l'homme potentiellement affectés par le système d'IA ont-ils été identifiés, à l'aide de la liste de contrôle exhaustive des droits ? (CRITIQUE)"
+            ]
+          },
+          "HRM-02": {
+            "title": "Dignité humaine",
+            "questions": [
+              "L'impact potentiel sur la dignité humaine a-t-il été évalué ?"
+            ]
+          },
+          "HRM-03": {
+            "title": "Liberté de discrimination",
+            "questions": [
+              "L'impact potentiel sur la liberté de discrimination a-t-il été évalué ?"
+            ]
+          },
+          "HRM-04": {
+            "title": "Droit à la vie",
+            "questions": [
+              "L'impact potentiel sur le droit à la vie a-t-il été évalué ?"
+            ]
+          },
+          "HRM-05": {
+            "title": "Liberté de l'esclavage",
+            "questions": [
+              "L'impact potentiel sur la liberté de l'esclavage a-t-il été évalué ?"
+            ]
+          },
+          "HRM-06": {
+            "title": "Liberté des traitements inhumains",
+            "questions": [
+              "L'impact potentiel sur la liberté des traitements inhumains ou dégradants a-t-il été évalué ?"
+            ]
+          },
+          "HRM-07": {
+            "title": "Droit à la vie privée",
+            "questions": [
+              "L'impact potentiel sur le droit à la vie privée a-t-il été évalué ?"
+            ]
+          },
+          "HRM-08": {
+            "title": "Droit à la propriété",
+            "questions": [
+              "L'impact potentiel sur le droit à la propriété a-t-il été évalué ?"
+            ]
+          },
+          "HRM-09": {
+            "title": "Liberté de pensée",
+            "questions": [
+              "L'impact potentiel sur la liberté de pensée, de conscience et de religion a-t-il été évalué ?"
+            ]
+          },
+          "HRM-10": {
+            "title": "Liberté d'expression",
+            "questions": [
+              "L'impact potentiel sur la liberté d'expression a-t-il été évalué ?"
+            ]
+          },
+          "HRM-11": {
+            "title": "Liberté de circulation",
+            "questions": [
+              "L'impact potentiel sur la liberté de circulation a-t-il été évalué ?"
+            ]
+          },
+          "HRM-12": {
+            "title": "Liberté de réunion",
+            "questions": [
+              "L'impact potentiel sur la liberté de réunion a-t-il été évalué ?"
+            ]
+          },
+          "HRM-13": {
+            "title": "Liberté d'association",
+            "questions": [
+              "L'impact potentiel sur le droit à la liberté d'association a-t-il été évalué ?"
+            ]
+          },
+          "HRM-14": {
+            "title": "Droit au mariage et à la famille",
+            "questions": [
+              "L'impact potentiel sur le droit au mariage et à la famille a-t-il été évalué ?"
+            ]
+          },
+          "HRM-15": {
+            "title": "Niveau de vie suffisant",
+            "questions": [
+              "L'impact potentiel sur le droit à un niveau de vie suffisant (y compris la santé) a-t-il été évalué ?"
+            ]
+          },
+          "HRM-16": {
+            "title": "Droit à l'éducation",
+            "questions": [
+              "L'impact potentiel sur le droit à l'éducation a-t-il été évalué ?"
+            ]
+          },
+          "HRM-17": {
+            "title": "Droit à la sécurité sociale",
+            "questions": [
+              "L'impact potentiel sur le droit à la sécurité sociale a-t-il été évalué ?"
+            ]
+          },
+          "HRM-18": {
+            "title": "Vie culturelle et scientifique",
+            "questions": [
+              "L'impact potentiel sur le droit de participer à la vie culturelle, artistique et scientifique a-t-il été évalué ?"
+            ]
+          },
+          "HRM-19": {
+            "title": "Droit au travail",
+            "questions": [
+              "L'impact potentiel sur le droit au travail a-t-il été évalué ?"
+            ]
+          },
+          "HRM-20": {
+            "title": "Droit au repos",
+            "questions": [
+              "L'impact potentiel sur le droit au repos et aux loisirs a-t-il été évalué ?"
+            ]
+          },
+          "HRM-21": {
+            "title": "Droits des minorités",
+            "questions": [
+              "L'impact potentiel sur les droits des minorités religieuses, ethniques ou linguistiques a-t-il été évalué ?"
+            ]
+          },
+          "HRM-22": {
+            "title": "Droits des enfants",
+            "questions": [
+              "L'impact potentiel sur les droits des enfants a-t-il été évalué ?"
+            ]
+          },
+          "HRM-23": {
+            "title": "Liberté de la torture",
+            "questions": [
+              "L'impact potentiel sur la liberté de la torture a-t-il été évalué ?"
+            ]
+          },
+          "HRM-24": {
+            "title": "Reconnaissance devant la loi",
+            "questions": [
+              "L'impact potentiel sur le droit à la reconnaissance devant la loi a-t-il été évalué ?"
+            ]
+          },
+          "HRM-25": {
+            "title": "Égalité devant la loi",
+            "questions": [
+              "L'impact potentiel sur le droit à l'égalité devant la loi a-t-il été évalué ?"
+            ]
+          },
+          "HRM-26": {
+            "title": "Accès à la justice",
+            "questions": [
+              "L'impact potentiel sur l'accès à la justice a-t-il été évalué ?"
+            ]
+          },
+          "HRM-27": {
+            "title": "Liberté de détention arbitraire",
+            "questions": [
+              "L'impact potentiel sur la liberté de détention arbitraire a-t-il été évalué ?"
+            ]
+          },
+          "HRM-28": {
+            "title": "Droit à un procès équitable",
+            "questions": [
+              "L'impact potentiel sur le droit à un procès équitable a-t-il été évalué ?"
+            ]
+          },
+          "HRM-29": {
+            "title": "Présomption d'innocence",
+            "questions": [
+              "L'impact potentiel sur la présomption d'innocence a-t-il été évalué ?"
+            ]
+          },
+          "HRM-30": {
+            "title": "Droit à un recours juridique",
+            "questions": [
+              "L'impact potentiel sur le droit à un recours juridique a-t-il été évalué ?"
+            ]
+          },
+          "HRM-31": {
+            "title": "Droit d'asile",
+            "questions": [
+              "L'impact potentiel sur le droit d'asile a-t-il été évalué ?"
+            ]
+          },
+          "HRM-32": {
+            "title": "Droit à la nationalité",
+            "questions": [
+              "L'impact potentiel sur le droit à la nationalité a-t-il été évalué ?"
+            ]
+          },
+          "HRM-33": {
+            "title": "Participation aux affaires publiques",
+            "questions": [
+              "L'impact potentiel sur le droit de participer aux affaires publiques a-t-il été évalué ?"
+            ]
+          },
+          "HRM-34": {
+            "title": "Instruments juridiques",
+            "questions": [
+              "Tous les instruments juridiques internationaux/régionaux applicables pour la protection des droits de l'homme dans les juridictions de déploiement ont-ils été identifiés ?"
+            ]
+          },
+          "HRM-35": {
+            "title": "Organes de contrôle",
+            "questions": [
+              "Les cours des droits de l'homme ou les organes de contrôle pertinents ont-ils été identifiés ?"
+            ]
+          },
+          "HRM-36": {
+            "title": "Jurisprudence",
+            "questions": [
+              "La jurisprudence et les dispositions juridiques les plus pertinentes dans le domaine des droits de l'homme ont-elles été identifiées ?"
+            ]
+          }
+        }
+      },
+      "undp-data-diligence": {
+        "title": "Diligence",
+        "items": {
+          "DD-01": {
+            "title": "Origine des données",
+            "questions": [
+              "L'origine des données d'entraînement primaires est-elle documentée (collectées, achetées, extraites) ? (CRITIQUE)"
+            ]
+          },
+          "DD-02": {
+            "title": "Consentement relatif aux données",
+            "questions": [
+              "Le consentement a-t-il été obtenu de manière appropriée pour la collecte de données ? (CRITIQUE)"
+            ]
+          },
+          "DD-03": {
+            "title": "Diversité des données",
+            "questions": [
+              "Des mesures ont-elles été prises pour garantir que les données représentent la diversité de la population affectée (genre, race, âge, handicap, localisation) ?"
+            ]
+          },
+          "DD-04": {
+            "title": "Biais des données",
+            "questions": [
+              "Les limitations connues ou les biais potentiels du jeu de données ont-ils été identifiés et documentés ?"
+            ]
+          },
+          "DD-05": {
+            "title": "Protection des données sensibles",
+            "questions": [
+              "Les données personnelles/sensibles sont-elles traitées et protégées de manière appropriée tout au long du cycle de vie ?"
+            ]
+          },
+          "DD-06": {
+            "title": "Étiquetage des données",
+            "questions": [
+              "Les processus d'étiquetage des données sont-ils documentés, y compris les sources potentielles de biais subjectif ?"
+            ]
+          },
+          "DD-07": {
+            "title": "Objectif de l'entraînement",
+            "questions": [
+              "L'objectif spécifique de l'entraînement de l'IA est-il documenté (clarifie la fonction prévue par rapport à l'utilisation abusive potentielle) ?"
+            ]
+          },
+          "DD-08": {
+            "title": "Critères d'équité",
+            "questions": [
+              "Des critères/métriques d'équité ont-ils été utilisés lors de l'entraînement et de l'évaluation (avec documentation de ceux utilisés) ?"
+            ]
+          },
+          "DD-09": {
+            "title": "Limitations du modèle",
+            "questions": [
+              "Les limitations connues, les modes de défaillance et les limites de performance du modèle entraîné sont-ils documentés ?"
+            ]
+          },
+          "DD-10": {
+            "title": "Type de modèle",
+            "questions": [
+              "Le type de modèle d'IA est-il documenté avec la justification de sa sélection (prédictif, génératif, etc.) ?"
+            ]
+          },
+          "DD-11": {
+            "title": "Mesure des performances",
+            "questions": [
+              "Les performances du système sont-elles mesurées et documentées ? (CRITIQUE)"
+            ]
+          },
+          "DD-12": {
+            "title": "Performances par sous-groupe",
+            "questions": [
+              "Les résultats de performance sont-ils disponibles ventilés par sous-groupes pertinents (âge, genre, race, origine ethnique, handicap) ? (CRITIQUE)"
+            ]
+          },
+          "DD-13": {
+            "title": "Documentation du modèle",
+            "questions": [
+              "La documentation du modèle est-elle disponible (ex. fiche de modèle, fiche de données) ?"
+            ]
+          },
+          "DD-14": {
+            "title": "Explicabilité",
+            "questions": [
+              "Des fonctionnalités sont-elles disponibles pour expliquer les décisions/résultats spécifiques de l'IA (explicabilité) ? (CRITIQUE)"
+            ]
+          },
+          "DD-15": {
+            "title": "Surveillance humaine",
+            "questions": [
+              "La surveillance humaine est-elle prévue ou requise dans le contexte de déploiement ? (CRITIQUE)"
+            ]
+          },
+          "DD-16": {
+            "title": "Suivi post-déploiement",
+            "questions": [
+              "Existe-t-il un processus de suivi et de mise à jour post-déploiement ? (CRITIQUE)"
+            ]
+          },
+          "DD-17": {
+            "title": "Retours et réclamations",
+            "questions": [
+              "Existe-t-il un processus pour traiter les retours, réclamations ou problèmes identifiés ? (CRITIQUE)"
+            ]
+          },
+          "DD-18": {
+            "title": "Tests d'entrée",
+            "questions": [
+              "Des tests d'entrée ont-ils été réalisés (cas limites — langage informel, noms inhabituels, valeurs extrêmes) ?"
+            ]
+          },
+          "DD-19": {
+            "title": "Détection de biais",
+            "questions": [
+              "Une détection de biais a-t-elle été réalisée (mêmes requêtes avec différents profils démographiques) ?"
+            ]
+          },
+          "DD-20": {
+            "title": "Tests fonctionnels",
+            "questions": [
+              "Des tests fonctionnels ont-ils été réalisés (le système fait-il de manière fiable ce qu'il prétend faire) ?"
+            ]
+          },
+          "DD-21": {
+            "title": "Vérification d'accessibilité",
+            "questions": [
+              "Une vérification d'accessibilité a-t-elle été réalisée (compatibilité avec les lecteurs d'écran, méthodes de saisie alternatives) ?"
+            ]
+          },
+          "DD-22": {
+            "title": "Revue des résultats",
+            "questions": [
+              "Une revue des résultats a-t-elle été réalisée (vérification des hallucinations, erreurs factuelles, contenu biaisé/nuisible) ?"
+            ]
+          }
+        }
+      },
+      "undp-risk-analysis": {
+        "title": "Analyse",
+        "items": {
+          "RA-01": {
+            "title": "Évaluation de la probabilité",
+            "questions": [
+              "La probabilité de résultats négatifs a-t-elle été évaluée pour chaque droit affecté (Faible / Moyen / Élevé / Très élevé) ?"
+            ]
+          },
+          "RA-02": {
+            "title": "Évaluation de l'exposition",
+            "questions": [
+              "L'exposition a-t-elle été évaluée — la proportion de titulaires de droits identifiés potentiellement affectés (Faible / Moyen / Élevé / Très élevé) ?"
+            ]
+          },
+          "RA-03": {
+            "title": "Vraisemblance globale",
+            "questions": [
+              "La vraisemblance globale a-t-elle été calculée à l'aide de la matrice Probabilité x Exposition ?"
+            ]
+          },
+          "RA-04": {
+            "title": "Gravité du préjudice",
+            "questions": [
+              "La gravité du préjudice a-t-elle été évaluée — en tenant compte de l'intensité, des conséquences, de l'importance du droit violé, de l'impact sur les groupes spécifiques et de la vulnérabilité (Faible / Moyen / Élevé / Très élevé) ?"
+            ]
+          },
+          "RA-05": {
+            "title": "Effort de remédiation",
+            "questions": [
+              "L'effort pour surmonter les effets négatifs a-t-il été évalué — réversibilité et difficulté de remédiation (Faible / Moyen / Élevé / Très élevé) ?"
+            ]
+          },
+          "RA-06": {
+            "title": "Sévérité globale",
+            "questions": [
+              "La sévérité globale a-t-elle été calculée à l'aide de la matrice Gravité x Effort ?"
+            ]
+          },
+          "RA-07": {
+            "title": "Indice de risque",
+            "questions": [
+              "L'indice de risque a-t-il été calculé pour chaque droit affecté (matrice Vraisemblance x Sévérité) ? (CRITIQUE)"
+            ]
+          },
+          "RA-08": {
+            "title": "Visualisation de l'impact",
+            "questions": [
+              "Un graphique radial ou une visualisation équivalente a-t-il été créé montrant l'impact sur l'ensemble des droits affectés ?"
+            ]
+          },
+          "RA-09": {
+            "title": "Évaluation indépendante",
+            "questions": [
+              "Chaque droit a-t-il été évalué indépendamment — sans indice cumulatif combinant les impacts sur les différents droits ?"
+            ]
+          },
+          "RA-10": {
+            "title": "Facteurs d'exclusion du risque",
+            "questions": [
+              "Les facteurs susceptibles d'exclure le risque ont-ils été évalués (limitations légales justifiant certains impacts) ?"
+            ]
+          },
+          "RA-11": {
+            "title": "Test de mise en balance",
+            "questions": [
+              "Un test de mise en balance a-t-il été appliqué lorsque des droits contradictoires existent (uniquement après l'évaluation individuelle de l'impact) ?"
+            ]
+          },
+          "RA-12": {
+            "title": "Analyse des bénéfices",
+            "questions": [
+              "Les bénéfices potentiels ont-ils été analysés en termes de renforcement ou de protection d'autres droits protégés ?"
+            ]
+          }
+        }
+      },
+      "undp-risk-management": {
+        "title": "Gestion",
+        "items": {
+          "RMG-01": {
+            "title": "Mesures d'atténuation",
+            "questions": [
+              "Des mesures spécifiques ont-elles été identifiées pour prévenir ou atténuer chaque risque évalué comme Moyen, Élevé ou Très élevé ? (CRITIQUE)"
+            ]
+          },
+          "RMG-02": {
+            "title": "Mesures contextualisées",
+            "questions": [
+              "Les mesures sont-elles contextualisées par rapport au système d'IA spécifique, à ses caractéristiques et à son contexte de déploiement ?"
+            ]
+          },
+          "RMG-03": {
+            "title": "Vraisemblance et sévérité",
+            "questions": [
+              "Les mesures abordent-elles à la fois les dimensions de vraisemblance et de sévérité ?"
+            ]
+          },
+          "RMG-04": {
+            "title": "Calendrier de mise en œuvre",
+            "questions": [
+              "Un calendrier de mise en œuvre a-t-il été établi pour chaque mesure ?"
+            ]
+          },
+          "RMG-05": {
+            "title": "Attribution des responsabilités",
+            "questions": [
+              "Une personne ou une équipe responsable a-t-elle été désignée pour chaque mesure ?"
+            ]
+          },
+          "RMG-06": {
+            "title": "Réévaluation du risque résiduel",
+            "questions": [
+              "Après la mise en œuvre des mesures d'atténuation, le risque résiduel a-t-il été réévalué pour chaque droit affecté ? (CRITIQUE)"
+            ]
+          },
+          "RMG-07": {
+            "title": "Vraisemblance résiduelle",
+            "questions": [
+              "La vraisemblance résiduelle a-t-elle été recalculée ?"
+            ]
+          },
+          "RMG-08": {
+            "title": "Sévérité résiduelle",
+            "questions": [
+              "La sévérité résiduelle a-t-elle été recalculée ?"
+            ]
+          },
+          "RMG-09": {
+            "title": "Impact résiduel",
+            "questions": [
+              "L'impact résiduel global a-t-il été documenté ?"
+            ]
+          },
+          "RMG-10": {
+            "title": "Évaluation de l'acceptabilité",
+            "questions": [
+              "L'acceptabilité du risque résiduel a-t-elle été évaluée ?"
+            ]
+          },
+          "RMG-11": {
+            "title": "Risque élevé persistant",
+            "questions": [
+              "Si le risque résiduel reste Élevé ou Très élevé, des mesures supplémentaires ou une refonte du projet ont-elles été envisagées ?"
+            ]
+          },
+          "RMG-12": {
+            "title": "Registres de décisions",
+            "questions": [
+              "Un registre complet de toutes les décisions d'évaluation des risques, des justifications de notation et des choix de matrice est-il tenu ? (CRITIQUE)"
+            ]
+          },
+          "RMG-13": {
+            "title": "Critères d'échelle",
+            "questions": [
+              "Existe-t-il un registre de tous les critères d'échelle utilisés et de la justification des plages ?"
+            ]
+          },
+          "RMG-14": {
+            "title": "Contributions des parties prenantes",
+            "questions": [
+              "Toutes les contributions des parties prenantes sont-elles documentées ?"
+            ]
+          },
+          "RMG-15": {
+            "title": "Documentation de l'efficacité",
+            "questions": [
+              "Les mesures d'atténuation et leur efficacité attendue sont-elles documentées ?"
+            ]
+          }
+        }
+      },
+      "undp-monitoring": {
+        "title": "Suivi",
+        "items": {
+          "MI-01": {
+            "title": "Plan de suivi",
+            "questions": [
+              "Un plan de suivi a-t-il été établi pour les performances post-déploiement du système d'IA ? (CRITIQUE)"
+            ]
+          },
+          "MI-02": {
+            "title": "Réévaluation périodique",
+            "questions": [
+              "Un calendrier de réévaluation périodique a-t-il été défini (approche itérative circulaire) ?"
+            ]
+          },
+          "MI-03": {
+            "title": "Détection de la dérive",
+            "questions": [
+              "Un processus est-il en place pour détecter la dérive du modèle et les biais émergents au fil du temps ?"
+            ]
+          },
+          "MI-04": {
+            "title": "Canaux de retour",
+            "questions": [
+              "Des canaux de retour ont-ils été établis pour que les personnes affectées puissent signaler un préjudice ? (CRITIQUE)"
+            ]
+          },
+          "MI-05": {
+            "title": "Mécanisme de recours",
+            "questions": [
+              "Un mécanisme de recours/réparation efficace est-il opérationnel pour les personnes affectées négativement ? (CRITIQUE)"
+            ]
+          },
+          "MI-06": {
+            "title": "Déclencheurs de réévaluation",
+            "questions": [
+              "Des déclencheurs ont-ils été définis pour déterminer quand une réévaluation complète est requise (ex. mise à jour significative du système, changement de contexte de déploiement, nouvelles exigences réglementaires, incidents signalés) ?"
+            ]
+          },
+          "MI-07": {
+            "title": "Intégration réglementaire",
+            "questions": [
+              "Existe-t-il un processus pour intégrer les nouvelles réglementations et normes à mesure qu'elles émergent ?"
+            ]
+          },
+          "MI-08": {
+            "title": "Boucle de rétroaction",
+            "questions": [
+              "Les résultats du suivi alimentent-ils le cycle d'évaluation des risques et d'atténuation ?"
+            ]
+          }
+        }
+      },
+      "undp-framework-alignment": {
+        "title": "Alignement",
+        "items": {
+          "FA-01": {
+            "title": "Devoir de protection de l'État",
+            "questions": [
+              "Pilier I des UNGPs — Existe-t-il une connaissance des obligations de l'État dans les juridictions de déploiement ?"
+            ]
+          },
+          "FA-02": {
+            "title": "Responsabilité des entreprises",
+            "questions": [
+              "Pilier II des UNGPs — L'organisation a-t-elle mené une diligence raisonnable en matière de droits de l'homme tout au long du cycle de vie de l'IA ?"
+            ]
+          },
+          "FA-03": {
+            "title": "Accès aux voies de recours",
+            "questions": [
+              "Pilier III des UNGPs — Des mécanismes de réclamation efficaces sont-ils en place pour les personnes affectées ?"
+            ]
+          },
+          "FA-04": {
+            "title": "Croissance inclusive",
+            "questions": [
+              "OECD — Le système d'IA profite-t-il largement à la société et n'exacerbe-t-il pas les inégalités ?"
+            ]
+          },
+          "FA-05": {
+            "title": "Valeurs centrées sur l'humain",
+            "questions": [
+              "OECD — Une évaluation de la discrimination potentielle et des résultats inéquitables a-t-elle été réalisée ?"
+            ]
+          },
+          "FA-06": {
+            "title": "Transparence et explicabilité",
+            "questions": [
+              "OECD — Existe-t-il une documentation sur le fonctionnement de l'IA, ses limitations et son processus décisionnel ?"
+            ]
+          },
+          "FA-07": {
+            "title": "Robustesse et sécurité",
+            "questions": [
+              "OECD — Les modes de défaillance, les vulnérabilités de sécurité et la fiabilité ont-ils été évalués ?"
+            ]
+          },
+          "FA-08": {
+            "title": "Responsabilité",
+            "questions": [
+              "OECD — Des responsabilités claires et des mécanismes de surveillance ont-ils été établis ?"
+            ]
+          },
+          "FA-09": {
+            "title": "Classification des risques du règlement IA de l'UE",
+            "questions": [
+              "La classification des risques du système d'IA a-t-elle été déterminée (risque inacceptable / élevé / limité / minimal) ? (CRITIQUE)"
+            ]
+          },
+          "FA-10": {
+            "title": "Évaluation de l'impact sur les droits fondamentaux",
+            "questions": [
+              "Si haut risque : une évaluation de l'impact sur les droits fondamentaux (FRIA) a-t-elle été réalisée conformément à l'Article 27 ?"
+            ]
+          },
+          "FA-11": {
+            "title": "Gouvernance des données",
+            "questions": [
+              "Des mesures appropriées de gouvernance des données sont-elles en place ?"
+            ]
+          },
+          "FA-12": {
+            "title": "Obligations de transparence",
+            "questions": [
+              "Les obligations de transparence ont-elles été respectées (les utilisateurs sont-ils informés qu'ils interagissent avec une IA le cas échéant) ?"
+            ]
+          },
+          "FA-13": {
+            "title": "Exigences de surveillance humaine",
+            "questions": [
+              "Les exigences de surveillance humaine ont-elles été établies et documentées ?"
+            ]
+          },
+          "FA-14": {
+            "title": "Documentation technique",
+            "questions": [
+              "La documentation technique est-elle tenue à jour conformément aux exigences ?"
+            ]
+          },
+          "FA-15": {
+            "title": "Enregistrement dans la base de données de l'UE",
+            "questions": [
+              "L'enregistrement dans la base de données de l'UE a-t-il été effectué (le cas échéant) ?"
+            ]
+          },
+          "FA-16": {
+            "title": "Évaluation du Conseil de l'Europe",
+            "questions": [
+              "Le système d'IA a-t-il été évalué pour son impact sur les droits de l'homme, la démocratie et l'état de droit ?"
+            ]
+          },
+          "FA-17": {
+            "title": "Conformité à la Convention",
+            "questions": [
+              "Le système est-il conforme à l'accent mis par la Convention du Conseil de l'Europe sur les droits de l'homme, les principes démocratiques et l'état de droit ?"
+            ]
+          }
+        }
+      }
+    }
   }
 }

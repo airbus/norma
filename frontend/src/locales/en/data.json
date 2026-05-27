@@ -859,7 +859,9 @@
           },
           "MG03": {
             "title": "Determine quality dimensions to evaluate",
-            "questions": ["Have data quality dimensions to evaluate been defined?"]
+            "questions": [
+              "Have data quality dimensions to evaluate been defined?"
+            ]
           },
           "MG04": {
             "title": "Define quality controls for each dimension",
@@ -890,7 +892,9 @@
           },
           "MG08": {
             "title": "Data transformation",
-            "questions": ["Have data been transformed to adapt them to AI system needs?"]
+            "questions": [
+              "Have data been transformed to adapt them to AI system needs?"
+            ]
           },
           "MG09": {
             "title": "Data aggregation",
@@ -901,7 +905,9 @@
           },
           "MG10": {
             "title": "Data sampling",
-            "questions": ["Is adequate data sampling performed?"]
+            "questions": [
+              "Is adequate data sampling performed?"
+            ]
           },
           "MG11": {
             "title": "Feature creation and selection",
@@ -912,7 +918,9 @@
           },
           "MG12": {
             "title": "Data enrichment",
-            "questions": ["Have data been enriched and expanded?"]
+            "questions": [
+              "Have data been enriched and expanded?"
+            ]
           },
           "MG13": {
             "title": "Data labelling",
@@ -1348,7 +1356,9 @@
           },
           "MG06": {
             "title": "Risk management",
-            "questions": ["Does the system have an associated risk management plan?"]
+            "questions": [
+              "Does the system have an associated risk management plan?"
+            ]
           },
           "MG07": {
             "title": "Transparency",
@@ -1453,11 +1463,15 @@
           },
           "MG13": {
             "title": "Article 9: Risk management system",
-            "questions": ["Does the system have an associated risk management plan?"]
+            "questions": [
+              "Does the system have an associated risk management plan?"
+            ]
           },
           "MG14": {
             "title": "Article 14: Human oversight",
-            "questions": ["Does the system comply with Human Oversight measures?"]
+            "questions": [
+              "Does the system comply with Human Oversight measures?"
+            ]
           },
           "MG15": {
             "title": "Article 15: Accuracy, robustness, and cybersecurity",
@@ -1663,6 +1677,1252 @@
     "environmental-monitoring-plan": {
       "name": "Environmental Monitoring Plan",
       "description": "Ongoing monitoring framework for tracking environmental KPIs, setting reduction targets, and reporting progress against sustainability goals."
+    }
+  },
+  "environmentalChecklist": {
+    "areas": {
+      "env-energy-carbon": {
+        "title": "Energy & Carbon",
+        "items": {
+          "EC-01": {
+            "title": "Training Energy Measurement",
+            "questions": [
+              "Has the total energy consumption for model training been measured and documented (in kWh)?",
+              "Is the energy source mix (renewable vs. fossil) for training infrastructure known and recorded?"
+            ]
+          },
+          "EC-02": {
+            "title": "Inference Energy Measurement",
+            "questions": [
+              "Is ongoing energy consumption during inference monitored and reported?",
+              "Are energy-per-query or energy-per-request metrics tracked for production workloads?"
+            ]
+          },
+          "EC-03": {
+            "title": "Carbon Footprint Estimation",
+            "questions": [
+              "Has the carbon footprint of the AI system been estimated using a recognised methodology (e.g., GHG Protocol, ML CO₂ Impact)?",
+              "Are Scope 1, 2, and 3 emissions considered in the carbon assessment?"
+            ]
+          },
+          "EC-04": {
+            "title": "Carbon Reduction Targets",
+            "questions": [
+              "Are there documented targets for reducing the carbon footprint of the AI system over time?",
+              "Is progress against carbon reduction targets reviewed at defined intervals?"
+            ]
+          },
+          "EC-05": {
+            "title": "Renewable Energy Usage",
+            "questions": [
+              "What percentage of energy consumed by the AI system comes from renewable sources?",
+              "Are there commitments or plans to increase renewable energy usage for AI workloads?"
+            ]
+          },
+          "EC-06": {
+            "title": "Carbon Offsetting",
+            "questions": [
+              "If carbon offsetting is used, are the offsets verified and from credible programmes?"
+            ]
+          }
+        }
+      },
+      "env-hardware": {
+        "title": "Hardware",
+        "items": {
+          "HW-01": {
+            "title": "Hardware Selection",
+            "questions": [
+              "Has the environmental impact of hardware choices (GPU/TPU type, server specifications) been considered during procurement?",
+              "Are energy-efficient hardware options prioritised where performance requirements allow?"
+            ]
+          },
+          "HW-02": {
+            "title": "Hardware Utilisation",
+            "questions": [
+              "Are hardware utilisation rates monitored to minimise idle resource consumption?",
+              "Are workload scheduling strategies (e.g., batch processing, off-peak scheduling) used to improve efficiency?"
+            ]
+          },
+          "HW-03": {
+            "title": "Hardware Lifespan",
+            "questions": [
+              "Are hardware refresh cycles planned to balance performance needs with environmental impact?",
+              "Is hardware reuse, refurbishment, or donation considered before disposal?"
+            ]
+          },
+          "HW-04": {
+            "title": "E-Waste Management",
+            "questions": [
+              "Is end-of-life hardware disposed of through certified e-waste recycling programmes?",
+              "Are hazardous materials in hardware components tracked and managed according to regulations?"
+            ]
+          },
+          "HW-05": {
+            "title": "Supply Chain Sustainability",
+            "questions": [
+              "Are hardware suppliers assessed for their environmental practices and sustainability commitments?"
+            ]
+          }
+        }
+      },
+      "env-data-management": {
+        "title": "Data Mgmt",
+        "items": {
+          "DM-01": {
+            "title": "Data Storage Efficiency",
+            "questions": [
+              "Are data storage practices optimised to minimise energy consumption (e.g., tiered storage, compression, deduplication)?",
+              "Is there a data retention policy that ensures unnecessary data is deleted to reduce storage footprint?"
+            ]
+          },
+          "DM-02": {
+            "title": "Data Transfer Efficiency",
+            "questions": [
+              "Are data transfer volumes minimised through edge processing, caching, or data locality strategies?",
+              "Is the environmental cost of large-scale data transfers (e.g., cross-region, cross-cloud) considered?"
+            ]
+          },
+          "DM-03": {
+            "title": "Data Centre Selection",
+            "questions": [
+              "Are data centres selected based on environmental criteria such as PUE, water usage effectiveness, and renewable energy sourcing?",
+              "Is the geographical location of data centres chosen to optimise for cooler climates or renewable energy availability?"
+            ]
+          },
+          "DM-04": {
+            "title": "Water Usage",
+            "questions": [
+              "Is the water usage of cooling systems for AI workloads measured and documented?",
+              "Are water-efficient cooling technologies employed where feasible?"
+            ]
+          }
+        }
+      },
+      "env-model-efficiency": {
+        "title": "Efficiency",
+        "items": {
+          "ME-01": {
+            "title": "Model Size Justification",
+            "questions": [
+              "Is the model size (parameter count) justified relative to the task requirements?",
+              "Have smaller or more efficient model architectures been evaluated before selecting the final model?"
+            ]
+          },
+          "ME-02": {
+            "title": "Training Efficiency",
+            "questions": [
+              "Are efficient training techniques used (e.g., transfer learning, mixed-precision training, early stopping)?",
+              "Is the number of training runs and hyperparameter searches documented and justified?"
+            ]
+          },
+          "ME-03": {
+            "title": "Inference Optimisation",
+            "questions": [
+              "Are inference optimisation techniques applied (e.g., quantisation, pruning, distillation, caching)?",
+              "Is the trade-off between model accuracy and computational cost explicitly evaluated?"
+            ]
+          },
+          "ME-04": {
+            "title": "Retraining Frequency",
+            "questions": [
+              "Is the retraining schedule justified based on performance degradation metrics rather than fixed intervals?",
+              "Are incremental or fine-tuning approaches used instead of full retraining where possible?"
+            ]
+          },
+          "ME-05": {
+            "title": "Benchmarking",
+            "questions": [
+              "Are environmental efficiency metrics (e.g., accuracy-per-watt, throughput-per-kWh) tracked alongside performance metrics?"
+            ]
+          }
+        }
+      },
+      "env-lifecycle": {
+        "title": "Lifecycle",
+        "items": {
+          "LC-01": {
+            "title": "Lifecycle Assessment",
+            "questions": [
+              "Has a lifecycle assessment been conducted covering the environmental impact from development through deployment to decommissioning?",
+              "Are embodied emissions from hardware manufacturing included in the lifecycle assessment?"
+            ]
+          },
+          "LC-02": {
+            "title": "Decommissioning Plan",
+            "questions": [
+              "Is there a documented plan for environmentally responsible decommissioning of the AI system and its infrastructure?",
+              "Does the decommissioning plan address data deletion, hardware disposal, and service wind-down?"
+            ]
+          },
+          "LC-03": {
+            "title": "Vendor and Cloud Sustainability",
+            "questions": [
+              "Are cloud providers and third-party vendors assessed for their environmental commitments and reporting?",
+              "Do service-level agreements include environmental performance criteria?"
+            ]
+          },
+          "LC-04": {
+            "title": "Circular Economy Practices",
+            "questions": [
+              "Are circular economy principles (reuse, repair, recycle) applied to AI infrastructure and hardware?"
+            ]
+          }
+        }
+      },
+      "env-monitoring": {
+        "title": "Monitoring",
+        "items": {
+          "EM-01": {
+            "title": "Environmental KPIs",
+            "questions": [
+              "Are environmental key performance indicators (KPIs) defined for the AI system (e.g., energy per inference, total carbon, water usage)?",
+              "Are KPIs reviewed and updated at regular intervals?"
+            ]
+          },
+          "EM-02": {
+            "title": "Reporting and Disclosure",
+            "questions": [
+              "Is environmental impact data reported to internal stakeholders and, where applicable, to external bodies?",
+              "Does environmental reporting follow a recognised standard or framework (e.g., GRI, CDP, TCFD)?"
+            ]
+          },
+          "EM-03": {
+            "title": "Continuous Improvement",
+            "questions": [
+              "Is there a documented process for identifying and implementing environmental improvements based on monitoring data?",
+              "Are lessons learned from environmental incidents or performance shortfalls systematically captured?"
+            ]
+          },
+          "EM-04": {
+            "title": "Regulatory Compliance",
+            "questions": [
+              "Does the organisation track and comply with applicable environmental regulations related to AI and data centre operations?"
+            ]
+          },
+          "EM-05": {
+            "title": "Sustainability Targets Integration",
+            "questions": [
+              "Are AI-specific environmental targets aligned with the organisation's broader sustainability goals and commitments (e.g., net-zero pledges)?"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "undpChecklist": {
+    "areas": {
+      "undp-zero-question": {
+        "title": "Zero Q.",
+        "items": {
+          "ZQ-01": {
+            "title": "AI Necessity Assessment",
+            "questions": [
+              "Has it been assessed whether an AI-based solution is actually necessary, or whether non-algorithmic alternatives could achieve the same goal? (CRITICAL)"
+            ]
+          },
+          "ZQ-02": {
+            "title": "AI Rationale",
+            "questions": [
+              "Has the rationale for choosing an AI-based approach over alternatives been documented?"
+            ]
+          },
+          "ZQ-03": {
+            "title": "SWOT Analysis",
+            "questions": [
+              "Has a SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) of the AI approach vs. alternatives been conducted?"
+            ]
+          },
+          "ZQ-04": {
+            "title": "Fundamental Rights Compatibility",
+            "questions": [
+              "Has it been confirmed that the AI solution does not pursue an objective that is inherently incompatible with fundamental rights?"
+            ]
+          }
+        }
+      },
+      "undp-org-readiness": {
+        "title": "Readiness",
+        "items": {
+          "OR-01": {
+            "title": "Human Rights Policy",
+            "questions": [
+              "Does the organisation have a documented human rights policy covering AI design, development, and deployment?"
+            ]
+          },
+          "OR-02": {
+            "title": "Leadership Support",
+            "questions": [
+              "Does leadership actively support and resource human rights due diligence for AI initiatives?"
+            ]
+          },
+          "OR-03": {
+            "title": "Reporting Channels",
+            "questions": [
+              "Do dedicated channels exist for employees to report potential human rights issues related to AI systems?"
+            ]
+          },
+          "OR-04": {
+            "title": "Policy Review",
+            "questions": [
+              "Does the organisation regularly review and update policies to address emerging AI-related human rights issues?"
+            ]
+          },
+          "OR-05": {
+            "title": "Cross-Departmental Collaboration",
+            "questions": [
+              "Is cross-departmental collaboration on human rights in AI facilitated?"
+            ]
+          },
+          "OR-06": {
+            "title": "Stakeholder Engagement",
+            "questions": [
+              "Does the organisation engage stakeholders (including affected communities) for input and feedback during the AI lifecycle?"
+            ]
+          },
+          "OR-07": {
+            "title": "Resource Allocation",
+            "questions": [
+              "Does the organisation allocate sufficient resources for training, risk assessments, and stakeholder engagement?"
+            ]
+          },
+          "OR-08": {
+            "title": "Public Transparency",
+            "questions": [
+              "Does the organisation prioritise transparency and communication with the public about AI use?"
+            ]
+          },
+          "OR-09": {
+            "title": "Management Understanding",
+            "questions": [
+              "Does the management team have comprehensive understanding of human rights implications of AI?"
+            ]
+          },
+          "OR-10": {
+            "title": "Employee Training",
+            "questions": [
+              "Do employees receive regular training on human rights and ethical considerations in AI?"
+            ]
+          },
+          "OR-11": {
+            "title": "Designated Staff",
+            "questions": [
+              "Are designated staff or teams responsible for monitoring and addressing human rights issues in AI projects?"
+            ]
+          },
+          "OR-12": {
+            "title": "External Expertise",
+            "questions": [
+              "Does the organisation collaborate with external human rights and AI experts?"
+            ]
+          },
+          "OR-13": {
+            "title": "Whistleblower Protection",
+            "questions": [
+              "Are employees protected from retaliation when raising human rights concerns about AI?"
+            ]
+          },
+          "OR-14": {
+            "title": "Feedback Incorporation",
+            "questions": [
+              "Does a process exist for incorporating stakeholder feedback into AI practices?"
+            ]
+          },
+          "OR-15": {
+            "title": "Legal Expertise",
+            "questions": [
+              "Does the organisation have access to legal expertise on human rights and AI?"
+            ]
+          },
+          "OR-16": {
+            "title": "Best Practices Resources",
+            "questions": [
+              "Are resources provided for employees to stay updated on best practices?"
+            ]
+          },
+          "OR-17": {
+            "title": "Industry Participation",
+            "questions": [
+              "Does the organisation participate in industry groups or forums on human rights and AI?"
+            ]
+          },
+          "OR-18": {
+            "title": "Skills Gap Assessment",
+            "questions": [
+              "Does the organisation regularly assess and address AI-related human rights skill gaps?"
+            ]
+          },
+          "OR-19": {
+            "title": "Impact Assessment Process",
+            "questions": [
+              "Does a systematic human rights impact assessment process exist for all AI projects? (CRITICAL)"
+            ]
+          },
+          "OR-20": {
+            "title": "Third-Party AI Evaluation",
+            "questions": [
+              "Do procedures exist to evaluate human rights impacts of third-party AI systems integrated or utilised? (CRITICAL)"
+            ]
+          },
+          "OR-21": {
+            "title": "Risk Identification",
+            "questions": [
+              "Is a systematic risk identification process in place, including testing for reliability, accuracy, and resilience?"
+            ]
+          },
+          "OR-22": {
+            "title": "Community Engagement",
+            "questions": [
+              "Are stakeholders (including affected communities) engaged in the AI deployment process?"
+            ]
+          },
+          "OR-23": {
+            "title": "Pre-Deployment Assessment",
+            "questions": [
+              "Do all AI projects undergo human rights and data protection impact assessment before deployment? (CRITICAL)"
+            ]
+          },
+          "OR-24": {
+            "title": "Data Security Protocols",
+            "questions": [
+              "Are data security and privacy protocols established for all AI-related processes?"
+            ]
+          },
+          "OR-25": {
+            "title": "Regulatory Updates",
+            "questions": [
+              "Are processes regularly updated to incorporate new regulations and standards?"
+            ]
+          },
+          "OR-26": {
+            "title": "Oversight Process",
+            "questions": [
+              "Is an oversight process established to monitor AI system performance and compliance with human rights standards? (CRITICAL)"
+            ]
+          },
+          "OR-27": {
+            "title": "Failure Mitigation",
+            "questions": [
+              "Does the organisation have ability to mitigate and minimise negative effects from AI system failures?"
+            ]
+          },
+          "OR-28": {
+            "title": "Redress Mechanism",
+            "questions": [
+              "Is a redress mechanism in place for individuals adversely affected by AI systems? (CRITICAL)"
+            ]
+          }
+        }
+      },
+      "undp-planning": {
+        "title": "Planning",
+        "items": {
+          "PS-01": {
+            "title": "System Purpose",
+            "questions": [
+              "Has the main purpose of the AI system been documented? (CRITICAL)"
+            ]
+          },
+          "PS-02": {
+            "title": "Technical Characteristics",
+            "questions": [
+              "Have the main technical characteristics of the system been documented (type of AI model, architecture)?"
+            ]
+          },
+          "PS-03": {
+            "title": "Deployment Jurisdictions",
+            "questions": [
+              "Have all countries/jurisdictions where the system will be deployed been identified?"
+            ]
+          },
+          "PS-04": {
+            "title": "Data Types",
+            "questions": [
+              "Have all types of data processed (personal, non-personal, special categories) for training and operation been identified? (CRITICAL)"
+            ]
+          },
+          "PS-05": {
+            "title": "Data Flow Mapping",
+            "questions": [
+              "Have all data flows been mapped — from collection through processing to storage and deletion?"
+            ]
+          },
+          "PS-06": {
+            "title": "Affected Individuals",
+            "questions": [
+              "Have all individuals or groups potentially affected by the AI system been identified? (CRITICAL)"
+            ]
+          },
+          "PS-07": {
+            "title": "Vulnerable Groups",
+            "questions": [
+              "Has it been assessed whether affected groups include vulnerable individuals or groups (children, minorities, persons with disabilities, etc.)?"
+            ]
+          },
+          "PS-08": {
+            "title": "Duty-Bearers",
+            "questions": [
+              "Have all duty-bearers been identified — who is involved in design, provision, and deployment, and what is their role? (CRITICAL)"
+            ]
+          },
+          "PS-09": {
+            "title": "Responsibility Chain",
+            "questions": [
+              "Has the chain of responsibility from developer to deployer been documented?"
+            ]
+          },
+          "PS-10": {
+            "title": "Existing Policies",
+            "questions": [
+              "Have existing policies and procedures for assessing human rights impacts (including stakeholder engagement) been documented?"
+            ]
+          },
+          "PS-11": {
+            "title": "Prior Impact Assessments",
+            "questions": [
+              "Have any prior impact assessments been documented (e.g., Data Protection Impact Assessment, sector-specific assessments)?"
+            ]
+          },
+          "PS-12": {
+            "title": "Affected Groups Identification",
+            "questions": [
+              "Have all groups or communities potentially affected by the AI system (including during development) been identified? (CRITICAL)"
+            ]
+          },
+          "PS-13": {
+            "title": "Relevant Stakeholders",
+            "questions": [
+              "Have all relevant stakeholders to involve been identified (civil society, international organisations, experts, industry associations, journalists)?"
+            ]
+          },
+          "PS-14": {
+            "title": "Additional Duty-Bearers",
+            "questions": [
+              "Have additional duty-bearers beyond the AI provider and deployer been identified (national authorities, government agencies)?"
+            ]
+          },
+          "PS-15": {
+            "title": "Supply Chain Assessment",
+            "questions": [
+              "Has it been assessed whether business partners and suppliers (subcontractors of AI systems and datasets) have been involved in the assessment? (CRITICAL)"
+            ]
+          },
+          "PS-16": {
+            "title": "Supplier Human Rights Impact",
+            "questions": [
+              "Has the AI provider conducted a supply chain assessment for potential human rights impacts from suppliers/contractors? (CRITICAL)"
+            ]
+          },
+          "PS-17": {
+            "title": "Supplier Standards",
+            "questions": [
+              "Has the AI provider promoted human rights standards or audits among suppliers?"
+            ]
+          },
+          "PS-18": {
+            "title": "Public Communication",
+            "questions": [
+              "Do the AI provider and developers publicly communicate potential human rights impacts of the AI system?"
+            ]
+          },
+          "PS-19": {
+            "title": "Staff Training",
+            "questions": [
+              "Do the AI provider and developers provide training on human rights standards to management and procurement staff?"
+            ]
+          }
+        }
+      },
+      "undp-rights-mapping": {
+        "title": "Rights Mapping",
+        "items": {
+          "HRM-01": {
+            "title": "Rights Identification",
+            "questions": [
+              "Have all human rights potentially affected by the AI system been identified, using the comprehensive rights checklist? (CRITICAL)"
+            ]
+          },
+          "HRM-02": {
+            "title": "Human Dignity",
+            "questions": [
+              "Has the potential impact on human dignity been assessed?"
+            ]
+          },
+          "HRM-03": {
+            "title": "Freedom from Discrimination",
+            "questions": [
+              "Has the potential impact on freedom from discrimination been assessed?"
+            ]
+          },
+          "HRM-04": {
+            "title": "Right to Life",
+            "questions": [
+              "Has the potential impact on the right to life been assessed?"
+            ]
+          },
+          "HRM-05": {
+            "title": "Freedom from Slavery",
+            "questions": [
+              "Has the potential impact on freedom from slavery been assessed?"
+            ]
+          },
+          "HRM-06": {
+            "title": "Freedom from Inhuman Treatment",
+            "questions": [
+              "Has the potential impact on freedom from inhuman/degrading treatment been assessed?"
+            ]
+          },
+          "HRM-07": {
+            "title": "Right to Privacy",
+            "questions": [
+              "Has the potential impact on the right to privacy been assessed?"
+            ]
+          },
+          "HRM-08": {
+            "title": "Right to Own Property",
+            "questions": [
+              "Has the potential impact on the right to own property been assessed?"
+            ]
+          },
+          "HRM-09": {
+            "title": "Freedom of Thought",
+            "questions": [
+              "Has the potential impact on freedom of thought, conscience, and religion been assessed?"
+            ]
+          },
+          "HRM-10": {
+            "title": "Freedom of Expression",
+            "questions": [
+              "Has the potential impact on freedom of expression been assessed?"
+            ]
+          },
+          "HRM-11": {
+            "title": "Freedom of Movement",
+            "questions": [
+              "Has the potential impact on freedom of movement been assessed?"
+            ]
+          },
+          "HRM-12": {
+            "title": "Freedom of Assembly",
+            "questions": [
+              "Has the potential impact on freedom of assembly been assessed?"
+            ]
+          },
+          "HRM-13": {
+            "title": "Freedom of Association",
+            "questions": [
+              "Has the potential impact on the right to freedom of association been assessed?"
+            ]
+          },
+          "HRM-14": {
+            "title": "Right to Marriage and Family",
+            "questions": [
+              "Has the potential impact on the right to marriage and family been assessed?"
+            ]
+          },
+          "HRM-15": {
+            "title": "Adequate Standard of Living",
+            "questions": [
+              "Has the potential impact on the right to adequate standard of living (including health) been assessed?"
+            ]
+          },
+          "HRM-16": {
+            "title": "Right to Education",
+            "questions": [
+              "Has the potential impact on the right to education been assessed?"
+            ]
+          },
+          "HRM-17": {
+            "title": "Right to Social Security",
+            "questions": [
+              "Has the potential impact on the right to social security been assessed?"
+            ]
+          },
+          "HRM-18": {
+            "title": "Cultural and Scientific Life",
+            "questions": [
+              "Has the potential impact on the right to take part in cultural, artistic, scientific life been assessed?"
+            ]
+          },
+          "HRM-19": {
+            "title": "Right to Work",
+            "questions": [
+              "Has the potential impact on the right to work been assessed?"
+            ]
+          },
+          "HRM-20": {
+            "title": "Right to Leisure",
+            "questions": [
+              "Has the potential impact on the right to leisure and rest been assessed?"
+            ]
+          },
+          "HRM-21": {
+            "title": "Minority Rights",
+            "questions": [
+              "Has the potential impact on the rights of religious, ethnic, or linguistic minorities been assessed?"
+            ]
+          },
+          "HRM-22": {
+            "title": "Rights of Children",
+            "questions": [
+              "Has the potential impact on the rights of children been assessed?"
+            ]
+          },
+          "HRM-23": {
+            "title": "Freedom from Torture",
+            "questions": [
+              "Has the potential impact on freedom from torture been assessed?"
+            ]
+          },
+          "HRM-24": {
+            "title": "Recognition Before the Law",
+            "questions": [
+              "Has the potential impact on the right to recognition before the law been assessed?"
+            ]
+          },
+          "HRM-25": {
+            "title": "Equality Before the Law",
+            "questions": [
+              "Has the potential impact on the right to equality before the law been assessed?"
+            ]
+          },
+          "HRM-26": {
+            "title": "Access to Justice",
+            "questions": [
+              "Has the potential impact on access to justice been assessed?"
+            ]
+          },
+          "HRM-27": {
+            "title": "Freedom from Arbitrary Detention",
+            "questions": [
+              "Has the potential impact on freedom from arbitrary detention been assessed?"
+            ]
+          },
+          "HRM-28": {
+            "title": "Right to a Fair Trial",
+            "questions": [
+              "Has the potential impact on the right to a fair trial been assessed?"
+            ]
+          },
+          "HRM-29": {
+            "title": "Presumption of Innocence",
+            "questions": [
+              "Has the potential impact on the presumption of innocence been assessed?"
+            ]
+          },
+          "HRM-30": {
+            "title": "Right to Legal Recourse",
+            "questions": [
+              "Has the potential impact on the right to legal recourse been assessed?"
+            ]
+          },
+          "HRM-31": {
+            "title": "Right to Asylum",
+            "questions": [
+              "Has the potential impact on the right to asylum been assessed?"
+            ]
+          },
+          "HRM-32": {
+            "title": "Right to Nationality",
+            "questions": [
+              "Has the potential impact on the right to nationality been assessed?"
+            ]
+          },
+          "HRM-33": {
+            "title": "Public Affairs Participation",
+            "questions": [
+              "Has the potential impact on the right to take part in public affairs been assessed?"
+            ]
+          },
+          "HRM-34": {
+            "title": "Legal Instruments",
+            "questions": [
+              "Have all applicable international/regional legal instruments for human rights protection in deployment jurisdictions been identified?"
+            ]
+          },
+          "HRM-35": {
+            "title": "Oversight Bodies",
+            "questions": [
+              "Have relevant human rights courts or oversight bodies been identified?"
+            ]
+          },
+          "HRM-36": {
+            "title": "Case Law",
+            "questions": [
+              "Has the most relevant case law and legal provisions in the field of human rights been identified?"
+            ]
+          }
+        }
+      },
+      "undp-data-diligence": {
+        "title": "Due Diligence",
+        "items": {
+          "DD-01": {
+            "title": "Data Origin",
+            "questions": [
+              "Is the origin of primary training data documented (collected, purchased, scraped)? (CRITICAL)"
+            ]
+          },
+          "DD-02": {
+            "title": "Data Consent",
+            "questions": [
+              "Was consent obtained appropriately for data collection? (CRITICAL)"
+            ]
+          },
+          "DD-03": {
+            "title": "Data Diversity",
+            "questions": [
+              "Have steps been taken to ensure data represents the diversity of the affected population (gender, race, age, disability, location)?"
+            ]
+          },
+          "DD-04": {
+            "title": "Data Bias",
+            "questions": [
+              "Have known limitations or potential biases in the dataset been identified and documented?"
+            ]
+          },
+          "DD-05": {
+            "title": "Sensitive Data Protection",
+            "questions": [
+              "Is personal/sensitive data handled and protected appropriately throughout the lifecycle?"
+            ]
+          },
+          "DD-06": {
+            "title": "Data Labelling",
+            "questions": [
+              "Are data labelling processes documented, including potential sources of subjective bias?"
+            ]
+          },
+          "DD-07": {
+            "title": "Training Objective",
+            "questions": [
+              "Is the specific goal/objective of the AI training documented (clarifies intended function vs. potential misuse)?"
+            ]
+          },
+          "DD-08": {
+            "title": "Fairness Criteria",
+            "questions": [
+              "Were fairness criteria/metrics used during training and evaluation (documented which ones)?"
+            ]
+          },
+          "DD-09": {
+            "title": "Model Limitations",
+            "questions": [
+              "Are known limitations, failure modes, and performance boundaries of the trained model documented?"
+            ]
+          },
+          "DD-10": {
+            "title": "Model Type",
+            "questions": [
+              "Is the type of AI model documented with rationale for selection (predictive, generative, etc.)?"
+            ]
+          },
+          "DD-11": {
+            "title": "Performance Measurement",
+            "questions": [
+              "Is system performance measured and documented? (CRITICAL)"
+            ]
+          },
+          "DD-12": {
+            "title": "Subgroup Performance",
+            "questions": [
+              "Are performance results available broken down by relevant subgroups (age, gender, race, ethnicity, disability)? (CRITICAL)"
+            ]
+          },
+          "DD-13": {
+            "title": "Model Documentation",
+            "questions": [
+              "Is model documentation available (e.g., Model Card, Datasheet)?"
+            ]
+          },
+          "DD-14": {
+            "title": "Explainability",
+            "questions": [
+              "Are features available for explaining specific AI decisions/outputs (explainability)? (CRITICAL)"
+            ]
+          },
+          "DD-15": {
+            "title": "Human Oversight",
+            "questions": [
+              "Is human oversight planned or required in the deployment context? (CRITICAL)"
+            ]
+          },
+          "DD-16": {
+            "title": "Post-Deployment Monitoring",
+            "questions": [
+              "Does a process exist for post-deployment monitoring and updates? (CRITICAL)"
+            ]
+          },
+          "DD-17": {
+            "title": "Feedback and Complaints",
+            "questions": [
+              "Does a process exist for addressing feedback, complaints, or identified problems? (CRITICAL)"
+            ]
+          },
+          "DD-18": {
+            "title": "Input Testing",
+            "questions": [
+              "Has input testing been performed (edge cases — informal language, unusual names, extreme values)?"
+            ]
+          },
+          "DD-19": {
+            "title": "Bias Probing",
+            "questions": [
+              "Has bias probing been performed (identical prompts with different demographic personas)?"
+            ]
+          },
+          "DD-20": {
+            "title": "Functionality Testing",
+            "questions": [
+              "Has functionality testing been performed (does the system reliably do what it claims)?"
+            ]
+          },
+          "DD-21": {
+            "title": "Accessibility Check",
+            "questions": [
+              "Has an accessibility check been performed (screen reader compatibility, alternative input methods)?"
+            ]
+          },
+          "DD-22": {
+            "title": "Output Review",
+            "questions": [
+              "Has an output review been performed (checked for hallucinations, factual errors, biased/harmful content)?"
+            ]
+          }
+        }
+      },
+      "undp-risk-analysis": {
+        "title": "Analysis",
+        "items": {
+          "RA-01": {
+            "title": "Probability Assessment",
+            "questions": [
+              "Has the probability of adverse outcomes been assessed for each affected right (Low / Medium / High / Very High)?"
+            ]
+          },
+          "RA-02": {
+            "title": "Exposure Assessment",
+            "questions": [
+              "Has exposure been assessed — the proportion of identified rights-holders potentially affected (Low / Medium / High / Very High)?"
+            ]
+          },
+          "RA-03": {
+            "title": "Overall Likelihood",
+            "questions": [
+              "Has overall likelihood been calculated using the Probability x Exposure matrix?"
+            ]
+          },
+          "RA-04": {
+            "title": "Gravity of Prejudice",
+            "questions": [
+              "Has gravity of prejudice been assessed — considering intensity, consequences, importance of the violated right, group-specific impact, and vulnerability (Low / Medium / High / Very High)?"
+            ]
+          },
+          "RA-05": {
+            "title": "Effort to Overcome",
+            "questions": [
+              "Has the effort to overcome adverse effects been assessed — reversibility and difficulty of remedy (Low / Medium / High / Very High)?"
+            ]
+          },
+          "RA-06": {
+            "title": "Overall Severity",
+            "questions": [
+              "Has overall severity been calculated using the Gravity x Effort matrix?"
+            ]
+          },
+          "RA-07": {
+            "title": "Risk Index",
+            "questions": [
+              "Has the risk index been calculated for each affected right (Likelihood x Severity matrix)? (CRITICAL)"
+            ]
+          },
+          "RA-08": {
+            "title": "Impact Visualisation",
+            "questions": [
+              "Has a radial graph or equivalent visualisation been created showing impact across all affected rights?"
+            ]
+          },
+          "RA-09": {
+            "title": "Independent Assessment",
+            "questions": [
+              "Has each right been assessed independently — no cumulative index combining impacts across rights?"
+            ]
+          },
+          "RA-10": {
+            "title": "Risk Exclusion Factors",
+            "questions": [
+              "Have factors that may exclude risk been evaluated (legal limitations justifying certain impacts)?"
+            ]
+          },
+          "RA-11": {
+            "title": "Balancing Test",
+            "questions": [
+              "Has a balancing test been applied where conflicting rights exist (only after individual impact assessment)?"
+            ]
+          },
+          "RA-12": {
+            "title": "Benefits Analysis",
+            "questions": [
+              "Have potential benefits been analysed in terms of enhancing or safeguarding other protected rights?"
+            ]
+          }
+        }
+      },
+      "undp-risk-management": {
+        "title": "Management",
+        "items": {
+          "RMG-01": {
+            "title": "Mitigation Measures",
+            "questions": [
+              "Have specific measures been identified to prevent or mitigate each risk rated Medium, High, or Very High? (CRITICAL)"
+            ]
+          },
+          "RMG-02": {
+            "title": "Contextualised Measures",
+            "questions": [
+              "Are measures contextualised to the specific AI system, its characteristics, and deployment context?"
+            ]
+          },
+          "RMG-03": {
+            "title": "Likelihood and Severity",
+            "questions": [
+              "Do measures address both the likelihood and severity dimensions?"
+            ]
+          },
+          "RMG-04": {
+            "title": "Implementation Timeline",
+            "questions": [
+              "Has an implementation timeline been established for each measure?"
+            ]
+          },
+          "RMG-05": {
+            "title": "Responsibility Assignment",
+            "questions": [
+              "Has a responsible person/team been assigned for each measure?"
+            ]
+          },
+          "RMG-06": {
+            "title": "Residual Risk Re-Assessment",
+            "questions": [
+              "After implementing mitigation measures, has residual risk been re-assessed for each affected right? (CRITICAL)"
+            ]
+          },
+          "RMG-07": {
+            "title": "Residual Likelihood",
+            "questions": [
+              "Has residual likelihood been re-calculated?"
+            ]
+          },
+          "RMG-08": {
+            "title": "Residual Severity",
+            "questions": [
+              "Has residual severity been re-calculated?"
+            ]
+          },
+          "RMG-09": {
+            "title": "Residual Impact",
+            "questions": [
+              "Has residual overall impact been documented?"
+            ]
+          },
+          "RMG-10": {
+            "title": "Acceptability Assessment",
+            "questions": [
+              "Has the acceptability of residual risk been assessed?"
+            ]
+          },
+          "RMG-11": {
+            "title": "Persistent High Risk",
+            "questions": [
+              "If residual risk remains High or Very High, have additional measures or project redesign been considered?"
+            ]
+          },
+          "RMG-12": {
+            "title": "Decision Records",
+            "questions": [
+              "Is a complete record maintained of all risk assessment decisions, scoring rationales, and matrix choices? (CRITICAL)"
+            ]
+          },
+          "RMG-13": {
+            "title": "Scaling Criteria",
+            "questions": [
+              "Is there a record of all scaling criteria used and justification for ranges?"
+            ]
+          },
+          "RMG-14": {
+            "title": "Stakeholder Input",
+            "questions": [
+              "Is all stakeholder input documented?"
+            ]
+          },
+          "RMG-15": {
+            "title": "Effectiveness Documentation",
+            "questions": [
+              "Are mitigation measures and their expected effectiveness documented?"
+            ]
+          }
+        }
+      },
+      "undp-monitoring": {
+        "title": "Monitoring",
+        "items": {
+          "MI-01": {
+            "title": "Monitoring Plan",
+            "questions": [
+              "Has a monitoring plan been established for post-deployment performance of the AI system? (CRITICAL)"
+            ]
+          },
+          "MI-02": {
+            "title": "Periodic Re-Assessment",
+            "questions": [
+              "Has a schedule been set for periodic re-assessment (circular iterative approach)?"
+            ]
+          },
+          "MI-03": {
+            "title": "Drift Detection",
+            "questions": [
+              "Is a process in place to detect model drift and emerging biases over time?"
+            ]
+          },
+          "MI-04": {
+            "title": "Feedback Channels",
+            "questions": [
+              "Have feedback channels been established for affected individuals to report harm? (CRITICAL)"
+            ]
+          },
+          "MI-05": {
+            "title": "Remedy Mechanism",
+            "questions": [
+              "Is an effective remedy/redress mechanism operational for individuals adversely affected? (CRITICAL)"
+            ]
+          },
+          "MI-06": {
+            "title": "Re-Assessment Triggers",
+            "questions": [
+              "Have triggers been defined for when a full re-assessment is required (e.g., significant system update, change in deployment context, new regulatory requirements, reported incidents)?"
+            ]
+          },
+          "MI-07": {
+            "title": "Regulatory Incorporation",
+            "questions": [
+              "Is there a process for incorporating new regulations and standards as they emerge?"
+            ]
+          },
+          "MI-08": {
+            "title": "Feedback Loop",
+            "questions": [
+              "Do the results of monitoring feed back into the risk assessment and mitigation cycle?"
+            ]
+          }
+        }
+      },
+      "undp-framework-alignment": {
+        "title": "Alignment",
+        "items": {
+          "FA-01": {
+            "title": "State Duty to Protect",
+            "questions": [
+              "UNGPs Pillar I — Is there awareness of state obligations in jurisdictions of deployment?"
+            ]
+          },
+          "FA-02": {
+            "title": "Corporate Responsibility",
+            "questions": [
+              "UNGPs Pillar II — Has the organisation conducted human rights due diligence across the AI lifecycle?"
+            ]
+          },
+          "FA-03": {
+            "title": "Access to Remedy",
+            "questions": [
+              "UNGPs Pillar III — Are effective grievance mechanisms in place for affected individuals?"
+            ]
+          },
+          "FA-04": {
+            "title": "Inclusive Growth",
+            "questions": [
+              "OECD — Does the AI system benefit society broadly and not exacerbate inequalities?"
+            ]
+          },
+          "FA-05": {
+            "title": "Human-Centred Values",
+            "questions": [
+              "OECD — Has an assessment of potential discrimination and inequitable outcomes been completed?"
+            ]
+          },
+          "FA-06": {
+            "title": "Transparency and Explainability",
+            "questions": [
+              "OECD — Is there documentation of how the AI works, its limitations, and how it makes decisions?"
+            ]
+          },
+          "FA-07": {
+            "title": "Robustness and Safety",
+            "questions": [
+              "OECD — Have failure modes, security vulnerabilities, and reliability been assessed?"
+            ]
+          },
+          "FA-08": {
+            "title": "Accountability",
+            "questions": [
+              "OECD — Have clear responsibilities and oversight mechanisms been established?"
+            ]
+          },
+          "FA-09": {
+            "title": "EU AI Act Risk Classification",
+            "questions": [
+              "Has the AI system risk classification been determined (Unacceptable / High / Limited / Minimal risk)? (CRITICAL)"
+            ]
+          },
+          "FA-10": {
+            "title": "Fundamental Rights Impact Assessment",
+            "questions": [
+              "If high-risk: Has a Fundamental Rights Impact Assessment (FRIA) been conducted as required under Article 27?"
+            ]
+          },
+          "FA-11": {
+            "title": "Data Governance",
+            "questions": [
+              "Are appropriate data governance measures in place?"
+            ]
+          },
+          "FA-12": {
+            "title": "Transparency Obligations",
+            "questions": [
+              "Have transparency obligations been met (users informed they are interacting with AI where applicable)?"
+            ]
+          },
+          "FA-13": {
+            "title": "Human Oversight Requirements",
+            "questions": [
+              "Have human oversight requirements been established and documented?"
+            ]
+          },
+          "FA-14": {
+            "title": "Technical Documentation",
+            "questions": [
+              "Is technical documentation maintained as required?"
+            ]
+          },
+          "FA-15": {
+            "title": "EU Database Registration",
+            "questions": [
+              "Has registration in the EU database been completed (if applicable)?"
+            ]
+          },
+          "FA-16": {
+            "title": "Council of Europe Assessment",
+            "questions": [
+              "Has the AI system been assessed for impact on human rights, democracy, and rule of law?"
+            ]
+          },
+          "FA-17": {
+            "title": "Convention Compliance",
+            "questions": [
+              "Does the system comply with the Council of Europe Convention's emphasis on human rights, democratic principles, and rule of law?"
+            ]
+          }
+        }
+      }
     }
   }
 }

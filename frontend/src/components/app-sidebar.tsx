@@ -54,7 +54,7 @@ const NAV_CONFIG = [
 ];
 
 export function AppSidebar() {
-  const { t } = useTranslation(['components', 'common']);
+  const { t } = useTranslation(['components', 'common', 'pages']);
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
@@ -92,10 +92,15 @@ export function AppSidebar() {
   }, [currentProject]);
 
   useEffect(() => {
-    api
-      .get<Framework[]>('/frameworks')
-      .then(setFrameworks)
-      .catch(() => {});
+    const fetch = () => {
+      api
+        .get<Framework[]>('/frameworks')
+        .then(setFrameworks)
+        .catch(() => {});
+    };
+    fetch();
+    window.addEventListener('frameworks-changed', fetch);
+    return () => window.removeEventListener('frameworks-changed', fetch);
   }, []);
 
   const initials = user
@@ -259,7 +264,7 @@ export function AppSidebar() {
                             isActive={location.pathname === `/documents/${fw.id}`}
                             onClick={() => navigate(`/documents/${fw.id}`)}
                           >
-                            <span>{fw.name}</span>
+                            <span>{t(`pages:frameworks.names.${fw.name}`, fw.name)}</span>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}
@@ -295,7 +300,7 @@ export function AppSidebar() {
                             isActive={location.pathname === `/reporting/${fw.id}`}
                             onClick={() => navigate(`/reporting/${fw.id}`)}
                           >
-                            <span>{fw.name}</span>
+                            <span>{t(`pages:frameworks.names.${fw.name}`, fw.name)}</span>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}

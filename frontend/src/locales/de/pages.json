@@ -103,6 +103,20 @@
   },
   "frameworks": {
     "title": "Frameworks",
-    "noContent": "Der Inhalt dieses Frameworks wurde noch nicht geladen. Der Fragebogen und die Berichtsabschnitte sind über die Seiten zur Risikoklassifizierung und Berichterstattung verfügbar."
+    "noContent": "Der Inhalt dieses Frameworks wurde noch nicht geladen. Der Fragebogen und die Berichtsabschnitte sind über die Seiten zur Risikoklassifizierung und Berichterstattung verfügbar.",
+    "deleteFramework": "Framework entfernen",
+    "deleteFrameworkConfirm": "Möchten Sie '{{name}}' wirklich entfernen? Alle zugehörigen Dokumente und Definitionen werden gelöscht. Sie können es später wieder hinzufügen.",
+    "addFrameworkTitle": "Framework hinzufügen",
+    "addFrameworkEmpty": "Alle verfügbaren Frameworks wurden bereits hinzugefügt.",
+    "names": {
+      "EU AI Act": "EU-KI-Verordnung",
+      "UNDP Human Rights Assessment": "UNDP-Menschenrechtsbewertung",
+      "Environmental Impact Framework": "Rahmenwerk für Umweltauswirkungen"
+    },
+    "descriptions": {
+      "EU AI Act": "Die KI-Verordnung der Europäischen Union schafft einen umfassenden Regulierungsrahmen für KI-Systeme basierend auf der Risikoklassifizierung. Sie schreibt Konformitätsbewertungen, Transparenzpflichten und Anforderungen an die menschliche Aufsicht für Hochrisiko-KI-Systeme vor.",
+      "UNDP Human Rights Assessment": "Das UNDP-Toolkit zur Bewertung der Auswirkungen von KI auf die Menschenrechte bietet eine strukturierte Methodik zur Bewertung von KI-Systemen anhand internationaler Menschenrechtsstandards. Es leitet Organisationen durch die Einbindung von Interessengruppen, die rechtebasierte Risikoanalyse und die laufende Überwachung, um sicherzustellen, dass KI-Einsätze Würde, Gleichheit und Nichtdiskriminierungsgrundsätze respektieren.",
+      "Environmental Impact Framework": "Das Rahmenwerk für Umweltauswirkungen von KI-Systemen bietet einen strukturierten Ansatz zur Messung, Berichterstattung und Reduzierung des ökologischen Fußabdrucks der KI-Entwicklung und -Bereitstellung. Es umfasst Energieverbrauch, Kohlenstoffemissionen, Hardware-Lebenszyklus und Rechenzentrum-Nachhaltigkeit zur Förderung verantwortungsvoller und umweltbewusster KI-Praktiken."
+    }
   }
 }
