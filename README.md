@@ -22,27 +22,27 @@
 
 ## What is Norma?
 
-Norma is a platform that helps teams manage AI compliance across multiple regulatory frameworks — including the **EU AI Act**, **Environmental Impact**, and **UNDP Human Rights** assessments.
+Norma is a platform that helps teams manage AI compliance across multiple regulatory frameworks, including the **EU AI Act**, **Environmental Impact**, and **UNDP Human Rights** assessments.
 
-It combines structured project management with an AI-powered assistant that understands your project context, uploaded documents, codebase, and compliance obligations. Norma guides you through risk classification, evidence gathering, and reporting — all in one place.
+It combines structured project management with an AI-powered assistant that understands your project context, uploaded documents, codebase, and compliance obligations. Norma guides you through risk classification, evidence gathering, and reporting, all in one place.
 
-Norma is **cloud-agnostic** and **LLM-agnostic**. It uses [LiteLLM](https://docs.litellm.ai/) to abstract model providers, so any backend — Vertex AI, OpenAI, Azure, or others — can be swapped without code changes.
+Norma is **cloud-agnostic** and **LLM-agnostic**. It uses [LiteLLM](https://docs.litellm.ai/) to abstract model providers, so any backend (Vertex AI, OpenAI, Azure, or others) can be swapped without code changes.
 
 ## Features
 
-**Risk Classification** — Interactive questionnaire following the EU AI Act decision tree to determine your AI system's risk level.
+**Risk Classification.** Interactive questionnaire following the EU AI Act decision tree to determine your AI system's risk level.
 
-**Multi-Framework Reporting** — Structured checklists for EU AI Act, Environmental Impact, and UNDP Human Rights frameworks with evidence tracking and validation.
+**Multi-Framework Reporting.** Structured checklists for EU AI Act, Environmental Impact, and UNDP Human Rights frameworks with evidence tracking and validation.
 
-**Document Management** — Upload compliance documents as PDFs. Norma extracts and summarises the content so the AI assistant can reference it in context.
+**Document Management.** Upload compliance documents as PDFs. Norma extracts and summarises the content so the AI assistant can reference it in context.
 
-**Norma AI Assistant** — A context-aware chat assistant that understands your project details, uploaded documents, codebase, and reporting progress to provide tailored compliance guidance.
+**Norma AI Assistant.** A context-aware chat assistant that understands your project details, uploaded documents, codebase, and reporting progress to provide tailored compliance guidance.
 
-**Codebase Analysis** — Connect a GitHub repository to generate architecture diagrams and technical summaries that feed into compliance assessments.
+**Codebase Analysis.** Connect a GitHub repository to generate architecture diagrams and technical summaries that feed into compliance assessments.
 
-**Multi-Language Support** — Full interface localisation in English, Spanish, French, and German, with AI responses adapted to the user's preferred language.
+**Multi-Language Support.** Full interface localisation in English, Spanish, French, and German, with AI responses adapted to the user's preferred language.
 
-**LLM-Agnostic** — Swap between any LLM provider (Vertex AI, OpenAI, Azure, local models) by changing a single environment variable.
+**LLM-Agnostic.** Swap between any LLM provider (Vertex AI, OpenAI, Azure, local models) by changing a single environment variable.
 
 ## Architecture
 
@@ -115,4 +115,4 @@ Contributions are welcome. Please read the [contributing guidelines](CONTRIBUTIN
 
 ## Licence
 
-This project is licensed under the Apache License 2.0 — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
