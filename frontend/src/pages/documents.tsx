@@ -6,12 +6,7 @@ import Markdown from 'react-markdown';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Table,
@@ -209,9 +204,7 @@ export function DocumentsPage() {
                         <TableRow
                           key={doc.id}
                           className="cursor-pointer"
-                          onClick={() =>
-                            setViewDoc({ name: doc.file_name, summary: doc.summary })
-                          }
+                          onClick={() => setViewDoc({ name: doc.file_name, summary: doc.summary })}
                         >
                           <TableCell>
                             <div className="flex items-center gap-2">
@@ -220,7 +213,10 @@ export function DocumentsPage() {
                                 <span className="text-sm font-medium">{doc.file_name}</span>
                                 {doc.summary && (
                                   <p className="text-muted-foreground truncate text-xs">
-                                    {doc.summary.replace(/[#*_~`>-]/g, '').replace(/\s+/g, ' ').trim()}
+                                    {doc.summary
+                                      .replace(/[#*_~`>-]/g, '')
+                                      .replace(/\s+/g, ' ')
+                                      .trim()}
                                   </p>
                                 )}
                               </div>
@@ -320,7 +316,10 @@ export function DocumentsPage() {
                             </div>
                             <p className="text-muted-foreground truncate text-xs">
                               {doc.summary
-                                ? doc.summary.replace(/[#*_~`>-]/g, '').replace(/\s+/g, ' ').trim()
+                                ? doc.summary
+                                    .replace(/[#*_~`>-]/g, '')
+                                    .replace(/\s+/g, ' ')
+                                    .trim()
                                 : t(`documentDefinitions.${slugify(doc.name)}.description`, {
                                     ns: 'data',
                                     defaultValue: doc.description,

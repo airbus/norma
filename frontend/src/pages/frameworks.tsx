@@ -5,12 +5,7 @@ import Markdown from 'react-markdown';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { PageHeader } from '@/components/page-header';
 import { api, type Framework } from '@/lib/api';
@@ -80,41 +75,42 @@ export function FrameworksPage() {
 
       <Dialog open={!!selected} onOpenChange={() => setSelected(null)}>
         <DialogContent className="h-[95vh] max-w-[95vw] sm:max-w-[95vw] overflow-hidden p-0">
-          {selected && (() => {
-            const text = [selected.description, selected.content].filter(Boolean).join(' ');
-            const wordCount = text.split(/\s+/).filter(Boolean).length;
-            const pageEstimate = Math.ceil(wordCount / 250);
-            return (
-              <>
-                <DialogHeader className="border-b px-6 pt-6 pb-4">
-                  <DialogTitle className="flex items-center gap-3">
-                    {selected.name}
-                    <Badge variant={STATUS_VARIANT[selected.status] ?? 'outline'}>
-                      {t(`common:status.${selected.status}`)}
-                    </Badge>
-                    {wordCount > 0 && (
-                      <span className="text-muted-foreground text-xs font-normal">
-                        {wordCount.toLocaleString()} words &middot; ~{pageEstimate}{' '}
-                        {pageEstimate === 1 ? 'page' : 'pages'}
-                      </span>
+          {selected &&
+            (() => {
+              const text = [selected.description, selected.content].filter(Boolean).join(' ');
+              const wordCount = text.split(/\s+/).filter(Boolean).length;
+              const pageEstimate = Math.ceil(wordCount / 250);
+              return (
+                <>
+                  <DialogHeader className="border-b px-6 pt-6 pb-4">
+                    <DialogTitle className="flex items-center gap-3">
+                      {selected.name}
+                      <Badge variant={STATUS_VARIANT[selected.status] ?? 'outline'}>
+                        {t(`common:status.${selected.status}`)}
+                      </Badge>
+                      {wordCount > 0 && (
+                        <span className="text-muted-foreground text-xs font-normal">
+                          {wordCount.toLocaleString()} words &middot; ~{pageEstimate}{' '}
+                          {pageEstimate === 1 ? 'page' : 'pages'}
+                        </span>
+                      )}
+                    </DialogTitle>
+                  </DialogHeader>
+                  <ScrollArea className="h-[calc(95vh-5rem)] px-6 py-4">
+                    <p className="text-muted-foreground mb-4 text-sm">{selected.description}</p>
+                    {selected.content ? (
+                      <div className="prose prose-sm dark:prose-invert max-w-none">
+                        <Markdown>{selected.content}</Markdown>
+                      </div>
+                    ) : (
+                      <p className="text-muted-foreground py-12 text-center">
+                        {t('frameworks.noContent')}
+                      </p>
                     )}
-                  </DialogTitle>
-                </DialogHeader>
-                <ScrollArea className="h-[calc(95vh-5rem)] px-6 py-4">
-                  <p className="text-muted-foreground mb-4 text-sm">{selected.description}</p>
-                  {selected.content ? (
-                    <div className="prose prose-sm dark:prose-invert max-w-none">
-                      <Markdown>{selected.content}</Markdown>
-                    </div>
-                  ) : (
-                    <p className="text-muted-foreground py-12 text-center">
-                      {t('frameworks.noContent')}
-                    </p>
-                  )}
-                </ScrollArea>
-              </>
-            );
-          })()}
+                  </ScrollArea>
+                </>
+              );
+            })()}
         </DialogContent>
       </Dialog>
     </div>
