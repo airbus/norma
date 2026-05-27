@@ -52,8 +52,8 @@ On first startup, the backend automatically runs database migrations and seeds t
 
 ## 3. Create an account
 
-1. Open [localhost:3000](http://localhost:3000) in your browser.
-2. The first user is automatically presented with a setup page to create an admin account.
+1. Open [localhost:3000/register](http://localhost:3000/register) in your browser.
+2. Since no users exist yet, you will see the admin setup page. Create your admin account.
 3. Once registered, sample projects are created automatically to help you explore the platform. These include pre-filled reporting evidence so you can see how a completed compliance workflow looks.
 
 ## 4. Create a project
