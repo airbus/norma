@@ -59,7 +59,8 @@
     "additional": "Additional",
     "uploadedCount": "{{count}} of {{total}} uploaded",
     "noAdditionalDocs": "No additional documents uploaded yet. Upload any PDF to include it in your project context.",
-    "deleteDocument": "Delete document"
+    "deleteDocument": "Delete document",
+    "noSummaryAvailable": "This document has not been processed yet. The summary will appear here once processing is complete."
   },
   "reporting": {
     "title": "Reporting",
@@ -101,6 +102,7 @@
     "githubDesc": "Connect a GitHub repository to sync tasks and analyse architecture."
   },
   "frameworks": {
-    "title": "Frameworks"
+    "title": "Frameworks",
+    "noContent": "The content for this framework has not been loaded yet. The questionnaire and reporting sections are available through the risk classification and reporting pages."
   }
 }

@@ -315,10 +315,10 @@ export function AppSidebar() {
                     <SidebarMenuButton
                       isActive={location.pathname === '/github'}
                       onClick={() => navigate('/github')}
-                      tooltip={t('sidebar.github')}
+                      tooltip={t('sidebar.githubPage')}
                     >
                       <GitBranch />
-                      <span>{t('sidebar.github')}</span>
+                      <span>{t('sidebar.githubPage')}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>

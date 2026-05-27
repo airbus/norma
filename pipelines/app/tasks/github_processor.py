@@ -11,13 +11,23 @@ SUMMARY_PROMPT = """\
 You are a technical project analyst. Below is information gathered from a GitHub repository: \
 a list of tasks/issues from the project board and key source files from the codebase.
 
-Produce a structured summary covering:
-1. **Project overview**: What this codebase does, its purpose and domain.
-2. **Tech stack**: Languages, frameworks, key dependencies.
-3. **Task status overview**: How many tasks are open vs closed, key themes, current priorities.
-4. **Key observations**: Architecture decisions, patterns, or risks relevant to compliance analysis.
+Produce a structured summary using EXACTLY these four sections in this order:
+## 1. Project Overview
+What this codebase does, its purpose and domain.
 
-Keep the summary concise (under 1000 words). Use markdown formatting.
+## 2. Tech Stack
+Languages, frameworks, key dependencies.
+
+## 3. Tasks
+List EVERY task/issue individually. For each task, include its number, title, \
+status (open/closed), and a one-sentence description of what it covers. Group by status \
+(open first, then closed). Do not summarise or group tasks by theme — list each one explicitly.
+
+## 4. Key Observations
+Architecture decisions, patterns, or risks relevant to compliance analysis.
+
+Use these exact section headings (## 1. Project Overview, ## 2. Tech Stack, ## 3. Tasks, ## 4. Key Observations). \
+Do not add, remove, rename, or reorder sections.
 {language_rule}
 
 ---

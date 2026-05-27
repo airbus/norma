@@ -38,7 +38,7 @@ export function IntegrationsPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title={t('integrations.title')} />
+      <PageHeader title={t('integrations.title')} debugSection="" />
 
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-4xl space-y-4">

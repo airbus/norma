@@ -37,6 +37,7 @@ export interface Framework {
   description: string;
   category: string;
   status: 'active' | 'draft' | 'inactive';
+  content: string;
   document_count: number;
   created_at: string;
 }
@@ -167,6 +168,7 @@ async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
     throw new Error(message);
   }
 
+  if (res.status === 204) return undefined as T;
   return res.json();
 }
 

@@ -61,8 +61,15 @@ export function ReportingPage() {
       .catch(() => {});
   }, [currentProject]);
 
+  const [debugRefreshKey, setDebugRefreshKey] = useState(0);
+  const debugRefreshTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
   const handleCommentChange = useCallback((key: string, value: string) => {
     setComments((prev) => ({ ...prev, [key]: value }));
+    if (debugRefreshTimer.current) clearTimeout(debugRefreshTimer.current);
+    debugRefreshTimer.current = setTimeout(() => {
+      setDebugRefreshKey((k) => k + 1);
+    }, 1500);
   }, []);
 
   const handleValidate = useCallback(
@@ -126,7 +133,7 @@ export function ReportingPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title={pageTitle}>
+      <PageHeader title={pageTitle} debugSection="reporting" debugRefreshKey={debugRefreshKey}>
         {currentFramework && (
           <AskNormaButton
             question={t('reporting.askNormaQuestion', { framework: currentFramework.name })}

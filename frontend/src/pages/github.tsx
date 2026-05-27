@@ -185,8 +185,9 @@ export function GitHubPage() {
         }
         if (buf) merged.push(buf);
 
-        const cleanLabel = (label: string) =>
-          label
+        const cleanLabel = (label: string) => {
+          const unwrapped = label.replace(/^\(([^)]*)\)$/, '$1').replace(/^\("?([^"]*)"?\)$/, '$1');
+          const cleaned = unwrapped
             .replace(/\([^)]*\)/g, '')
             .replace(/\(.*$/, '')
             .replace(/[{}"'<>]/g, '')
@@ -194,6 +195,8 @@ export function GitHubPage() {
             .replace(/,\s*$/, '')
             .replace(/\s{2,}/g, ' ')
             .trim();
+          return cleaned || unwrapped.replace(/[{}"'<>]/g, '').trim() || label.trim();
+        };
 
         merged[0] = merged[0].replace(/^graph\s+(LR|RL|BT|TB)/, 'graph TD');
 
@@ -302,7 +305,7 @@ export function GitHubPage() {
   if (loading && !integration) {
     return (
       <div className="flex h-svh flex-col">
-        <PageHeader title={t('github.title')} />
+        <PageHeader title={t('github.title')} debugSection="github" />
         <div className="flex flex-1 items-center justify-center">
           <Loader2 className="size-6 animate-spin text-muted-foreground" />
         </div>
@@ -312,7 +315,7 @@ export function GitHubPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title={t('github.title')}>
+      <PageHeader title={t('github.title')} debugSection="github">
         <AskNormaButton question={t('github.askNormaQuestion')} />
       </PageHeader>
 

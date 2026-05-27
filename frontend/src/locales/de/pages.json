@@ -59,7 +59,8 @@
     "additional": "Zusätzliche",
     "uploadedCount": "{{count}} von {{total}} hochgeladen",
     "noAdditionalDocs": "Noch keine zusätzlichen Dokumente hochgeladen. Laden Sie ein beliebiges PDF hoch, um es in Ihren Projektkontext aufzunehmen.",
-    "deleteDocument": "Dokument löschen"
+    "deleteDocument": "Dokument löschen",
+    "noSummaryAvailable": "Dieses Dokument wurde noch nicht verarbeitet. Die Zusammenfassung wird hier angezeigt, sobald die Verarbeitung abgeschlossen ist."
   },
   "reporting": {
     "title": "Berichterstattung",
@@ -101,6 +102,7 @@
     "githubDesc": "Verbinden Sie ein GitHub-Repository, um Aufgaben zu synchronisieren und die Architektur zu analysieren."
   },
   "frameworks": {
-    "title": "Frameworks"
+    "title": "Frameworks",
+    "noContent": "Der Inhalt dieses Frameworks wurde noch nicht geladen. Der Fragebogen und die Berichtsabschnitte sind über die Seiten zur Risikoklassifizierung und Berichterstattung verfügbar."
   }
 }

@@ -73,52 +73,6 @@ def list_documents(
     return [_to_response(d) for d in docs]
 
 
-@router.post("/{document_id}/upload", response_model=DocumentResponse)
-async def upload_document(
-    project_id: uuid.UUID,
-    document_id: uuid.UUID,
-    file: UploadFile,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
-):
-    project = _get_project(project_id, current_user, db)
-    doc = db.query(Document).filter(Document.id == document_id, Document.project_id == project.id).first()
-    if not doc:
-        raise HTTPException(status_code=404, detail="Document not found")
-
-    upload_dir = UPLOAD_DIR / str(project.id)
-    upload_dir.mkdir(parents=True, exist_ok=True)
-
-    file_ext = Path(file.filename).suffix if file.filename else ""
-    stored_name = f"{document_id}{file_ext}"
-    file_path = upload_dir / stored_name
-
-    content = await file.read()
-    file_path.write_bytes(content)
-
-    doc.file_path = str(file_path)
-    doc.file_name = file.filename
-    doc.uploaded_at = datetime.now(UTC)
-    db.commit()
-    db.refresh(doc)
-
-    try:
-        async with httpx.AsyncClient() as client:
-            await client.post(
-                f"{settings.pipelines_url}/api/documents/process",
-                json={
-                    "document_id": str(doc.id),
-                    "file_path": str(file_path),
-                    "language": current_user.language_preference or "en",
-                },
-                timeout=300,
-            )
-    except Exception:
-        pass
-
-    return _to_response(doc)
-
-
 @router.get("/custom", response_model=list[CustomDocumentResponse])
 def list_custom_documents(
     project_id: uuid.UUID,
@@ -208,3 +162,75 @@ def delete_custom_document(
 
     db.delete(doc)
     db.commit()
+
+
+@router.delete("/{document_id}/upload", response_model=DocumentResponse)
+def remove_uploaded_document(
+    project_id: uuid.UUID,
+    document_id: uuid.UUID,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    project = _get_project(project_id, current_user, db)
+    doc = db.query(Document).filter(Document.id == document_id, Document.project_id == project.id).first()
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document not found")
+
+    if doc.file_path:
+        file_path = Path(doc.file_path)
+        if file_path.exists():
+            file_path.unlink()
+
+    doc.file_path = None
+    doc.file_name = None
+    doc.summary = None
+    doc.uploaded_at = None
+    db.commit()
+    db.refresh(doc)
+    return _to_response(doc)
+
+
+@router.post("/{document_id}/upload", response_model=DocumentResponse)
+async def upload_document(
+    project_id: uuid.UUID,
+    document_id: uuid.UUID,
+    file: UploadFile,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    project = _get_project(project_id, current_user, db)
+    doc = db.query(Document).filter(Document.id == document_id, Document.project_id == project.id).first()
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document not found")
+
+    upload_dir = UPLOAD_DIR / str(project.id)
+    upload_dir.mkdir(parents=True, exist_ok=True)
+
+    file_ext = Path(file.filename).suffix if file.filename else ""
+    stored_name = f"{document_id}{file_ext}"
+    file_path = upload_dir / stored_name
+
+    content = await file.read()
+    file_path.write_bytes(content)
+
+    doc.file_path = str(file_path)
+    doc.file_name = file.filename
+    doc.uploaded_at = datetime.now(UTC)
+    db.commit()
+    db.refresh(doc)
+
+    try:
+        async with httpx.AsyncClient() as client:
+            await client.post(
+                f"{settings.pipelines_url}/api/documents/process",
+                json={
+                    "document_id": str(doc.id),
+                    "file_path": str(file_path),
+                    "language": current_user.language_preference or "en",
+                },
+                timeout=300,
+            )
+    except Exception:
+        pass
+
+    return _to_response(doc)

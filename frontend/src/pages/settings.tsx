@@ -43,7 +43,7 @@ export function SettingsPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title={t('settings.title')} />
+      <PageHeader title={t('settings.title')} debugSection="" />
 
       <div className="flex-1 overflow-auto p-6">
         <div className="mx-auto max-w-4xl space-y-6">

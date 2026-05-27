@@ -10,7 +10,8 @@
     "reporting": "Reporting",
     "integrations": "Integrations",
     "frameworks": "Frameworks",
-    "github": "GitHub",
+    "github": "Codebase",
+    "githubPage": "GitHub",
     "overview": "Overview",
     "riskClassification": "Risk Classification",
     "additionalDocuments": "Additional Documents"

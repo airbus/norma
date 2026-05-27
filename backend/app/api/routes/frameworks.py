@@ -19,6 +19,7 @@ def _to_response(fw: Framework) -> dict:
         "description": fw.description,
         "category": fw.category,
         "status": fw.status,
+        "content": fw.content,
         "document_count": len(fw.document_definitions),
         "created_at": fw.created_at,
     }
