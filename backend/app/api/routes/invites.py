@@ -25,7 +25,7 @@ def create_invite(
         email=body.email,
         role=body.role,
         created_by=current_user.id,
-        expires_at=datetime.now(UTC) + timedelta(days=7),
+        expires_at=datetime.now(UTC).replace(tzinfo=None) + timedelta(days=7),
     )
     db.add(invite)
     db.commit()
@@ -61,6 +61,6 @@ def delete_invite(
 @router.get("/{token}/validate")
 def validate_invite(token: str, db: Session = Depends(get_db)):
     invite = db.query(InviteToken).filter(InviteToken.token == token).first()
-    if not invite or invite.used_by or invite.expires_at < datetime.now(UTC):
+    if not invite or invite.used_by or invite.expires_at < datetime.now(UTC).replace(tzinfo=None):
         return {"valid": False}
     return {"valid": True, "email": invite.email, "role": invite.role}

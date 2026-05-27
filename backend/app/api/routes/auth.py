@@ -30,7 +30,7 @@ def register(body: RegisterRequest, db: Session = Depends(get_db)):
 
     if body.invite_token:
         invite = db.query(InviteToken).filter(InviteToken.token == body.invite_token).first()
-        if not invite or invite.used_by or invite.expires_at < datetime.now():
+        if not invite or invite.used_by or invite.expires_at < datetime.now(UTC).replace(tzinfo=None):
             raise HTTPException(status_code=400, detail="Invalid or expired invite")
         if invite.email and invite.email.lower() != body.email.lower():
             raise HTTPException(status_code=400, detail="Email does not match invite")
@@ -46,10 +46,11 @@ def register(body: RegisterRequest, db: Session = Depends(get_db)):
         role=role,
     )
     db.add(user)
+    db.flush()
 
     if invite:
         invite.used_by = user.id
-        invite.used_at = datetime.now(UTC)
+        invite.used_at = datetime.now(UTC).replace(tzinfo=None)
 
     db.commit()
     db.refresh(user)
