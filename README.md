@@ -22,9 +22,7 @@
 
 ## What is Norma?
 
-Norma is a platform that helps teams achieve **EU AI Act** compliance.
-
-It combines structured project management with an AI-powered assistant that understands your project context, uploaded documents, codebase, and compliance obligations. Norma guides you through risk classification, evidence gathering, and reporting, all in one place.
+Norma helps teams achieve **EU AI Act** compliance by combining structured project management with an AI-powered assistant that understands your project context, uploaded documents, codebase, and compliance obligations to guide you through risk classification, evidence gathering, and reporting.
 
 Norma is **cloud-agnostic** and **LLM-agnostic**. It uses [LiteLLM](https://docs.litellm.ai/) to abstract model providers, so any backend (Vertex AI, OpenAI, Azure, or others) can be swapped without code changes.
 
@@ -32,7 +30,7 @@ Norma is **cloud-agnostic** and **LLM-agnostic**. It uses [LiteLLM](https://docs
 
 **Risk Classification.** Interactive questionnaire following the EU AI Act decision tree to determine your AI system's risk level.
 
-**Multi-Framework Reporting.** Structured checklists for EU AI Act, Environmental Impact, and UNDP Human Rights frameworks with evidence tracking and validation.
+**Compliance Reporting.** Structured checklists with evidence tracking and validation to build your EU AI Act compliance case.
 
 **Document Management.** Upload compliance documents as PDFs. Norma extracts and summarises the content so the AI assistant can reference it in context.
 
