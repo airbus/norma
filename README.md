@@ -17,8 +17,7 @@
 
 ---
 
-<!-- TODO: Add a screenshot of the Norma UI here -->
-<!-- <p align="center"><img src="docs/assets/screenshot.png" alt="Norma screenshot" width="800" /></p> -->
+<p align="center"><img src="docs/assets/screenshot.png" alt="Norma screenshot" width="800" /></p>
 
 ## What is Norma?
 
