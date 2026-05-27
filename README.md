@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <em>AI governance, simplified</em>
+  <em>AI compliance, simplified</em>
 </p>
 
 <p align="center">
