@@ -39,7 +39,7 @@ graph TB
 
 ### Frontend
 
-**Stack:** React 18, Vite, Tailwind CSS, shadcn/ui, Lucide icons, React Router
+**Stack:** React 19, Vite, TypeScript, Tailwind CSS, shadcn/ui, Lucide icons, React Router, i18next
 
 The single-page application provides the full user workflow:
 
@@ -48,8 +48,10 @@ The single-page application provides the full user workflow:
 - **Risk banner** — real-time display of the LLM-evaluated risk classification with re-evaluate controls
 - **Document checklist** — per-framework required documents with file upload and LLM-generated summaries, plus free-form custom PDF uploads
 - **Reporting checklist** — compliance evidence tracking with free-text comments per item and AI-powered suggestion generation
+- **Codebase integration** — GitHub repository connection with auto-generated architecture diagrams and technical summaries
 - **Chat interface** — streaming conversation with the Norma AI assistant, with full project context
-- **Settings** — user and admin management (invite links, user listing)
+- **Internationalisation** — full UI localisation in English, Spanish, French, and German (i18next)
+- **Settings** — user preferences (language), admin management (invite links, user listing)
 
 In production, the frontend is served via Nginx which proxies `/api` requests to the backend service.
 
@@ -64,24 +66,34 @@ The central API server handling all business logic:
 | **Authentication** (`app/api/routes/auth.py`) | JWT-based auth with bcrypt password hashing. Users register via single-use invite tokens created by admins. Tokens expire after 7 days. |
 | **Projects** (`app/api/routes/projects.py`) | Full CRUD for compliance projects. PATCH requests that modify risk-relevant fields (description, intended purpose, intended users, deployment context, questionnaire answers) automatically trigger an LLM-based risk evaluation. |
 | **Risk Evaluation** (`app/services/risk_evaluation.py`) | One-shot LLM call using `litellm.acompletion()` that classifies a project as `unacceptable`, `high`, `limited`, or `minimal` based on the EU AI Act self-assessment decision tree. |
-| **Chat / Norma Agent** (`app/agents/norma.py`, `app/api/routes/chat.py`) | Multi-turn AI assistant built on Google ADK. System prompt assembled from framework knowledge, project context, uploaded document summaries, and reporting evidence. Supports both synchronous and SSE streaming responses. |
+| **Chat / Norma Agent** (`app/agents/norma.py`, `app/api/routes/chat.py`) | Multi-turn AI assistant built on Google ADK. System prompt assembled from framework knowledge, project context, uploaded document summaries, reporting evidence, and codebase analysis. Supports both synchronous and SSE streaming responses. Includes a debug context endpoint for inspecting assembled context per section. |
 | **Documents** (`app/api/routes/documents.py`) | Manages per-project document instances derived from framework-defined templates, plus free-form custom PDF uploads. Handles file uploads and delegates processing to the Pipelines service. |
 | **Reporting** (`app/api/routes/reporting.py`) | Bulk upsert of compliance checklist evidence entries keyed by item identifier. Each entry stores the user's comment alongside an LLM-generated validation result (`covered` flag and `feedback` text). Includes a suggestion endpoint that generates context-aware comments and a validation endpoint that evaluates whether an answer satisfies the compliance question. |
+| **Integrations** (`app/api/routes/integrations.py`) | GitHub repository integration. Stores PAT credentials, triggers repository sync via the Pipelines service, and serves the generated summary, architecture diagram, and task list. |
 | **Frameworks** (`app/api/routes/frameworks.py`) | Read-only endpoints for regulatory frameworks and their metadata. |
-| **Seeding** (`app/services/seed.py`) | On startup, seeds the EU AI Act framework with its required document definitions and loads knowledge base content from markdown files. Also creates a sample project for newly registered users. |
+| **Seeding** (`app/services/seed.py`) | On startup, seeds three compliance frameworks (EU AI Act, UNDP Human Rights Assessment, Environmental Impact) with their required document definitions and loads knowledge base content from markdown files. Creates a sample project for newly registered users. |
 | **Migrations** (`alembic/`) | Alembic manages schema migrations, run automatically on backend startup. |
 
 ### Pipelines
 
 **Stack:** FastAPI, LiteLLM, PyMuPDF
 
-A lightweight, independently scalable service dedicated to heavy processing tasks. Currently handles document processing:
+A lightweight, independently scalable service dedicated to heavy processing tasks:
 
+**Document processing:**
 1. **Text extraction** — reads uploaded files (PDF via PyMuPDF, or plain text for Markdown/TXT/CSV/JSON/XML/HTML)
 2. **LLM summarisation** — sends extracted text to `litellm.acompletion()` with a structured prompt requesting comprehensive markdown summaries
-3. **Database update** — writes the generated summary back to the `documents.summary` or `custom_documents.summary` column (determined by the `table_name` parameter)
+3. **Database update** — writes the generated summary back to the `documents.summary` or `custom_documents.summary` column
 
-The Pipelines service shares the `norma-data` volume with the Backend for file access and connects directly to PostgreSQL for writing summaries.
+**GitHub processing:**
+1. **Repository sync** — fetches the repository file tree and file contents via the GitHub API
+2. **Summary generation** — produces a structured technical summary (overview, tech stack, tasks, key observations) via LLM
+3. **Architecture diagram** — generates a Mermaid diagram of the system architecture from the codebase structure
+4. **Task sync** — fetches open issues and project items, storing them as `github_tasks`
+
+All LLM calls in the Pipelines service respect the user's language preference, generating summaries and descriptions in the configured language.
+
+The Pipelines service shares the `norma-data` volume with the Backend for file access and connects directly to PostgreSQL for writing results.
 
 ### Database
 
@@ -95,6 +107,9 @@ erDiagram
     projects ||--o{ custom_documents : has
     projects ||--o{ reporting_evidence : has
     projects ||--o{ chat_sessions : has
+    projects ||--o| integrations : has
+    integrations ||--o{ github_tasks : has
+    integrations ||--o{ github_repo_files : has
     frameworks ||--o{ document_definitions : defines
     document_definitions ||--o{ documents : instantiates
     chat_sessions ||--o{ chat_messages : contains
@@ -105,6 +120,7 @@ erDiagram
         string name
         string hashed_password
         string role
+        string language_preference
         boolean is_active
         datetime created_at
     }
@@ -187,6 +203,43 @@ erDiagram
         text content
         datetime created_at
     }
+
+    integrations {
+        uuid id PK
+        uuid project_id FK
+        string provider
+        string github_pat
+        string repo_owner
+        string repo_name
+        integer github_project_number
+        text summary
+        text architecture_mermaid
+        string sync_status
+        datetime last_synced_at
+        datetime created_at
+    }
+
+    github_tasks {
+        uuid id PK
+        uuid integration_id FK
+        integer github_id
+        string title
+        text body
+        string status
+        jsonb assignees
+        jsonb labels
+        string milestone
+        string github_url
+        datetime created_at
+    }
+
+    github_repo_files {
+        uuid id PK
+        uuid integration_id FK
+        string file_path
+        text content
+        datetime created_at
+    }
 ```
 
 Key design decisions:
@@ -209,6 +262,7 @@ graph LR
 
     subgraph Pipelines
         DP[Document Processor<br/>litellm.acompletion]
+        GP[GitHub Processor<br/>litellm.acompletion]
     end
 
     LLM_ADAPTER[LiteLLM<br/>Model Router]
@@ -216,6 +270,7 @@ graph LR
     RE -->|one-shot| LLM_ADAPTER
     NA -->|multi-turn via ADK LiteLlm adapter| LLM_ADAPTER
     DP -->|one-shot| LLM_ADAPTER
+    GP -->|one-shot| LLM_ADAPTER
 
     LLM_ADAPTER -->|vertex_ai/| VERTEX[Vertex AI]
     LLM_ADAPTER -->|openai/| OPENAI[OpenAI]
@@ -227,7 +282,7 @@ Two distinct LLM usage patterns:
 
 | Pattern | Used By | How | Purpose |
 |---------|---------|-----|---------|
-| **One-shot classification** | Risk evaluation, Document processing | `litellm.acompletion()` directly | Single-turn, structured output. Risk eval returns exactly one word. Document processing returns a markdown summary. |
+| **One-shot classification** | Risk evaluation, Document processing, GitHub processing | `litellm.acompletion()` directly | Single-turn, structured output. Risk eval returns exactly one word. Document and GitHub processing return markdown summaries and Mermaid diagrams. |
 | **Multi-turn agent** | Norma chat | Google ADK `Agent` + `Runner` + `InMemorySessionService`, with `LiteLlm` model adapter | Conversational AI assistant with full project context in the system prompt. Supports streaming via SSE. |
 
 ## Data Flows
@@ -297,7 +352,7 @@ sequenceDiagram
 
     User->>FE: Creates chat session
     FE->>BE: POST /api/chat/sessions
-    BE->>BE: Assemble system prompt from:<br/>- Framework knowledge base<br/>- Project fields + questionnaire<br/>- Uploaded document summaries<br/>- Reporting evidence
+    BE->>BE: Assemble system prompt from:<br/>- Framework knowledge base<br/>- Project fields + questionnaire<br/>- Uploaded document summaries<br/>- Reporting evidence<br/>- Codebase analysis (if connected)
     BE->>BE: Store frozen system prompt
     BE-->>FE: Session created
 
@@ -316,6 +371,39 @@ sequenceDiagram
     BE-->>FE: SSE data: [DONE]
 ```
 
+### Codebase Sync
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant FE as Frontend
+    participant BE as Backend
+    participant PL as Pipelines
+    participant GH as GitHub API
+    participant LLM as LLM Provider
+    participant DB as PostgreSQL
+
+    User->>FE: Clicks Sync
+    FE->>BE: POST /api/projects/{id}/integrations/sync
+    BE->>BE: Set sync_status = "syncing"
+    BE->>PL: POST /api/github/process<br/>{integration_id, language}
+
+    PL->>GH: Fetch repo tree + file contents
+    PL->>DB: Store files in github_repo_files
+    PL->>GH: Fetch issues / project items
+    PL->>DB: Store tasks in github_tasks
+
+    PL->>LLM: acompletion() with repo context
+    LLM-->>PL: Technical summary
+    PL->>LLM: acompletion() with file tree
+    LLM-->>PL: Mermaid architecture diagram
+    PL->>DB: UPDATE integrations SET summary, architecture_mermaid
+
+    PL->>DB: Set sync_status = "idle"
+    BE-->>FE: Sync initiated
+    FE->>FE: Poll sync_status until idle
+```
+
 ## Knowledge Base
 
 Regulatory knowledge is stored as markdown files organised by framework and loaded into the database at startup:
@@ -323,12 +411,24 @@ Regulatory knowledge is stored as markdown files organised by framework and load
 ```
 backend/app/data/knowledge/
   eu_ai_act/
-    00_getting_started.md      -- Introduction and overview (sorted first)
-    eu_ai_act_summary.md       -- Full regulation summary
-    high_risk_guidelines.md    -- High-risk system compliance guide
-    sandbox_guidelines.md      -- AI regulatory sandbox guide
+    00_getting_started.md                  -- Introduction and overview
+    eu_ai_act_summary.md                   -- Full regulation summary
+    high_risk_guidelines.md                -- High-risk system compliance guide
+    sandbox_guidelines.md                  -- AI regulatory sandbox guide
+  undp_human_rights_assessment/
+    01_summary.md                          -- UNDP toolkit summary
+  environmental_impact_framework/
+    (knowledge files added as available)
 ```
 
 The seed service scans each framework's subdirectory by name slug (e.g., `eu_ai_act` for "EU AI Act"), concatenates all `.md` files in sorted order, and stores the result in `frameworks.content`. On subsequent startups, if file content has changed, the database is updated automatically.
 
 This content is included in the Norma chat agent's system prompt, giving it deep regulatory knowledge to draw from when answering user questions.
+
+## Internationalisation
+
+The frontend supports English, Spanish, French, and German via i18next. Translation files are stored in `frontend/src/locales/{en,es,fr,de}/`. Each user has a `language_preference` field that controls:
+
+- **UI language** — all interface text, labels, and messages
+- **AI responses** — the Norma chat agent adapts its output language to match the user's preference
+- **Pipeline outputs** — document summaries and codebase analyses are generated in the user's language

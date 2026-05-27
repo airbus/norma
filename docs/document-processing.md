@@ -1,4 +1,8 @@
-# Document Processing
+# Document and Codebase Processing
+
+The Pipelines service handles two types of processing: document uploads (text extraction and summarisation) and GitHub repository analysis (codebase summary and architecture diagram generation).
+
+## Document Processing
 
 The document processing pipeline handles file uploads, text extraction, and LLM-powered summarisation for compliance documents.
 
@@ -124,13 +128,69 @@ The summary is stored in the `documents.summary` or `custom_documents.summary` c
 
 Both the Backend and Pipelines services mount the `norma-data` volume at `/data`. The Backend writes files during upload; the Pipelines service reads them during processing.
 
+## GitHub Processing
+
+When a user triggers a repository sync, the Backend calls the Pipelines service to process the connected GitHub repository.
+
+### Sync Flow
+
+```mermaid
+sequenceDiagram
+    participant BE as Backend
+    participant PL as Pipelines
+    participant GH as GitHub API
+    participant LLM as LLM Provider
+    participant DB as PostgreSQL
+
+    BE->>PL: POST /api/github/process<br/>{integration_id, language}
+
+    PL->>GH: GET repo tree (filtered)
+    PL->>GH: GET file contents (relevant files)
+    PL->>DB: Store in github_repo_files
+
+    PL->>GH: GET issues + project items
+    PL->>DB: Store in github_tasks
+
+    PL->>LLM: acompletion() with tasks + files
+    LLM-->>PL: Structured summary
+    PL->>DB: UPDATE integrations SET summary
+
+    PL->>LLM: acompletion() with file tree + contents
+    LLM-->>PL: Mermaid architecture diagram
+    PL->>DB: UPDATE integrations SET architecture_mermaid
+
+    PL->>DB: Set sync_status = "idle"
+```
+
+### Summary Generation
+
+The GitHub processor (`pipelines/app/tasks/github_processor.py`) generates two outputs:
+
+**Technical summary** with four sections:
+1. Overview of the repository
+2. Tech stack and dependencies
+3. Current tasks and priorities
+4. Key observations
+
+**Architecture diagram** as a Mermaid graph showing the system's main components and their relationships, accompanied by a bullet-point description.
+
+Both outputs respect the user's language preference. Prompts are truncated at 200,000 characters to stay within LLM context limits.
+
+### File Filtering
+
+The processor fetches the repository tree from GitHub and filters out files that are unlikely to be relevant to compliance analysis (e.g., lock files, build artefacts, test fixtures). Only files matching common source code and configuration patterns are fetched and stored.
+
 ## Files
 
 | File | Purpose |
 |------|---------|
 | `backend/app/api/routes/documents.py` | Upload endpoint, document listing, lazy document creation, custom document CRUD |
+| `backend/app/api/routes/integrations.py` | Integration CRUD, sync trigger, task listing |
 | `backend/app/models/document.py` | `Document` and `DocumentDefinition` SQLAlchemy models |
 | `backend/app/models/custom_document.py` | `CustomDocument` SQLAlchemy model for free-form uploads |
+| `backend/app/models/integration.py` | `Integration`, `GitHubTask`, `GitHubRepoFile` models |
 | `backend/app/services/seed.py` | Seeds `document_definitions` from framework config |
 | `pipelines/app/tasks/document_processor.py` | Text extraction and LLM summary generation |
-| `pipelines/app/api/routes/documents.py` | Processing endpoint called by the backend (supports `table_name` parameter) |
+| `pipelines/app/tasks/github_processor.py` | GitHub repository analysis and diagram generation |
+| `pipelines/app/api/routes/documents.py` | Document processing endpoint called by the backend |
+| `pipelines/app/api/routes/github.py` | GitHub processing endpoint called by the backend |

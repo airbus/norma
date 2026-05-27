@@ -139,7 +139,7 @@ sequenceDiagram
 |---------|------|-------|-------|
 | `frontend` | 3000 | Custom (React + Nginx) | Proxies `/api` to backend |
 | `backend` | 8000 | Custom (FastAPI + uv) | Runs Alembic migrations and seeds DB on startup |
-| `pipelines` | 8001 | Custom (FastAPI + uv) | Document processing worker |
+| `pipelines` | 8001 | Custom (FastAPI + uv) | Document and codebase processing worker |
 | `db` | 5432 | `pgvector/pgvector:pg16` | PostgreSQL with pgvector extension |
 
 ### Volumes
@@ -175,7 +175,7 @@ uv run alembic revision --autogenerate -m "description"
 
 ### Seeding
 
-On startup, the backend seeds regulatory frameworks and their required documents from `backend/app/services/seed.py`. Knowledge base content is loaded from markdown files in `backend/app/data/knowledge/`. If framework content has changed since the last startup, the database is updated automatically.
+On startup, the backend seeds three compliance frameworks (EU AI Act, UNDP Human Rights Assessment, Environmental Impact) and their required documents from `backend/app/services/seed.py`. Knowledge base content is loaded from markdown files in `backend/app/data/knowledge/`. If framework content has changed since the last startup, the database is updated automatically.
 
 ## Local Development (Without Docker)
 

@@ -100,10 +100,11 @@ cd backend && uv run alembic upgrade head
 
 | Document | Description |
 | --- | --- |
+| [Getting Started](docs/getting-started.md) | Step-by-step guide to setting up Norma and creating your first project |
 | [Architecture](docs/architecture.md) | System design, data models, and integration patterns |
 | [API Reference](docs/api-reference.md) | REST endpoint documentation |
 | [Chat Agent](docs/chat-agent.md) | Norma AI assistant architecture and prompt assembly |
-| [Document Processing](docs/document-processing.md) | PDF upload, text extraction, and summarisation pipeline |
+| [Document Processing](docs/document-processing.md) | Document and codebase processing pipelines |
 | [Risk Evaluation](docs/risk-evaluation.md) | EU AI Act risk classification decision tree |
 | [Deployment](docs/deployment.md) | Docker Compose configuration and production setup |
 
