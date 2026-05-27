@@ -21,6 +21,7 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm run format:check
+      - run: npm run test
       - run: npm run build
 
   lint-backend:
@@ -49,10 +50,34 @@ jobs:
       - run: uv run ruff check .
       - run: uv run ruff format --check .
 
+  test-backend:
+    name: Test Backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      - run: uv run pytest
+
+  test-pipelines:
+    name: Test Pipelines
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pipelines
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      - run: uv run pytest
+
   docker-build:
     name: Docker Build
     runs-on: ubuntu-latest
-    needs: [lint-frontend, lint-backend, lint-pipelines]
+    needs: [lint-frontend, lint-backend, lint-pipelines, test-backend, test-pipelines]
     steps:
       - uses: actions/checkout@v4
       - run: docker compose build
