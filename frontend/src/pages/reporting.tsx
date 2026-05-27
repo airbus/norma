@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Download } from 'lucide-react';
+import { Download, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AskNormaButton } from '@/components/ask-norma-button';
@@ -10,9 +10,10 @@ import { ChecklistPanel, type ValidationResult } from '@/components/reporting/ch
 import { useProject } from '@/hooks/use-project';
 import { getFrameworkChecklists } from '@/data/reporting-checklists';
 import { api, type Framework, type ReportingEvidence } from '@/lib/api';
+import type { PdfLabels } from '@/lib/pdf-export';
 
 export function ReportingPage() {
-  const { t } = useTranslation(['pages', 'common']);
+  const { t, i18n } = useTranslation(['pages', 'common']);
   const { currentProject } = useProject();
   const { frameworkId } = useParams<{ frameworkId: string }>();
   const navigate = useNavigate();
@@ -123,9 +124,64 @@ export function ReportingPage() {
     [currentProject, frameworkId],
   );
 
+  const [isExporting, setIsExporting] = useState(false);
+
   const currentFramework = frameworks.find((fw) => fw.id === frameworkId);
   const frameworkChecklists = getFrameworkChecklists(t);
-  const checklist = currentFramework ? (frameworkChecklists[currentFramework.name] ?? []) : [];
+  const checklist = useMemo(
+    () => (currentFramework ? (frameworkChecklists[currentFramework.name] ?? []) : []),
+    [currentFramework, frameworkChecklists],
+  );
+
+  const handleExport = useCallback(async () => {
+    if (!currentFramework || !currentProject) return;
+    setIsExporting(true);
+    try {
+      const { exportReportToPdf } = await import('@/lib/pdf-export');
+      const labels: PdfLabels = {
+        reportTitle: t('common:pdfExport.reportTitle'),
+        generatedOn: t('common:pdfExport.generatedOn'),
+        projectOverview: t('common:pdfExport.projectOverview'),
+        projectName: t('common:pdfExport.projectName'),
+        description: t('common:pdfExport.description'),
+        riskClassification: t('common:pdfExport.riskClassification'),
+        intendedPurpose: t('common:pdfExport.intendedPurpose'),
+        intendedUsers: t('common:pdfExport.intendedUsers'),
+        deploymentContext: t('common:pdfExport.deploymentContext'),
+        framework: t('common:pdfExport.framework'),
+        completionSummary: t('common:pdfExport.completionSummary'),
+        totalQuestions: t('common:pdfExport.totalQuestions'),
+        answered: t('common:pdfExport.answered'),
+        covered: t('common:pdfExport.covered'),
+        needsAttention: t('common:pdfExport.needsAttention'),
+        notAnswered: t('common:pdfExport.notAnswered'),
+        question: t('common:pdfExport.question'),
+        response: t('common:pdfExport.response'),
+        status: t('common:pdfExport.status'),
+        page: t('common:pdfExport.page'),
+        of: t('common:pdfExport.of'),
+        confidential: t('common:pdfExport.confidential'),
+        validationFeedback: t('common:pdfExport.validationFeedback'),
+        area: t('common:pdfExport.area'),
+      };
+      await exportReportToPdf({
+        projectName: currentProject.name,
+        projectDescription: currentProject.description,
+        riskClassification: currentProject.risk_classification,
+        intendedPurpose: currentProject.intended_purpose,
+        intendedUsers: currentProject.intended_users,
+        deploymentContext: currentProject.deployment_context,
+        frameworkName: currentFramework.name,
+        checklist,
+        comments,
+        validations,
+        language: i18n.language,
+        labels,
+      });
+    } finally {
+      setIsExporting(false);
+    }
+  }, [currentFramework, currentProject, checklist, comments, validations, t, i18n.language]);
 
   const pageTitle = currentFramework
     ? `${t('reporting.title')} > ${currentFramework.name}`
@@ -146,8 +202,12 @@ export function ReportingPage() {
           {checklist.length > 0 ? (
             <>
               <div className="mb-4 flex justify-end">
-                <Button variant="outline" size="sm" disabled>
-                  <Download className="mr-1 size-4" />
+                <Button variant="outline" size="sm" onClick={handleExport} disabled={isExporting}>
+                  {isExporting ? (
+                    <Loader2 className="mr-1 size-4 animate-spin" />
+                  ) : (
+                    <Download className="mr-1 size-4" />
+                  )}
                   {t('common:buttons.exportReport')}
                 </Button>
               </div>
