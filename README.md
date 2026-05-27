@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <em>Open-source AI compliance for project management</em>
+  <em>AI governance, simplified</em>
 </p>
 
 <p align="center">
