@@ -42,6 +42,28 @@ Returns a JWT access token.
 
 Returns the authenticated user's profile.
 
+### `PATCH /api/auth/me`
+
+Update the current user's preferences.
+
+**Body (all fields optional):**
+```json
+{
+  "language_preference": "es"
+}
+```
+
+### `GET /api/auth/setup-status`
+
+Check whether the system needs initial setup (no users exist). No authentication required.
+
+**Response:**
+```json
+{
+  "needs_setup": true
+}
+```
+
 ---
 
 ## Projects
@@ -241,11 +263,43 @@ Validate whether an answer sufficiently addresses a compliance question. Uses pr
 
 ### `GET /api/frameworks`
 
-List all compliance frameworks.
+List all active compliance frameworks.
 
 ### `GET /api/frameworks/{framework_id}`
 
-Get a single framework by ID.
+Get a single framework by ID, including its full content.
+
+### `GET /api/frameworks/available`
+
+List frameworks from the built-in catalogue that are not yet active. Used to populate the "Add Framework" dialog.
+
+**Response:**
+```json
+[
+  {
+    "name": "Environmental Impact Framework",
+    "description": "Structured approach to measuring AI environmental footprint.",
+    "category": "Internal"
+  }
+]
+```
+
+### `POST /api/frameworks`
+
+Add a framework from the built-in catalogue. Creates the framework and its document definitions.
+
+**Body:**
+```json
+{
+  "name": "Environmental Impact Framework"
+}
+```
+
+Returns 404 if the name is not in the catalogue, 409 if it already exists.
+
+### `DELETE /api/frameworks/{framework_id}`
+
+Remove a framework and its associated documents. The EU AI Act framework is protected and cannot be deleted (returns 403).
 
 ---
 
@@ -406,9 +460,25 @@ Update the integration's context file content.
 
 ---
 
-## Admin
+## Health
 
-### `POST /api/admin/invites`
+### `GET /api/health`
+
+Health check endpoint. No authentication required.
+
+**Response:**
+```json
+{
+  "status": "ok",
+  "debug": false
+}
+```
+
+---
+
+## Invites (Admin)
+
+### `POST /api/invites`
 
 Create an invite link (admin only).
 
@@ -420,10 +490,58 @@ Create an invite link (admin only).
 }
 ```
 
-### `GET /api/admin/invites`
+### `GET /api/invites`
 
 List all invites (admin only).
 
-### `GET /api/admin/users`
+### `DELETE /api/invites/{invite_id}`
+
+Delete an unused invite (admin only). Returns 400 if the invite has already been used.
+
+### `GET /api/invites/{token}/validate`
+
+Validate an invite token. No authentication required. Used by the registration page.
+
+**Response:**
+```json
+{
+  "valid": true,
+  "email": "newuser@example.com",
+  "role": "member"
+}
+```
+
+---
+
+## Users (Admin)
+
+### `GET /api/users`
 
 List all users (admin only).
+
+### `PATCH /api/users/{user_id}`
+
+Update a user's role or active status (admin only). Admins cannot demote or disable themselves.
+
+**Body (all fields optional):**
+```json
+{
+  "role": "admin",
+  "is_active": true
+}
+```
+
+### `POST /api/users/{user_id}/reset-password`
+
+Reset a user's password (admin only).
+
+**Body:**
+```json
+{
+  "new_password": "newSecret123"
+}
+```
+
+### `DELETE /api/users/{user_id}`
+
+Delete a user (admin only). Admins cannot delete themselves.

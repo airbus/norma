@@ -175,7 +175,9 @@ uv run alembic revision --autogenerate -m "description"
 
 ### Seeding
 
-On startup, the backend seeds three compliance frameworks (EU AI Act, UNDP Human Rights Assessment, Environmental Impact) and their required documents from `backend/app/services/seed.py`. Knowledge base content is loaded from markdown files in `backend/app/data/knowledge/`. If framework content has changed since the last startup, the database is updated automatically.
+On startup, the backend seeds two compliance frameworks (EU AI Act and UNDP Human Rights Assessment) and their required documents from `backend/app/services/seed.py`. Additional frameworks (e.g., Environmental Impact Framework) can be added dynamically from the Frameworks page. Knowledge base content is loaded from markdown files in `backend/app/data/knowledge/`. If framework content has changed since the last startup, the database is updated automatically.
+
+On first user registration, sample projects are created automatically with pre-filled reporting evidence to demonstrate the platform's capabilities.
 
 ## Local Development (Without Docker)
 
