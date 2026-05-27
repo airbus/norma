@@ -12,5 +12,6 @@ class FrameworkResponse(BaseModel):
     description: str
     category: str
     status: str
+    content: str
     document_count: int
     created_at: datetime

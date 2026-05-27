@@ -59,7 +59,8 @@
     "additional": "Supplémentaires",
     "uploadedCount": "{{count}} sur {{total}} téléversés",
     "noAdditionalDocs": "Aucun document supplémentaire n'a encore été téléversé. Téléversez un PDF pour l'inclure dans le contexte de votre projet.",
-    "deleteDocument": "Supprimer le document"
+    "deleteDocument": "Supprimer le document",
+    "noSummaryAvailable": "Ce document n'a pas encore été traité. Le résumé apparaîtra ici une fois le traitement terminé."
   },
   "reporting": {
     "title": "Rapports",
@@ -101,6 +102,7 @@
     "githubDesc": "Connectez un dépôt GitHub pour synchroniser les tâches et analyser l'architecture."
   },
   "frameworks": {
-    "title": "Référentiels"
+    "title": "Référentiels",
+    "noContent": "Le contenu de ce référentiel n'a pas encore été chargé. Le questionnaire et les sections de rapports sont accessibles via les pages de classification des risques et de rapports."
   }
 }

@@ -1,8 +1,10 @@
 from fastapi import APIRouter
 
-router = APIRouter(tags=["health"])
+from app.core.config import settings
+
+router = APIRouter(prefix="/api", tags=["health"])
 
 
 @router.get("/health")
 def health_check():
-    return {"status": "ok"}
+    return {"status": "ok", "debug": settings.debug}

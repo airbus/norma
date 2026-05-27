@@ -44,6 +44,7 @@ export function RiskClassificationPage() {
     return (
       <div className="flex h-svh flex-col">
         <PageHeader
+          debugSection="overview"
           title={
             t('description.title') + ' > ' + t('sidebar.riskClassification', { ns: 'components' })
           }
@@ -60,6 +61,7 @@ export function RiskClassificationPage() {
   return (
     <div className="flex h-svh flex-col">
       <PageHeader
+        debugSection="overview"
         title={
           t('description.title') + ' > ' + t('sidebar.riskClassification', { ns: 'components' })
         }

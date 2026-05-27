@@ -302,7 +302,7 @@ export function GitHubPage() {
   if (loading && !integration) {
     return (
       <div className="flex h-svh flex-col">
-        <PageHeader title={t('github.title')} />
+        <PageHeader title={t('github.title')} debugSection="github" />
         <div className="flex flex-1 items-center justify-center">
           <Loader2 className="size-6 animate-spin text-muted-foreground" />
         </div>
@@ -312,7 +312,7 @@ export function GitHubPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title={t('github.title')}>
+      <PageHeader title={t('github.title')} debugSection="github">
         <AskNormaButton question={t('github.askNormaQuestion')} />
       </PageHeader>
 

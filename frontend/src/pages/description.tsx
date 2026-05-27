@@ -23,7 +23,10 @@ export function DescriptionPage() {
   if (!currentProject) {
     return (
       <div className="flex h-svh flex-col">
-        <PageHeader title={t('description.title') + ' > ' + t('description.overview')}>
+        <PageHeader
+          title={t('description.title') + ' > ' + t('description.overview')}
+          debugSection="overview"
+        >
           <AskNormaButton question={t('description.askNormaQuestion')} />
         </PageHeader>
         <div className="flex flex-1 items-center justify-center">
@@ -35,7 +38,10 @@ export function DescriptionPage() {
 
   return (
     <div className="flex h-svh flex-col">
-      <PageHeader title={t('description.title') + ' > ' + t('description.overview')}>
+      <PageHeader
+        title={t('description.title') + ' > ' + t('description.overview')}
+        debugSection="overview"
+      >
         <AskNormaButton question={t('description.askNormaQuestion')} />
       </PageHeader>
 

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Markdown from 'react-markdown';
 import { MessageSquare, Send, SquarePen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { DebugContextDialog } from '@/components/debug-context-dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useProject } from '@/hooks/use-project';
@@ -200,15 +201,13 @@ export function ChatPage() {
       <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
         <SidebarTrigger className="-ml-1" />
         <h1 className="text-base font-medium">{t('chat.title')}</h1>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="ml-auto cursor-pointer"
-          onClick={handleNewChat}
-        >
-          <SquarePen className="mr-1 size-4" />
-          {t('common:buttons.newChat')}
-        </Button>
+        <div className="ml-auto flex items-center gap-2">
+          <Button variant="ghost" size="sm" className="cursor-pointer" onClick={handleNewChat}>
+            <SquarePen className="mr-1 size-4" />
+            {t('common:buttons.newChat')}
+          </Button>
+          <DebugContextDialog section="full" />
+        </div>
       </header>
 
       <div className="relative flex-1 overflow-hidden">

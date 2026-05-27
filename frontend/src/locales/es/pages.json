@@ -59,7 +59,8 @@
     "additional": "Adicionales",
     "uploadedCount": "{{count}} de {{total}} subidos",
     "noAdditionalDocs": "Aún no se han subido documentos adicionales. Suba cualquier PDF para incluirlo en el contexto de su proyecto.",
-    "deleteDocument": "Eliminar documento"
+    "deleteDocument": "Eliminar documento",
+    "noSummaryAvailable": "Este documento aún no ha sido procesado. El resumen aparecerá aquí una vez completado el procesamiento."
   },
   "reporting": {
     "title": "Informes",
@@ -101,6 +102,7 @@
     "githubDesc": "Conecte un repositorio de GitHub para sincronizar tareas y analizar la arquitectura."
   },
   "frameworks": {
-    "title": "Marcos normativos"
+    "title": "Marcos normativos",
+    "noContent": "El contenido de este marco aún no ha sido cargado. El cuestionario y las secciones de informes están disponibles a través de las páginas de clasificación de riesgos e informes."
   }
 }
