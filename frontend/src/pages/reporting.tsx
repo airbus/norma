@@ -133,6 +133,11 @@ export function ReportingPage() {
     [currentFramework, frameworkChecklists],
   );
 
+  const fwName = currentFramework
+    ? t(`frameworks.names.${currentFramework.name}`, currentFramework.name)
+    : '';
+  const pageTitle = currentFramework ? `${t('reporting.title')} > ${fwName}` : t('reporting.title');
+
   const handleExport = useCallback(async () => {
     if (!currentFramework || !currentProject) return;
     setIsExporting(true);
@@ -171,7 +176,7 @@ export function ReportingPage() {
         intendedPurpose: currentProject.intended_purpose,
         intendedUsers: currentProject.intended_users,
         deploymentContext: currentProject.deployment_context,
-        frameworkName: currentFramework.name,
+        frameworkName: fwName,
         checklist,
         comments,
         validations,
@@ -181,19 +186,22 @@ export function ReportingPage() {
     } finally {
       setIsExporting(false);
     }
-  }, [currentFramework, currentProject, checklist, comments, validations, t, i18n.language]);
-
-  const pageTitle = currentFramework
-    ? `${t('reporting.title')} > ${currentFramework.name}`
-    : t('reporting.title');
+  }, [
+    currentFramework,
+    currentProject,
+    fwName,
+    checklist,
+    comments,
+    validations,
+    t,
+    i18n.language,
+  ]);
 
   return (
     <div className="flex h-svh flex-col">
       <PageHeader title={pageTitle} debugSection="reporting" debugRefreshKey={debugRefreshKey}>
         {currentFramework && (
-          <AskNormaButton
-            question={t('reporting.askNormaQuestion', { framework: currentFramework.name })}
-          />
+          <AskNormaButton question={t('reporting.askNormaQuestion', { framework: fwName })} />
         )}
       </PageHeader>
 

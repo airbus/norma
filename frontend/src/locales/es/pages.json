@@ -103,6 +103,20 @@
   },
   "frameworks": {
     "title": "Marcos normativos",
-    "noContent": "El contenido de este marco aún no ha sido cargado. El cuestionario y las secciones de informes están disponibles a través de las páginas de clasificación de riesgos e informes."
+    "noContent": "El contenido de este marco aún no ha sido cargado. El cuestionario y las secciones de informes están disponibles a través de las páginas de clasificación de riesgos e informes.",
+    "deleteFramework": "Eliminar marco normativo",
+    "deleteFrameworkConfirm": "¿Está seguro de que desea eliminar \"{{name}}\"? Se eliminarán todos los documentos y definiciones asociados. Puede volver a agregarlo más tarde.",
+    "addFrameworkTitle": "Agregar marco normativo",
+    "addFrameworkEmpty": "Todos los marcos normativos disponibles ya han sido agregados.",
+    "names": {
+      "EU AI Act": "Ley de IA de la UE",
+      "UNDP Human Rights Assessment": "Evaluación de Derechos Humanos del PNUD",
+      "Environmental Impact Framework": "Marco de Impacto Ambiental"
+    },
+    "descriptions": {
+      "EU AI Act": "La Ley de Inteligencia Artificial de la Unión Europea establece un marco regulatorio integral para los sistemas de IA basado en la clasificación de riesgos. Exige evaluaciones de conformidad, obligaciones de transparencia y requisitos de supervisión humana para los sistemas de IA de alto riesgo.",
+      "UNDP Human Rights Assessment": "El Kit de Herramientas de Evaluación de Impacto en Derechos Humanos de la IA del PNUD proporciona una metodología estructurada para evaluar los sistemas de IA frente a los estándares internacionales de derechos humanos. Guía a las organizaciones a través de la participación de las partes interesadas, el análisis de riesgos basado en derechos y el monitoreo continuo para garantizar que los despliegues de IA respeten la dignidad, la igualdad y los principios de no discriminación.",
+      "Environmental Impact Framework": "El Marco de Impacto Ambiental para Sistemas de IA proporciona un enfoque estructurado para medir, informar y reducir la huella ambiental del desarrollo y despliegue de IA. Cubre el consumo de energía, las emisiones de carbono, el ciclo de vida del hardware y la sostenibilidad de los centros de datos para promover prácticas de IA responsables y ambientalmente conscientes."
+    }
   }
 }

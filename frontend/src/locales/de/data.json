@@ -1666,5 +1666,1251 @@
       "name": "Umweltüberwachungsplan",
       "description": "Laufendes Überwachungsrahmenwerk zur Verfolgung von Umwelt-KPIs, Festlegung von Reduktionszielen und Berichterstattung über Fortschritte bei den Nachhaltigkeitszielen."
     }
+  },
+  "environmentalChecklist": {
+    "areas": {
+      "env-energy-carbon": {
+        "title": "Energie",
+        "items": {
+          "EC-01": {
+            "title": "Messung des Trainingsenergieverbrauchs",
+            "questions": [
+              "Wurde der gesamte Energieverbrauch für das Modelltraining gemessen und dokumentiert (in kWh)?",
+              "Ist der Energiequellenmix (erneuerbar vs. fossil) der Trainingsinfrastruktur bekannt und erfasst?"
+            ]
+          },
+          "EC-02": {
+            "title": "Messung des Inferenzenergieverbrauchs",
+            "questions": [
+              "Wird der laufende Energieverbrauch während der Inferenz überwacht und gemeldet?",
+              "Werden Energie-pro-Anfrage-Metriken für Produktionsworkloads erfasst?"
+            ]
+          },
+          "EC-03": {
+            "title": "Schätzung des CO2-Fußabdrucks",
+            "questions": [
+              "Wurde der CO2-Fußabdruck des KI-Systems mit einer anerkannten Methodik geschätzt (z. B. GHG Protocol, ML CO2 Impact)?",
+              "Werden Scope-1-, -2- und -3-Emissionen in der CO2-Bewertung berücksichtigt?"
+            ]
+          },
+          "EC-04": {
+            "title": "Ziele zur CO2-Reduktion",
+            "questions": [
+              "Gibt es dokumentierte Ziele zur Reduzierung des CO2-Fußabdrucks des KI-Systems im Zeitverlauf?",
+              "Wird der Fortschritt bei den CO2-Reduktionszielen in festgelegten Intervallen überprüft?"
+            ]
+          },
+          "EC-05": {
+            "title": "Nutzung erneuerbarer Energien",
+            "questions": [
+              "Welcher Anteil der vom KI-System verbrauchten Energie stammt aus erneuerbaren Quellen?",
+              "Gibt es Verpflichtungen oder Pläne zur Erhöhung des Anteils erneuerbarer Energien für KI-Workloads?"
+            ]
+          },
+          "EC-06": {
+            "title": "CO2-Kompensation",
+            "questions": [
+              "Wenn CO2-Kompensation eingesetzt wird, sind die Kompensationen verifiziert und stammen aus glaubwürdigen Programmen?"
+            ]
+          }
+        }
+      },
+      "env-hardware": {
+        "title": "Hardware",
+        "items": {
+          "HW-01": {
+            "title": "Hardwareauswahl",
+            "questions": [
+              "Wurden die Umweltauswirkungen der Hardwareauswahl (GPU-/TPU-Typ, Serverspezifikationen) bei der Beschaffung berücksichtigt?",
+              "Werden energieeffiziente Hardwareoptionen priorisiert, wenn die Leistungsanforderungen dies zulassen?"
+            ]
+          },
+          "HW-02": {
+            "title": "Hardwareauslastung",
+            "questions": [
+              "Werden die Hardwareauslastungsraten überwacht, um den Energieverbrauch im Leerlauf zu minimieren?",
+              "Werden Workload-Planungsstrategien (z. B. Stapelverarbeitung, Planung außerhalb der Spitzenzeiten) zur Effizienzsteigerung eingesetzt?"
+            ]
+          },
+          "HW-03": {
+            "title": "Hardware-Lebensdauer",
+            "questions": [
+              "Werden Hardware-Erneuerungszyklen geplant, um Leistungsanforderungen und Umweltauswirkungen auszugleichen?",
+              "Wird die Wiederverwendung, Aufarbeitung oder Spende von Hardware vor der Entsorgung in Betracht gezogen?"
+            ]
+          },
+          "HW-04": {
+            "title": "Elektroschrott-Management",
+            "questions": [
+              "Wird Hardware am Ende ihrer Lebensdauer über zertifizierte Elektroschrott-Recyclingprogramme entsorgt?",
+              "Werden gefährliche Materialien in Hardwarekomponenten gemäß den Vorschriften erfasst und verwaltet?"
+            ]
+          },
+          "HW-05": {
+            "title": "Nachhaltigkeit der Lieferkette",
+            "questions": [
+              "Werden Hardwarelieferanten hinsichtlich ihrer Umweltpraktiken und Nachhaltigkeitsverpflichtungen bewertet?"
+            ]
+          }
+        }
+      },
+      "env-data-management": {
+        "title": "Daten",
+        "items": {
+          "DM-01": {
+            "title": "Datenspeichereffizienz",
+            "questions": [
+              "Sind die Datenspeicherungspraktiken zur Minimierung des Energieverbrauchs optimiert (z. B. gestaffelte Speicherung, Komprimierung, Deduplizierung)?",
+              "Gibt es eine Datenaufbewahrungsrichtlinie, die sicherstellt, dass unnötige Daten gelöscht werden, um den Speicherbedarf zu reduzieren?"
+            ]
+          },
+          "DM-02": {
+            "title": "Datenübertragungseffizienz",
+            "questions": [
+              "Werden Datenübertragungsvolumen durch Edge-Verarbeitung, Caching oder Datenlokalitätsstrategien minimiert?",
+              "Werden die Umweltkosten großer Datenübertragungen (z. B. regionsübergreifend, cloudübergreifend) berücksichtigt?"
+            ]
+          },
+          "DM-03": {
+            "title": "Auswahl des Rechenzentrums",
+            "questions": [
+              "Werden Rechenzentren anhand von Umweltkriterien wie PUE, Wasserverbrauchseffizienz und Beschaffung erneuerbarer Energien ausgewählt?",
+              "Wird der geografische Standort der Rechenzentren zur Optimierung für kühlere Klimazonen oder die Verfügbarkeit erneuerbarer Energien gewählt?"
+            ]
+          },
+          "DM-04": {
+            "title": "Wasserverbrauch",
+            "questions": [
+              "Wird der Wasserverbrauch der Kühlsysteme für KI-Workloads gemessen und dokumentiert?",
+              "Werden wassereffiziente Kühlungstechnologien eingesetzt, wo dies machbar ist?"
+            ]
+          }
+        }
+      },
+      "env-model-efficiency": {
+        "title": "Effizienz",
+        "items": {
+          "ME-01": {
+            "title": "Begründung der Modellgröße",
+            "questions": [
+              "Ist die Modellgröße (Parameteranzahl) im Verhältnis zu den Aufgabenanforderungen begründet?",
+              "Wurden kleinere oder effizientere Modellarchitekturen evaluiert, bevor das endgültige Modell ausgewählt wurde?"
+            ]
+          },
+          "ME-02": {
+            "title": "Trainingseffizienz",
+            "questions": [
+              "Werden effiziente Trainingstechniken eingesetzt (z. B. Transfer Learning, Mixed-Precision-Training, Early Stopping)?",
+              "Ist die Anzahl der Trainingsläufe und Hyperparameter-Suchen dokumentiert und begründet?"
+            ]
+          },
+          "ME-03": {
+            "title": "Inferenzoptimierung",
+            "questions": [
+              "Werden Techniken zur Inferenzoptimierung angewendet (z. B. Quantisierung, Pruning, Destillation, Caching)?",
+              "Wird der Kompromiss zwischen Modellgenauigkeit und Rechenkosten explizit bewertet?"
+            ]
+          },
+          "ME-04": {
+            "title": "Häufigkeit des Neutrainings",
+            "questions": [
+              "Ist der Neutrainingsplan auf Basis von Leistungsverschlechterungsmetriken statt fester Intervalle begründet?",
+              "Werden inkrementelle oder Fine-Tuning-Ansätze anstelle eines vollständigen Neutrainings verwendet, wo möglich?"
+            ]
+          },
+          "ME-05": {
+            "title": "Benchmarking",
+            "questions": [
+              "Werden Umwelteffizienzmetriken (z. B. Genauigkeit pro Watt, Durchsatz pro kWh) neben Leistungsmetriken erfasst?"
+            ]
+          }
+        }
+      },
+      "env-lifecycle": {
+        "title": "Lebenszyklus",
+        "items": {
+          "LC-01": {
+            "title": "Lebenszyklusbewertung",
+            "questions": [
+              "Wurde eine Lebenszyklusbewertung durchgeführt, die die Umweltauswirkungen von der Entwicklung über die Bereitstellung bis zur Außerbetriebnahme abdeckt?",
+              "Sind die in der Hardware-Herstellung enthaltenen Emissionen in der Lebenszyklusbewertung berücksichtigt?"
+            ]
+          },
+          "LC-02": {
+            "title": "Außerbetriebnahmeplan",
+            "questions": [
+              "Gibt es einen dokumentierten Plan für die umweltverantwortliche Außerbetriebnahme des KI-Systems und seiner Infrastruktur?",
+              "Behandelt der Außerbetriebnahmeplan die Datenlöschung, Hardwareentsorgung und Dienstabwicklung?"
+            ]
+          },
+          "LC-03": {
+            "title": "Nachhaltigkeit von Anbietern und Cloud",
+            "questions": [
+              "Werden Cloud-Anbieter und Drittanbieter hinsichtlich ihrer Umweltverpflichtungen und Berichterstattung bewertet?",
+              "Enthalten Service-Level-Vereinbarungen Kriterien für die Umweltleistung?"
+            ]
+          },
+          "LC-04": {
+            "title": "Kreislaufwirtschaftspraktiken",
+            "questions": [
+              "Werden Kreislaufwirtschaftsprinzipien (Wiederverwendung, Reparatur, Recycling) auf KI-Infrastruktur und Hardware angewendet?"
+            ]
+          }
+        }
+      },
+      "env-monitoring": {
+        "title": "Monitoring",
+        "items": {
+          "EM-01": {
+            "title": "Umwelt-KPIs",
+            "questions": [
+              "Sind Umweltkennzahlen (KPIs) für das KI-System definiert (z. B. Energie pro Inferenz, Gesamt-CO2, Wasserverbrauch)?",
+              "Werden die KPIs in regelmäßigen Abständen überprüft und aktualisiert?"
+            ]
+          },
+          "EM-02": {
+            "title": "Berichterstattung und Offenlegung",
+            "questions": [
+              "Werden Umweltauswirkungsdaten an interne Stakeholder und gegebenenfalls an externe Stellen gemeldet?",
+              "Folgt die Umweltberichterstattung einem anerkannten Standard oder Rahmenwerk (z. B. GRI, CDP, TCFD)?"
+            ]
+          },
+          "EM-03": {
+            "title": "Kontinuierliche Verbesserung",
+            "questions": [
+              "Gibt es einen dokumentierten Prozess zur Identifizierung und Umsetzung von Umweltverbesserungen auf Basis von Überwachungsdaten?",
+              "Werden Erkenntnisse aus Umweltvorfällen oder Leistungsdefiziten systematisch erfasst?"
+            ]
+          },
+          "EM-04": {
+            "title": "Regulatorische Konformität",
+            "questions": [
+              "Verfolgt und erfüllt die Organisation die geltenden Umweltvorschriften im Zusammenhang mit KI- und Rechenzentrumsbetrieb?"
+            ]
+          },
+          "EM-05": {
+            "title": "Integration der Nachhaltigkeitsziele",
+            "questions": [
+              "Sind KI-spezifische Umweltziele mit den übergeordneten Nachhaltigkeitszielen und -verpflichtungen der Organisation abgestimmt (z. B. Netto-Null-Zusagen)?"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "undpChecklist": {
+    "areas": {
+      "undp-zero-question": {
+        "title": "Nullfrage",
+        "items": {
+          "ZQ-01": {
+            "title": "Bewertung der KI-Notwendigkeit",
+            "questions": [
+              "Wurde bewertet, ob eine KI-basierte Lösung tatsächlich notwendig ist, oder ob nicht-algorithmische Alternativen dasselbe Ziel erreichen könnten? (KRITISCH)"
+            ]
+          },
+          "ZQ-02": {
+            "title": "Begründung für KI",
+            "questions": [
+              "Wurde die Begründung für die Wahl eines KI-basierten Ansatzes gegenüber Alternativen dokumentiert?"
+            ]
+          },
+          "ZQ-03": {
+            "title": "SWOT-Analyse",
+            "questions": [
+              "Wurde eine SWOT-Analyse (Stärken, Schwächen, Chancen, Risiken) des KI-Ansatzes im Vergleich zu Alternativen durchgeführt?"
+            ]
+          },
+          "ZQ-04": {
+            "title": "Vereinbarkeit mit Grundrechten",
+            "questions": [
+              "Wurde bestätigt, dass die KI-Lösung kein Ziel verfolgt, das grundsätzlich mit Grundrechten unvereinbar ist?"
+            ]
+          }
+        }
+      },
+      "undp-org-readiness": {
+        "title": "Bereitschaft",
+        "items": {
+          "OR-01": {
+            "title": "Menschenrechtspolitik",
+            "questions": [
+              "Verfügt die Organisation über eine dokumentierte Menschenrechtspolitik, die den Entwurf, die Entwicklung und den Einsatz von KI abdeckt?"
+            ]
+          },
+          "OR-02": {
+            "title": "Unterstützung durch die Führungsebene",
+            "questions": [
+              "Unterstützt und finanziert die Führungsebene aktiv die menschenrechtliche Sorgfaltspflicht für KI-Initiativen?"
+            ]
+          },
+          "OR-03": {
+            "title": "Meldekanäle",
+            "questions": [
+              "Gibt es dedizierte Kanäle, über die Mitarbeitende mögliche Menschenrechtsprobleme im Zusammenhang mit KI-Systemen melden können?"
+            ]
+          },
+          "OR-04": {
+            "title": "Richtlinienüberprüfung",
+            "questions": [
+              "Überprüft und aktualisiert die Organisation regelmäßig ihre Richtlinien, um aufkommende KI-bezogene Menschenrechtsfragen zu berücksichtigen?"
+            ]
+          },
+          "OR-05": {
+            "title": "Abteilungsübergreifende Zusammenarbeit",
+            "questions": [
+              "Wird die abteilungsübergreifende Zusammenarbeit zu Menschenrechten bei KI gefördert?"
+            ]
+          },
+          "OR-06": {
+            "title": "Stakeholder-Einbindung",
+            "questions": [
+              "Bindet die Organisation Stakeholder (einschließlich betroffener Gemeinschaften) für Beiträge und Feedback während des KI-Lebenszyklus ein?"
+            ]
+          },
+          "OR-07": {
+            "title": "Ressourcenzuweisung",
+            "questions": [
+              "Stellt die Organisation ausreichende Ressourcen für Schulungen, Risikobewertungen und Stakeholder-Einbindung bereit?"
+            ]
+          },
+          "OR-08": {
+            "title": "Öffentliche Transparenz",
+            "questions": [
+              "Priorisiert die Organisation Transparenz und Kommunikation mit der Öffentlichkeit über den KI-Einsatz?"
+            ]
+          },
+          "OR-09": {
+            "title": "Verständnis des Managements",
+            "questions": [
+              "Verfügt das Management über ein umfassendes Verständnis der menschenrechtlichen Auswirkungen von KI?"
+            ]
+          },
+          "OR-10": {
+            "title": "Mitarbeiterschulung",
+            "questions": [
+              "Erhalten Mitarbeitende regelmäßig Schulungen zu Menschenrechten und ethischen Aspekten bei KI?"
+            ]
+          },
+          "OR-11": {
+            "title": "Zuständiges Personal",
+            "questions": [
+              "Sind bestimmte Mitarbeitende oder Teams für die Überwachung und Bearbeitung von Menschenrechtsfragen in KI-Projekten verantwortlich?"
+            ]
+          },
+          "OR-12": {
+            "title": "Externe Expertise",
+            "questions": [
+              "Arbeitet die Organisation mit externen Menschenrechts- und KI-Experten zusammen?"
+            ]
+          },
+          "OR-13": {
+            "title": "Hinweisgeberschutz",
+            "questions": [
+              "Sind Mitarbeitende vor Vergeltungsmaßnahmen geschützt, wenn sie Menschenrechtsbedenken zu KI äußern?"
+            ]
+          },
+          "OR-14": {
+            "title": "Einbeziehung von Feedback",
+            "questions": [
+              "Gibt es einen Prozess zur Einbeziehung von Stakeholder-Feedback in KI-Praktiken?"
+            ]
+          },
+          "OR-15": {
+            "title": "Juristische Expertise",
+            "questions": [
+              "Hat die Organisation Zugang zu juristischer Expertise im Bereich Menschenrechte und KI?"
+            ]
+          },
+          "OR-16": {
+            "title": "Ressourcen für bewährte Verfahren",
+            "questions": [
+              "Werden den Mitarbeitenden Ressourcen bereitgestellt, um über bewährte Verfahren auf dem Laufenden zu bleiben?"
+            ]
+          },
+          "OR-17": {
+            "title": "Branchenteilnahme",
+            "questions": [
+              "Nimmt die Organisation an Branchengruppen oder Foren zu Menschenrechten und KI teil?"
+            ]
+          },
+          "OR-18": {
+            "title": "Bewertung von Kompetenzlücken",
+            "questions": [
+              "Bewertet und adressiert die Organisation regelmäßig KI-bezogene Menschenrechtskompetenzlücken?"
+            ]
+          },
+          "OR-19": {
+            "title": "Verfahren zur Folgenabschätzung",
+            "questions": [
+              "Gibt es ein systematisches Verfahren zur Menschenrechts-Folgenabschätzung für alle KI-Projekte? (KRITISCH)"
+            ]
+          },
+          "OR-20": {
+            "title": "Bewertung von Drittanbieter-KI",
+            "questions": [
+              "Gibt es Verfahren zur Bewertung der Menschenrechtsauswirkungen von integrierten oder genutzten Drittanbieter-KI-Systemen? (KRITISCH)"
+            ]
+          },
+          "OR-21": {
+            "title": "Risikoidentifizierung",
+            "questions": [
+              "Gibt es einen systematischen Risikoidentifizierungsprozess, einschließlich Tests auf Zuverlässigkeit, Genauigkeit und Widerstandsfähigkeit?"
+            ]
+          },
+          "OR-22": {
+            "title": "Einbindung der Gemeinschaft",
+            "questions": [
+              "Werden Stakeholder (einschließlich betroffener Gemeinschaften) in den KI-Bereitstellungsprozess einbezogen?"
+            ]
+          },
+          "OR-23": {
+            "title": "Bewertung vor der Bereitstellung",
+            "questions": [
+              "Durchlaufen alle KI-Projekte vor der Bereitstellung eine Menschenrechts- und Datenschutz-Folgenabschätzung? (KRITISCH)"
+            ]
+          },
+          "OR-24": {
+            "title": "Datensicherheitsprotokolle",
+            "questions": [
+              "Sind Datensicherheits- und Datenschutzprotokolle für alle KI-bezogenen Prozesse eingerichtet?"
+            ]
+          },
+          "OR-25": {
+            "title": "Regulatorische Aktualisierungen",
+            "questions": [
+              "Werden Prozesse regelmäßig aktualisiert, um neue Vorschriften und Standards zu integrieren?"
+            ]
+          },
+          "OR-26": {
+            "title": "Aufsichtsprozess",
+            "questions": [
+              "Ist ein Aufsichtsprozess zur Überwachung der KI-Systemleistung und der Einhaltung von Menschenrechtsstandards eingerichtet? (KRITISCH)"
+            ]
+          },
+          "OR-27": {
+            "title": "Schadensbegrenzung bei Ausfällen",
+            "questions": [
+              "Ist die Organisation in der Lage, negative Auswirkungen von KI-Systemausfällen zu begrenzen und zu minimieren?"
+            ]
+          },
+          "OR-28": {
+            "title": "Abhilfemechanismus",
+            "questions": [
+              "Ist ein Abhilfemechanismus für Personen eingerichtet, die durch KI-Systeme nachteilig betroffen sind? (KRITISCH)"
+            ]
+          }
+        }
+      },
+      "undp-planning": {
+        "title": "Planung",
+        "items": {
+          "PS-01": {
+            "title": "Systemzweck",
+            "questions": [
+              "Wurde der Hauptzweck des KI-Systems dokumentiert? (KRITISCH)"
+            ]
+          },
+          "PS-02": {
+            "title": "Technische Merkmale",
+            "questions": [
+              "Wurden die wesentlichen technischen Merkmale des Systems dokumentiert (Art des KI-Modells, Architektur)?"
+            ]
+          },
+          "PS-03": {
+            "title": "Einsatzgebiete",
+            "questions": [
+              "Wurden alle Länder/Rechtsordnungen identifiziert, in denen das System eingesetzt werden soll?"
+            ]
+          },
+          "PS-04": {
+            "title": "Datentypen",
+            "questions": [
+              "Wurden alle Arten von verarbeiteten Daten (personenbezogen, nicht personenbezogen, besondere Kategorien) für Training und Betrieb identifiziert? (KRITISCH)"
+            ]
+          },
+          "PS-05": {
+            "title": "Datenflusskartierung",
+            "questions": [
+              "Wurden alle Datenflüsse kartiert -- von der Erhebung über die Verarbeitung bis zur Speicherung und Löschung?"
+            ]
+          },
+          "PS-06": {
+            "title": "Betroffene Personen",
+            "questions": [
+              "Wurden alle Personen oder Gruppen identifiziert, die potenziell vom KI-System betroffen sind? (KRITISCH)"
+            ]
+          },
+          "PS-07": {
+            "title": "Vulnerable Gruppen",
+            "questions": [
+              "Wurde bewertet, ob betroffene Gruppen verletzliche Personen oder Gruppen umfassen (Kinder, Minderheiten, Menschen mit Behinderungen usw.)?"
+            ]
+          },
+          "PS-08": {
+            "title": "Pflichtenträger",
+            "questions": [
+              "Wurden alle Pflichtenträger identifiziert -- wer ist am Entwurf, der Bereitstellung und dem Einsatz beteiligt, und welche Rolle haben sie? (KRITISCH)"
+            ]
+          },
+          "PS-09": {
+            "title": "Verantwortungskette",
+            "questions": [
+              "Wurde die Verantwortungskette vom Entwickler bis zum Betreiber dokumentiert?"
+            ]
+          },
+          "PS-10": {
+            "title": "Bestehende Richtlinien",
+            "questions": [
+              "Wurden bestehende Richtlinien und Verfahren zur Bewertung von Menschenrechtsauswirkungen (einschließlich Stakeholder-Einbindung) dokumentiert?"
+            ]
+          },
+          "PS-11": {
+            "title": "Frühere Folgenabschätzungen",
+            "questions": [
+              "Wurden frühere Folgenabschätzungen dokumentiert (z. B. Datenschutz-Folgenabschätzung, branchenspezifische Bewertungen)?"
+            ]
+          },
+          "PS-12": {
+            "title": "Identifizierung betroffener Gruppen",
+            "questions": [
+              "Wurden alle Gruppen oder Gemeinschaften identifiziert, die potenziell vom KI-System betroffen sind (einschließlich während der Entwicklung)? (KRITISCH)"
+            ]
+          },
+          "PS-13": {
+            "title": "Relevante Stakeholder",
+            "questions": [
+              "Wurden alle relevanten einzubeziehenden Stakeholder identifiziert (Zivilgesellschaft, internationale Organisationen, Experten, Branchenverbände, Journalisten)?"
+            ]
+          },
+          "PS-14": {
+            "title": "Weitere Pflichtenträger",
+            "questions": [
+              "Wurden weitere Pflichtenträger über den KI-Anbieter und -Betreiber hinaus identifiziert (nationale Behörden, Regierungsstellen)?"
+            ]
+          },
+          "PS-15": {
+            "title": "Bewertung der Lieferkette",
+            "questions": [
+              "Wurde bewertet, ob Geschäftspartner und Lieferanten (Unterauftragnehmer von KI-Systemen und Datensätzen) in die Bewertung einbezogen wurden? (KRITISCH)"
+            ]
+          },
+          "PS-16": {
+            "title": "Menschenrechtsauswirkungen der Lieferanten",
+            "questions": [
+              "Hat der KI-Anbieter eine Lieferkettenbewertung bezüglich potenzieller Menschenrechtsauswirkungen durch Lieferanten/Auftragnehmer durchgeführt? (KRITISCH)"
+            ]
+          },
+          "PS-17": {
+            "title": "Standards für Lieferanten",
+            "questions": [
+              "Hat der KI-Anbieter Menschenrechtsstandards oder Audits bei Lieferanten gefördert?"
+            ]
+          },
+          "PS-18": {
+            "title": "Öffentliche Kommunikation",
+            "questions": [
+              "Kommunizieren der KI-Anbieter und die Entwickler öffentlich über potenzielle Menschenrechtsauswirkungen des KI-Systems?"
+            ]
+          },
+          "PS-19": {
+            "title": "Mitarbeiterschulung",
+            "questions": [
+              "Bieten der KI-Anbieter und die Entwickler Schulungen zu Menschenrechtsstandards für Führungskräfte und Beschaffungsmitarbeitende an?"
+            ]
+          }
+        }
+      },
+      "undp-rights-mapping": {
+        "title": "Rechte",
+        "items": {
+          "HRM-01": {
+            "title": "Identifizierung der Rechte",
+            "questions": [
+              "Wurden alle potenziell vom KI-System betroffenen Menschenrechte anhand der umfassenden Rechtecheckliste identifiziert? (KRITISCH)"
+            ]
+          },
+          "HRM-02": {
+            "title": "Menschenwürde",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Menschenwürde bewertet?"
+            ]
+          },
+          "HRM-03": {
+            "title": "Diskriminierungsfreiheit",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Diskriminierungsfreiheit bewertet?"
+            ]
+          },
+          "HRM-04": {
+            "title": "Recht auf Leben",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Leben bewertet?"
+            ]
+          },
+          "HRM-05": {
+            "title": "Freiheit von Sklaverei",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Freiheit von Sklaverei bewertet?"
+            ]
+          },
+          "HRM-06": {
+            "title": "Freiheit von unmenschlicher Behandlung",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Freiheit von unmenschlicher/erniedrigender Behandlung bewertet?"
+            ]
+          },
+          "HRM-07": {
+            "title": "Recht auf Privatsphäre",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Privatsphäre bewertet?"
+            ]
+          },
+          "HRM-08": {
+            "title": "Recht auf Eigentum",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Eigentum bewertet?"
+            ]
+          },
+          "HRM-09": {
+            "title": "Gedankenfreiheit",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Gedanken-, Gewissens- und Religionsfreiheit bewertet?"
+            ]
+          },
+          "HRM-10": {
+            "title": "Meinungsfreiheit",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Meinungsfreiheit bewertet?"
+            ]
+          },
+          "HRM-11": {
+            "title": "Freizügigkeit",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Freizügigkeit bewertet?"
+            ]
+          },
+          "HRM-12": {
+            "title": "Versammlungsfreiheit",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Versammlungsfreiheit bewertet?"
+            ]
+          },
+          "HRM-13": {
+            "title": "Vereinigungsfreiheit",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Vereinigungsfreiheit bewertet?"
+            ]
+          },
+          "HRM-14": {
+            "title": "Recht auf Ehe und Familie",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Ehe und Familie bewertet?"
+            ]
+          },
+          "HRM-15": {
+            "title": "Angemessener Lebensstandard",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf einen angemessenen Lebensstandard (einschließlich Gesundheit) bewertet?"
+            ]
+          },
+          "HRM-16": {
+            "title": "Recht auf Bildung",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Bildung bewertet?"
+            ]
+          },
+          "HRM-17": {
+            "title": "Recht auf soziale Sicherheit",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf soziale Sicherheit bewertet?"
+            ]
+          },
+          "HRM-18": {
+            "title": "Kulturelles und wissenschaftliches Leben",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Teilnahme am kulturellen, künstlerischen und wissenschaftlichen Leben bewertet?"
+            ]
+          },
+          "HRM-19": {
+            "title": "Recht auf Arbeit",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Arbeit bewertet?"
+            ]
+          },
+          "HRM-20": {
+            "title": "Recht auf Freizeit",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Freizeit und Erholung bewertet?"
+            ]
+          },
+          "HRM-21": {
+            "title": "Minderheitenrechte",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Rechte religiöser, ethnischer oder sprachlicher Minderheiten bewertet?"
+            ]
+          },
+          "HRM-22": {
+            "title": "Kinderrechte",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Rechte von Kindern bewertet?"
+            ]
+          },
+          "HRM-23": {
+            "title": "Freiheit von Folter",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Freiheit von Folter bewertet?"
+            ]
+          },
+          "HRM-24": {
+            "title": "Anerkennung vor dem Gesetz",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Anerkennung vor dem Gesetz bewertet?"
+            ]
+          },
+          "HRM-25": {
+            "title": "Gleichheit vor dem Gesetz",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Gleichheit vor dem Gesetz bewertet?"
+            ]
+          },
+          "HRM-26": {
+            "title": "Zugang zur Justiz",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf den Zugang zur Justiz bewertet?"
+            ]
+          },
+          "HRM-27": {
+            "title": "Freiheit von willkürlicher Inhaftierung",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Freiheit von willkürlicher Inhaftierung bewertet?"
+            ]
+          },
+          "HRM-28": {
+            "title": "Recht auf ein faires Verfahren",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf ein faires Verfahren bewertet?"
+            ]
+          },
+          "HRM-29": {
+            "title": "Unschuldsvermutung",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf die Unschuldsvermutung bewertet?"
+            ]
+          },
+          "HRM-30": {
+            "title": "Recht auf Rechtsbehelf",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Rechtsbehelf bewertet?"
+            ]
+          },
+          "HRM-31": {
+            "title": "Recht auf Asyl",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Asyl bewertet?"
+            ]
+          },
+          "HRM-32": {
+            "title": "Recht auf Staatsangehörigkeit",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Staatsangehörigkeit bewertet?"
+            ]
+          },
+          "HRM-33": {
+            "title": "Teilnahme an öffentlichen Angelegenheiten",
+            "questions": [
+              "Wurde die potenzielle Auswirkung auf das Recht auf Teilnahme an öffentlichen Angelegenheiten bewertet?"
+            ]
+          },
+          "HRM-34": {
+            "title": "Rechtsinstrumente",
+            "questions": [
+              "Wurden alle anwendbaren internationalen/regionalen Rechtsinstrumente zum Menschenrechtsschutz in den Einsatzgebieten identifiziert?"
+            ]
+          },
+          "HRM-35": {
+            "title": "Aufsichtsorgane",
+            "questions": [
+              "Wurden relevante Menschenrechtsgerichte oder Aufsichtsorgane identifiziert?"
+            ]
+          },
+          "HRM-36": {
+            "title": "Rechtsprechung",
+            "questions": [
+              "Wurde die relevanteste Rechtsprechung und die einschlägigen Rechtsvorschriften im Bereich der Menschenrechte identifiziert?"
+            ]
+          }
+        }
+      },
+      "undp-data-diligence": {
+        "title": "Sorgfalt",
+        "items": {
+          "DD-01": {
+            "title": "Datenherkunft",
+            "questions": [
+              "Ist die Herkunft der primären Trainingsdaten dokumentiert (erhoben, gekauft, erfasst)? (KRITISCH)"
+            ]
+          },
+          "DD-02": {
+            "title": "Dateneinwilligung",
+            "questions": [
+              "Wurde die Einwilligung zur Datenerhebung ordnungsgemäß eingeholt? (KRITISCH)"
+            ]
+          },
+          "DD-03": {
+            "title": "Datenvielfalt",
+            "questions": [
+              "Wurden Maßnahmen ergriffen, um sicherzustellen, dass die Daten die Vielfalt der betroffenen Bevölkerung widerspiegeln (Geschlecht, Herkunft, Alter, Behinderung, Standort)?"
+            ]
+          },
+          "DD-04": {
+            "title": "Datenverzerrung",
+            "questions": [
+              "Wurden bekannte Einschränkungen oder potenzielle Verzerrungen im Datensatz identifiziert und dokumentiert?"
+            ]
+          },
+          "DD-05": {
+            "title": "Schutz sensibler Daten",
+            "questions": [
+              "Werden personenbezogene/sensible Daten während des gesamten Lebenszyklus angemessen behandelt und geschützt?"
+            ]
+          },
+          "DD-06": {
+            "title": "Datenkennzeichnung",
+            "questions": [
+              "Sind die Datenkennzeichnungsprozesse dokumentiert, einschließlich potenzieller Quellen subjektiver Verzerrung?"
+            ]
+          },
+          "DD-07": {
+            "title": "Trainingsziel",
+            "questions": [
+              "Ist das spezifische Ziel des KI-Trainings dokumentiert (klärt die beabsichtigte Funktion gegenüber möglichem Missbrauch)?"
+            ]
+          },
+          "DD-08": {
+            "title": "Fairnesskriterien",
+            "questions": [
+              "Wurden Fairnesskriterien/-metriken während des Trainings und der Evaluierung verwendet (dokumentiert, welche)?"
+            ]
+          },
+          "DD-09": {
+            "title": "Modelleinschränkungen",
+            "questions": [
+              "Sind bekannte Einschränkungen, Fehlerszenarien und Leistungsgrenzen des trainierten Modells dokumentiert?"
+            ]
+          },
+          "DD-10": {
+            "title": "Modelltyp",
+            "questions": [
+              "Ist der Typ des KI-Modells mit Begründung für die Auswahl dokumentiert (prädiktiv, generativ usw.)?"
+            ]
+          },
+          "DD-11": {
+            "title": "Leistungsmessung",
+            "questions": [
+              "Wird die Systemleistung gemessen und dokumentiert? (KRITISCH)"
+            ]
+          },
+          "DD-12": {
+            "title": "Leistung nach Untergruppen",
+            "questions": [
+              "Sind Leistungsergebnisse nach relevanten Untergruppen aufgeschlüsselt verfügbar (Alter, Geschlecht, Herkunft, Ethnizität, Behinderung)? (KRITISCH)"
+            ]
+          },
+          "DD-13": {
+            "title": "Modelldokumentation",
+            "questions": [
+              "Ist eine Modelldokumentation verfügbar (z. B. Model Card, Datenblatt)?"
+            ]
+          },
+          "DD-14": {
+            "title": "Erklärbarkeit",
+            "questions": [
+              "Sind Funktionen zur Erklärung spezifischer KI-Entscheidungen/-Ausgaben verfügbar (Erklärbarkeit)? (KRITISCH)"
+            ]
+          },
+          "DD-15": {
+            "title": "Menschliche Aufsicht",
+            "questions": [
+              "Ist menschliche Aufsicht im Einsatzkontext geplant oder erforderlich? (KRITISCH)"
+            ]
+          },
+          "DD-16": {
+            "title": "Überwachung nach der Bereitstellung",
+            "questions": [
+              "Gibt es einen Prozess für die Überwachung und Aktualisierung nach der Bereitstellung? (KRITISCH)"
+            ]
+          },
+          "DD-17": {
+            "title": "Feedback und Beschwerden",
+            "questions": [
+              "Gibt es einen Prozess für den Umgang mit Feedback, Beschwerden oder identifizierten Problemen? (KRITISCH)"
+            ]
+          },
+          "DD-18": {
+            "title": "Eingabetests",
+            "questions": [
+              "Wurden Eingabetests durchgeführt (Randfälle -- informelle Sprache, ungewöhnliche Namen, extreme Werte)?"
+            ]
+          },
+          "DD-19": {
+            "title": "Verzerrungsprüfung",
+            "questions": [
+              "Wurde eine Verzerrungsprüfung durchgeführt (identische Eingaben mit unterschiedlichen demographischen Profilen)?"
+            ]
+          },
+          "DD-20": {
+            "title": "Funktionstest",
+            "questions": [
+              "Wurde ein Funktionstest durchgeführt (erfüllt das System zuverlässig, was es verspricht)?"
+            ]
+          },
+          "DD-21": {
+            "title": "Barrierefreiheitsprüfung",
+            "questions": [
+              "Wurde eine Barrierefreiheitsprüfung durchgeführt (Screenreader-Kompatibilität, alternative Eingabemethoden)?"
+            ]
+          },
+          "DD-22": {
+            "title": "Ausgabeüberprüfung",
+            "questions": [
+              "Wurde eine Ausgabeüberprüfung durchgeführt (Prüfung auf Halluzinationen, Sachfehler, voreingenommene/schädliche Inhalte)?"
+            ]
+          }
+        }
+      },
+      "undp-risk-analysis": {
+        "title": "Analyse",
+        "items": {
+          "RA-01": {
+            "title": "Wahrscheinlichkeitsbewertung",
+            "questions": [
+              "Wurde die Wahrscheinlichkeit nachteiliger Auswirkungen für jedes betroffene Recht bewertet (Niedrig / Mittel / Hoch / Sehr hoch)?"
+            ]
+          },
+          "RA-02": {
+            "title": "Expositionsbewertung",
+            "questions": [
+              "Wurde die Exposition bewertet -- der Anteil der identifizierten Rechteinhaber, die potenziell betroffen sind (Niedrig / Mittel / Hoch / Sehr hoch)?"
+            ]
+          },
+          "RA-03": {
+            "title": "Gesamtwahrscheinlichkeit",
+            "questions": [
+              "Wurde die Gesamtwahrscheinlichkeit anhand der Wahrscheinlichkeit-x-Expositions-Matrix berechnet?"
+            ]
+          },
+          "RA-04": {
+            "title": "Schwere der Beeinträchtigung",
+            "questions": [
+              "Wurde die Schwere der Beeinträchtigung bewertet -- unter Berücksichtigung von Intensität, Folgen, Bedeutung des verletzten Rechts, gruppenspezifischen Auswirkungen und Verletzlichkeit (Niedrig / Mittel / Hoch / Sehr hoch)?"
+            ]
+          },
+          "RA-05": {
+            "title": "Aufwand zur Überwindung",
+            "questions": [
+              "Wurde der Aufwand zur Überwindung nachteiliger Auswirkungen bewertet -- Umkehrbarkeit und Schwierigkeit der Abhilfe (Niedrig / Mittel / Hoch / Sehr hoch)?"
+            ]
+          },
+          "RA-06": {
+            "title": "Gesamtschwere",
+            "questions": [
+              "Wurde die Gesamtschwere anhand der Schwere-x-Aufwand-Matrix berechnet?"
+            ]
+          },
+          "RA-07": {
+            "title": "Risikoindex",
+            "questions": [
+              "Wurde der Risikoindex für jedes betroffene Recht berechnet (Wahrscheinlichkeit-x-Schwere-Matrix)? (KRITISCH)"
+            ]
+          },
+          "RA-08": {
+            "title": "Auswirkungsvisualisierung",
+            "questions": [
+              "Wurde ein Radialdiagramm oder eine gleichwertige Visualisierung erstellt, die die Auswirkungen auf alle betroffenen Rechte zeigt?"
+            ]
+          },
+          "RA-09": {
+            "title": "Unabhängige Bewertung",
+            "questions": [
+              "Wurde jedes Recht unabhängig bewertet -- kein kumulativer Index, der Auswirkungen über verschiedene Rechte hinweg zusammenfasst?"
+            ]
+          },
+          "RA-10": {
+            "title": "Risikoausschlussfaktoren",
+            "questions": [
+              "Wurden Faktoren bewertet, die ein Risiko ausschließen können (rechtliche Einschränkungen, die bestimmte Auswirkungen rechtfertigen)?"
+            ]
+          },
+          "RA-11": {
+            "title": "Abwägungstest",
+            "questions": [
+              "Wurde ein Abwägungstest angewendet, wenn kollidierende Rechte bestehen (nur nach individueller Folgenabschätzung)?"
+            ]
+          },
+          "RA-12": {
+            "title": "Nutzenanalyse",
+            "questions": [
+              "Wurden potenzielle Vorteile hinsichtlich der Stärkung oder Sicherung anderer geschützter Rechte analysiert?"
+            ]
+          }
+        }
+      },
+      "undp-risk-management": {
+        "title": "Steuerung",
+        "items": {
+          "RMG-01": {
+            "title": "Minderungsmaßnahmen",
+            "questions": [
+              "Wurden spezifische Maßnahmen zur Verhinderung oder Minderung jedes als Mittel, Hoch oder Sehr hoch eingestuften Risikos identifiziert? (KRITISCH)"
+            ]
+          },
+          "RMG-02": {
+            "title": "Kontextualisierte Maßnahmen",
+            "questions": [
+              "Sind die Maßnahmen auf das spezifische KI-System, seine Eigenschaften und den Einsatzkontext zugeschnitten?"
+            ]
+          },
+          "RMG-03": {
+            "title": "Wahrscheinlichkeit und Schwere",
+            "questions": [
+              "Adressieren die Maßnahmen sowohl die Wahrscheinlichkeits- als auch die Schweredimension?"
+            ]
+          },
+          "RMG-04": {
+            "title": "Umsetzungszeitplan",
+            "questions": [
+              "Wurde ein Umsetzungszeitplan für jede Maßnahme festgelegt?"
+            ]
+          },
+          "RMG-05": {
+            "title": "Verantwortlichkeitszuweisung",
+            "questions": [
+              "Wurde für jede Maßnahme eine verantwortliche Person/ein verantwortliches Team benannt?"
+            ]
+          },
+          "RMG-06": {
+            "title": "Neubewertung des Restrisikos",
+            "questions": [
+              "Wurde nach Umsetzung der Minderungsmaßnahmen das Restrisiko für jedes betroffene Recht neu bewertet? (KRITISCH)"
+            ]
+          },
+          "RMG-07": {
+            "title": "Restwahrscheinlichkeit",
+            "questions": [
+              "Wurde die Restwahrscheinlichkeit neu berechnet?"
+            ]
+          },
+          "RMG-08": {
+            "title": "Restschwere",
+            "questions": [
+              "Wurde die Restschwere neu berechnet?"
+            ]
+          },
+          "RMG-09": {
+            "title": "Restauswirkung",
+            "questions": [
+              "Wurde die verbleibende Gesamtauswirkung dokumentiert?"
+            ]
+          },
+          "RMG-10": {
+            "title": "Akzeptanzbewertung",
+            "questions": [
+              "Wurde die Akzeptabilität des Restrisikos bewertet?"
+            ]
+          },
+          "RMG-11": {
+            "title": "Anhaltendes hohes Risiko",
+            "questions": [
+              "Wenn das Restrisiko Hoch oder Sehr hoch bleibt, wurden zusätzliche Maßnahmen oder eine Neugestaltung des Projekts in Betracht gezogen?"
+            ]
+          },
+          "RMG-12": {
+            "title": "Entscheidungsdokumentation",
+            "questions": [
+              "Wird eine vollständige Dokumentation aller Risikobewertungsentscheidungen, Bewertungsbegründungen und Matrixauswahlen geführt? (KRITISCH)"
+            ]
+          },
+          "RMG-13": {
+            "title": "Skalierungskriterien",
+            "questions": [
+              "Gibt es eine Dokumentation aller verwendeten Skalierungskriterien und der Begründung für die Bereiche?"
+            ]
+          },
+          "RMG-14": {
+            "title": "Stakeholder-Beiträge",
+            "questions": [
+              "Sind alle Stakeholder-Beiträge dokumentiert?"
+            ]
+          },
+          "RMG-15": {
+            "title": "Wirksamkeitsdokumentation",
+            "questions": [
+              "Sind die Minderungsmaßnahmen und ihre erwartete Wirksamkeit dokumentiert?"
+            ]
+          }
+        }
+      },
+      "undp-monitoring": {
+        "title": "Monitoring",
+        "items": {
+          "MI-01": {
+            "title": "Überwachungsplan",
+            "questions": [
+              "Wurde ein Überwachungsplan für die Leistung des KI-Systems nach der Bereitstellung erstellt? (KRITISCH)"
+            ]
+          },
+          "MI-02": {
+            "title": "Periodische Neubewertung",
+            "questions": [
+              "Wurde ein Zeitplan für die periodische Neubewertung festgelegt (zirkulärer iterativer Ansatz)?"
+            ]
+          },
+          "MI-03": {
+            "title": "Drift-Erkennung",
+            "questions": [
+              "Gibt es einen Prozess zur Erkennung von Modell-Drift und aufkommenden Verzerrungen im Zeitverlauf?"
+            ]
+          },
+          "MI-04": {
+            "title": "Feedbackkanäle",
+            "questions": [
+              "Wurden Feedbackkanäle für betroffene Personen eingerichtet, um Schäden zu melden? (KRITISCH)"
+            ]
+          },
+          "MI-05": {
+            "title": "Abhilfemechanismus",
+            "questions": [
+              "Ist ein wirksamer Abhilfe-/Wiedergutmachungsmechanismus für nachteilig betroffene Personen in Betrieb? (KRITISCH)"
+            ]
+          },
+          "MI-06": {
+            "title": "Auslöser für Neubewertung",
+            "questions": [
+              "Wurden Auslöser definiert, wann eine vollständige Neubewertung erforderlich ist (z. B. wesentliches System-Update, Änderung des Einsatzkontexts, neue regulatorische Anforderungen, gemeldete Vorfälle)?"
+            ]
+          },
+          "MI-07": {
+            "title": "Regulatorische Integration",
+            "questions": [
+              "Gibt es einen Prozess zur Integration neuer Vorschriften und Standards, sobald diese entstehen?"
+            ]
+          },
+          "MI-08": {
+            "title": "Feedback-Kreislauf",
+            "questions": [
+              "Fließen die Ergebnisse der Überwachung in den Risikobewertungs- und Minderungszyklus zurück?"
+            ]
+          }
+        }
+      },
+      "undp-framework-alignment": {
+        "title": "Ausrichtung",
+        "items": {
+          "FA-01": {
+            "title": "Staatliche Schutzpflicht",
+            "questions": [
+              "UNGPs Säule I -- Gibt es ein Bewusstsein für staatliche Verpflichtungen in den Einsatzgebieten?"
+            ]
+          },
+          "FA-02": {
+            "title": "Unternehmerische Verantwortung",
+            "questions": [
+              "UNGPs Säule II -- Hat die Organisation eine menschenrechtliche Sorgfaltsprüfung über den gesamten KI-Lebenszyklus durchgeführt?"
+            ]
+          },
+          "FA-03": {
+            "title": "Zugang zu Abhilfe",
+            "questions": [
+              "UNGPs Säule III -- Sind wirksame Beschwerdemechanismen für betroffene Personen vorhanden?"
+            ]
+          },
+          "FA-04": {
+            "title": "Inklusives Wachstum",
+            "questions": [
+              "OECD -- Kommt das KI-System der Gesellschaft insgesamt zugute und verschärft es keine Ungleichheiten?"
+            ]
+          },
+          "FA-05": {
+            "title": "Menschenzentrierte Werte",
+            "questions": [
+              "OECD -- Wurde eine Bewertung potenzieller Diskriminierung und ungleicher Ergebnisse abgeschlossen?"
+            ]
+          },
+          "FA-06": {
+            "title": "Transparenz und Erklärbarkeit",
+            "questions": [
+              "OECD -- Gibt es eine Dokumentation darüber, wie die KI funktioniert, welche Einschränkungen sie hat und wie sie Entscheidungen trifft?"
+            ]
+          },
+          "FA-07": {
+            "title": "Robustheit und Sicherheit",
+            "questions": [
+              "OECD -- Wurden Fehlerszenarien, Sicherheitslücken und Zuverlässigkeit bewertet?"
+            ]
+          },
+          "FA-08": {
+            "title": "Rechenschaftspflicht",
+            "questions": [
+              "OECD -- Wurden klare Verantwortlichkeiten und Aufsichtsmechanismen eingerichtet?"
+            ]
+          },
+          "FA-09": {
+            "title": "KI-Verordnung Risikoklassifizierung",
+            "questions": [
+              "Wurde die Risikoklassifizierung des KI-Systems festgelegt (Unzulässig / Hoch / Begrenzt / Minimal)? (KRITISCH)"
+            ]
+          },
+          "FA-10": {
+            "title": "Grundrechte-Folgenabschätzung",
+            "questions": [
+              "Wenn hochriskant: Wurde eine Grundrechte-Folgenabschätzung (FRIA) gemäß Article 27 durchgeführt?"
+            ]
+          },
+          "FA-11": {
+            "title": "Daten-Governance",
+            "questions": [
+              "Sind angemessene Daten-Governance-Maßnahmen vorhanden?"
+            ]
+          },
+          "FA-12": {
+            "title": "Transparenzpflichten",
+            "questions": [
+              "Wurden die Transparenzpflichten erfüllt (Nutzer darüber informiert, dass sie mit KI interagieren, wo zutreffend)?"
+            ]
+          },
+          "FA-13": {
+            "title": "Anforderungen an menschliche Aufsicht",
+            "questions": [
+              "Wurden Anforderungen an die menschliche Aufsicht festgelegt und dokumentiert?"
+            ]
+          },
+          "FA-14": {
+            "title": "Technische Dokumentation",
+            "questions": [
+              "Wird die technische Dokumentation wie erforderlich gepflegt?"
+            ]
+          },
+          "FA-15": {
+            "title": "EU-Datenbankregistrierung",
+            "questions": [
+              "Wurde die Registrierung in der EU-Datenbank abgeschlossen (falls zutreffend)?"
+            ]
+          },
+          "FA-16": {
+            "title": "Bewertung des Europarats",
+            "questions": [
+              "Wurde das KI-System hinsichtlich seiner Auswirkungen auf Menschenrechte, Demokratie und Rechtsstaatlichkeit bewertet?"
+            ]
+          },
+          "FA-17": {
+            "title": "Konventionskonformität",
+            "questions": [
+              "Entspricht das System dem Schwerpunkt der Konvention des Europarats auf Menschenrechte, demokratische Grundsätze und Rechtsstaatlichkeit?"
+            ]
+          }
+        }
+      }
+    }
   }
 }
