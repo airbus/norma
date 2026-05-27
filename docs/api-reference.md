@@ -130,6 +130,10 @@ Upload a file for a framework document. Accepts `multipart/form-data` with a `fi
 
 Supported file types: PDF, Markdown, TXT, CSV, JSON, XML, HTML.
 
+### `DELETE /api/projects/{project_id}/documents/{document_id}/upload`
+
+Remove an uploaded file from a framework document. Clears the file path, file name, summary, and upload timestamp. The document placeholder remains.
+
 ### Custom Documents
 
 Free-form document uploads not tied to any framework definition. Custom document summaries are included in the chat agent and reporting suggestion context.
@@ -249,7 +253,7 @@ Get a single framework by ID.
 
 ### `POST /api/chat/sessions`
 
-Create a new chat session for a project. The system prompt is assembled at creation time from the project's current state (frameworks, questionnaire answers, uploaded document summaries, reporting evidence).
+Create a new chat session for a project. The system prompt is assembled at creation time from the project's current state (frameworks, questionnaire answers, uploaded document summaries, reporting evidence, codebase analysis).
 
 **Body:**
 ```json
@@ -287,6 +291,117 @@ data: Here is the first part...
 data: of the response.
 
 data: [DONE]
+```
+
+### `GET /api/chat/context`
+
+Fetch the assembled context for a project, optionally filtered by section. Used by the debug context viewer.
+
+**Query parameters:**
+- `project_id` (required) — project UUID
+- `section` (optional, default `full`) — one of `full`, `overview`, `frameworks`, `documents`, `reporting`, `github`
+
+**Response:**
+```json
+{
+  "context": "## Current Project Context\n..."
+}
+```
+
+Returns `{"context": null}` if the requested section has no content.
+
+---
+
+## Integrations
+
+### `GET /api/projects/{project_id}/integrations`
+
+Get the integration configuration for a project. Returns 404 if no integration is configured.
+
+**Response:**
+```json
+{
+  "id": "uuid",
+  "project_id": "uuid",
+  "provider": "github",
+  "repo_owner": "org",
+  "repo_name": "repo",
+  "github_project_number": 1,
+  "summary": "LLM-generated summary or null",
+  "architecture_mermaid": "graph TD\n...",
+  "sync_status": "idle",
+  "last_synced_at": "2026-05-27T10:00:00"
+}
+```
+
+### `POST /api/projects/{project_id}/integrations`
+
+Create a new integration for a project.
+
+**Body:**
+```json
+{
+  "provider": "github",
+  "github_pat": "ghp_...",
+  "repo_owner": "org",
+  "repo_name": "repo",
+  "github_project_number": 1
+}
+```
+
+### `PATCH /api/projects/{project_id}/integrations`
+
+Update integration configuration. All fields are optional.
+
+### `DELETE /api/projects/{project_id}/integrations`
+
+Remove the integration and all associated data (tasks, repo files). Returns 204.
+
+### `POST /api/projects/{project_id}/integrations/sync`
+
+Trigger a repository sync. Fetches the repo tree, file contents, issues, and project items from GitHub, then generates an LLM summary and architecture diagram. The sync runs asynchronously; poll the sync status endpoint to check progress.
+
+**Response:**
+```json
+{
+  "status": "syncing"
+}
+```
+
+### `GET /api/projects/{project_id}/integrations/sync-status`
+
+Check the current sync status.
+
+**Response:**
+```json
+{
+  "sync_status": "idle"
+}
+```
+
+Possible values: `idle`, `syncing`, `error`.
+
+### `GET /api/projects/{project_id}/integrations/tasks`
+
+List GitHub tasks (issues and project items) for the integration. Supports optional query filters: `status`, `assignee`, `label`, `milestone`.
+
+### `GET /api/projects/{project_id}/integrations/tasks/{task_id}`
+
+Get a single GitHub task by ID.
+
+### `GET /api/projects/{project_id}/integrations/context-file`
+
+Get the integration's context file content (user-editable supplementary context).
+
+### `PUT /api/projects/{project_id}/integrations/context-file`
+
+Update the integration's context file content.
+
+**Body:**
+```json
+{
+  "content": "Additional context about the codebase..."
+}
 ```
 
 ---

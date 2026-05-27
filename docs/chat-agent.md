@@ -24,6 +24,7 @@ graph TB
         DOCS[(documents.summary)]
         CDOCS[(custom_documents.summary)]
         RPT[(reporting_evidence)]
+        INT[(integrations)]
         HIST[(chat_messages)]
     end
 
@@ -36,6 +37,7 @@ graph TB
     BUILDER --> DOCS
     BUILDER --> CDOCS
     BUILDER --> RPT
+    BUILDER --> INT
     BUILDER -->|frozen system prompt| AGENT
     API --> RUNNER
     RUNNER --> SESSION
@@ -73,6 +75,8 @@ flowchart LR
         DOC_SECTION[Document Summaries<br/>LLM-generated summaries of<br/>framework and custom documents]
         DOC_SECTION --> RPT_SECTION
         RPT_SECTION[Reporting Evidence<br/>Comments from compliance<br/>reporting checklist]
+        RPT_SECTION --> GH_SECTION
+        GH_SECTION[Codebase Context<br/>GitHub summary and<br/>architecture diagram]
     end
 ```
 
@@ -80,11 +84,12 @@ flowchart LR
 
 | Section | Source | Gives the agent... |
 |---------|--------|--------------------|
-| **Base instruction** | Hardcoded in `norma.py` | Its identity, role boundaries, and response format |
-| **Framework knowledge** | `frameworks.content` column | Deep regulatory knowledge (EU AI Act articles, risk classification logic, compliance procedures) |
+| **Base instruction** | Hardcoded in `norma.py` | Its identity, role boundaries, and response format. Includes a language directive based on the user's preference. |
+| **Framework knowledge** | `frameworks.content` column | Deep regulatory knowledge (EU AI Act articles, UNDP Human Rights guidelines, Environmental Impact criteria) |
 | **Project context** | `projects` table | Awareness of the specific AI system being assessed |
 | **Document summaries** | `documents.summary` and `custom_documents.summary` columns | Understanding of compliance documents the user has already prepared (both framework-required and custom uploads) |
 | **Reporting evidence** | `reporting_evidence` table | Knowledge of which checklist items the user has addressed |
+| **Codebase context** | `integrations.summary` and `integrations.architecture_mermaid` | Technical understanding of the AI system's implementation, architecture, and open tasks |
 
 ## Knowledge Base
 
@@ -93,13 +98,25 @@ Framework knowledge is stored in the `frameworks.content` database column, loade
 ```
 backend/app/data/knowledge/
   eu_ai_act/
-    00_getting_started.md       # Introduction and overview (sorted first)
-    eu_ai_act_summary.md        # Full regulation summary
-    high_risk_guidelines.md     # High-risk system compliance guide
-    sandbox_guidelines.md       # AI regulatory sandbox guide
+    00_getting_started.md                  # Introduction and overview
+    eu_ai_act_summary.md                   # Full regulation summary
+    high_risk_guidelines.md                # High-risk system compliance guide
+    sandbox_guidelines.md                  # AI regulatory sandbox guide
+  undp_human_rights_assessment/
+    01_summary.md                          # UNDP toolkit summary
+  environmental_impact_framework/
+    (knowledge files added as available)
 ```
 
 The seed service (`backend/app/services/seed.py`) reads all `.md` files from each framework's subdirectory (sorted alphabetically), concatenates them with `---` separators, and stores the result in `frameworks.content`. On subsequent startups, if file content has changed, the database is updated automatically.
+
+## Language Support
+
+The system prompt includes a language directive based on the user's `language_preference` setting. Norma adapts its responses to match: English, Spanish, French, or German. The base instruction and response format remain the same regardless of language; only the output language changes.
+
+## Debug Context Viewer
+
+The `GET /api/chat/context` endpoint allows inspecting the assembled context by section (`overview`, `frameworks`, `documents`, `reporting`, `github`, or `full`). The frontend exposes this as a debug overlay on each page (enabled via `NORMA_DEBUG=true`), showing only the context section relevant to that page.
 
 ## Chat Session Lifecycle
 
@@ -148,6 +165,7 @@ Sends a user message and returns the response as Server-Sent Events (SSE). Each 
 | File | Purpose |
 |------|---------|
 | `backend/app/agents/norma.py` | Agent definition, system prompt builder |
-| `backend/app/api/routes/chat.py` | Chat API endpoints (create session, send message, stream) |
+| `backend/app/api/routes/chat.py` | Chat API endpoints (create session, send message, stream, debug context) |
+| `backend/app/data/evidence_questions.py` | Structured compliance questions for all frameworks |
 | `backend/app/services/seed.py` | Knowledge base loading and framework seeding |
 | `backend/app/data/knowledge/` | Markdown knowledge base files |
