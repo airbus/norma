@@ -1,8 +1,6 @@
 <p align="center">
   <img src="docs/assets/norma-logo.png" alt="Norma" height="80" />
-</p>
-
-<p align="center">
+  <br />
   <em>AI compliance, simplified</em>
 </p>
 
