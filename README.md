@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="frontend/public/favicon.svg" alt="Norma" width="80" height="80" />
+  <img src="docs/assets/norma-icon.svg" alt="Norma" width="64" height="64" />
 </p>
 
 <h1 align="center">Norma</h1>
