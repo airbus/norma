@@ -6,6 +6,9 @@ from sqlalchemy.orm import Session
 from app.models.document import Document, DocumentDefinition
 from app.models.framework import Framework
 from app.models.project import Project
+from app.models.reporting import ReportingEvidence
+from app.services.sample_evidence_en import SAMPLE_EVIDENCE_EN
+from app.services.sample_evidence_es import SAMPLE_EVIDENCE_ES, SAMPLE_PROJECT_ES
 
 KNOWLEDGE_DIR = Path(__file__).resolve().parent.parent / "data" / "knowledge"
 
@@ -273,7 +276,7 @@ def seed_frameworks(db: Session) -> None:
     db.commit()
 
 
-SAMPLE_PROJECT = {
+SAMPLE_PROJECT_EN = {
     "name": "Sample Project — Facial Recognition Access Control",
     "description": (
         "An AI-powered facial recognition system used for building access control "
@@ -319,8 +322,28 @@ SAMPLE_PROJECT = {
     },
 }
 
+SAMPLE_PROJECTS = [
+    (SAMPLE_PROJECT_EN, SAMPLE_EVIDENCE_EN),
+    (SAMPLE_PROJECT_ES, SAMPLE_EVIDENCE_ES),
+]
+
+
+def _seed_evidence(project_id: uuid.UUID, evidence: dict[str, str], db: Session) -> None:
+    for item_key, comment in evidence.items():
+        db.add(
+            ReportingEvidence(
+                project_id=project_id,
+                item_key=item_key,
+                comment=comment,
+                covered=True,
+            )
+        )
+
 
 def create_sample_project(user_id: uuid.UUID, db: Session) -> None:
-    project = Project(owner_id=user_id, **SAMPLE_PROJECT)
-    db.add(project)
+    for project_data, evidence_data in SAMPLE_PROJECTS:
+        project = Project(owner_id=user_id, **project_data)
+        db.add(project)
+        db.flush()
+        _seed_evidence(project.id, evidence_data, db)
     db.commit()
