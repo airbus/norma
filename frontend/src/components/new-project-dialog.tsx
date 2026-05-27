@@ -61,15 +61,15 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
         onOpenChange(nextOpen);
       }}
     >
-      <DialogContent className="flex h-[85vh] flex-col overflow-hidden backdrop-blur-lg sm:max-w-4xl">
-        <DialogHeader>
+      <DialogContent className="top-[10vh] flex h-[80vh] -translate-y-0 flex-col gap-0 overflow-hidden p-0 backdrop-blur-lg sm:max-w-4xl">
+        <DialogHeader className="shrink-0 p-6 pb-4">
           <DialogTitle>{t('newProjectDialog.title')}</DialogTitle>
           <DialogDescription>{t('newProjectDialog.description')}</DialogDescription>
         </DialogHeader>
 
-        <div className="-mx-4 flex-1 overflow-auto px-4">
-          <div className="space-y-6">
-            <Card>
+        <div className="flex-1 overflow-auto px-6">
+          <div className="space-y-3">
+            <Card className="ring-0 shadow-none">
               <CardHeader>
                 <CardTitle>{t('newProjectDialog.projectSummary')}</CardTitle>
                 <CardDescription>{t('newProjectDialog.projectSummaryDesc')}</CardDescription>
@@ -99,7 +99,7 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="ring-0 shadow-none">
               <CardHeader>
                 <CardTitle>{t('newProjectDialog.intendedPurpose')}</CardTitle>
                 <CardDescription>{t('newProjectDialog.intendedPurposeDesc')}</CardDescription>
@@ -115,7 +115,7 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="ring-0 shadow-none">
               <CardHeader>
                 <CardTitle>{t('newProjectDialog.intendedUsers')}</CardTitle>
                 <CardDescription>{t('newProjectDialog.intendedUsersDesc')}</CardDescription>
@@ -131,7 +131,7 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="ring-0 shadow-none">
               <CardHeader>
                 <CardTitle>{t('newProjectDialog.deploymentContext')}</CardTitle>
                 <CardDescription>{t('newProjectDialog.deploymentContextDesc')}</CardDescription>
@@ -149,7 +149,7 @@ export function NewProjectDialog({ open, onOpenChange }: NewProjectDialogProps) 
           </div>
         </div>
 
-        <div className="-mx-4 -mb-4 flex justify-end gap-2 rounded-b-xl border-t bg-muted/50 p-4">
+        <div className="flex shrink-0 justify-end gap-2 rounded-b-xl border-t bg-muted/50 p-4">
           <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
             {t('common:buttons.cancel')}
           </Button>
