@@ -363,19 +363,12 @@ async def send_message_stream(
 
     async def event_generator():
         response_text = ""
-        event_count = 0
         async for event in runner.run_async(
             user_id=user_id,
             session_id=adk_session.id,
             new_message=user_content,
             run_config=run_config,
         ):
-            event_count += 1
-            has_content = bool(event.content and event.content.parts)
-            print(
-                f"[STREAM] event#{event_count} partial={event.partial} author={event.author} has_content={has_content}",
-                flush=True,
-            )
             if not event.partial or not event.content or not event.content.parts:
                 continue
             for part in event.content.parts:
