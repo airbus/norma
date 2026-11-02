@@ -113,37 +113,53 @@ export function ChatPage() {
         let sseBuffer = '';
         let started = false;
 
+        const processEvent = (event: string) => {
+          const lines = event.split(/\r?\n/);
+          for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed.startsWith('data: ')) continue;
+            const raw = trimmed.slice(6);
+            if (raw === '[DONE]') continue;
+
+            let chunk = '';
+            try {
+              chunk = JSON.parse(raw);
+            } catch {
+              chunk = raw;
+            }
+
+            if (chunk) {
+              streamingMsg.content += chunk;
+              if (!started) {
+                started = true;
+                setIsTyping(false);
+                setMessages((prev) => [...prev, { ...streamingMsg }]);
+              } else {
+                setMessages((prev) =>
+                  prev.map((m) => (m.id === streamingMsg.id ? { ...streamingMsg } : m)),
+                );
+              }
+            }
+          }
+        };
+
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
 
           sseBuffer += decoder.decode(value, { stream: true });
-          const events = sseBuffer.split('\n\n');
+          const events = sseBuffer.split(/\r?\n\r?\n/);
           sseBuffer = events.pop() ?? '';
 
           for (const event of events) {
-            const trimmed = event.trim();
-            if (!trimmed.startsWith('data: ')) continue;
-            const raw = trimmed.slice(6);
-            if (raw === '[DONE]') continue;
-
-            try {
-              streamingMsg.content += JSON.parse(raw);
-            } catch {
-              streamingMsg.content += raw;
-            }
-
-            if (!started) {
-              started = true;
-              setIsTyping(false);
-              setMessages((prev) => [...prev, { ...streamingMsg }]);
-            } else {
-              setMessages((prev) =>
-                prev.map((m) => (m.id === streamingMsg.id ? { ...streamingMsg } : m)),
-              );
-            }
-            await new Promise((r) => requestAnimationFrame(r));
+            processEvent(event);
+            await new Promise((r) => setTimeout(r, 0));
           }
+        }
+
+        sseBuffer += decoder.decode();
+        if (sseBuffer.trim()) {
+          processEvent(sseBuffer);
         }
       } catch {
         if (streamingMsg.content) {
